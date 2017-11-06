@@ -39,7 +39,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         // contentTitle 과 contentText는 드래그 전에 표시할 내용 입니다.
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.jwc_small_logo_red).setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.jwc_small_logo_red2) )
+                .setSmallIcon(R.drawable.jwc_small_logo_red).setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.pushrogo) )
                 .setContentTitle(title)
                 .setContentText("아래로 당겨 주세요 ▼")
                 .setAutoCancel(true)
