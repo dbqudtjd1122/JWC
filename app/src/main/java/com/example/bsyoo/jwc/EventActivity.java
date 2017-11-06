@@ -37,7 +37,9 @@ public class EventActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.RED);
         }
         getSupportActionBar().setTitle("이벤트");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
+        // 뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         ExpandableListView = (android.widget.ExpandableListView) findViewById(R.id.expandable_list);
         setData();

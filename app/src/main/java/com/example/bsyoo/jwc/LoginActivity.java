@@ -1,12 +1,17 @@
 package com.example.bsyoo.jwc;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,13 +27,16 @@ public class LoginActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.RED);
         }
-
-        // 액션바 타이틀 및 배경색
+        // 액션바 타이틀
         getSupportActionBar().setTitle("");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.jwc_logo_red);
+        // 뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
 
         SignUp = (TextView) findViewById(R.id.SignUp);
         IDPWSearch = (TextView) findViewById(R.id.IDPWSearch);
@@ -39,5 +47,13 @@ public class LoginActivity extends AppCompatActivity {
         SpannableString content2 = new SpannableString("아이디/비밀번호 찾기");
         content2.setSpan(new UnderlineSpan(), 0, content2.length(), 0);
         IDPWSearch.setText(content2);
+        SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

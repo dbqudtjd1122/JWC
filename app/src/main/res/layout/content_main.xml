@@ -184,7 +184,6 @@
                             app:srcCompat="@drawable/main_benefit" />
                     </FrameLayout>
                 </ViewFlipper>
-
             </LinearLayout>
 
             <LinearLayout
@@ -202,7 +201,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <ImageView
@@ -214,13 +213,10 @@
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="140dp"
                     app:srcCompat="@drawable/bo4" />
 
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

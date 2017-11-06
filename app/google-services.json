@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "430190354014",
+    "firebase_url": "https://jwcnetworks-e3e2e.firebaseio.com",
+    "project_id": "jwcnetworks-e3e2e",
+    "storage_bucket": "jwcnetworks-e3e2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430190354014:android:118371ec89e84dbe",
+        "android_client_info": {
+          "package_name": "com.example.bsyoo.jwc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430190354014-q1mo11ua0ufa1rbohrf63g7ahaol2tbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjjssfiCrLtu9oWaTh-Zl4lb3yUU2pJVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,7 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.example.bsyoo.jwc.camera.CameraActivity;
+import com.example.bsyoo.jwc.adapter.BackCloseHandler;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnTouchListener {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity
     private TextView Login, Event, notice, company;
     private ViewFlipper viewflipper;
     private float down_x, up_x;
-
+    private BackCloseHandler backCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.jwc_logo_red);
+
+        backCloseHandler = new BackCloseHandler(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -127,9 +130,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } /*else {
             super.onBackPressed();
-        }
+        }*/
+        // 뒤로가기버튼 2번 누를경우 종료
+        backCloseHandler.onBackPressed();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

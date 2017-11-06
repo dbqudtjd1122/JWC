@@ -25,6 +25,9 @@ public class NoticeInfoActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.RED);
         }
         getSupportActionBar().setTitle("공지사항");
+        // 뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         Intent intent = getIntent();
         notice = (Model_Notice) intent.getSerializableExtra("notice");

@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 public class IntroActivity extends AppCompatActivity {
 
     @Override
@@ -28,5 +30,7 @@ public class IntroActivity extends AppCompatActivity {
                 finish();
             }
         }, 2000);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("notice");
     }
 }

@@ -36,7 +36,9 @@ public class NoticeActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.RED);
         }
         getSupportActionBar().setTitle("공지사항");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
+        // 뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         noticelist = new ArrayList<>();
 
