@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Model_Camera implements Serializable{
 
     private Integer Camerano;
+    private String type;
     private String onlinename;
     private String offlinename;
     private String onlineprice;
@@ -12,9 +13,11 @@ public class Model_Camera implements Serializable{
     private String series;
     private String Performance; // 성능
     private String Pixel;
+    private Integer NewCamera;
 
-    public Model_Camera(Integer camerano, String onlinename, String offlinename, String onlineprice, String offlineprice, String series, String performance, String pixel) {
+    public Model_Camera(Integer camerano, String type, String onlinename, String offlinename, String onlineprice, String offlineprice, String series, String performance, String pixel, Integer newCamera) {
         Camerano = camerano;
+        this.type = type;
         this.onlinename = onlinename;
         this.offlinename = offlinename;
         this.onlineprice = onlineprice;
@@ -22,12 +25,14 @@ public class Model_Camera implements Serializable{
         this.series = series;
         Performance = performance;
         Pixel = pixel;
+        NewCamera = newCamera;
     }
 
     @Override
     public String toString() {
         return "Model_Camera{" +
                 "Camerano=" + Camerano +
+                ", type='" + type + '\'' +
                 ", onlinename='" + onlinename + '\'' +
                 ", offlinename='" + offlinename + '\'' +
                 ", onlineprice='" + onlineprice + '\'' +
@@ -35,12 +40,27 @@ public class Model_Camera implements Serializable{
                 ", series='" + series + '\'' +
                 ", Performance='" + Performance + '\'' +
                 ", Pixel='" + Pixel + '\'' +
+                ", NewCamera=" + NewCamera +
                 '}';
     }
 
     public Model_Camera() {
     }
 
+    public Integer getNewCamera() {
+        return NewCamera;
+    }
+
+    public void setNewCamera(Integer newCamera) {
+        NewCamera = newCamera;
+    }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getPerformance() {
         return Performance;

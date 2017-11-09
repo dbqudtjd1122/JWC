@@ -2,35 +2,48 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/camera"
+            android:id="@+id/menu_login"
+            android:title="로그인" />
+
+        <item
+            android:id="@+id/menu_mypage"
+            android:title="마이페이지" />
+
+        <item
+            android:id="@+id/menu_notice"
+            android:title="공지사항" />
+
+        <item
+            android:id="@+id/menu_event"
+            android:title="이벤트" />
+
+        <item
+            android:id="@+id/menu_company"
+            android:title="회사소개" />
+
+        <item
+            android:id="@+id/menu_reference"
+            android:title="자료실" />
+
+        <item
+            android:id="@+id/menu_logout"
+            android:title="로그아웃" />
+
+        <item
+            android:id="@+id/menu_setting"
+            android:title="설정" />
+
+        <item
+            android:id="@+id/menu_camera"
             android:icon="@drawable/icon_camera"
             android:title="CCTV 카메라" />
 
         <item
-            android:id="@+id/jwc_l"
-            android:title="JWC - L 시리즈" />
-
-        <item
-            android:id="@+id/jwc_ptz"
-            android:title="JWC - PTZ 시리즈" />
-
-        <item
-            android:id="@+id/jwc_s"
-            android:title="JWC - S 시리즈" />
-
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/menu_record"
             android:icon="@drawable/icon_dvr"
             android:title="CCTV 녹화기" />
-
-        <item
-            android:id="@+id/qhd4mp"
-            android:title="QHD 4MP ALL-HD" />
-
-        <item
-            android:id="@+id/all_lite"
-            android:title="All - HD LITE" />
 
     </group>
 

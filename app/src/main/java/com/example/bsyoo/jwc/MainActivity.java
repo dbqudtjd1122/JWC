@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,11 +32,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnTouchListener {
 
     private LinearLayout ModelSearch;
-    private Button but_search_close;
-    private TextView Login, Event, notice, company;
+    private ImageView main_img_left, main_img_right;
     private ViewFlipper viewflipper;
     private float down_x, up_x;
     private BackCloseHandler backCloseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,41 +89,82 @@ public class MainActivity extends AppCompatActivity
         // 오른쪽방향으로 진행
         viewflipperrigth();
         viewflipper.startFlipping();
-
-        Login = (TextView) findViewById(R.id.Login);
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        Event = (TextView) findViewById(R.id.Event);
-        Event.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EventActivity.class);
-                startActivity(intent);
-            }
-        });
-        notice = (TextView) findViewById(R.id.notice);
-        notice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
-                startActivity(intent);
-            }
-        });
-        company = (TextView) findViewById(R.id.company);
-        company.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CompanyActivity.class);
-                startActivity(intent);
-            }
-        });
         viewflipper.setOnTouchListener(this);
 
+        // Frame레이아웃 이미지뷰 제일 위로
+        main_img_left = (ImageView) findViewById(R.id.main_img_left);
+        main_img_left.bringToFront();
+        main_img_right = (ImageView) findViewById(R.id.main_img_right);
+        main_img_right.bringToFront();
+
+
+    }
+    public void onclick(View view){
+        switch (view.getId()){
+            case R.id.main_img_left:
+                // 왼쪽으로 넘기기
+                viewflipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_in));
+                viewflipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_out));
+                viewflipper.showPrevious();
+
+                // 우측으로 3초 자동 넘기기
+                viewflipper.stopFlipping();
+                viewflipper.setAutoStart(true);
+                viewflipper.setFlipInterval(3000);
+                viewflipper.startFlipping();
+                viewflipperrigth();
+                viewflipper.startFlipping();
+                break;
+            case R.id.main_img_right:
+                viewflipperrigth();
+                viewflipper.showNext();
+
+                viewflipper.stopFlipping();
+                viewflipper.setAutoStart(true);
+                viewflipper.setFlipInterval(3000);
+                viewflipper.startFlipping();
+
+                break;
+
+            case R.id.viewpage1:
+                Toast.makeText(MainActivity.this, "1번", Toast.LENGTH_SHORT).show();
+                Intent intent5 = new Intent(this, BannerActivity.class);
+                intent5.putExtra("0", 0);
+                intent5.putExtra("title", "JDO-4008B");
+                startActivity(intent5);
+                break;
+            case R.id.viewpage2:
+                Toast.makeText(MainActivity.this, "2번", Toast.LENGTH_SHORT).show();
+                Intent intent6 = new Intent(this, BannerActivity.class);
+                intent6.putExtra("0", 1);
+                intent6.putExtra("title", "2017 컨퍼런스");
+                startActivity(intent6);
+                break;
+            case R.id.viewpage3:
+                Toast.makeText(MainActivity.this, "3번", Toast.LENGTH_SHORT).show();
+                Intent intent7 = new Intent(this, BannerActivity.class);
+                intent7.putExtra("0", 2);
+                intent7.putExtra("title", "CCTV 렌탈 서비스");
+                startActivity(intent7);
+                break;
+            case R.id.viewpage4:
+                Toast.makeText(MainActivity.this, "4번", Toast.LENGTH_SHORT).show();
+                Intent intent8 = new Intent(this, BannerActivity.class);
+                intent8.putExtra("0", 3);
+                intent8.putExtra("title", "협력업체 특별혜택");
+                startActivity(intent8);
+                break;
+            case R.id.image_camera:
+                Intent intent = new Intent(this, SeriesListActivity.class);
+                intent.putExtra("type", "카메라");
+                startActivity(intent);
+                break;
+            case R.id.image_record:
+                Intent intent2 = new Intent(this, SeriesListActivity.class);
+                intent2.putExtra("type", "녹화기");
+                startActivity(intent2);
+                break;
+        }
     }
 
     @Override
@@ -143,29 +185,34 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.camera) {
-            /*Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-            startActivity(intent);*/
-        } else if (id == R.id.jwc_l) {
-            Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-            intent.putExtra("series", "JWC-L 시리즈");
+        if (id == R.id.menu_camera) {
+            Intent intent = new Intent(MainActivity.this, SeriesListActivity.class);
+            intent.putExtra("type", "카메라");
             startActivity(intent);
-        } else if (id == R.id.jwc_ptz) {
-            Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-            intent.putExtra("series", "JWC-PTZ 시리즈");
+        }else if (id == R.id.menu_record) {
+            Intent intent = new Intent(MainActivity.this, SeriesListActivity.class);
+            intent.putExtra("type", "녹화기");
             startActivity(intent);
-        } else if (id == R.id.jwc_s) {
-            Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-            intent.putExtra("series", "JWC-S 시리즈");
+        }else if (id == R.id.menu_login) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
-        } else if (id == R.id.qhd4mp) {
-            Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-            intent.putExtra("series", "QHD 4MP ALL - HD DVR");
+        }else if (id == R.id.menu_mypage) {
+            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.menu_notice) {
+            Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
             startActivity(intent);
-        }else if (id == R.id.all_lite) {
-            Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-            intent.putExtra("series", "ALL-HD DVR LITE 모델");
+        }else if (id == R.id.menu_event) {
+            Intent intent = new Intent(MainActivity.this, EventActivity.class);
             startActivity(intent);
+        }else if (id == R.id.menu_company) {
+            Intent intent = new Intent(MainActivity.this, CompanyActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.menu_reference) {
+            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.menu_logout) {
+            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.menu_setting) {
+            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -205,34 +252,11 @@ public class MainActivity extends AppCompatActivity
         // 스크롤뷰 안에서 ViewFlipper 부드럽게 적용
         v.getParent().requestDisallowInterceptTouchEvent(true);
 
-        /*ImageView viewpage1 = (ImageView) findViewById(R.id.viewpage1);
-        ImageView viewpage2 = (ImageView) findViewById(R.id.viewpage2);
-        switch (v.getId()) {
-            case R.id.viewpage1:
-                Toast.makeText(this, "1번", Toast.LENGTH_SHORT).show();
-                Intent intent0 = new Intent(this, BannerActivity.class);
-                intent0.putExtra("0", 0);
-                startActivity(intent0);
-                return false;
-            case R.id.viewpage2:
-                Toast.makeText(this, "2번", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(this, BannerActivity.class);
-                intent1.putExtra("0", 1);
-                startActivity(intent1);
-                return false;
-            case R.id.viewpage3:
-                Toast.makeText(this, "3번", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(this, BannerActivity.class);
-                intent2.putExtra("0", 2);
-                startActivity(intent2);
-                return false;
-        }*/
-
         // 터치 이벤트가 일어난 뷰가 ViewFlipper가 아니면 return
         if (viewflipper != viewflipper)
             return false;
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        /*if (event.getAction() == MotionEvent.ACTION_DOWN) {
             // 터치 시작지점 x좌표 저장
             down_x = event.getX();
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -256,35 +280,13 @@ public class MainActivity extends AppCompatActivity
             // 오른쪽방향으로 진행
             viewflipperrigth();
             viewflipper.startFlipping();
-        }
+        }*/
         return true;
     }
 
+    // 뷰페이퍼 우측으로 넘기기
     public void viewflipperrigth() {
         viewflipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_in));
         viewflipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_out));
     }
-
-    /*public void pageClick(View v) {
-        switch (v.getId()) {
-            case R.id.viewpage1:
-                Toast.makeText(MainActivity.this, "1번", Toast.LENGTH_SHORT).show();
-                Intent intent0 = new Intent(this, BannerActivity.class);
-                intent0.putExtra("0", 0);
-                startActivity(intent0);
-                break;
-            case R.id.viewpage2:
-                Toast.makeText(MainActivity.this, "2번", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(this, BannerActivity.class);
-                intent1.putExtra("0", 1);
-                startActivity(intent1);
-                break;
-            case R.id.viewpage3:
-                Toast.makeText(MainActivity.this, "3번", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(this, BannerActivity.class);
-                intent2.putExtra("0", 2);
-                startActivity(intent2);
-                break;
-        }
-    }*/
 }

@@ -34,13 +34,13 @@ public class SeriesActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.RED);
         }
-        // 뒤로가기 버튼
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         Intent intent = getIntent();
         String series = intent.getStringExtra("series");
         setTitle(series);
+
+        /*// 뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);*/
 
         // 출력 데이터 생성
         cameralist = new ArrayList<>();
@@ -130,7 +130,6 @@ public class SeriesActivity extends AppCompatActivity {
             camera.setPerformance("120FPS@1080P 풀프레임 녹화");
             cameralist.add(camera);
         }
-
 
         // Adapter 생성
         adapter = new Adapter_Camera(this, R.layout.listitem_camera, R.id.text_series, cameralist);

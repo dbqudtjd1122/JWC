@@ -62,13 +62,7 @@ public class EventActivity extends AppCompatActivity {
                 BitmapDrawable b = (BitmapDrawable)((ImageView) findViewById(R.id.groupswich)).getDrawable();
                 Bitmap bitmap2 = b.getBitmap();
 
-
                 groupswich.setImageResource(R.drawable.swich1);
-                /*if(bitmap1.equals(bitmap2)){
-                    groupswich.setImageResource(R.drawable.swich1);
-                } else {
-                    groupswich.setImageResource(R.drawable.swich0);
-                }*/
 
                 return false;
             }
@@ -101,7 +95,6 @@ public class EventActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void setData(){
         groupListDatas = new ArrayList<GroupData>();

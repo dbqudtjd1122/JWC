@@ -22,6 +22,7 @@
         android:layout_height="match_parent"
         app:srcCompat="@drawable/swich1"
         android:gravity="center|right"
+        android:layout_margin="3dp"
         />
 
 </LinearLayout>

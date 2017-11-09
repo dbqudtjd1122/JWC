@@ -61,71 +61,30 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/Login"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/text"
-                    android:gravity="center"
-                    android:text="로그인"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/text"
-                    android:gravity="center"
-                    android:text="마이페이지"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Event"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/text"
-                    android:gravity="center"
-                    android:text="이벤트"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/notice"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/text"
-                    android:gravity="center"
-                    android:text="공지사항"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/company"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/text"
-                    android:gravity="center"
-                    android:text="회사소개"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
+            <FrameLayout
+                android:id="@+id/frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/main_img_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:onClick="onclick"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/arrow_left1" />
+
+                <ImageButton
+                    android:id="@+id/main_img_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:onClick="onclick"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/arrow_right1" />
+
 
                 <ViewFlipper
                     android:id="@+id/viewflipper"
@@ -141,8 +100,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
                             android:layout_gravity="center"
+                            android:onClick="onclick"
                             android:scaleType="fitXY"
                             app:srcCompat="@drawable/viewpage1" />
+
                     </FrameLayout>
 
                     <FrameLayout
@@ -154,6 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:onClick="onclick"
                             android:scaleType="fitXY"
                             app:srcCompat="@drawable/conference" />
                     </FrameLayout>
@@ -167,6 +129,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:onClick="onclick"
                             android:scaleType="fitXY"
                             app:srcCompat="@drawable/main_rental" />
                     </FrameLayout>
@@ -180,43 +143,146 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:onClick="onclick"
                             android:scaleType="fitXY"
                             app:srcCompat="@drawable/main_benefit" />
                     </FrameLayout>
                 </ViewFlipper>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="match_parent"
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    app:srcCompat="@drawable/mainimg2" />
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/image_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:onClick="onclick"/>
+
+                <ImageView
+                    android:id="@+id/image_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:onClick="onclick"/>
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
 
                 <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    app:srcCompat="@drawable/bo1" />
+                    android:id="@+id/imageView2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:srcCompat="@drawable/jwc_logo_red" />
 
-                <ImageView
-                    android:id="@+id/imageView6"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    app:srcCompat="@drawable/bo4" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="상호명 : (주)제이더블유씨네트웍스 \n 사업자번호 : 104-86-43227  l  대표 : 이동원 \n 주소 : 서울특별시 금천구 가산동 371-51 한국전자협동(주)공장B동 4층 \n TEL : 1899-4602 I FAX : 02-2277-7615"
+                        android:textSize="13dp"
+                        android:layout_marginLeft="5dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
