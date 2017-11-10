@@ -8,4 +8,17 @@
     tools:context="com.example.bsyoo.jwc.camera.CameraTabFragment2"
     tools:showIn="@layout/activity_camera">
 
+    <LinearLayout
+        android:id="@+id/fraglayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/fraglist2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
 </LinearLayout>

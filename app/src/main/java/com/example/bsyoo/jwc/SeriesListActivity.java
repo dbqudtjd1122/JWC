@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SeriesListActivity extends AppCompatActivity {
 
-    private Adapter_Series adater;
+    private Adapter_Series adapter;
     private List<Model_Camera> cameralist;
     private Model_Camera camera = new Model_Camera();
 
@@ -65,13 +65,13 @@ public class SeriesListActivity extends AppCompatActivity {
             cameralist.add(camera);
         }
 
-        adater = new Adapter_Series(this, R.layout.listitem_series, R.id.series_name, cameralist);
+        adapter = new Adapter_Series(this, R.layout.listitem_series, R.id.series_name, cameralist);
 
         listView.setOnItemClickListener( new SeriesListActivity.OnItemHandler());
         listView.setOnItemLongClickListener(new SeriesListActivity.OnItemHandler());
         listView.setOnItemSelectedListener(new SeriesListActivity.OnItemHandler());
 
-        listView.setAdapter(adater);
+        listView.setAdapter(adapter);
     }
 
     class OnItemHandler implements ListView.OnItemClickListener, ListView.OnItemLongClickListener, ListView.OnItemSelectedListener {

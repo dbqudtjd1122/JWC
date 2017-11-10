@@ -1,18 +1,16 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.user;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.bsyoo.jwc.R;
 
 public class LoginActivity extends AppCompatActivity {
 

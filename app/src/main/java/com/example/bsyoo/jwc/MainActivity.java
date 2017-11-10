@@ -1,6 +1,7 @@
 package com.example.bsyoo.jwc;
 
 import android.content.Intent;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -17,15 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
+import com.example.bsyoo.jwc.camera.CameraActivity;
+import com.example.bsyoo.jwc.user.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity
@@ -164,6 +164,17 @@ public class MainActivity extends AppCompatActivity
                 intent2.putExtra("type", "녹화기");
                 startActivity(intent2);
                 break;
+            case R.id.image_new:
+                Intent intent3 = new Intent(this, SeriesActivity.class);
+                intent3.putExtra("series", "신제품");
+                startActivity(intent3);
+                break;
+            case R.id.main_testcamera:
+                Intent intent4 = new Intent(this, CameraActivity.class);
+                intent4.putExtra("type", "카메라");
+                startActivity(intent4);
+                break;
+
         }
     }
 

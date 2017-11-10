@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,7 +29,8 @@ public class SeriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
 
-        ListView listView = (ListView) findViewById(R.id.series_list);
+
+        GridView listView = (GridView) findViewById(R.id.series_list);
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -45,90 +47,28 @@ public class SeriesActivity extends AppCompatActivity {
         // 출력 데이터 생성
         cameralist = new ArrayList<>();
 
+        // 카메라---------------------
         if(series.equals("JWC-L 시리즈")){
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-L 시리즈]");
-            camera.setOnlinename("JWC-L1VD");
-            camera.setPerformance("12LED 2.8mm 광각, SONY 1/2.8 스타비스센서 메탈 반달케이스");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-L 시리즈]");
-            camera.setOnlinename("JWC-L3HAF");
-            camera.setPerformance("하이파워 4LED 2.8~12mm 오토포커스렌즈 롱바디 하우징일체형, UTC ZOOM 컨트롤");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-L 시리즈]");
-            camera.setOnlinename("JWC-L4LPR");
-            camera.setPerformance("파워 18LED (740nm) 6~50mm IR조절기능 시속 60km 차량번호식별 UTC 아답타별매");
-            cameralist.add(camera);
+            setJWC_L();
         } else if(series.equals("JWC-PTZ 시리즈")){
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-PTZ 시리즈]");
-            camera.setOnlinename("JSP-210A");
-            camera.setPerformance("하이파워 6LED, 광학10배줌(5~50mm) SONY센서, UTC지원, 벽브라켓+아답타포함");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-PTZ 시리즈]");
-            camera.setOnlinename("JSP-218A");
-            camera.setPerformance("하이파워 14LED, 광학18배줌(4.7~94mm) SONY센서, UTC지원, 벽브라켓+아답타포함");
-            cameralist.add(camera);
+            setJWC_PTZ();
         } else if(series.equals("JWC-S 시리즈")){
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-S 시리즈]");
-            camera.setOnlinename("JWC-S1D 2.8mm");
-            camera.setPerformance("2.8mm None IR 광각 SONY 1/2.8 센서 플라스틱 화이트색상");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[JWC-S 시리즈]");
-            camera.setOnlinename("JWC-S1D 3.6mm");
-            camera.setPerformance("3.6mm None IR SONY 1/2.8 센서 플라스틱 화이트색상");
-            cameralist.add(camera);
+            setJWC_S();
         }
-        // ---------------------
+        //  녹화기---------------------
         else if(series.equals("QHD 4MP ALL - HD DVR")){
-            camera = new Model_Camera();
-            camera.setSeries("[QHD 4MP]");
-            camera.setOnlinename("JDO-4008B (1TB)");
-            camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[QHD 4MP]");
-            camera.setOnlinename("JDO-4008B (2TB)");
-            camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[QHD 4MP]");
-            camera.setOnlinename("JDO-4008B (3TB)");
-            camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
-            cameralist.add(camera);
-        }
-        else if(series.equals("ALL-HD DVR LITE 모델")){
-            camera = new Model_Camera();
-            camera.setSeries("[ALL-HD DVR LITE]");
-            camera.setOnlinename("JDO-4005B (1TB)");
-            camera.setPerformance("120FPS@1080P 녹화 AHD+TVI+CVI+SD");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[ALL-HD DVR LITE]");
-            camera.setOnlinename("JDO-8005 (1TB)");
-            camera.setPerformance("240FPS@1080P 녹화 AHD+TVI+CVI+SD");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[ALL-HD DVR LITE]");
-            camera.setOnlinename("JDO-1605 (2TB)");
-            camera.setPerformance("120FPS@1080P 풀프레임 녹화");
-            cameralist.add(camera);
+            setQHD_4MP_ALL_HDDVR();
+        } else if(series.equals("ALL-HD DVR LITE 모델")){
+            setALL_HDDVR_LITE();
         } else if(series.equals("ALL-HD DVR PRO 모델")){
-            camera = new Model_Camera();
-            camera.setSeries("[ALL-HD DVR PRO]");
-            camera.setOnlinename("JDO-4008 (1TB)");
-            camera.setPerformance("120FPS@1080P 풀프레임 녹화");
-            cameralist.add(camera);
-            camera = new Model_Camera();
-            camera.setSeries("[ALL-HD DVR PRO]");
-            camera.setOnlinename("JDO-4008 (2TB)");
-            camera.setPerformance("120FPS@1080P 풀프레임 녹화");
-            cameralist.add(camera);
+            setALL_HDDVR_PRO();
+        } else if(series.equals("신제품")){
+            setJWC_L();
+            setJWC_PTZ();
+            setJWC_S();
+            setQHD_4MP_ALL_HDDVR();
+            setALL_HDDVR_LITE();
+            setALL_HDDVR_PRO();
         }
 
         // Adapter 생성
@@ -164,5 +104,92 @@ public class SeriesActivity extends AppCompatActivity {
         public void onNothingSelected(AdapterView<?> parent) {
 
         }
+    }
+    public void setJWC_L(){
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-L 시리즈]");
+        camera.setOnlinename("JWC-L1VD");
+        camera.setPerformance("12LED 2.8mm 광각, SONY 1/2.8 스타비스센서 메탈 반달케이스");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-L 시리즈]");
+        camera.setOnlinename("JWC-L3HAF");
+        camera.setPerformance("하이파워 4LED 2.8~12mm 오토포커스렌즈 롱바디 하우징일체형, UTC ZOOM 컨트롤");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-L 시리즈]");
+        camera.setOnlinename("JWC-L4LPR");
+        camera.setPerformance("파워 18LED (740nm) 6~50mm IR조절기능 시속 60km 차량번호식별 UTC 아답타별매");
+        cameralist.add(camera);
+    }
+    public void setJWC_PTZ(){
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-PTZ 시리즈]");
+        camera.setOnlinename("JSP-210A");
+        camera.setPerformance("하이파워 6LED, 광학10배줌(5~50mm) SONY센서, UTC지원, 벽브라켓+아답타포함");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-PTZ 시리즈]");
+        camera.setOnlinename("JSP-218A");
+        camera.setPerformance("하이파워 14LED, 광학18배줌(4.7~94mm) SONY센서, UTC지원, 벽브라켓+아답타포함");
+        cameralist.add(camera);
+    }
+    public void setJWC_S(){
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-S 시리즈]");
+        camera.setOnlinename("JWC-S1D 2.8mm");
+        camera.setPerformance("2.8mm None IR 광각 SONY 1/2.8 센서 플라스틱 화이트색상");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[JWC-S 시리즈]");
+        camera.setOnlinename("JWC-S1D 3.6mm");
+        camera.setPerformance("3.6mm None IR SONY 1/2.8 센서 플라스틱 화이트색상");
+        cameralist.add(camera);
+    }
+    public void setQHD_4MP_ALL_HDDVR(){
+        camera = new Model_Camera();
+        camera.setSeries("[QHD 4MP]");
+        camera.setOnlinename("JDO-4008B (1TB)");
+        camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[QHD 4MP]");
+        camera.setOnlinename("JDO-4008B (2TB)");
+        camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[QHD 4MP]");
+        camera.setOnlinename("JDO-4008B (3TB)");
+        camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
+        cameralist.add(camera);
+    }
+    public void setALL_HDDVR_LITE() {
+        camera = new Model_Camera();
+        camera.setSeries("[ALL-HD DVR LITE]");
+        camera.setOnlinename("JDO-4005B (1TB)");
+        camera.setPerformance("120FPS@1080P 녹화 AHD+TVI+CVI+SD");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[ALL-HD DVR LITE]");
+        camera.setOnlinename("JDO-8005 (1TB)");
+        camera.setPerformance("240FPS@1080P 녹화 AHD+TVI+CVI+SD");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[ALL-HD DVR LITE]");
+        camera.setOnlinename("JDO-1605 (2TB)");
+        camera.setPerformance("120FPS@1080P 풀프레임 녹화");
+        cameralist.add(camera);
+    }
+    public void setALL_HDDVR_PRO() {
+        camera = new Model_Camera();
+        camera.setSeries("[ALL-HD DVR PRO]");
+        camera.setOnlinename("JDO-4008 (1TB)");
+        camera.setPerformance("120FPS@1080P 풀프레임 녹화");
+        cameralist.add(camera);
+        camera = new Model_Camera();
+        camera.setSeries("[ALL-HD DVR PRO]");
+        camera.setOnlinename("JDO-4008 (2TB)");
+        camera.setPerformance("120FPS@1080P 풀프레임 녹화");
+        cameralist.add(camera);
     }
 }

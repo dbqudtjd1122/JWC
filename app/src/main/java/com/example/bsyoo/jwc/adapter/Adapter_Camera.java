@@ -27,7 +27,7 @@ public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera>{
     class ViewHolder {
         TextView text_series;
         TextView text_cameraname;
-        TextView text_camera;
+        // TextView text_camera;
         ImageView img_camera;
     }
 
@@ -42,7 +42,7 @@ public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera>{
             viewHolder = new ViewHolder();
             viewHolder.text_series = (TextView) itemLayout.findViewById(R.id.text_series);
             viewHolder.text_cameraname = (TextView) itemLayout.findViewById(R.id.text_cameraname);
-            viewHolder.text_camera = (TextView) itemLayout.findViewById(R.id.text_camera);
+            // viewHolder.text_camera = (TextView) itemLayout.findViewById(R.id.text_camera);
             viewHolder.img_camera = (ImageView) itemLayout.findViewById(R.id.img_camera);
 
             itemLayout.setTag(viewHolder);
@@ -73,7 +73,7 @@ public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera>{
 
         viewHolder.text_series.setText(getItem(position).getSeries().toString());
         viewHolder.text_cameraname.setText(getItem(position).getOnlinename().toString());
-        viewHolder.text_camera.setText(getItem(position).getPerformance().toString());
+        // viewHolder.text_camera.setText(getItem(position).getPerformance().toString());
 
         return itemLayout;
     }

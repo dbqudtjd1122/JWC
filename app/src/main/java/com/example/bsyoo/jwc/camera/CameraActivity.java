@@ -1,5 +1,6 @@
 package com.example.bsyoo.jwc.camera;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -29,33 +30,32 @@ public class CameraActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.RED);
         }
-        setTitle("CCTV 카메라");
+        setTitle("JWC");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
 
         // TabLayout 초기화
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setBackgroundColor(Color.parseColor("#ff0000"));
+        tabLayout.setBackgroundColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
 
-        tabLayout.addTab( tabLayout.newTab().setText("돔") );
-        tabLayout.addTab( tabLayout.newTab().setText("뷸렛") );
-        tabLayout.addTab( tabLayout.newTab().setText("하우징") );
+        tabLayout.addTab(tabLayout.newTab().setText("카메라"));
+        tabLayout.addTab(tabLayout.newTab().setText("녹화기"));
 
         // ViewPager 초기화
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         // PagerAdater 생성
-        CameraTabPagerAdapter pagerAdapter = new CameraTabPagerAdapter( getSupportFragmentManager(), tabLayout.getTabCount() );
+        CameraTabPagerAdapter pagerAdapter = new CameraTabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
         // PagerAdapter와 ViewPager 연결 : Fragment와 ViewPager 연결
-        viewPager.setAdapter( pagerAdapter );
+        viewPager.setAdapter(pagerAdapter);
 
         // 탭 시작지점 정하는부분
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(1);
 
 
         // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
-        viewPager.addOnPageChangeListener( new TabLayout.TabLayoutOnPageChangeListener( tabLayout ));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -78,12 +78,20 @@ public class CameraActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem( tab.getPosition() );
+                int i = viewPager.getCurrentItem();
+                if (i == 0 || i == 1){
+                    viewPager.setCurrentItem( tab.getPosition() );
+                }
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
     }
 }

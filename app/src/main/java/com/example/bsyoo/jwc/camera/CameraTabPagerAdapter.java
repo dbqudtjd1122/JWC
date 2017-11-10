@@ -26,9 +26,6 @@ public class CameraTabPagerAdapter  extends FragmentPagerAdapter{
             case 1:
                 fragment = new CameraTabFragment2();
                 break;
-            case 2:
-                fragment = new CameraTabFragment3();
-                break;
         }
         return fragment;
     }

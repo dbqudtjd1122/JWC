@@ -1,9 +1,11 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.user;
 
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.bsyoo.jwc.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
