@@ -1,20 +1,34 @@
 package com.example.bsyoo.jwc.user;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.hppt.Http_SignUp;
+import com.example.bsyoo.jwc.model.Model_User;
 
-public class LoginActivity extends AppCompatActivity {
+import java.util.regex.Pattern;
+
+public class LoginActivity extends LoginInformation {
 
     private TextView SignUp, IDPWSearch;
+    private EditText et_login_id, et_login_pw;
+    private Model_User user = new Model_User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +44,14 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.jwc_logo_red);
+
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        setbyid();
 
 
-        SignUp = (TextView) findViewById(R.id.SignUp);
-        IDPWSearch = (TextView) findViewById(R.id.IDPWSearch);
         // TextView 밑줄 적용
         SpannableString content = new SpannableString("회원가입");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
@@ -53,5 +67,93 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void loginClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_login:
+                user.setID(et_login_id.getText().toString());
+                user.setPW(et_login_pw.getText().toString());
+                new LoginActivity.Login().execute(user);
+                break;
+        }
+    }
+
+    private void setbyid() {
+        SignUp = (TextView) findViewById(R.id.SignUp);
+        IDPWSearch = (TextView) findViewById(R.id.IDPWSearch);
+
+        et_login_id = (EditText) findViewById(R.id.et_login_id);
+        et_login_id.setFilters(new InputFilter[]{filter});
+        et_login_pw = (EditText) findViewById(R.id.et_login_pw);
+    }
+
+    // EditText 영문&숫자만 적용
+    protected InputFilter filter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
+            Pattern ps = Pattern.compile("^[a-zA-Z0-9]+$");
+            if (!ps.matcher(source).matches()) {
+                return "";
+            }
+            return null;
+        }
+    };
+
+    // 회원가입
+    public class Login extends AsyncTask<Model_User, Integer, Model_User> {
+
+        private ProgressDialog waitDlg = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // ProgressDialog 보이기
+            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
+            waitDlg = new ProgressDialog(LoginActivity.this);
+            waitDlg.setMessage("로그인중 입니다.");
+            waitDlg.show();
+        }
+
+        @Override
+        protected Model_User doInBackground(Model_User... params) {
+
+            Model_User count = new Http_SignUp().Login(user);
+
+            return count;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Model_User s) {
+            super.onPostExecute(s);
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+            if(s == null){
+                Toast.makeText(LoginActivity.this, "ID 또는 PW 가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+            } else if(s.getOK()==1){
+                Toast.makeText(LoginActivity.this, "로그인을 환영합니다.", Toast.LENGTH_SHORT).show();
+
+                SharedPreferences.Editor prefEditor = pref.edit();
+                prefEditor.putString("id_Set", s.getID().toString());
+                prefEditor.putString("level_Set", s.getLevel().toString());
+                prefEditor.putInt("number_Set", s.getNumber());
+                prefEditor.putString("email_Set", s.getEmail().toString());
+                prefEditor.apply();
+
+                finish();
+            } else if(s.getOK()==2) {
+                Toast.makeText(LoginActivity.this, "로그인 승인 대기를 기다려야합니다.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
     }
 }

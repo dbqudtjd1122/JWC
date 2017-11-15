@@ -1,7 +1,6 @@
 package com.example.bsyoo.jwc;
 
 import android.content.Intent;
-import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity
                 intent8.putExtra("title", "협력업체 특별혜택");
                 startActivity(intent8);
                 break;
-            case R.id.image_camera:
+           /* case R.id.image_camera:
                 Intent intent = new Intent(this, SeriesListActivity.class);
                 intent.putExtra("type", "카메라");
                 startActivity(intent);
@@ -163,16 +162,21 @@ public class MainActivity extends AppCompatActivity
                 Intent intent2 = new Intent(this, SeriesListActivity.class);
                 intent2.putExtra("type", "녹화기");
                 startActivity(intent2);
-                break;
+                break;*/
             case R.id.image_new:
                 Intent intent3 = new Intent(this, SeriesActivity.class);
                 intent3.putExtra("series", "신제품");
                 startActivity(intent3);
                 break;
-            case R.id.main_testcamera:
+            case R.id.image_camera:
                 Intent intent4 = new Intent(this, CameraActivity.class);
                 intent4.putExtra("type", "카메라");
                 startActivity(intent4);
+                break;
+            case R.id.image_record:
+                Intent intent2 = new Intent(this, CameraActivity.class);
+                intent2.putExtra("type", "녹화기");
+                startActivity(intent2);
                 break;
 
         }
@@ -197,11 +201,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.menu_camera) {
-            Intent intent = new Intent(MainActivity.this, SeriesListActivity.class);
+            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
             intent.putExtra("type", "카메라");
             startActivity(intent);
         }else if (id == R.id.menu_record) {
-            Intent intent = new Intent(MainActivity.this, SeriesListActivity.class);
+            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
             intent.putExtra("type", "녹화기");
             startActivity(intent);
         }else if (id == R.id.menu_login) {

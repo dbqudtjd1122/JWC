@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.SeriesInfoActivity">
-
+    tools:context="com.example.bsyoo.jwc.user.terms.TermsTabFragment1"
+    tools:showIn="@layout/activity_terms">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,18 +17,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <view
-                android:id="@+id/youtubeView"
-                class="com.google.android.youtube.player.YouTubePlayerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-            <ImageView
-                android:id="@+id/series_info"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/l1vd_ss_410" />
+                android:layout_margin="10dp"
+                android:text="회원가입 이용약관"
+                android:textColor="@color/colorblackk"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_termsinfo1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="13dp" />
+
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

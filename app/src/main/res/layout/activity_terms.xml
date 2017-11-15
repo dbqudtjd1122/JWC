@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bsyoo.jwc.camera.CameraActivity"
+    tools:context="com.example.bsyoo.jwc.user.terms.TermsActivity"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -22,7 +22,7 @@
 
         <!-- 탭 설정 -->
         <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/terms_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -36,14 +36,12 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="horizontal">
-
 
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/terms_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>

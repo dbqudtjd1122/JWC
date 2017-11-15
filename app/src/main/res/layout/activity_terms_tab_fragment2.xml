@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.SeriesInfoActivity">
-
+    tools:context="com.example.bsyoo.jwc.user.terms.TermsTabFragment2"
+    tools:showIn="@layout/activity_terms">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,18 +17,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <view
-                android:id="@+id/youtubeView"
-                class="com.google.android.youtube.player.YouTubePlayerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-            <ImageView
-                android:id="@+id/series_info"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/l1vd_ss_410" />
+                android:layout_margin="10dp"
+                android:text="개인정보 취급방침"
+                android:textColor="@color/colorblackk"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_termsinfo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:textSize="13dp" />
+
         </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>

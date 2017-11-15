@@ -16,7 +16,7 @@
         android:padding="20dp">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_login_id"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="15dp"
@@ -29,7 +29,7 @@
             android:textCursorDrawable="@null" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/et_login_pw"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="20dp"
@@ -42,14 +42,15 @@
             android:textCursorDrawable="@null" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_red_dark"
             android:text="로그인"
             android:textColor="@android:color/background_light"
             android:textSize="17dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="loginClick"/>
 
         <TextView
             android:id="@+id/IDPWSearch"
