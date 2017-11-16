@@ -1,6 +1,8 @@
 package com.example.bsyoo.jwc.camera;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +13,8 @@ import android.widget.ListView;
 
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.SeriesActivity;
-import com.example.bsyoo.jwc.SeriesInfoActivity;
 import com.example.bsyoo.jwc.adapter.Adapter_Series;
+import com.example.bsyoo.jwc.hppt.Http_Camera;
 import com.example.bsyoo.jwc.model.Model_Camera;
 
 import java.util.ArrayList;
@@ -48,13 +50,13 @@ public class CameraTabFragment1 extends CameraFragment {
         // 출력 데이터 생성
         cameralist = new ArrayList<>();
 
-        setdata();
-
         // Adapter 생성
         adapter = new Adapter_Series(getContext(), R.layout.listitem_series, R.id.series_name, cameralist);
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
+        new CameraTabFragment1.getCameraList().execute("카메라");
+
 
         // 아이템 클릭 이벤트 (camera 모델값을 넘겨준다.)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,22 +64,49 @@ public class CameraTabFragment1 extends CameraFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), SeriesActivity.class);
                 camera = cameralist.get(position);
-                intent.putExtra("series", camera.getSeries().toString());
+                intent.putExtra("series", camera.getOnlineseries().toString());
                 startActivity(intent);
             }
         });
     }
 
-    public void setdata(){
-        camera = new Model_Camera();
-        camera.setSeries("JWC-L 시리즈");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("JWC-PTZ 시리즈");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("JWC-S 시리즈");
-        cameralist.add(camera);
+    // Http List DB 가져오기
+    public class getCameraList extends AsyncTask<String, Integer, List<Model_Camera>> {
 
+        private ProgressDialog waitDlg = null;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected List<Model_Camera> doInBackground(String... params) {
+
+            try {
+                cameralist = new Http_Camera().getCameraList(params[0].toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return cameralist;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(List<Model_Camera> list) {
+            super.onPostExecute(list);
+            // 1.
+            cameralist = list;
+            adapter.clear();
+            adapter.addAll(cameralist);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

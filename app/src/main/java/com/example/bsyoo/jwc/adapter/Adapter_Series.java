@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.Model_Camera;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter_Series extends android.widget.ArrayAdapter<Model_Camera> {
@@ -41,7 +40,7 @@ public class Adapter_Series extends android.widget.ArrayAdapter<Model_Camera> {
             itemLayout.setTag(viewHolder);
         }
 
-        viewHolder.series_name.setText(getItem(position).getSeries().toString());
+        viewHolder.series_name.setText(getItem(position).getOnlineseries().toString());
 
         return itemLayout;
     }

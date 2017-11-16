@@ -142,12 +142,12 @@ public class LoginActivity extends LoginInformation {
             } else if(s.getOK()==1){
                 Toast.makeText(LoginActivity.this, "로그인을 환영합니다.", Toast.LENGTH_SHORT).show();
 
-                SharedPreferences.Editor prefEditor = pref.edit();
+                /*SharedPreferences.Editor prefEditor = pref.edit();
                 prefEditor.putString("id_Set", s.getID().toString());
                 prefEditor.putString("level_Set", s.getLevel().toString());
                 prefEditor.putInt("number_Set", s.getNumber());
                 prefEditor.putString("email_Set", s.getEmail().toString());
-                prefEditor.apply();
+                prefEditor.apply();*/
 
                 finish();
             } else if(s.getOK()==2) {

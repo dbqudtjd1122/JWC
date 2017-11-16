@@ -1,8 +1,9 @@
 package com.example.bsyoo.jwc.camera;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.SeriesActivity;
 import com.example.bsyoo.jwc.adapter.Adapter_Series;
+import com.example.bsyoo.jwc.hppt.Http_Camera;
 import com.example.bsyoo.jwc.model.Model_Camera;
 
 import java.util.ArrayList;
@@ -56,6 +58,7 @@ public class CameraTabFragment2 extends CameraFragment {
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
+        //new CameraTabFragment2.getCameraList().execute("녹화기");
 
 
 
@@ -65,21 +68,61 @@ public class CameraTabFragment2 extends CameraFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), SeriesActivity.class);
                 camera = cameralist.get(position);
-                intent.putExtra("series", camera.getSeries().toString());
+                intent.putExtra("series", camera.getOnlineseries().toString());
                 startActivity(intent);
             }
         });
     }
 
+    // Http List DB 가져오기
+    public class getCameraList extends AsyncTask<String, Integer, List<Model_Camera>> {
+
+        private ProgressDialog waitDlg = null;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected List<Model_Camera> doInBackground(String... params) {
+
+            try {
+                cameralist = new Http_Camera().getCameraList(params[0].toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return cameralist;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(List<Model_Camera> list) {
+            super.onPostExecute(list);
+            // 1.
+            cameralist = list;
+            adapter.clear();
+            adapter.addAll(cameralist);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     public void setdata(){
         camera = new Model_Camera();
-        camera.setSeries("QHD 4MP ALL - HD DVR");
+        camera.setOnlineseries("QHD 4MP ALL - HD DVR");
         cameralist.add(camera);
         camera = new Model_Camera();
-        camera.setSeries("ALL-HD DVR LITE 모델");
+        camera.setOnlineseries("ALL-HD DVR LITE 모델");
         cameralist.add(camera);
         camera = new Model_Camera();
-        camera.setSeries("ALL-HD DVR PRO 모델");
+        camera.setOnlineseries("ALL-HD DVR PRO 모델");
         cameralist.add(camera);
     }
 }

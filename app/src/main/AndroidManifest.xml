@@ -57,9 +57,12 @@
             android:name=".camera.CameraActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+            <meta-data
+                android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
+                android:value="GlideModule" />
         </activity>
 
         <activity android:name=".EventInfoActivity">
@@ -69,19 +72,22 @@
         </activity>
 
         <activity android:name=".SeriesActivity" />
-        <activity android:name=".SeriesInfoActivity" />
+        <activity android:name=".SeriesInfoActivity">
+            <meta-data
+                android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
+                android:value="GlideModule" />
+        </activity>
         <activity android:name=".user.SignUpActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".user.LoginActivity" />
         </activity>
-        <activity android:name=".user.AddressActivity">
-        </activity>
+        <activity android:name=".user.AddressActivity"></activity>
 
-        <activity android:name=".user.terms.TermsActivity"
+        <activity
+            android:name=".user.terms.TermsActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <service android:name=".fmcpush.FirebaseMessagingService">
             <intent-filter>

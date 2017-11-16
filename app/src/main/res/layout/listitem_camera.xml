@@ -19,15 +19,6 @@
             app:srcCompat="@drawable/l1vd_100"
             android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/text_series"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="[JWC-L 시리즈]"
-            android:textColor="#000"
-            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/text_cameraname"
@@ -37,7 +28,18 @@
             android:text="JWC-L1VD"
             android:textColor="#000"
             android:textSize="12dp"
-            android:paddingBottom="5dp"/>
 
+            />
+
+        <TextView
+            android:id="@+id/text_cameraprice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="가격"
+            android:textColor="#000"
+            android:textSize="12dp"
+            android:paddingBottom="5dp"
+            android:textStyle="bold"/>
     </LinearLayout>
 </LinearLayout>

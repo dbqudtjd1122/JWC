@@ -1,7 +1,9 @@
 package com.example.bsyoo.jwc;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.bsyoo.jwc.adapter.Adapter_Camera;
-import com.example.bsyoo.jwc.camera.CameraTabFragment1;
+import com.example.bsyoo.jwc.hppt.Http_Camera;
 import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.user.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class SeriesActivity extends AppCompatActivity {
     private Adapter_Camera adapter;
     private List<Model_Camera> cameralist;
     private Model_Camera camera = new Model_Camera();
+    private GridView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class SeriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_series);
 
 
-        GridView listView = (GridView) findViewById(R.id.series_list);
+        listView = (GridView) findViewById(R.id.series_list);
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -40,46 +43,20 @@ public class SeriesActivity extends AppCompatActivity {
         String series = intent.getStringExtra("series");
         setTitle(series);
 
-        /*// 뒤로가기 버튼
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);*/
-
         // 출력 데이터 생성
         cameralist = new ArrayList<>();
 
-        // 카메라---------------------
-        if(series.equals("JWC-L 시리즈")){
-            setJWC_L();
-        } else if(series.equals("JWC-PTZ 시리즈")){
-            setJWC_PTZ();
-        } else if(series.equals("JWC-S 시리즈")){
-            setJWC_S();
-        }
-        //  녹화기---------------------
-        else if(series.equals("QHD 4MP ALL - HD DVR")){
-            setQHD_4MP_ALL_HDDVR();
-        } else if(series.equals("ALL-HD DVR LITE 모델")){
-            setALL_HDDVR_LITE();
-        } else if(series.equals("ALL-HD DVR PRO 모델")){
-            setALL_HDDVR_PRO();
-        } else if(series.equals("신제품")){
-            setJWC_L();
-            setJWC_PTZ();
-            setJWC_S();
-            setQHD_4MP_ALL_HDDVR();
-            setALL_HDDVR_LITE();
-            setALL_HDDVR_PRO();
-        }
-
         // Adapter 생성
-        adapter = new Adapter_Camera(this, R.layout.listitem_camera, R.id.text_series, cameralist);
+        adapter = new Adapter_Camera(this, R.layout.listitem_camera, R.id.text_cameraname, cameralist);
+
+        // 리스트뷰에 어댑터 설정
+        listView.setAdapter(adapter);
+        new SeriesActivity.getCameraInfoList().execute(series);
 
         listView.setOnItemClickListener( new SeriesActivity.OnItemHandler());
         listView.setOnItemLongClickListener(new SeriesActivity.OnItemHandler());
         listView.setOnItemSelectedListener(new SeriesActivity.OnItemHandler());
 
-        // 리스트뷰에 어댑터 설정
-        listView.setAdapter(adapter);
     }
 
     class OnItemHandler implements ListView.OnItemClickListener, ListView.OnItemLongClickListener, ListView.OnItemSelectedListener {
@@ -105,91 +82,53 @@ public class SeriesActivity extends AppCompatActivity {
 
         }
     }
-    public void setJWC_L(){
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-L 시리즈]");
-        camera.setOnlinename("JWC-L1VD");
-        camera.setPerformance("12LED 2.8mm 광각, SONY 1/2.8 스타비스센서 메탈 반달케이스");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-L 시리즈]");
-        camera.setOnlinename("JWC-L3HAF");
-        camera.setPerformance("하이파워 4LED 2.8~12mm 오토포커스렌즈 롱바디 하우징일체형, UTC ZOOM 컨트롤");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-L 시리즈]");
-        camera.setOnlinename("JWC-L4LPR");
-        camera.setPerformance("파워 18LED (740nm) 6~50mm IR조절기능 시속 60km 차량번호식별 UTC 아답타별매");
-        cameralist.add(camera);
-    }
-    public void setJWC_PTZ(){
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-PTZ 시리즈]");
-        camera.setOnlinename("JSP-210A");
-        camera.setPerformance("하이파워 6LED, 광학10배줌(5~50mm) SONY센서, UTC지원, 벽브라켓+아답타포함");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-PTZ 시리즈]");
-        camera.setOnlinename("JSP-218A");
-        camera.setPerformance("하이파워 14LED, 광학18배줌(4.7~94mm) SONY센서, UTC지원, 벽브라켓+아답타포함");
-        cameralist.add(camera);
-    }
-    public void setJWC_S(){
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-S 시리즈]");
-        camera.setOnlinename("JWC-S1D 2.8mm");
-        camera.setPerformance("2.8mm None IR 광각 SONY 1/2.8 센서 플라스틱 화이트색상");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[JWC-S 시리즈]");
-        camera.setOnlinename("JWC-S1D 3.6mm");
-        camera.setPerformance("3.6mm None IR SONY 1/2.8 센서 플라스틱 화이트색상");
-        cameralist.add(camera);
-    }
-    public void setQHD_4MP_ALL_HDDVR(){
-        camera = new Model_Camera();
-        camera.setSeries("[QHD 4MP]");
-        camera.setOnlinename("JDO-4008B (1TB)");
-        camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[QHD 4MP]");
-        camera.setOnlinename("JDO-4008B (2TB)");
-        camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[QHD 4MP]");
-        camera.setOnlinename("JDO-4008B (3TB)");
-        camera.setPerformance("AHD+TVI+CVI+SD (4MP+2MP) 60FPS@4MP 녹화 최대 20TB지원");
-        cameralist.add(camera);
-    }
-    public void setALL_HDDVR_LITE() {
-        camera = new Model_Camera();
-        camera.setSeries("[ALL-HD DVR LITE]");
-        camera.setOnlinename("JDO-4005B (1TB)");
-        camera.setPerformance("120FPS@1080P 녹화 AHD+TVI+CVI+SD");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[ALL-HD DVR LITE]");
-        camera.setOnlinename("JDO-8005 (1TB)");
-        camera.setPerformance("240FPS@1080P 녹화 AHD+TVI+CVI+SD");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[ALL-HD DVR LITE]");
-        camera.setOnlinename("JDO-1605 (2TB)");
-        camera.setPerformance("120FPS@1080P 풀프레임 녹화");
-        cameralist.add(camera);
-    }
-    public void setALL_HDDVR_PRO() {
-        camera = new Model_Camera();
-        camera.setSeries("[ALL-HD DVR PRO]");
-        camera.setOnlinename("JDO-4008 (1TB)");
-        camera.setPerformance("120FPS@1080P 풀프레임 녹화");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setSeries("[ALL-HD DVR PRO]");
-        camera.setOnlinename("JDO-4008 (2TB)");
-        camera.setPerformance("120FPS@1080P 풀프레임 녹화");
-        cameralist.add(camera);
+
+    // Http List DB 가져오기
+    public class getCameraInfoList extends AsyncTask<String, Integer, List<Model_Camera>> {
+
+        private ProgressDialog waitDlg = null;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            waitDlg = new ProgressDialog(SeriesActivity.this);
+            waitDlg.setMessage("시리즈 정보를 가져오고 있습니다.");
+            waitDlg.show();
+        }
+
+        @Override
+        protected List<Model_Camera> doInBackground(String... params) {
+
+            try {
+                cameralist = new Http_Camera().getCameraInfoList(params[0].toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return cameralist;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(List<Model_Camera> list) {
+            super.onPostExecute(list);
+            // 1.
+            cameralist = list;
+            adapter.clear();
+            adapter.addAll(cameralist);
+            adapter.notifyDataSetChanged();
+
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+        }
     }
 }

@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.SeriesActivity;
 import com.example.bsyoo.jwc.model.Model_Camera;
 
 import java.util.ArrayList;
@@ -25,9 +27,8 @@ public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera>{
     }
 
     class ViewHolder {
-        TextView text_series;
         TextView text_cameraname;
-        // TextView text_camera;
+        TextView text_cameraprice;
         ImageView img_camera;
     }
 
@@ -40,40 +41,16 @@ public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera>{
 
         if(viewHolder == null){
             viewHolder = new ViewHolder();
-            viewHolder.text_series = (TextView) itemLayout.findViewById(R.id.text_series);
             viewHolder.text_cameraname = (TextView) itemLayout.findViewById(R.id.text_cameraname);
-            // viewHolder.text_camera = (TextView) itemLayout.findViewById(R.id.text_camera);
+            viewHolder.text_cameraprice = (TextView) itemLayout.findViewById(R.id.text_cameraprice);
             viewHolder.img_camera = (ImageView) itemLayout.findViewById(R.id.img_camera);
 
             itemLayout.setTag(viewHolder);
         }
-        if(camera.getOnlinename().toString().equals("JWC-L1VD")){
-            viewHolder.img_camera.setImageResource(R.drawable.l1vd_100);
-        } else if (camera.getOnlinename().toString().equals("JWC-L3HAF")){
-            viewHolder.img_camera.setImageResource(R.drawable.l3haf_100);
-        } else if (camera.getOnlinename().toString().equals("JWC-L4LPR")){
-            viewHolder.img_camera.setImageResource(R.drawable.l4lpr_100);
-        } else if (camera.getOnlinename().toString().equals("JSP-210A")){
-            viewHolder.img_camera.setImageResource(R.drawable.jsp_210a);
-        } else if (camera.getOnlinename().toString().equals("JSP-218A")){
-            viewHolder.img_camera.setImageResource(R.drawable.jsp_218a);
-        } else if (camera.getOnlinename().toString().equals("JWC-S1D 2.8mm")){
-            viewHolder.img_camera.setImageResource(R.drawable.jwc_s1d2);
-        } else if (camera.getOnlinename().toString().equals("JWC-S1D 3.6mm")){
-            viewHolder.img_camera.setImageResource(R.drawable.jwc_s1d3);
-        }
-        // HQD 4MP
-        else if (camera.getOnlinename().toString().equals("JDO-4008B (1TB)") || camera.getOnlinename().toString().equals("JDO-4008B (2TB)") || camera.getOnlinename().toString().equals("JDO-4008B (3TB)")){
-            viewHolder.img_camera.setImageResource(R.drawable.jdo_4008_1tb);
-        }
-        // ALL-HD LITE 모델
-        else if (camera.getOnlinename().toString().equals("JDO-4005B (1TB)") || camera.getOnlinename().toString().equals("JDO-8005 (1TB)") || camera.getOnlinename().toString().equals("JDO-1605 (2TB)")){
-            viewHolder.img_camera.setImageResource(R.drawable.jdo_4005b_1tb);
-        }
 
-        viewHolder.text_series.setText(getItem(position).getSeries().toString());
+        Glide.with(getContext()).load(getItem(position).getOnline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
         viewHolder.text_cameraname.setText(getItem(position).getOnlinename().toString());
-        // viewHolder.text_camera.setText(getItem(position).getPerformance().toString());
+        viewHolder.text_cameraprice.setText(getItem(position).getLevel1price().toString());
 
         return itemLayout;
     }
