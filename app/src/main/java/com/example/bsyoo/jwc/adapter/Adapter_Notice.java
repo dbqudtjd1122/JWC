@@ -8,24 +8,26 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.Model_Notice;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter_Notice extends ArrayAdapter<Model_Notice> {
+    
+    public ArrayList<Model_Notice> data = null;
 
     public Adapter_Notice(@NonNull Context context, @LayoutRes int resource, @IdRes int notice1, @NonNull List<Model_Notice> objects) {
         super(context, resource, notice1, objects);
     }
 
     class ViewHolder{
-        TextView notice;
-        TextView day;
+        TextView notice_title;
+        TextView time;
     }
 
     @NonNull
@@ -36,14 +38,17 @@ public class Adapter_Notice extends ArrayAdapter<Model_Notice> {
 
         if(viewHolder == null){
             viewHolder = new ViewHolder();
-            viewHolder.notice = (TextView) itemLayout.findViewById(R.id.notice1);
-            viewHolder.day = (TextView) itemLayout.findViewById(R.id.textView9);
+            viewHolder.notice_title = (TextView) itemLayout.findViewById(R.id.notice1);
+            viewHolder.time = (TextView) itemLayout.findViewById(R.id.textView9);
 
             itemLayout.setTag(viewHolder);
         }
 
-        viewHolder.notice.setText(getItem(position).getNotice());
-        viewHolder.day.setText(getItem(position).getDay());
+        viewHolder.notice_title.setText(getItem(position).getNotice_title());
+
+        SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd"); // E 요일 HH 시간 mm 분 ss 초
+        String datetime = data.format(getItem(position).getTime().getTime());  // 리뷰 수정 날짜, 시간
+        viewHolder.time.setText(datetime);
 
         return itemLayout;
     }

@@ -1,10 +1,11 @@
 package com.example.bsyoo.jwc;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,17 +15,23 @@ import android.widget.ImageView;
 
 import com.example.bsyoo.jwc.adapter.Adapter_Event;
 import com.example.bsyoo.jwc.adapter.GroupData;
-import com.example.bsyoo.jwc.model.Model_Event;
+import com.example.bsyoo.jwc.hppt.Http_Notice;
+import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.user.SignUpActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventActivity extends AppCompatActivity {
 
     private ExpandableListView ExpandableListView;
     private Adapter_Event adapter;
-    private ArrayList<GroupData> groupListDatas;
-    private ArrayList<ArrayList<Model_Event>> childListDatas;
-    private Model_Event event = new Model_Event();
+    private ArrayList<GroupData> groupListDatas = new ArrayList<GroupData>();
+    private ArrayList<ArrayList<Model_Notice>> childListDatas = new ArrayList<ArrayList<Model_Notice>>();
+    private Model_Notice notice = new Model_Notice();
+
+    private List<Model_Notice> noticeslist = new ArrayList<Model_Notice>();
+    private int sizeList = 0;
 
 
     @Override
@@ -42,13 +49,9 @@ public class EventActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         ExpandableListView = (android.widget.ExpandableListView) findViewById(R.id.expandable_list);
-        setData();
-        adapter = new Adapter_Event(this, groupListDatas, childListDatas);
-        ExpandableListView.setAdapter(adapter);
-        // Group 열려있게하기
-        for(int i=0; i< adapter.getGroupCount(); i++){
-            ExpandableListView.expandGroup(i);
-        }
+
+        new EventActivity.getEventList().execute("이벤트");
+
 
         // Group / Child 체크 이벤트
         ExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -67,14 +70,19 @@ public class EventActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         ExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Intent intent = new Intent(EventActivity.this, EventInfoActivity.class);
+
+                notice = noticeslist.get(childPosition);
+                intent.putExtra("event", notice);
                 startActivity(intent);
                 return false;
             }
         });
+
         // 그룹이 닫힐 경우 이벤트
         ExpandableListView.setOnGroupCollapseListener(new android.widget.ExpandableListView.OnGroupCollapseListener() {
             @Override
@@ -96,21 +104,66 @@ public class EventActivity extends AppCompatActivity {
         });
     }
 
-    private void setData(){
-        groupListDatas = new ArrayList<GroupData>();
-        childListDatas = new ArrayList<ArrayList<Model_Event>>();
-        int sizeList = 0;
-        groupListDatas.add(new GroupData("진행 중인 이벤트"));
-        childListDatas.add(new ArrayList<Model_Event>());
+    private void setData(List<Model_Notice> list, String group) {
 
-        childListDatas.get(sizeList).add(new Model_Event("[이벤트] CCTV 렌탈 서비스", "2017-08-16" , R.drawable.rental330));
-        childListDatas.get(sizeList).add(new Model_Event("[이벤트] JWC & Dahua 컨퍼런스", "2017-07-21" , R.drawable.conference_330));
-        childListDatas.get(sizeList).add(new Model_Event("[이벤트] 협력업체 특별혜택", "2017-06-29" , R.drawable.benefit_330));
-        groupListDatas.add(new GroupData("종료된 이벤트"));
-        childListDatas.add(new ArrayList<Model_Event>());
+        groupListDatas.add(new GroupData(group.toString()));
+        childListDatas.add(new ArrayList<Model_Notice>());
+        for (int i = 0; i <= list.size() - 1; i++) {
+            childListDatas.get(sizeList).add(new Model_Notice(list.get(i).getNotice_title().toString(), list.get(i).getTime(), list.get(i).getImg_title()));
+        }
         sizeList++;
-        childListDatas.get(sizeList).add(new Model_Event("[이벤트] 화질은 HD급! 가격은 Light급! JDO-4008", "2017-07-16" , R.drawable.mp_330));
-        //childListDatas.get(sizeList).add(new Model_Event("딸기빙수", 9000, "맛있쪙"));
-        //childListDatas.get(sizeList).add(new Model_Event("초코빙수", 8500, "달아달아"));
+    }
+
+    public class getEventList extends AsyncTask<String, Integer, List<Model_Notice>> {
+
+        private ProgressDialog waitDlg = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // ProgressDialog 보이기
+            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
+            waitDlg = new ProgressDialog(EventActivity.this);
+            waitDlg.setMessage("이벤트 불러오는중 입니다.");
+            waitDlg.show();
+        }
+
+        @Override
+        protected List<Model_Notice> doInBackground(String... params) {
+
+            List<String> startend = new ArrayList<String>();
+            startend.add(0, "진행 중인 이벤트");
+            startend.add(1, "종료된 이벤트");
+
+            for (int i = 0; i <= 1; i++) {
+                noticeslist = new Http_Notice().EventList(startend.get(i).toString(), params[0]);
+                setData(noticeslist, startend.get(i).toString());
+            }
+            return noticeslist;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(List<Model_Notice> menulist) {
+            super.onPostExecute(menulist);
+
+            adapter = new Adapter_Event(EventActivity.this, groupListDatas, childListDatas);
+            ExpandableListView.setAdapter(adapter);
+
+            // 열려있게하기
+            for(int i=0; i< adapter.getGroupCount(); i ++) {
+                ExpandableListView.expandGroup(i);
+            }
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+        }
     }
 }
+

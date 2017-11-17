@@ -18,9 +18,10 @@
 
             <ImageView
                 android:id="@+id/notice_info"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/rental410" />
+                app:srcCompat="@drawable/rental410"
+                android:adjustViewBounds="true"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

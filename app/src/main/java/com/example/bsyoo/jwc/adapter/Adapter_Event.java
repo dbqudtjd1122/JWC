@@ -8,20 +8,21 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_Event;
+import com.example.bsyoo.jwc.model.Model_Notice;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 
 public class Adapter_Event extends BaseExpandableListAdapter {
 
     private Context context;
     private ArrayList<GroupData> groupDatas;
-    private ArrayList<ArrayList<Model_Event>> childDatas;
+    private ArrayList<ArrayList<Model_Notice>> childDatas;
     private LayoutInflater inflater = null;
 
-    public Adapter_Event(Context context, ArrayList<GroupData> groupDatas, ArrayList<ArrayList<Model_Event>> childDatas){
+    public Adapter_Event(Context context, ArrayList<GroupData> groupDatas, ArrayList<ArrayList<Model_Notice>> childDatas){
         this.context = context;
         this.groupDatas = groupDatas;
         this.childDatas = childDatas;
@@ -82,21 +83,18 @@ public class Adapter_Event extends BaseExpandableListAdapter {
         if(view == null){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_child_row, viewGroup, false );
         }
-        TextView event_name = (TextView) view.findViewById(R.id.event_name);
-        TextView event_time = (TextView) view.findViewById(R.id.event_time);
+        TextView event_name = (TextView) view.findViewById(R.id.notice_title);
+        TextView event_time = (TextView) view.findViewById(R.id.time);
         ImageView event_img = (ImageView) view.findViewById(R.id.event_img);
 
-        event_name.setText(childDatas.get(i).get(i1).getEvent_name());
-        event_time.setText(childDatas.get(i).get(i1).getEvent_time());
-        if(event_name.getText().toString().equals("[이벤트] CCTV 렌탈 서비스")){
-            event_img.setImageResource(R.drawable.rental330);
-        }else if(event_name.getText().toString().equals("[이벤트] JWC & Dahua 컨퍼런스")) {
-            event_img.setImageResource(R.drawable.conference_330);
-        }else if(event_name.getText().toString().equals("[이벤트] 협력업체 특별혜택")) {
-            event_img.setImageResource(R.drawable.benefit_330);
-        }else if(event_name.getText().toString().equals("[이벤트] 화질은 HD급! 가격은 Light급! JDO-4008")) {
-            event_img.setImageResource(R.drawable.mp_330);
-        }
+        event_name.setText(childDatas.get(i).get(i1).getNotice_title());
+
+        SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd"); // E 요일 HH 시간 mm 분 ss 초
+        String datetime = data.format(childDatas.get(i).get(i1).getTime());  // 리뷰 수정 날짜, 시간
+        event_time.setText(datetime);
+
+        Glide.with(context).load(childDatas.get(i).get(i1).getImg_title()).override(800,1000).fitCenter().into(event_img);
+
         return view;
     }
 

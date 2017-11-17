@@ -1,52 +1,96 @@
 package com.example.bsyoo.jwc.model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 public class Model_Notice implements Serializable {
 
-    private String title;
-    private String notice;
-    private String day;
+    private String notice_type;
+    private String notice_title;
+    private Date time;
+	private String img_title;
+	private String img_info;
+    private String notice_end;
 
-    protected Model_Notice(Parcel in) {
-        notice = in.readString();
-        day = in.readString();
-    }
 
     @Override
     public String toString() {
         return "Model_Notice{" +
-                "notice='" + notice + '\'' +
-                ", day='" + day + '\'' +
+                "notice_type='" + notice_type + '\'' +
+                ", notice_title='" + notice_title + '\'' +
+                ", time=" + time +
+                ", img_title='" + img_title + '\'' +
+                ", img_info='" + img_info + '\'' +
+                ", notice_end='" + notice_end + '\'' +
                 '}';
+    }
+
+    public Model_Notice(String notice_type, String notice_title, Date time, String img_title, String img_info, String notice_end) {
+        this.notice_type = notice_type;
+        this.notice_title = notice_title;
+        this.time = time;
+        this.img_title = img_title;
+        this.img_info = img_info;
+        this.notice_end = notice_end;
+    }
+
+    public Model_Notice(String notice_title, Date time, String img_title) {
+        this.notice_title = notice_title;
+        this.time = time;
+        this.img_title = img_title;
     }
 
     public Model_Notice() {
     }
 
-    public String getNotice() {
-        return notice;
+    public String getNotice_end() {
+        return notice_end;
     }
 
-    public void setNotice(String notice) {
-        this.notice = notice;
+    public void setNotice_end(String notice_end) {
+        this.notice_end = notice_end;
     }
 
-    public String getDay() {
-        return day;
+    public Date getTime() {
+        return time;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
-    public Model_Notice(String notice, String day) {
-        this.notice = notice;
-        this.day = day;
+    public String getNotice_type() {
+        return notice_type;
     }
 
+    public void setNotice_type(String notice_type) {
+        this.notice_type = notice_type;
+    }
+
+    public String getNotice_title() {
+        return notice_title;
+    }
+
+    public void setNotice_title(String notice_title) {
+        this.notice_title = notice_title;
+    }
+
+    public String getImg_title() {
+        return img_title;
+    }
+
+    public void setImg_title(String img_title) {
+        this.img_title = img_title;
+    }
+
+    public String getImg_info() {
+        return img_info;
+    }
+
+    public void setImg_info(String img_info) {
+        this.img_info = img_info;
+    }
 }

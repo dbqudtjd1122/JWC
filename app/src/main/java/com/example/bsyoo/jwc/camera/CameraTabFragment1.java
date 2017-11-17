@@ -16,6 +16,7 @@ import com.example.bsyoo.jwc.SeriesActivity;
 import com.example.bsyoo.jwc.adapter.Adapter_Series;
 import com.example.bsyoo.jwc.hppt.Http_Camera;
 import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.user.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +81,9 @@ public class CameraTabFragment1 extends CameraFragment {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            waitDlg = new ProgressDialog(getContext());
+            waitDlg.setMessage("카메라 리스트를 가져오는중 입니다.");
+            waitDlg.show();
         }
 
         @Override
@@ -107,6 +111,11 @@ public class CameraTabFragment1 extends CameraFragment {
             adapter.clear();
             adapter.addAll(cameralist);
             adapter.notifyDataSetChanged();
+
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
         }
     }
 }

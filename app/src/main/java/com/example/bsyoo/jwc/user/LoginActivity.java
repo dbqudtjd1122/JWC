@@ -13,6 +13,7 @@ import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -155,5 +156,12 @@ public class LoginActivity extends LoginInformation {
                 finish();
             }
         }
+    }
+
+    // 액션바 우측 안보이는 이미지.. (가운데정렬)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
     }
 }

@@ -40,11 +40,8 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtubeView);
         youTubePlayerView.initialize(API_KEY, this);
 
-
-
         ImageView img_series_info = (ImageView) findViewById(R.id.series_info);
         Glide.with(this).load(camera.getOnline_Img_info()).override(720,4000).fitCenter().into(img_series_info);
-        img_series_info.setImageResource(R.drawable.l1vd_ss_410);
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(img_series_info);

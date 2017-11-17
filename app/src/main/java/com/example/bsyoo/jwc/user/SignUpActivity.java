@@ -13,6 +13,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
+import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -296,6 +297,14 @@ public class SignUpActivity extends AppCompatActivity {
         buisness_layout = (LinearLayout) findViewById(R.id.buisness_layout);
     }
 
+
+    // 액션바 우측 안보이는 이미지.. (가운데정렬)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
     // 회원가입
     public class HttpSignUp extends AsyncTask<Model_User, Integer, Integer> {
 
@@ -325,6 +334,7 @@ public class SignUpActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
 
+
         @Override
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
@@ -345,6 +355,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
+
 
     // ID중복체크
     public class HttpIDCheck extends AsyncTask<Model_User, Integer, Integer> {

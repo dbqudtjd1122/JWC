@@ -25,6 +25,7 @@ import android.widget.ViewFlipper;
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
 import com.example.bsyoo.jwc.user.LoginActivity;
+import com.example.bsyoo.jwc.user.mypage.MypageActivity;
 
 
 public class MainActivity extends AppCompatActivity
@@ -212,7 +213,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         }else if (id == R.id.menu_mypage) {
-            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, MypageActivity.class);
+            startActivity(intent);
         }else if (id == R.id.menu_notice) {
             Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
             startActivity(intent);

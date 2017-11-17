@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/event_name"
+                android:id="@+id/notice_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -26,7 +26,7 @@
                 android:textSize="18dip" />
 
             <TextView
-                android:id="@+id/event_time"
+                android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -35,10 +35,9 @@
 
             <ImageView
                 android:id="@+id/event_img"
-                android:layout_width="330dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:gravity="left"
                 app:srcCompat="@drawable/event1"
                 android:layout_gravity="center"/>
         </LinearLayout>
