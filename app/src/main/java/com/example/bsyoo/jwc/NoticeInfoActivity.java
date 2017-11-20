@@ -32,7 +32,7 @@ public class NoticeInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         notice = (Model_Notice) intent.getSerializableExtra("notice");
 
-        ImageView notice_info = (ImageView) findViewById(R.id.notice_info);
+        ImageView notice_info = (ImageView) findViewById(R.id.event_info);
         Glide.with(this).load(notice.getImg_info()).override(720,4000).fitCenter().into(notice_info);
 
 

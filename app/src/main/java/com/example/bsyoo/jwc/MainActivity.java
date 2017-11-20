@@ -1,22 +1,25 @@
 package com.example.bsyoo.jwc;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -25,10 +28,11 @@ import android.widget.ViewFlipper;
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
 import com.example.bsyoo.jwc.user.LoginActivity;
+import com.example.bsyoo.jwc.user.LoginInformation;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends LoginInformation
         implements NavigationView.OnNavigationItemSelectedListener, View.OnTouchListener {
 
     private LinearLayout ModelSearch;
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity
             getWindow().setStatusBarColor(Color.RED);
         }
 
+
+
         // 액션바 타이틀 및 배경색
         getSupportActionBar().setTitle("");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
@@ -69,6 +75,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
+
+
+        // 로그인정보가 있는경우
+        if(pref.getString("id_Set", "").toString() != "" || pref.getString("id_Set", "").toString() != null) {
+            Loginsave();
+        }
 
         // 뷰플리퍼 자동 넘김 (광고 배너)
         viewflipper = (ViewFlipper) findViewById(R.id.viewflipper);
@@ -125,7 +138,6 @@ public class MainActivity extends AppCompatActivity
                 viewflipper.startFlipping();
 
                 break;
-
             case R.id.viewpage1:
                 Toast.makeText(MainActivity.this, "1번", Toast.LENGTH_SHORT).show();
                 Intent intent5 = new Intent(this, BannerActivity.class);
@@ -154,16 +166,6 @@ public class MainActivity extends AppCompatActivity
                 intent8.putExtra("title", "협력업체 특별혜택");
                 startActivity(intent8);
                 break;
-           /* case R.id.image_camera:
-                Intent intent = new Intent(this, SeriesListActivity.class);
-                intent.putExtra("type", "카메라");
-                startActivity(intent);
-                break;
-            case R.id.image_record:
-                Intent intent2 = new Intent(this, SeriesListActivity.class);
-                intent2.putExtra("type", "녹화기");
-                startActivity(intent2);
-                break;*/
             case R.id.image_new:
                 Intent intent3 = new Intent(this, SeriesActivity.class);
                 intent3.putExtra("series", "신제품");
@@ -178,6 +180,12 @@ public class MainActivity extends AppCompatActivity
                 Intent intent2 = new Intent(this, CameraActivity.class);
                 intent2.putExtra("type", "녹화기");
                 startActivity(intent2);
+                break;
+            case R.id.btn_modelsearch:
+                EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);
+                Intent intent9 = new Intent(this, ModelSearchActivity.class);
+                intent9.putExtra("model", et_modelsearch.getText().toString());
+                startActivity(intent9);
                 break;
 
         }
@@ -201,6 +209,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.menu_camera) {
             Intent intent = new Intent(MainActivity.this, CameraActivity.class);
             intent.putExtra("type", "카메라");
@@ -211,7 +220,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }else if (id == R.id.menu_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 999);
         }else if (id == R.id.menu_mypage) {
             Intent intent = new Intent(MainActivity.this, MypageActivity.class);
             startActivity(intent);
@@ -227,7 +236,8 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.menu_reference) {
             Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.menu_logout) {
-            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
+            Logout();
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.menu_setting) {
             Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
         }
@@ -305,5 +315,50 @@ public class MainActivity extends AppCompatActivity
     public void viewflipperrigth() {
         viewflipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_in));
         viewflipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_out));
+    }
+    // 로그인했을때, 로그인정보가 있을때
+    public void Loginsave(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.menu_login).setVisible(false);
+        menu.findItem(R.id.menu_mypage).setVisible(true);
+        menu.findItem(R.id.menu_logout).setVisible(true);
+        menu.findItem(R.id.menu_setting).setVisible(true);
+    }
+    // 로그아웃했을때
+    public void Logout(){
+        SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.remove("id_Set");
+        editor.remove("level_Set");
+        editor.remove("number_Set");
+        editor.remove("email_Set");
+        isid = pref.getString("id_Set", "").toString();
+        islevel = pref.getInt("level_Set", -1);
+        isnumber = pref.getInt("number_Set", -1);
+        isemail = pref.getString("email_Set", "" ).toString();
+        editor.clear();
+        editor.commit();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.menu_login).setVisible(true);
+        menu.findItem(R.id.menu_mypage).setVisible(false);
+        menu.findItem(R.id.menu_logout).setVisible(false);
+        menu.findItem(R.id.menu_setting).setVisible(false);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 999) {
+            if (resultCode == RESULT_OK) {
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                if (navigationView != null) {
+                    Loginsave();
+                }
+            }
+        }
     }
 }

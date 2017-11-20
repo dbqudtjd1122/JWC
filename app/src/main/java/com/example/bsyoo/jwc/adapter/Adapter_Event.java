@@ -1,10 +1,13 @@
 package com.example.bsyoo.jwc.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,92 +17,47 @@ import com.example.bsyoo.jwc.model.Model_Notice;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Adapter_Event extends BaseExpandableListAdapter {
+public class Adapter_Event  extends ArrayAdapter<Model_Notice> {
 
-    private Context context;
-    private ArrayList<GroupData> groupDatas;
-    private ArrayList<ArrayList<Model_Notice>> childDatas;
-    private LayoutInflater inflater = null;
+    public ArrayList<Model_Notice> data = null;
 
-    public Adapter_Event(Context context, ArrayList<GroupData> groupDatas, ArrayList<ArrayList<Model_Notice>> childDatas){
-        this.context = context;
-        this.groupDatas = groupDatas;
-        this.childDatas = childDatas;
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public Adapter_Event(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<Model_Notice> objects) {
+        super(context, resource, textViewResourceId, objects);
     }
 
-    @Override
-    public int getGroupCount() {
-        return groupDatas.size();
+    class ViewHolder{
+        TextView event_title;
+        TextView event_time;
+        ImageView event_img;
     }
 
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return childDatas.get(groupPosition).size();
-    }
+    @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View itemLayout = super.getView(position, convertView, parent);
+            ViewHolder viewHolder = (ViewHolder) itemLayout.getTag();
 
-    @Override
-    public Object getGroup(int groupPosition) {
-        return groupDatas.get(groupPosition);
-    }
+            if(viewHolder == null) {
+                viewHolder = new ViewHolder();
+                viewHolder.event_title = (TextView) itemLayout.findViewById(R.id.event_title);
+                viewHolder.event_time = (TextView) itemLayout.findViewById(R.id.event_time);
+                viewHolder.event_img = (ImageView) itemLayout.findViewById(R.id.event_img);
 
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return childDatas.get(groupPosition).get(childPosition);
-    }
+                itemLayout.setTag(viewHolder);
+            }
+            if(getItem(position).getNotice_end().toString().equals("진행 중인 이벤트")){
+                viewHolder.event_title.setText("[이벤트] "+getItem(position).getNotice_title().toString());
+            } else {
+                viewHolder.event_title.setText("[종료된 이벤트] "+getItem(position).getNotice_title().toString());
+            }
+            SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd"); // E 요일 HH 시간 mm 분 ss 초
+            String datetime = data.format(getItem(position).getTime().getTime());  // 리뷰 수정 날짜, 시간
+            viewHolder.event_time.setText(datetime);
 
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
+            Glide.with(getContext()).load(getItem(position).getImg_title().toString()).override(800,1000).fitCenter().into(viewHolder.event_img);
 
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View View, ViewGroup parent) {
-
-        if(View == null){
-            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            View = inflater.inflate(R.layout.event_group_row, null);
-        }
-        TextView groupName = (TextView)View.findViewById(R.id.groupName);
-        String group = String.valueOf(groupDatas.get(groupPosition).getGroupName());
-        groupName.setText(group.toString());
-
-        return View;
-    }
-
-    @Override
-    public View getChildView(int i, int i1, boolean isLastChild, View view, ViewGroup viewGroup) {
-        if(view == null){
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_child_row, viewGroup, false );
-        }
-        TextView event_name = (TextView) view.findViewById(R.id.notice_title);
-        TextView event_time = (TextView) view.findViewById(R.id.time);
-        ImageView event_img = (ImageView) view.findViewById(R.id.event_img);
-
-        event_name.setText(childDatas.get(i).get(i1).getNotice_title());
-
-        SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd"); // E 요일 HH 시간 mm 분 ss 초
-        String datetime = data.format(childDatas.get(i).get(i1).getTime());  // 리뷰 수정 날짜, 시간
-        event_time.setText(datetime);
-
-        Glide.with(context).load(childDatas.get(i).get(i1).getImg_title()).override(800,1000).fitCenter().into(event_img);
-
-        return view;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+            return itemLayout;
     }
 }

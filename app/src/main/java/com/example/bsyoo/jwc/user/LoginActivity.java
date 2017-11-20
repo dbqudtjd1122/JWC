@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.SpannableString;
@@ -51,7 +49,6 @@ public class LoginActivity extends LoginInformation {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         setbyid();
-
 
         // TextView 밑줄 적용
         SpannableString content = new SpannableString("회원가입");
@@ -116,7 +113,6 @@ public class LoginActivity extends LoginInformation {
             waitDlg.setMessage("로그인중 입니다.");
             waitDlg.show();
         }
-
         @Override
         protected Model_User doInBackground(Model_User... params) {
 
@@ -124,12 +120,10 @@ public class LoginActivity extends LoginInformation {
 
             return count;
         }
-
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
         }
-
         @Override
         protected void onPostExecute(Model_User s) {
             super.onPostExecute(s);
@@ -138,20 +132,29 @@ public class LoginActivity extends LoginInformation {
                 waitDlg.dismiss();
                 waitDlg = null;
             }
-            if(s == null){
+            if (s == null) {
                 Toast.makeText(LoginActivity.this, "ID 또는 PW 가 틀렸습니다.", Toast.LENGTH_SHORT).show();
-            } else if(s.getOK()==1){
-                Toast.makeText(LoginActivity.this, "로그인을 환영합니다.", Toast.LENGTH_SHORT).show();
+            } else if (s.getOK() == 1) {
+                Integer number = s.getNumber();
 
-                /*SharedPreferences.Editor prefEditor = pref.edit();
+                SharedPreferences.Editor prefEditor = pref.edit();
                 prefEditor.putString("id_Set", s.getID().toString());
-                prefEditor.putString("level_Set", s.getLevel().toString());
-                prefEditor.putInt("number_Set", s.getNumber());
+                prefEditor.putInt("level_Set", s.getLevel());
+                prefEditor.putInt("number_Set", number);
                 prefEditor.putString("email_Set", s.getEmail().toString());
-                prefEditor.apply();*/
+                prefEditor.apply();
 
+                isid = pref.getString("id_Set", "").toString();
+                islevel = pref.getInt("level_Set", -1);
+                isnumber = pref.getInt("number_Set", -1);
+                isemail = pref.getString("email_Set", "" ).toString();
+
+                Intent intent = new Intent();
+
+                setResult(RESULT_OK, intent);
+                Toast.makeText(LoginActivity.this, "로그인을 환영합니다.", Toast.LENGTH_SHORT).show();
                 finish();
-            } else if(s.getOK()==2) {
+            } else if (s.getOK() == 2) {
                 Toast.makeText(LoginActivity.this, "로그인 승인 대기를 기다려야합니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }

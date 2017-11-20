@@ -100,6 +100,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".ModelSearchActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
         <service android:name=".fmcpush.FirebaseMessagingService">
             <intent-filter>
@@ -112,7 +117,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".user.mypage.PwCheckActivity"></activity>
+        <activity android:name=".user.mypage.PwCheckActivity" />
+
     </application>
 
 </manifest>

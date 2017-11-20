@@ -50,7 +50,7 @@ public class Http_Notice {
         }
     }
 
-    public List<Model_Notice> EventList(String startend, String type){
+    public List<Model_Notice> EventList(String type){
         String weburl = "http://192.168.0.11/notice/getevent";
 
         HttpRequest request = null;
@@ -60,8 +60,7 @@ public class Http_Notice {
         int httpCode = 0;
         try {
             request = new HttpRequest(weburl).addHeader("charset", "utf-8");
-            request.addParameter("startend", startend);
-            request.addParameter("type", type);
+            request.addParameter("notice_type", type);
 
             httpCode = request.post();
 

@@ -2,36 +2,29 @@ package com.example.bsyoo.jwc;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.bsyoo.jwc.adapter.Adapter_Event;
-import com.example.bsyoo.jwc.adapter.GroupData;
 import com.example.bsyoo.jwc.hppt.Http_Notice;
 import com.example.bsyoo.jwc.model.Model_Notice;
-import com.example.bsyoo.jwc.user.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventActivity extends AppCompatActivity {
 
-    private ExpandableListView ExpandableListView;
+    private ListView EventListView;
     private Adapter_Event adapter;
-    private ArrayList<GroupData> groupListDatas = new ArrayList<GroupData>();
-    private ArrayList<ArrayList<Model_Notice>> childListDatas = new ArrayList<ArrayList<Model_Notice>>();
-    private Model_Notice notice = new Model_Notice();
+    private Model_Notice event = new Model_Notice();
 
     private List<Model_Notice> noticeslist = new ArrayList<Model_Notice>();
-    private int sizeList = 0;
 
 
     @Override
@@ -48,70 +41,47 @@ public class EventActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        ExpandableListView = (android.widget.ExpandableListView) findViewById(R.id.expandable_list);
+        EventListView = (ListView) findViewById(R.id.event_list);
+
+        // 출력 데이터 생성
+        noticeslist = new ArrayList<>();
+
+        // Adapter 생성
+        adapter = new Adapter_Event(this, R.layout.listitem_event, R.id.event_title, noticeslist);
+
+        // 리스트뷰에 어댑터 설정
+        EventListView.setAdapter(adapter);
 
         new EventActivity.getEventList().execute("이벤트");
 
+        EventListView.setOnItemClickListener( new EventActivity.OnItemHandler());
+        EventListView.setOnItemLongClickListener(new EventActivity.OnItemHandler());
+        EventListView.setOnItemSelectedListener(new EventActivity.OnItemHandler());
 
-        // Group / Child 체크 이벤트
-        ExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long id) {
-                ImageView groupswich = (ImageView) findViewById(R.id.groupswich);
-
-                BitmapDrawable a = (BitmapDrawable) getResources().getDrawable(R.drawable.swich0);
-                Bitmap bitmap1 = a.getBitmap();
-
-                BitmapDrawable b = (BitmapDrawable)((ImageView) findViewById(R.id.groupswich)).getDrawable();
-                Bitmap bitmap2 = b.getBitmap();
-
-                groupswich.setImageResource(R.drawable.swich1);
-
-                return false;
-            }
-        });
-
-        ExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Intent intent = new Intent(EventActivity.this, EventInfoActivity.class);
-
-                notice = noticeslist.get(childPosition);
-                intent.putExtra("event", notice);
-                startActivity(intent);
-                return false;
-            }
-        });
-
-        // 그룹이 닫힐 경우 이벤트
-        ExpandableListView.setOnGroupCollapseListener(new android.widget.ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                ImageView groupswich = (ImageView) findViewById(R.id.groupswich);
-
-                BitmapDrawable a = (BitmapDrawable) getResources().getDrawable(R.drawable.swich0);
-                Bitmap bitmap1 = a.getBitmap();
-
-                BitmapDrawable b = (BitmapDrawable)((ImageView) findViewById(R.id.groupswich)).getDrawable();
-                Bitmap bitmap2 = b.getBitmap();
-
-                if(bitmap1.equals(bitmap2)) {
-                    groupswich.setImageResource(R.drawable.swich1);
-                } else {
-                    groupswich.setImageResource(R.drawable.swich0);
-                }
-            }
-        });
     }
-
-    private void setData(List<Model_Notice> list, String group) {
-
-        groupListDatas.add(new GroupData(group.toString()));
-        childListDatas.add(new ArrayList<Model_Notice>());
-        for (int i = 0; i <= list.size() - 1; i++) {
-            childListDatas.get(sizeList).add(new Model_Notice(list.get(i).getNotice_title().toString(), list.get(i).getTime(), list.get(i).getImg_title()));
+    public class OnItemHandler implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemLongClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(EventActivity.this, EventInfoActivity.class);
+            event = noticeslist.get(position);
+            intent.putExtra("event", event);
+            startActivity(intent);
         }
-        sizeList++;
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            return false;
+        }
     }
 
     public class getEventList extends AsyncTask<String, Integer, List<Model_Notice>> {
@@ -125,21 +95,15 @@ public class EventActivity extends AppCompatActivity {
             // ProgressDialog 보이기
             // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
             waitDlg = new ProgressDialog(EventActivity.this);
-            waitDlg.setMessage("이벤트 불러오는중 입니다.");
+            waitDlg.setMessage("이벤트를 불러오는중 입니다.");
             waitDlg.show();
         }
 
         @Override
         protected List<Model_Notice> doInBackground(String... params) {
 
-            List<String> startend = new ArrayList<String>();
-            startend.add(0, "진행 중인 이벤트");
-            startend.add(1, "종료된 이벤트");
+            noticeslist = new Http_Notice().EventList(params[0].toString());
 
-            for (int i = 0; i <= 1; i++) {
-                noticeslist = new Http_Notice().EventList(startend.get(i).toString(), params[0]);
-                setData(noticeslist, startend.get(i).toString());
-            }
             return noticeslist;
         }
 
@@ -149,16 +113,14 @@ public class EventActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Model_Notice> menulist) {
-            super.onPostExecute(menulist);
+        protected void onPostExecute(List<Model_Notice> list) {
+            super.onPostExecute(list);
 
-            adapter = new Adapter_Event(EventActivity.this, groupListDatas, childListDatas);
-            ExpandableListView.setAdapter(adapter);
+            noticeslist = list;
+            adapter.clear();
+            adapter.addAll(noticeslist);
+            adapter.notifyDataSetChanged();
 
-            // 열려있게하기
-            for(int i=0; i< adapter.getGroupCount(); i ++) {
-                ExpandableListView.expandGroup(i);
-            }
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;

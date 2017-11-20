@@ -51,14 +51,12 @@ public class CameraTabFragment2 extends CameraFragment {
         // 출력 데이터 생성
         cameralist = new ArrayList<>();
 
-        setdata();
-
         // Adapter 생성
         adapter = new Adapter_Series(getContext(), R.layout.listitem_series, R.id.series_name, cameralist);
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
-        //new CameraTabFragment2.getCameraList().execute("녹화기");
+        new CameraTabFragment2.getCameraList().execute("녹화기");
 
 
 
@@ -84,6 +82,9 @@ public class CameraTabFragment2 extends CameraFragment {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            waitDlg = new ProgressDialog(getContext());
+            waitDlg.setMessage("녹화기 리스트를 가져오는중 입니다.");
+            waitDlg.show();
         }
 
         @Override
@@ -111,18 +112,11 @@ public class CameraTabFragment2 extends CameraFragment {
             adapter.clear();
             adapter.addAll(cameralist);
             adapter.notifyDataSetChanged();
-        }
-    }
 
-    public void setdata(){
-        camera = new Model_Camera();
-        camera.setOnlineseries("QHD 4MP ALL - HD DVR");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setOnlineseries("ALL-HD DVR LITE 모델");
-        cameralist.add(camera);
-        camera = new Model_Camera();
-        camera.setOnlineseries("ALL-HD DVR PRO 모델");
-        cameralist.add(camera);
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+        }
     }
 }

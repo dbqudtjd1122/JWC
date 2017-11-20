@@ -7,10 +7,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.bsyoo.jwc.EventActivity">
 
-    <ExpandableListView
+    <ListView
+        android:id="@+id/event_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-        android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
-        android:id="@+id/expandable_list"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

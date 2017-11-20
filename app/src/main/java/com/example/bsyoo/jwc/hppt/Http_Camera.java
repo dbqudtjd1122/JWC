@@ -85,4 +85,40 @@ public class Http_Camera {
             return cameraList;
         }
     }
+
+    public List<Model_Camera> getCameraSearchList(String search) {
+        String weburl = "http://192.168.0.11/jwccamera/getCameraSearchList";
+
+        HttpRequest request = null;
+        JSONArray response = null;
+        List<Model_Camera> cameraList = null;
+
+        int httpCode = 0;
+        try {
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+            request.addParameter("Onlinename", search);
+
+            httpCode = request.post();
+
+            if (httpCode == HttpURLConnection.HTTP_OK) { // HttpURLConnection.HTTP_OK == 200
+                try {
+                    response = request.getJSONArrayResponse(); // 서버값이 리턴된다
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+            }
+
+            String jsonInString = response.toString();
+            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<Model_Camera>>() {
+            }.getType());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+            return cameraList;
+        }
+    }
 }

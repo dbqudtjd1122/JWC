@@ -44,7 +44,7 @@ public class Adapter_Notice extends ArrayAdapter<Model_Notice> {
             itemLayout.setTag(viewHolder);
         }
 
-        viewHolder.notice_title.setText(getItem(position).getNotice_title());
+        viewHolder.notice_title.setText("[공지] "+getItem(position).getNotice_title());
 
         SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd"); // E 요일 HH 시간 mm 분 ss 초
         String datetime = data.format(getItem(position).getTime().getTime());  // 리뷰 수정 날짜, 시간
