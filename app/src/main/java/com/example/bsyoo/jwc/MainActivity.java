@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -44,8 +45,6 @@ public class MainActivity extends LoginInformation
         implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
 
     private LinearLayout ModelSearch;
-    private ImageView main_img_left, main_img_right;
-    private float down_x, up_x;
     private BackCloseHandler backCloseHandler;
 
     // ViewPager
@@ -129,7 +128,6 @@ public class MainActivity extends LoginInformation
                     img[3].setImageResource(R.drawable.page_select);
                 }
             }
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
@@ -167,8 +165,8 @@ public class MainActivity extends LoginInformation
             }
         };
         thread.start();
-
     }
+
     public void onclick(View view){
         switch (view.getId()){
             case R.id.image_new:
@@ -192,9 +190,9 @@ public class MainActivity extends LoginInformation
                 intent9.putExtra("model", et_modelsearch.getText().toString());
                 startActivity(intent9);
                 break;
-
         }
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -230,7 +228,6 @@ public class MainActivity extends LoginInformation
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
 
         if (id == R.id.menu_camera) {
             Intent intent = new Intent(MainActivity.this, CameraActivity.class);
@@ -330,6 +327,7 @@ public class MainActivity extends LoginInformation
         menu.findItem(R.id.menu_setting).setVisible(false);
     }
 
+    // 로그인 액티비티에서오는 Result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

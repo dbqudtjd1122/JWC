@@ -70,8 +70,8 @@
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="305dp" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="315dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
