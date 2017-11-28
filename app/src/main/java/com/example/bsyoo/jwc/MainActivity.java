@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,24 +20,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.support.v4.view.ViewPager;
+import android.view.View.OnClickListener;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
-import com.example.bsyoo.jwc.user.LoginActivity;
-import com.example.bsyoo.jwc.user.LoginInformation;
+import com.example.bsyoo.jwc.user.Login.LoginActivity;
+import com.example.bsyoo.jwc.user.Login.LoginInformation;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
 import com.example.bsyoo.jwc.viewpager.ViewPagerAdapter;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 
 public class MainActivity extends LoginInformation
@@ -87,7 +77,8 @@ public class MainActivity extends LoginInformation
 
 
         // 로그인정보가 있는경우
-        if(pref.getString("id_Set", "").toString() != "" || pref.getString("id_Set", "").toString() != null) {
+        if(pref.getString("id_Set", "").toString().equals("") || pref.getString("id_Set", "").toString().equals(null)) {
+        }else {
             Loginsave();
         }
 
@@ -102,7 +93,7 @@ public class MainActivity extends LoginInformation
         for (int i = 0; i < img.length; i++) {
             img[i].setOnClickListener(this);
         }
-
+        // 보이는화면이 몇번째 View인지에 따라 설정하는 옵션값
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -135,7 +126,6 @@ public class MainActivity extends LoginInformation
             public void onPageScrollStateChanged(int state) {
             }
         });
-
         handler = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (viewPager.getCurrentItem() == 0) {
@@ -312,10 +302,10 @@ public class MainActivity extends LoginInformation
         editor.remove("level_Set");
         editor.remove("number_Set");
         editor.remove("email_Set");
-        isid = pref.getString("id_Set", "").toString();
+        /*isid = pref.getString("id_Set", "").toString();
         islevel = pref.getInt("level_Set", -1);
         isnumber = pref.getInt("number_Set", -1);
-        isemail = pref.getString("email_Set", "" ).toString();
+        isemail = pref.getString("email_Set", "" ).toString();*/
         editor.clear();
         editor.commit();
 

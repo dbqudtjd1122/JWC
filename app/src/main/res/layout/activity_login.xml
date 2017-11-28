@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.user.LoginActivity">
+    tools:context="com.example.bsyoo.jwc.user.Login.LoginActivity">
 
 
     <LinearLayout
@@ -22,7 +22,8 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/edittext"
             android:ems="10"
-            android:hint=" 아이디"
+            android:padding="5dp"
+            android:hint="아이디"
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:textColor="#000"
@@ -35,7 +36,8 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/edittext"
             android:ems="10"
-            android:hint=" 비밀번호"
+            android:hint="비밀번호"
+            android:padding="5dp"
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="#000"
@@ -46,11 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_red_dark"
+            android:onClick="loginClick"
             android:text="로그인"
             android:textColor="@android:color/background_light"
             android:textSize="17dp"
-            android:textStyle="bold"
-            android:onClick="loginClick"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/IDPWSearch"

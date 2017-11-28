@@ -16,7 +16,6 @@ import com.example.bsyoo.jwc.SeriesActivity;
 import com.example.bsyoo.jwc.adapter.Adapter_Series;
 import com.example.bsyoo.jwc.hppt.Http_Camera;
 import com.example.bsyoo.jwc.model.Model_Camera;
-import com.example.bsyoo.jwc.user.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;

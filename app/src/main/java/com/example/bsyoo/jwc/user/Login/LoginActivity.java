@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc.user;
+package com.example.bsyoo.jwc.user.Login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.Http_SignUp;
 import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.user.Login.IDPWSearch.IDPWSearchActivity;
 
 import java.util.regex.Pattern;
 
@@ -64,6 +65,14 @@ public class LoginActivity extends LoginInformation {
                 startActivity(intent);
             }
         });
+        IDPWSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, IDPWSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

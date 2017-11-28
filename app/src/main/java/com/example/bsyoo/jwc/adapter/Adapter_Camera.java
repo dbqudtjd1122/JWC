@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.Model_Camera;
-import com.example.bsyoo.jwc.user.LoginInformation;
+import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 import java.util.ArrayList;
 import java.util.List;

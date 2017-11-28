@@ -1,5 +1,7 @@
 package com.example.bsyoo.jwc.model;
 
+import java.util.Date;
+
 public class Model_User {
 
     private Integer Number;
@@ -15,10 +17,32 @@ public class Model_User {
     private String Representation;
     private String Buisness_number;
     private String Sectors;
+    private Date UserTime;
     private Integer Email_sms;
     private Integer Phone_sms;
     private Integer Push;
     private Integer OK;
+
+    public Model_User(Integer number, String ID, String email, Integer level, String PW, String name, String phone_home, String phone, String addr, String mutual, String representation, String buisness_number, String sectors, Date userTime, Integer email_sms, Integer phone_sms, Integer push, Integer OK) {
+        Number = number;
+        this.ID = ID;
+        Email = email;
+        Level = level;
+        this.PW = PW;
+        Name = name;
+        Phone_home = phone_home;
+        Phone = phone;
+        Addr = addr;
+        Mutual = mutual;
+        Representation = representation;
+        Buisness_number = buisness_number;
+        Sectors = sectors;
+        UserTime = userTime;
+        Email_sms = email_sms;
+        Phone_sms = phone_sms;
+        Push = push;
+        this.OK = OK;
+    }
 
     @Override
     public String toString() {
@@ -36,6 +60,7 @@ public class Model_User {
                 ", Representation='" + Representation + '\'' +
                 ", Buisness_number='" + Buisness_number + '\'' +
                 ", Sectors='" + Sectors + '\'' +
+                ", UserTime=" + UserTime +
                 ", Email_sms=" + Email_sms +
                 ", Phone_sms=" + Phone_sms +
                 ", Push=" + Push +
@@ -43,28 +68,17 @@ public class Model_User {
                 '}';
     }
 
-    public Model_User(Integer number, String ID, String email, Integer level, String PW, String name, String phone_home, String phone, String addr, String mutual, String representation, String buisness_number, String sectors, Integer email_sms, Integer phone_sms, Integer push, Integer OK) {
-        Number = number;
-        this.ID = ID;
-        Email = email;
-        Level = level;
-        this.PW = PW;
-        Name = name;
-        Phone_home = phone_home;
-        Phone = phone;
-        Addr = addr;
-        Mutual = mutual;
-        Representation = representation;
-        Buisness_number = buisness_number;
-        Sectors = sectors;
-        Email_sms = email_sms;
-        Phone_sms = phone_sms;
-        Push = push;
-        this.OK = OK;
-    }
-
     public Model_User() {
         super();
+    }
+
+
+    public Date getUserTime() {
+        return UserTime;
+    }
+
+    public void setUserTime(Date userTime) {
+        UserTime = userTime;
     }
 
     public Integer getNumber() {

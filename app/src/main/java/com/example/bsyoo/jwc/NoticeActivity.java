@@ -14,10 +14,7 @@ import android.widget.Toast;
 
 import com.example.bsyoo.jwc.adapter.Adapter_Notice;
 import com.example.bsyoo.jwc.hppt.Http_Notice;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
 import com.example.bsyoo.jwc.model.Model_Notice;
-import com.example.bsyoo.jwc.model.Model_User;
-import com.example.bsyoo.jwc.user.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
