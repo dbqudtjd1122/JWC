@@ -75,7 +75,6 @@ public class MainActivity extends LoginInformation
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
-
         // 로그인정보가 있는경우
         if(pref.getString("id_Set", "").toString().equals("") || pref.getString("id_Set", "").toString().equals(null)) {
         }else {

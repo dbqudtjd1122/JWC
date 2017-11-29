@@ -7,14 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.model.Model_User;
 
 
 public class MypageTabFragment2 extends MypageFragment {
 
     private View view = null;
+    private Model_User user = new Model_User();
 
     public MypageTabFragment2(){
 
+    }
+
+    @Override
+    public void recall() {
+        super.recall();
+        user = getOrderuser();
     }
 
     @Override

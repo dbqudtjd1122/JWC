@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.user.Login.SignUpActivity">
+    android:visibility="visible"
+    tools:context="com.example.bsyoo.jwc.user.mypage.MypageModifiedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="회원가입"
+            android:text="개인 정보 수정"
             android:textColor="@color/colorblackk"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -105,43 +106,22 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/et_id"
+                        <TextView
+                            android:id="@+id/tv_id"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
                             android:layout_margin="7dp"
-                            android:background="@drawable/signuptext"
                             android:ems="10"
                             android:inputType="textPersonName"
                             android:maxLength="16"
                             android:singleLine="true"
                             android:textColor="#000"
                             android:textCursorDrawable="@null"
-                            android:textSize="16dp" />
+                            android:textSize="16dp"
+                            android:text="dbqudtjd1122"/>
 
-                        <Button
-                            android:id="@+id/btn_id_check"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="5dp"
-                            android:background="@color/colorblackk"
-                            android:onClick="signClick"
-                            android:text="중복확인"
-                            android:textColor="@color/colorblack"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:text="영문자, 숫자만 입력 가능. 최소 6자 이상 입력."
-                        android:textSize="13dp" />
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -411,7 +391,6 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="5dp"
                             android:background="@color/colorblackk"
-                            android:onClick="signClick"
                             android:text="중복확인"
                             android:textColor="@color/colorblack"
                             android:textStyle="bold" />
@@ -513,7 +492,6 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="5dp"
                             android:background="@color/colorblackk"
-                            android:onClick="signClick"
                             android:text="주소 검색"
                             android:textColor="@color/colorblack"
                             android:textStyle="bold" />
@@ -842,16 +820,14 @@
                                 android:layout_height="wrap_content"
                                 android:buttonTint="#ff0000"
                                 android:checked="true"
-                                android:onClick="signClick"
-                                android:text="일반 회원가입" />
+                                android:text="일반 소비자" />
 
                             <RadioButton
                                 android:id="@+id/radioButton2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:buttonTint="#ff0000"
-                                android:onClick="signClick"
-                                android:text="사업자 회원가입" />
+                                android:text="사업자" />
                         </RadioGroup>
 
                         <TextView
@@ -859,7 +835,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="사업자 회원가입 경우 로그인 승인대기를\n기다리셔야 합니다." />
+                            android:text="사업자 회원으로 변경할 경우 로그인\n승인대기를기다리셔야 합니다." />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -973,6 +949,7 @@
                             android:textCursorDrawable="@null"
                             android:textSize="15dp" />
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -1074,6 +1051,7 @@
                             android:textSize="15dp" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -1132,56 +1110,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/ch_terms1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="#ff0000"
-                    android:text="" />
-
-                <TextView
-                    android:id="@+id/tv_terms1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="signClick"
-                    android:text="회원가입 이용약관에 동의 합니다."
-                    android:textColor="#ff0000"
-                    android:textSize="12dp" />
-
-                <CheckBox
-                    android:id="@+id/ch_terms2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="#ff0000"
-                    android:text="" />
-
-                <TextView
-                    android:id="@+id/tv_terms2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="signClick"
-                    android:text="개인정보취급방침에 동의합니다."
-                    android:textColor="#ff0000"
-                    android:textSize="12dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_signupfinish"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="#ff0000"
-                    android:onClick="signClick"
-                    android:text="회원가입"
+                    android:text="정보수정 완료"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
 

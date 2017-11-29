@@ -1,17 +1,34 @@
 package com.example.bsyoo.jwc.user.mypage;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.hppt.Http_SignUp;
+import com.example.bsyoo.jwc.hppt.Http_User;
+import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.user.Login.LoginActivity;
+import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
-public class MypageActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MypageActivity extends LoginInformation {
+
+    private Model_User user = new Model_User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +70,10 @@ public class MypageActivity extends AppCompatActivity {
         // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        user.setNumber(pref.getInt("number_Set", -1));
+        new MypageActivity.getLoginInfomation().execute(user);
+
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -86,5 +107,57 @@ public class MypageActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(tab.getPosition());
             }
         });
+    }
+
+    // 회원가입
+    public class getLoginInfomation extends AsyncTask<Model_User, Integer, Model_User> {
+
+        private ProgressDialog waitDlg = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // ProgressDialog 보이기
+            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
+            waitDlg = new ProgressDialog(MypageActivity.this);
+            waitDlg.setMessage("회원정보를 가져오는중 입니다.");
+            waitDlg.show();
+        }
+        @Override
+        protected Model_User doInBackground(Model_User... params) {
+
+            Model_User count = new Http_User().getLoginInfomation(user);
+
+            return count;
+        }
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+        @Override
+        protected void onPostExecute(Model_User s) {
+            super.onPostExecute(s);
+
+            user = s;
+
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+            setValueFragment(user);
+        }
+    }
+
+    public void setValueFragment(Model_User model){
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if(fragments != null){
+            for(Fragment fragment : fragments){
+                if(fragment != null && fragment.isVisible())
+                    ((MypageFragment)fragment).setOrderuser(model);
+            }
+        }
     }
 }

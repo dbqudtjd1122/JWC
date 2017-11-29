@@ -1,8 +1,9 @@
 package com.example.bsyoo.jwc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Model_User {
+public class Model_User implements Serializable {
 
     private Integer Number;
     private String ID;
