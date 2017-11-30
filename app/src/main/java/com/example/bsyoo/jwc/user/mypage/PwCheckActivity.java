@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
-import com.example.bsyoo.jwc.hppt.Http_User;
-import com.example.bsyoo.jwc.model.Model_User;
-import com.example.bsyoo.jwc.user.Login.LoginActivity;
+import com.example.bsyoo.jwc.hppt.HttpSignUp;
+import com.example.bsyoo.jwc.hppt.HttpUser;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 public class PwCheckActivity extends LoginInformation {
@@ -27,7 +25,7 @@ public class PwCheckActivity extends LoginInformation {
     private TextView tv_id;
     private EditText et_pw;
     private Button btn_pwcheck;
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
     private String account = "";
 
     @Override
@@ -48,7 +46,7 @@ public class PwCheckActivity extends LoginInformation {
 
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        user.setNumber(pref.getInt("number_Set", -1));
+        user.setUser_Number(pref.getInt("number_Set", -1));
 
         new PwCheckActivity.getLoginInfomation().execute(user);
 
@@ -72,7 +70,7 @@ public class PwCheckActivity extends LoginInformation {
     }
 
     // 회원정보 가져오기
-    public class getLoginInfomation extends AsyncTask<Model_User, Integer, Model_User> {
+    public class getLoginInfomation extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -87,9 +85,9 @@ public class PwCheckActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_User().getLoginInfomation(user);
+            ModelUser count = new HttpUser().getLoginInfomation(user);
 
             return count;
         }
@@ -98,7 +96,7 @@ public class PwCheckActivity extends LoginInformation {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
 
             user = s;
@@ -112,7 +110,7 @@ public class PwCheckActivity extends LoginInformation {
     }
 
     // 비밀번호 확인
-    public class PwCheck extends AsyncTask<Model_User, Integer, Model_User> {
+    public class PwCheck extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -127,9 +125,9 @@ public class PwCheckActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_SignUp().Login(user);
+            ModelUser count = new HttpSignUp().Login(user);
 
             return count;
         }
@@ -138,7 +136,7 @@ public class PwCheckActivity extends LoginInformation {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {

@@ -2,7 +2,7 @@ package com.example.bsyoo.jwc.model;
 
 import java.io.Serializable;
 
-public class Model_Camera implements Serializable{
+public class ModelCamera implements Serializable{
 
 
 	private Integer Number           ;
@@ -26,7 +26,7 @@ public class Model_Camera implements Serializable{
 
     @Override
     public String toString() {
-        return "Model_Camera{" +
+        return "ModelCamera{" +
                 "Number=" + Number +
                 ", Cameratype='" + Cameratype + '\'' +
                 ", Level=" + Level +
@@ -48,7 +48,7 @@ public class Model_Camera implements Serializable{
                 '}';
     }
 
-    public Model_Camera(Integer number, String cameratype, Integer level, String onlineseries, String offlineseries, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera) {
+    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String offlineseries, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera) {
         Number = number;
         Cameratype = cameratype;
         Level = level;
@@ -69,7 +69,7 @@ public class Model_Camera implements Serializable{
         NewCamera = newCamera;
     }
 
-    public Model_Camera() {
+    public ModelCamera() {
     }
 
     public String getYoutube() {

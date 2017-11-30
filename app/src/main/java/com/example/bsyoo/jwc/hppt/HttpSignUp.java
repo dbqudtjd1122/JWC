@@ -1,7 +1,7 @@
 package com.example.bsyoo.jwc.hppt;
 
 
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -10,9 +10,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-public class Http_SignUp {
+public class HttpSignUp {
 
-    public Integer signupinsert(Model_User user){
+    public Integer signupinsert(ModelUser user){
         String weburl = "http://192.168.0.11/jwcuser/insert";
 
         HttpRequest request = null;
@@ -21,7 +21,7 @@ public class Http_SignUp {
         int httpCode = 0;
         try {
             // ModelPerson을 json으로 변환
-            Model_User obj = user ;
+            ModelUser obj = user ;
 
             String data = new Gson().toJson(obj);
 
@@ -44,7 +44,7 @@ public class Http_SignUp {
         return Integer.valueOf(response);
     }
 
-    public Integer IDCheck(Model_User user){
+    public Integer IDCheck(ModelUser user){
         String weburl = "http://192.168.0.11/jwcuser/idcheck";
 
         HttpRequest request = null;
@@ -53,7 +53,7 @@ public class Http_SignUp {
         int httpCode = 0;
         try {
             // ModelPerson을 json으로 변환
-            Model_User obj = user ;
+            ModelUser obj = user ;
 
             String data = new Gson().toJson(obj);
 
@@ -76,7 +76,7 @@ public class Http_SignUp {
         return Integer.valueOf(response);
     }
 
-    public Integer EmailCheck(Model_User user){
+    public Integer EmailCheck(ModelUser user){
         String weburl = "http://192.168.0.11/jwcuser/emailcheck";
 
         HttpRequest request = null;
@@ -85,7 +85,7 @@ public class Http_SignUp {
         int httpCode = 0;
         try {
             // ModelPerson을 json으로 변환
-            Model_User obj = user ;
+            ModelUser obj = user ;
 
             String data = new Gson().toJson(obj);
 
@@ -108,12 +108,12 @@ public class Http_SignUp {
         return Integer.valueOf(response);
     }
 
-    public Model_User Login(Model_User model){
+    public ModelUser Login(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/login";
 
         HttpRequest request = null;
         JSONObject response = null;
-        Model_User user = null ;
+        ModelUser user = null ;
         int httpCode = 0;
         try {
             String data = new Gson().toJson(model);
@@ -129,7 +129,7 @@ public class Http_SignUp {
             }
 
             String jsonInString = response.toString();
-            user = new Gson().fromJson(jsonInString, Model_User.class);
+            user = new Gson().fromJson(jsonInString, ModelUser.class);
 
         } catch (IOException e) {
             e.printStackTrace();

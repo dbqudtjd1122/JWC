@@ -7,13 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.model.ModelUser;
 
 
 public class MypageTabFragment2 extends MypageFragment {
 
     private View view = null;
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
 
     public MypageTabFragment2(){
 

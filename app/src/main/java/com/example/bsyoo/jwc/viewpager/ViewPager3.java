@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.example.bsyoo.jwc.EventInfoActivity;
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 
 public class ViewPager3 extends Fragment{
 
@@ -33,7 +33,7 @@ public class ViewPager3 extends Fragment{
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Model_Notice event = new Model_Notice();
+                ModelNotice event = new ModelNotice();
                 event.setImg_info("http://jwcnet.godohosting.com/JWCMALL/home/under/new_ss_v6.jpg");
                 Intent intent = new Intent (getContext(), EventInfoActivity.class);
                 intent.putExtra("event", event);

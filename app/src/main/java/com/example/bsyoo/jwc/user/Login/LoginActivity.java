@@ -18,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.hppt.HttpSignUp;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.IDPWSearch.IDPWSearchActivity;
 
 import java.util.regex.Pattern;
@@ -28,7 +28,7 @@ public class LoginActivity extends LoginInformation {
 
     private TextView SignUp, IDPWSearch;
     private EditText et_login_id, et_login_pw;
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,6 @@ public class LoginActivity extends LoginInformation {
                 startActivity(intent);
             }
         });
-
-
     }
 
     public void loginClick(View view) {
@@ -108,7 +106,7 @@ public class LoginActivity extends LoginInformation {
     };
 
     // 로그인
-    public class Login extends AsyncTask<Model_User, Integer, Model_User> {
+    public class Login extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -123,9 +121,9 @@ public class LoginActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_SignUp().Login(user);
+            ModelUser count = new HttpSignUp().Login(user);
 
             return count;
         }
@@ -134,7 +132,7 @@ public class LoginActivity extends LoginInformation {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
@@ -144,12 +142,12 @@ public class LoginActivity extends LoginInformation {
             if (s == null) {
                 Toast.makeText(LoginActivity.this, "ID 또는 PW 가 틀렸습니다.", Toast.LENGTH_SHORT).show();
             } else if (s.getOK() == 1) {
-                Integer number = s.getNumber();
+                //Integer number = s.getUser_Number();
 
                 SharedPreferences.Editor prefEditor = pref.edit();
                 prefEditor.putString("id_Set", s.getID().toString());
                 prefEditor.putInt("level_Set", s.getLevel());
-                prefEditor.putInt("number_Set", number);
+                prefEditor.putInt("number_Set",  s.getUser_Number());
                 prefEditor.putString("email_Set", s.getEmail().toString());
                 prefEditor.apply();
 

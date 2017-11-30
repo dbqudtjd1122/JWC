@@ -23,8 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.terms.TermsActivity;
 
 import java.util.regex.Pattern;
@@ -37,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioButton radioButton;
     public Integer REQUEST_CODE = 8575;
     private LinearLayout buisness_layout;
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
 
     // ID, Email 중복확인
     private int idcheck = 0;
@@ -241,7 +240,7 @@ public class SignUpActivity extends AppCompatActivity {
                     break;
                 }
 
-                new SignUpActivity.HttpSignUp().execute(user);
+                new HttpSignUp().execute(user);
                 break;
         }
     }
@@ -307,7 +306,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // 회원가입
-    public class HttpSignUp extends AsyncTask<Model_User, Integer, Integer> {
+    public class HttpSignUp extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -323,9 +322,9 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_SignUp().signupinsert(user);
+            Integer count = new com.example.bsyoo.jwc.hppt.HttpSignUp().signupinsert(user);
 
             return count;
         }
@@ -358,7 +357,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // ID중복체크
-    public class HttpIDCheck extends AsyncTask<Model_User, Integer, Integer> {
+    public class HttpIDCheck extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -374,9 +373,9 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_SignUp().IDCheck(user);
+            Integer count = new com.example.bsyoo.jwc.hppt.HttpSignUp().IDCheck(user);
 
             return count;
         }
@@ -406,7 +405,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // Email중복체크
-    public class HttpEmailCheck extends AsyncTask<Model_User, Integer, Integer> {
+    public class HttpEmailCheck extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -422,9 +421,9 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_SignUp().EmailCheck(user);
+            Integer count = new com.example.bsyoo.jwc.hppt.HttpSignUp().EmailCheck(user);
 
             return count;
         }

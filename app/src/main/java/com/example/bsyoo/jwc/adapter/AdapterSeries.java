@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.model.ModelCamera;
 
 import java.util.List;
 
-public class Adapter_Series extends android.widget.ArrayAdapter<Model_Camera> {
+public class AdapterSeries extends android.widget.ArrayAdapter<ModelCamera> {
 
 
-    public Adapter_Series(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<Model_Camera> objects){
+    public AdapterSeries(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelCamera> objects){
         super(context, resource, textViewResourceId, objects);
     }
 
@@ -31,7 +31,7 @@ public class Adapter_Series extends android.widget.ArrayAdapter<Model_Camera> {
         View itemLayout = super.getView(position, convertView, parent);
         ViewHolder viewHolder = (ViewHolder) itemLayout.getTag();
 
-        Model_Camera camera = getItem(position);
+        ModelCamera camera = getItem(position);
 
         if(viewHolder == null) {
             viewHolder = new ViewHolder();

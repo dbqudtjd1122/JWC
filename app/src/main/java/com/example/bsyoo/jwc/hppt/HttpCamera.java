@@ -1,7 +1,7 @@
 package com.example.bsyoo.jwc.hppt;
 
 
-import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.model.ModelCamera;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
-public class Http_Camera {
+public class HttpCamera {
 
-    public List<Model_Camera> getCameraList(String type) {
+    public List<ModelCamera> getCameraList(String type) {
         String weburl = "http://192.168.0.11/jwccamera/cameralist";
 
         HttpRequest request = null;
         JSONArray response = null;
-        List<Model_Camera> cameraList = null;
+        List<ModelCamera> cameraList = null;
 
         int httpCode = 0;
         try {
@@ -39,7 +39,7 @@ public class Http_Camera {
             }
 
             String jsonInString = response.toString();
-            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<Model_Camera>>() {
+            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelCamera>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -50,12 +50,12 @@ public class Http_Camera {
         }
     }
 
-    public List<Model_Camera> getCameraInfoList(String series) {
+    public List<ModelCamera> getCameraInfoList(String series) {
         String weburl = "http://192.168.0.11/jwccamera/getCameraInfoList";
 
         HttpRequest request = null;
         JSONArray response = null;
-        List<Model_Camera> cameraList = null;
+        List<ModelCamera> cameraList = null;
 
         int httpCode = 0;
         try {
@@ -75,7 +75,7 @@ public class Http_Camera {
             }
 
             String jsonInString = response.toString();
-            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<Model_Camera>>() {
+            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelCamera>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -86,12 +86,12 @@ public class Http_Camera {
         }
     }
 
-    public List<Model_Camera> getCameraSearchList(String search) {
+    public List<ModelCamera> getCameraSearchList(String search) {
         String weburl = "http://192.168.0.11/jwccamera/getCameraSearchList";
 
         HttpRequest request = null;
         JSONArray response = null;
-        List<Model_Camera> cameraList = null;
+        List<ModelCamera> cameraList = null;
 
         int httpCode = 0;
         try {
@@ -111,7 +111,7 @@ public class Http_Camera {
             }
 
             String jsonInString = response.toString();
-            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<Model_Camera>>() {
+            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelCamera>>() {
             }.getType());
 
         } catch (IOException e) {

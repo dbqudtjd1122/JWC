@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.school;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,61 +10,64 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.bsyoo.jwc.adapter.AdapterEvent;
+import com.example.bsyoo.jwc.EventActivity;
+import com.example.bsyoo.jwc.EventInfoActivity;
+import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.adapter.AdapterSchool;
 import com.example.bsyoo.jwc.hppt.HttpNotice;
+import com.example.bsyoo.jwc.hppt.HttpSchool;
 import com.example.bsyoo.jwc.model.ModelNotice;
+import com.example.bsyoo.jwc.model.ModelSchool;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventActivity extends AppCompatActivity {
+public class SchoolActivity extends AppCompatActivity {
 
-    private ListView EventListView;
-    private AdapterEvent adapter;
-    private ModelNotice event = new ModelNotice();
-
-    private List<ModelNotice> noticeslist = new ArrayList<ModelNotice>();
+    private ListView SchoolListview;
+    private ModelSchool school = new ModelSchool();
+    private List<ModelSchool> schoollist;
+    private AdapterSchool adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_school);
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.RED);
         }
-        getSupportActionBar().setTitle("이벤트");
-        // 뒤로가기 버튼
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        setTitle("교육목록");
 
-        EventListView = (ListView) findViewById(R.id.event_list);
+        SchoolListview = (ListView) findViewById(R.id.schoollistview);
 
         // 출력 데이터 생성
-        noticeslist = new ArrayList<>();
+        schoollist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterEvent(this, R.layout.listitem_event, R.id.event_title, noticeslist);
+        adapter = new AdapterSchool(this, R.layout.listitem_event, R.id.event_title, schoollist);
 
         // 리스트뷰에 어댑터 설정
-        EventListView.setAdapter(adapter);
+        SchoolListview.setAdapter(adapter);
 
-        new EventActivity.getEventList().execute("이벤트");
+        new SchoolActivity.getSchoolList().execute();
 
-        EventListView.setOnItemClickListener( new EventActivity.OnItemHandler());
-        EventListView.setOnItemLongClickListener(new EventActivity.OnItemHandler());
-        EventListView.setOnItemSelectedListener(new EventActivity.OnItemHandler());
-
+        SchoolListview.setOnItemClickListener(new SchoolActivity.OnItemHandler());
+        SchoolListview.setOnItemLongClickListener(new SchoolActivity.OnItemHandler());
+        SchoolListview.setOnItemSelectedListener(new SchoolActivity.OnItemHandler());
     }
+
     public class OnItemHandler implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemLongClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(EventActivity.this, EventInfoActivity.class);
-            event = noticeslist.get(position);
-            intent.putExtra("event", event);
+            Intent intent = new Intent(SchoolActivity.this, SchoolInfoActivity.class);
+            school = schoollist.get(position);
+            intent.putExtra("school", school);
             startActivity(intent);
         }
 
@@ -84,7 +87,8 @@ public class EventActivity extends AppCompatActivity {
         }
     }
 
-    public class getEventList extends AsyncTask<String, Integer, List<ModelNotice>> {
+
+    public class getSchoolList extends AsyncTask<Integer, Integer, List<ModelSchool>> {
 
         private ProgressDialog waitDlg = null;
 
@@ -94,17 +98,17 @@ public class EventActivity extends AppCompatActivity {
 
             // ProgressDialog 보이기
             // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(EventActivity.this);
-            waitDlg.setMessage("이벤트를 불러오는중 입니다.");
+            waitDlg = new ProgressDialog(SchoolActivity.this);
+            waitDlg.setMessage("교육정보를 불러오는중 입니다.");
             waitDlg.show();
         }
 
         @Override
-        protected List<ModelNotice> doInBackground(String... params) {
+        protected List<ModelSchool> doInBackground(Integer... params) {
 
-            noticeslist = new HttpNotice().EventList(params[0].toString());
+            schoollist = new HttpSchool().SchoolList();
 
-            return noticeslist;
+            return schoollist;
         }
 
         @Override
@@ -113,12 +117,12 @@ public class EventActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<ModelNotice> list) {
+        protected void onPostExecute(List<ModelSchool> list) {
             super.onPostExecute(list);
 
-            noticeslist = list;
+            schoollist = list;
             adapter.clear();
-            adapter.addAll(noticeslist);
+            adapter.addAll(schoollist);
             adapter.notifyDataSetChanged();
 
             if (waitDlg != null) {
@@ -128,4 +132,3 @@ public class EventActivity extends AppCompatActivity {
         }
     }
 }
-

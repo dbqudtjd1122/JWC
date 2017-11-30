@@ -12,9 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.bsyoo.jwc.adapter.Adapter_Notice;
-import com.example.bsyoo.jwc.hppt.Http_Notice;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.adapter.AdapterNotice;
+import com.example.bsyoo.jwc.hppt.HttpNotice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,9 @@ import java.util.List;
 public class NoticeActivity extends AppCompatActivity {
 
     private ListView listview;
-    private Adapter_Notice adater;
-    private List<Model_Notice> noticelist;
-    private Model_Notice notice = new Model_Notice();
+    private AdapterNotice adater;
+    private List<ModelNotice> noticelist;
+    private ModelNotice notice = new ModelNotice();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class NoticeActivity extends AppCompatActivity {
         noticelist = new ArrayList<>();
 
         // 어댑터를 생성하고 데이터 설정
-        adater = new Adapter_Notice(this, R.layout.listitem_notice, R.id.notice1, noticelist);
+        adater = new AdapterNotice(this, R.layout.listitem_notice, R.id.notice1, noticelist);
 
         listview.setOnItemClickListener( new OnItemHandler());
         listview.setOnItemLongClickListener(new OnItemHandler());
@@ -87,7 +87,7 @@ public class NoticeActivity extends AppCompatActivity {
     }
 
     // 데이터가져오기
-    public class getNoticeList extends AsyncTask<String, Integer, List<Model_Notice>> {
+    public class getNoticeList extends AsyncTask<String, Integer, List<ModelNotice>> {
 
         private ProgressDialog waitDlg = null;
 
@@ -103,9 +103,9 @@ public class NoticeActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<Model_Notice> doInBackground(String... params) {
+        protected List<ModelNotice> doInBackground(String... params) {
 
-            List<Model_Notice> count = new Http_Notice().NoticeList(params[0].toString());
+            List<ModelNotice> count = new HttpNotice().NoticeList(params[0].toString());
 
             return count;
         }
@@ -116,7 +116,7 @@ public class NoticeActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Model_Notice> s) {
+        protected void onPostExecute(List<ModelNotice> s) {
             super.onPostExecute(s);
 
             noticelist = s;

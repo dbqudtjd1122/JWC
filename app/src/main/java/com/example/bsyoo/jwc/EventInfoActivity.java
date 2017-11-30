@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class EventInfoActivity extends AppCompatActivity {
 
-    private Model_Notice event = new Model_Notice();
+    private ModelNotice event = new ModelNotice();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class EventInfoActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         Intent intent = getIntent();
-        event = (Model_Notice) intent.getSerializableExtra("event");
+        event = (ModelNotice) intent.getSerializableExtra("event");
         ImageView event_info = (ImageView) findViewById(R.id.event_info);
 
         if (event.getImg_info() != null) {

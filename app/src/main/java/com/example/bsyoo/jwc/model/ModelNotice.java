@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class Model_Notice implements Serializable {
+public class ModelNotice implements Serializable {
 
     private String notice_type;
     private String notice_title;
@@ -18,7 +18,7 @@ public class Model_Notice implements Serializable {
 
     @Override
     public String toString() {
-        return "Model_Notice{" +
+        return "ModelNotice{" +
                 "notice_type='" + notice_type + '\'' +
                 ", notice_title='" + notice_title + '\'' +
                 ", time=" + time +
@@ -28,7 +28,7 @@ public class Model_Notice implements Serializable {
                 '}';
     }
 
-    public Model_Notice(String notice_type, String notice_title, Date time, String img_title, String img_info, String notice_end) {
+    public ModelNotice(String notice_type, String notice_title, Date time, String img_title, String img_info, String notice_end) {
         this.notice_type = notice_type;
         this.notice_title = notice_title;
         this.time = time;
@@ -37,13 +37,13 @@ public class Model_Notice implements Serializable {
         this.notice_end = notice_end;
     }
 
-    public Model_Notice(String notice_title, Date time, String img_title) {
+    public ModelNotice(String notice_title, Date time, String img_title) {
         this.notice_title = notice_title;
         this.time = time;
         this.img_title = img_title;
     }
 
-    public Model_Notice() {
+    public ModelNotice() {
     }
 
     public String getNotice_end() {

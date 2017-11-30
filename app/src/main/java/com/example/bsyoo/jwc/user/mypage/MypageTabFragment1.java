@@ -4,22 +4,19 @@ package com.example.bsyoo.jwc.user.mypage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.model.ModelUser;
 
 public class MypageTabFragment1 extends MypageFragment{
 
     private View view = null;
     private LinearLayout ll_mypage1, ll_mypage2;
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
 
     public MypageTabFragment1(){
 

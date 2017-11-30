@@ -11,9 +11,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
-import com.example.bsyoo.jwc.adapter.Adapter_Camera;
-import com.example.bsyoo.jwc.hppt.Http_Camera;
-import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.adapter.AdapterCamera;
+import com.example.bsyoo.jwc.hppt.HttpCamera;
+import com.example.bsyoo.jwc.model.ModelCamera;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 import java.util.ArrayList;
@@ -21,9 +21,9 @@ import java.util.List;
 
 public class ModelSearchActivity extends LoginInformation {
 
-    private Adapter_Camera adapter;
-    private List<Model_Camera> cameralist;
-    private Model_Camera camera = new Model_Camera();
+    private AdapterCamera adapter;
+    private List<ModelCamera> cameralist;
+    private ModelCamera camera = new ModelCamera();
     private GridView gridView;
 
     @Override
@@ -48,7 +48,7 @@ public class ModelSearchActivity extends LoginInformation {
         cameralist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new Adapter_Camera(this, R.layout.listitem_camera, R.id.text_cameraname, cameralist, islevel);
+        adapter = new AdapterCamera(this, R.layout.listitem_camera, R.id.text_cameraname, cameralist, islevel);
 
         // 리스트뷰에 어댑터 설정
         gridView.setAdapter(adapter);
@@ -83,7 +83,7 @@ public class ModelSearchActivity extends LoginInformation {
     }
 
     // Http List DB 가져오기
-    public class getCameraSearchList extends AsyncTask<String, Integer, List<Model_Camera>> {
+    public class getCameraSearchList extends AsyncTask<String, Integer, List<ModelCamera>> {
 
         private ProgressDialog waitDlg = null;
 
@@ -97,10 +97,10 @@ public class ModelSearchActivity extends LoginInformation {
         }
 
         @Override
-        protected List<Model_Camera> doInBackground(String... params) {
+        protected List<ModelCamera> doInBackground(String... params) {
 
             try {
-                cameralist = new Http_Camera().getCameraSearchList(params[0].toString());
+                cameralist = new HttpCamera().getCameraSearchList(params[0].toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -113,7 +113,7 @@ public class ModelSearchActivity extends LoginInformation {
         }
 
         @Override
-        protected void onPostExecute(List<Model_Camera> list) {
+        protected void onPostExecute(List<ModelCamera> list) {
             super.onPostExecute(list);
             // 1.
             cameralist = list;

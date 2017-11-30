@@ -3,9 +3,9 @@ package com.example.bsyoo.jwc.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Model_User implements Serializable {
+public class ModelUser implements Serializable {
 
-    private Integer Number;
+    private Integer User_Number;
     private String ID;
     private String Email;
     private Integer Level;
@@ -24,8 +24,9 @@ public class Model_User implements Serializable {
     private Integer Push;
     private Integer OK;
 
-    public Model_User(Integer number, String ID, String email, Integer level, String PW, String name, String phone_home, String phone, String addr, String mutual, String representation, String buisness_number, String sectors, Date userTime, Integer email_sms, Integer phone_sms, Integer push, Integer OK) {
-        Number = number;
+
+    public ModelUser(Integer user_Number, String ID, String email, Integer level, String PW, String name, String phone_home, String phone, String addr, String mutual, String representation, String buisness_number, String sectors, Date userTime, Integer email_sms, Integer phone_sms, Integer push, Integer OK) {
+        User_Number = user_Number;
         this.ID = ID;
         Email = email;
         Level = level;
@@ -47,8 +48,8 @@ public class Model_User implements Serializable {
 
     @Override
     public String toString() {
-        return "Model_User{" +
-                "Number=" + Number +
+        return "ModelUser{" +
+                "User_Number=" + User_Number +
                 ", ID='" + ID + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Level=" + Level +
@@ -69,7 +70,7 @@ public class Model_User implements Serializable {
                 '}';
     }
 
-    public Model_User() {
+    public ModelUser() {
         super();
     }
 
@@ -82,12 +83,14 @@ public class Model_User implements Serializable {
         UserTime = userTime;
     }
 
-    public Integer getNumber() {
-        return Number;
+    public Integer getUser_Number() {
+        return User_Number;
     }
-    public void setNumber(Integer number) {
-        Number = number;
+
+    public void setUser_Number(Integer user_Number) {
+        User_Number = user_Number;
     }
+
     public Integer getOK() {
         return OK;
     }

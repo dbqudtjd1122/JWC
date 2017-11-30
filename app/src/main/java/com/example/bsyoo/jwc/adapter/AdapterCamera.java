@@ -13,19 +13,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.model.ModelCamera;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera> {
+public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
 
-    public ArrayList<Model_Camera> data = null;
+    public ArrayList<ModelCamera> data = null;
     public LoginInformation login;
     public Integer level;
 
-    public Adapter_Camera(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<Model_Camera> objects, @NonNull int islevel) {
+    public AdapterCamera(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelCamera> objects, @NonNull int islevel) {
         super(context, resource, textViewResourceId, objects);
         level = islevel;
     }
@@ -42,7 +42,7 @@ public class Adapter_Camera extends android.widget.ArrayAdapter<Model_Camera> {
         View itemLayout = super.getView(position, convertView, parent);
         ViewHolder viewHolder = (ViewHolder) itemLayout.getTag();
 
-        Model_Camera camera = getItem(position);
+        ModelCamera camera = getItem(position);
 
         if(viewHolder == null){
             viewHolder = new ViewHolder();

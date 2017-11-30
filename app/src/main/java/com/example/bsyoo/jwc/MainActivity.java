@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
+import com.example.bsyoo.jwc.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
@@ -159,19 +160,23 @@ public class MainActivity extends LoginInformation
     public void onclick(View view){
         switch (view.getId()){
             case R.id.image_new:
-                Intent intent3 = new Intent(this, SeriesActivity.class);
-                intent3.putExtra("series", "신제품");
-                startActivity(intent3);
+                Intent intent1 = new Intent(this, SeriesActivity.class);
+                intent1.putExtra("series", "JWC-AHD-720P");
+                startActivity(intent1);
                 break;
             case R.id.image_camera:
-                Intent intent4 = new Intent(this, CameraActivity.class);
-                intent4.putExtra("type", "카메라");
-                startActivity(intent4);
+                Intent intent2 = new Intent(this, CameraActivity.class);
+                intent2.putExtra("type", "카메라");
+                startActivity(intent2);
                 break;
             case R.id.image_record:
-                Intent intent2 = new Intent(this, CameraActivity.class);
-                intent2.putExtra("type", "녹화기");
-                startActivity(intent2);
+                Intent intent3 = new Intent(this, CameraActivity.class);
+                intent3.putExtra("type", "녹화기");
+                startActivity(intent3);
+                break;
+            case R.id.img_supporter:
+                Intent intnet4 = new Intent(this, SchoolActivity.class);
+                startActivity(intnet4);
                 break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);
@@ -336,6 +341,4 @@ public class MainActivity extends LoginInformation
             }
         }
     }
-
-
 }

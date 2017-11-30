@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.model.ModelCamera;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -18,7 +18,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    private Model_Camera camera = new Model_Camera();
+    private ModelCamera camera = new ModelCamera();
 
     private YouTubePlayerView youTubePlayerView;
     private String API_KEY = "";
@@ -34,7 +34,7 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
             getWindow().setStatusBarColor(Color.RED);
         }
         Intent intent = getIntent();
-        camera = (Model_Camera) intent.getSerializableExtra("camera");
+        camera = (ModelCamera) intent.getSerializableExtra("camera");
         API_KEY = camera.getYoutube().toString();
 
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtubeView);

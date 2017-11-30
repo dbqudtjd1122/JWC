@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class NoticeInfoActivity extends AppCompatActivity {
 
-    private Model_Notice notice = new Model_Notice();
+    private ModelNotice notice = new ModelNotice();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class NoticeInfoActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         Intent intent = getIntent();
-        notice = (Model_Notice) intent.getSerializableExtra("notice");
+        notice = (ModelNotice) intent.getSerializableExtra("notice");
 
         ImageView notice_info = (ImageView) findViewById(R.id.event_info);
         Glide.with(this).load(notice.getImg_info()).override(720,4000).fitCenter().into(notice_info);

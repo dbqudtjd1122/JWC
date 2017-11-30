@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +14,13 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_User;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.hppt.HttpUser;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 public class DeleteUserActivity extends LoginInformation {
 
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
     private CheckBox ch_delete;
     private Button btn_delete;
 
@@ -39,7 +38,7 @@ public class DeleteUserActivity extends LoginInformation {
         byid();
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        user.setNumber(pref.getInt("number_Set", -1));
+        user.setUser_Number(pref.getInt("number_Set", -1));
 
         new DeleteUserActivity.getLoginInfomation().execute(user);
 
@@ -61,7 +60,7 @@ public class DeleteUserActivity extends LoginInformation {
     }
 
     // 회원정보 가져오기
-    public class getLoginInfomation extends AsyncTask<Model_User, Integer, Model_User> {
+    public class getLoginInfomation extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -76,9 +75,9 @@ public class DeleteUserActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_User().getLoginInfomation(user);
+            ModelUser count = new HttpUser().getLoginInfomation(user);
 
             return count;
         }
@@ -87,7 +86,7 @@ public class DeleteUserActivity extends LoginInformation {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
 
             user = s;
@@ -100,7 +99,7 @@ public class DeleteUserActivity extends LoginInformation {
     }
 
     // 계정 탈퇴
-    public class deleteuser extends AsyncTask<Model_User, Integer, Integer> {
+    public class deleteuser extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -115,9 +114,9 @@ public class DeleteUserActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_User().deleteuser(user);
+            Integer count = new HttpUser().deleteuser(user);
 
             return count;
         }

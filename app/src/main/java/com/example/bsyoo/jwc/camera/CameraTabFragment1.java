@@ -13,9 +13,9 @@ import android.widget.ListView;
 
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.SeriesActivity;
-import com.example.bsyoo.jwc.adapter.Adapter_Series;
-import com.example.bsyoo.jwc.hppt.Http_Camera;
-import com.example.bsyoo.jwc.model.Model_Camera;
+import com.example.bsyoo.jwc.adapter.AdapterSeries;
+import com.example.bsyoo.jwc.hppt.HttpCamera;
+import com.example.bsyoo.jwc.model.ModelCamera;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.List;
 public class CameraTabFragment1 extends CameraFragment {
 
     private View view = null;
-    private Adapter_Series adapter;
-    private List<Model_Camera> cameralist;
-    private Model_Camera camera = new Model_Camera();
+    private AdapterSeries adapter;
+    private List<ModelCamera> cameralist;
+    private ModelCamera camera = new ModelCamera();
     private ListView listView;
 
     public CameraTabFragment1(){
@@ -51,7 +51,7 @@ public class CameraTabFragment1 extends CameraFragment {
         cameralist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new Adapter_Series(getContext(), R.layout.listitem_series, R.id.series_name, cameralist);
+        adapter = new AdapterSeries(getContext(), R.layout.listitem_series, R.id.series_name, cameralist);
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
@@ -71,7 +71,7 @@ public class CameraTabFragment1 extends CameraFragment {
     }
 
     // Http List DB 가져오기
-    public class getCameraList extends AsyncTask<String, Integer, List<Model_Camera>> {
+    public class getCameraList extends AsyncTask<String, Integer, List<ModelCamera>> {
 
         private ProgressDialog waitDlg = null;
 
@@ -86,10 +86,10 @@ public class CameraTabFragment1 extends CameraFragment {
         }
 
         @Override
-        protected List<Model_Camera> doInBackground(String... params) {
+        protected List<ModelCamera> doInBackground(String... params) {
 
             try {
-                cameralist = new Http_Camera().getCameraList(params[0].toString());
+                cameralist = new HttpCamera().getCameraList(params[0].toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -103,7 +103,7 @@ public class CameraTabFragment1 extends CameraFragment {
         }
 
         @Override
-        protected void onPostExecute(List<Model_Camera> list) {
+        protected void onPostExecute(List<ModelCamera> list) {
             super.onPostExecute(list);
             // 1.
             cameralist = list;

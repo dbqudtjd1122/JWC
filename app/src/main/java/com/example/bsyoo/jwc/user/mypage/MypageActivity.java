@@ -1,31 +1,17 @@
 package com.example.bsyoo.jwc.user.mypage;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.example.bsyoo.jwc.MainActivity;
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
-import com.example.bsyoo.jwc.hppt.Http_User;
-import com.example.bsyoo.jwc.model.Model_User;
-import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
-
-import java.util.List;
 
 public class MypageActivity extends LoginInformation {
 

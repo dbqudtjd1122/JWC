@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,17 +21,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
-import com.example.bsyoo.jwc.hppt.Http_User;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.hppt.HttpSignUp;
+import com.example.bsyoo.jwc.hppt.HttpUser;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.AddressActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
-import com.example.bsyoo.jwc.user.Login.SignUpActivity;
-import com.example.bsyoo.jwc.user.terms.TermsActivity;
 
 public class MypageModifiedActivity extends LoginInformation {
 
-    private Model_User user = new Model_User();
+    private ModelUser user = new ModelUser();
     private EditText et_pw, et_pw2, et_name, et_email, et_email2, et_addr3, et_phone1, et_phone2, et_phone3, et_hphone1, et_hphone2, et_hphone3, et_Mutual, et_Representation, et_Buisness1,et_Buisness2,et_Buisness3, et_Sectors;
     private TextView tv_id, tv_addr1, tv_addr2, tv_pwcheck;
     private CheckBox ch_email, ch_phone;
@@ -58,7 +55,7 @@ public class MypageModifiedActivity extends LoginInformation {
         byid();
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        user.setNumber(pref.getInt("number_Set", -1));
+        user.setUser_Number(pref.getInt("number_Set", -1));
         new MypageModifiedActivity.getLoginInfomation().execute(user);
 
         // 라디오그룹 클릭리스너
@@ -318,7 +315,7 @@ public class MypageModifiedActivity extends LoginInformation {
     }
 
     // 회원정보 가져오기
-    public class getLoginInfomation extends AsyncTask<Model_User, Integer, Model_User> {
+    public class getLoginInfomation extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -333,9 +330,9 @@ public class MypageModifiedActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_User().getLoginInfomation(user);
+            ModelUser count = new HttpUser().getLoginInfomation(user);
 
             return count;
         }
@@ -344,7 +341,7 @@ public class MypageModifiedActivity extends LoginInformation {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
 
             user = s;
@@ -358,7 +355,7 @@ public class MypageModifiedActivity extends LoginInformation {
     }
 
     // Email중복체크
-    public class HttpEmailCheck extends AsyncTask<Model_User, Integer, Integer> {
+    public class HttpEmailCheck extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -374,9 +371,9 @@ public class MypageModifiedActivity extends LoginInformation {
         }
 
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_SignUp().EmailCheck(user);
+            Integer count = new HttpSignUp().EmailCheck(user);
 
             return count;
         }
@@ -406,7 +403,7 @@ public class MypageModifiedActivity extends LoginInformation {
     }
 
     // 회원정보 업데이트
-    public class LoginUpdate extends AsyncTask<Model_User, Integer, Integer> {
+    public class LoginUpdate extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -422,9 +419,9 @@ public class MypageModifiedActivity extends LoginInformation {
         }
 
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_User().LoginInfoUpdate(user);
+            Integer count = new HttpUser().LoginInfoUpdate(user);
 
             return count;
         }

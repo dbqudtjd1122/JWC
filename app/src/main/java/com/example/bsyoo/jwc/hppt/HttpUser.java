@@ -1,7 +1,7 @@
 package com.example.bsyoo.jwc.hppt;
 
 
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -10,15 +10,15 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-public class Http_User {
+public class HttpUser {
 
     // 아이디찾기
-    public Model_User IDSearch1(Model_User model){
+    public ModelUser IDSearch1(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/idsearch";
 
         HttpRequest request = null;
         JSONObject response = null;
-        Model_User user = null ;
+        ModelUser user = null ;
         int httpCode = 0;
         try {
             String data = new Gson().toJson(model);
@@ -34,7 +34,7 @@ public class Http_User {
             }
 
             String jsonInString = response.toString();
-            user = new Gson().fromJson(jsonInString, Model_User.class);
+            user = new Gson().fromJson(jsonInString, ModelUser.class);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,12 +47,12 @@ public class Http_User {
     }
 
     // 비밀번호 찾기
-    public Model_User PWSearch1(Model_User model){
+    public ModelUser PWSearch1(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/pwsearch";
 
         HttpRequest request = null;
         JSONObject response = null;
-        Model_User user = null ;
+        ModelUser user = null ;
         int httpCode = 0;
         try {
             String data = new Gson().toJson(model);
@@ -68,7 +68,7 @@ public class Http_User {
             }
 
             String jsonInString = response.toString();
-            user = new Gson().fromJson(jsonInString, Model_User.class);
+            user = new Gson().fromJson(jsonInString, ModelUser.class);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +81,7 @@ public class Http_User {
     }
 
     // 비밀번호 업데이트
-    public Integer PWSearch2(Model_User model){
+    public Integer PWSearch2(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/pwchange";
 
         HttpRequest request = null;
@@ -110,12 +110,12 @@ public class Http_User {
     }
 
     // 회원정보 가져오기
-    public Model_User getLoginInfomation(Model_User model){
+    public ModelUser getLoginInfomation(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/getuserinfo";
 
         HttpRequest request = null;
         JSONObject response = null;
-        Model_User user = null ;
+        ModelUser user = null ;
         int httpCode = 0;
         try {
             String data = new Gson().toJson(model);
@@ -131,7 +131,7 @@ public class Http_User {
             }
 
             String jsonInString = response.toString();
-            user = new Gson().fromJson(jsonInString, Model_User.class);
+            user = new Gson().fromJson(jsonInString, ModelUser.class);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class Http_User {
     }
 
     // 회원정보 업데이트
-    public Integer LoginInfoUpdate(Model_User model){
+    public Integer LoginInfoUpdate(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/loginupdate";
 
         HttpRequest request = null;
@@ -173,7 +173,7 @@ public class Http_User {
     }
 
     // 회원정보 삭제
-    public Integer deleteuser(Model_User model){
+    public Integer deleteuser(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/deleteuser";
 
         HttpRequest request = null;

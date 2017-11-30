@@ -26,6 +26,16 @@
                 android:textSize="18dip" />
 
             <TextView
+                android:id="@+id/school_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2017-12-01 ~ 2017-12-15"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <TextView
                 android:id="@+id/event_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

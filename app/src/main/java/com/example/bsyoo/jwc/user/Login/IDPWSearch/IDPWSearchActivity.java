@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.Gmail.GMail;
-import com.example.bsyoo.jwc.hppt.Http_User;
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.hppt.HttpUser;
+import com.example.bsyoo.jwc.model.ModelUser;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -24,8 +24,8 @@ import java.util.Random;
 public class IDPWSearchActivity extends AppCompatActivity {
 
     private EditText et_id_searchname, et_id_searchemail, et_pw_searchid;
-    private Model_User iduser = new Model_User();
-    private Model_User pwuser = new Model_User();
+    private ModelUser iduser = new ModelUser();
+    private ModelUser pwuser = new ModelUser();
     private LinearLayout ll_idsearch, ll_pwsearch;
     private TextView tv_idsearch1, tv_idsearch2, tv_pwsearch;
 
@@ -46,7 +46,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
     public void idpwonclick(View view) {
         switch (view.getId()){
             case R.id.btn_id_search1:
-                iduser = new Model_User();
+                iduser = new ModelUser();
                 iduser.setName(et_id_searchname.getText().toString());
                 iduser.setEmail(et_id_searchemail.getText().toString());
                 new IDPWSearchActivity.IDSearch().execute(iduser);
@@ -55,7 +55,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 new IDGMailSender().execute();
                 break;
             case R.id.btn_pw_search1:
-                pwuser = new Model_User();
+                pwuser = new ModelUser();
                 pwuser.setID(et_pw_searchid.getText().toString());
                 new IDPWSearchActivity.PWSearch().execute(pwuser);
                 break;
@@ -89,7 +89,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
     }
 
     // 아이디찾기 - 첫번째
-    private class IDSearch extends AsyncTask<Model_User, Integer, Model_User> {
+    private class IDSearch extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -104,9 +104,9 @@ public class IDPWSearchActivity extends AppCompatActivity {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_User().IDSearch1(iduser);
+            ModelUser count = new HttpUser().IDSearch1(iduser);
 
             return count;
         }
@@ -115,7 +115,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
 
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
@@ -169,7 +169,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
     }
 
     // 비밀번호찾기 - 첫번째
-    private class PWSearch extends AsyncTask<Model_User, Integer, Model_User> {
+    private class PWSearch extends AsyncTask<ModelUser, Integer, ModelUser> {
 
         private ProgressDialog waitDlg = null;
 
@@ -184,9 +184,9 @@ public class IDPWSearchActivity extends AppCompatActivity {
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected ModelUser doInBackground(ModelUser... params) {
 
-            Model_User count = new Http_User().PWSearch1(params[0]);
+            ModelUser count = new HttpUser().PWSearch1(params[0]);
 
             return count;
         }
@@ -195,7 +195,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
 
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
@@ -248,16 +248,16 @@ public class IDPWSearchActivity extends AppCompatActivity {
     }
 
     // 비밀번호찾기 - 임시비밀번호로 변경
-    private class PWChange extends AsyncTask<Model_User, Integer, Integer> {
+    private class PWChange extends AsyncTask<ModelUser, Integer, Integer> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
         @Override
-        protected Integer doInBackground(Model_User... params) {
+        protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new Http_User().PWSearch2(params[0]);
+            Integer count = new HttpUser().PWSearch2(params[0]);
 
             return count;
         }

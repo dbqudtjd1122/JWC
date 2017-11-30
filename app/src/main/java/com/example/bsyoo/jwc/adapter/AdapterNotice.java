@@ -11,22 +11,23 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter_Notice extends ArrayAdapter<Model_Notice> {
+public class AdapterNotice extends ArrayAdapter<ModelNotice> {
     
-    public ArrayList<Model_Notice> data = null;
+    public ArrayList<ModelNotice> data = null;
 
-    public Adapter_Notice(@NonNull Context context, @LayoutRes int resource, @IdRes int notice1, @NonNull List<Model_Notice> objects) {
+    public AdapterNotice(@NonNull Context context, @LayoutRes int resource, @IdRes int notice1, @NonNull List<ModelNotice> objects) {
         super(context, resource, notice1, objects);
     }
 
     class ViewHolder{
         TextView notice_title;
+
         TextView time;
     }
 

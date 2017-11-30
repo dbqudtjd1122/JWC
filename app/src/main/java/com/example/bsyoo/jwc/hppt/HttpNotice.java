@@ -1,8 +1,7 @@
 package com.example.bsyoo.jwc.hppt;
 
 
-import com.example.bsyoo.jwc.model.Model_Camera;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -13,14 +12,14 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
-public class Http_Notice {
+public class HttpNotice {
 
-    public List<Model_Notice> NoticeList(String type){
+    public List<ModelNotice> NoticeList(String type){
         String weburl = "http://192.168.0.11/notice/getnotice";
 
         HttpRequest request = null;
         JSONArray response = null;
-        List<Model_Notice> noticeList = null;
+        List<ModelNotice> noticeList = null;
 
         int httpCode = 0;
         try {
@@ -39,7 +38,7 @@ public class Http_Notice {
             }
 
             String jsonInString = response.toString();
-            noticeList = new Gson().fromJson(jsonInString, new TypeToken<List<Model_Notice>>() {
+            noticeList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelNotice>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -50,12 +49,12 @@ public class Http_Notice {
         }
     }
 
-    public List<Model_Notice> EventList(String type){
+    public List<ModelNotice> EventList(String type){
         String weburl = "http://192.168.0.11/notice/getevent";
 
         HttpRequest request = null;
         JSONArray response = null;
-        List<Model_Notice> noticeList = null;
+        List<ModelNotice> noticeList = null;
 
         int httpCode = 0;
         try {
@@ -74,7 +73,7 @@ public class Http_Notice {
             }
 
             String jsonInString = response.toString();
-            noticeList = new Gson().fromJson(jsonInString, new TypeToken<List<Model_Notice>>() {
+            noticeList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelNotice>>() {
             }.getType());
 
         } catch (IOException e) {

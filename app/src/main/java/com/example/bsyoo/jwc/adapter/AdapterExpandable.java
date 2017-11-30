@@ -7,18 +7,18 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.Model_Notice;
+import com.example.bsyoo.jwc.model.ModelNotice;
 
 import java.util.ArrayList;
 
-public class Adapter_Expandable extends BaseExpandableListAdapter {
+public class AdapterExpandable extends BaseExpandableListAdapter {
 
     private Context context;
     private ArrayList<GroupData> groupDatas;
-    private ArrayList<ArrayList<Model_Notice>> childDatas;
+    private ArrayList<ArrayList<ModelNotice>> childDatas;
     private LayoutInflater inflater = null;
 
-    public Adapter_Expandable(Context context, ArrayList<GroupData> groupDatas, ArrayList<ArrayList<Model_Notice>> childDatas){
+    public AdapterExpandable(Context context, ArrayList<GroupData> groupDatas, ArrayList<ArrayList<ModelNotice>> childDatas){
         this.context = context;
         this.groupDatas = groupDatas;
         this.childDatas = childDatas;

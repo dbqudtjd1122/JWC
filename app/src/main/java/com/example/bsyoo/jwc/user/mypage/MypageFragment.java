@@ -3,16 +3,16 @@ package com.example.bsyoo.jwc.user.mypage;
 
 import android.support.v4.app.Fragment;
 
-import com.example.bsyoo.jwc.model.Model_User;
+import com.example.bsyoo.jwc.model.ModelUser;
 
 public class MypageFragment extends Fragment{
-    protected Model_User orderuser = new Model_User();
+    protected ModelUser orderuser = new ModelUser();
 
-    public Model_User getOrderuser() {
+    public ModelUser getOrderuser() {
         return orderuser;
     }
 
-    public void setOrderuser(Model_User orderuser) {
+    public void setOrderuser(ModelUser orderuser) {
         this.orderuser = orderuser;
         recall();
     }
