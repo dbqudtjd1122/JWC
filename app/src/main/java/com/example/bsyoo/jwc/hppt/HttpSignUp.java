@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 
 public class HttpSignUp {
 
+    // 회원가입
     public Integer signupinsert(ModelUser user){
         String weburl = "http://192.168.0.11/jwcuser/insert";
 
@@ -44,6 +45,7 @@ public class HttpSignUp {
         return Integer.valueOf(response);
     }
 
+    // 아이디 중복확인
     public Integer IDCheck(ModelUser user){
         String weburl = "http://192.168.0.11/jwcuser/idcheck";
 
@@ -76,6 +78,7 @@ public class HttpSignUp {
         return Integer.valueOf(response);
     }
 
+    // 이메일 중복확인
     public Integer EmailCheck(ModelUser user){
         String weburl = "http://192.168.0.11/jwcuser/emailcheck";
 
@@ -108,6 +111,7 @@ public class HttpSignUp {
         return Integer.valueOf(response);
     }
 
+    // 로그인
     public ModelUser Login(ModelUser model){
         String weburl = "http://192.168.0.11/jwcuser/login";
 

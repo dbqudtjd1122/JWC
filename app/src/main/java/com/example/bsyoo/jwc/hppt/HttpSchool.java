@@ -1,6 +1,7 @@
 package com.example.bsyoo.jwc.hppt;
 
 import com.example.bsyoo.jwc.model.ModelSchool;
+import com.example.bsyoo.jwc.model.ModelSchoolUser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class HttpSchool {
 
+    // 교육 리스트 가져오기
     public List<ModelSchool> SchoolList(){
         String weburl = "http://192.168.0.11/school/getSchool";
 
@@ -45,5 +47,38 @@ public class HttpSchool {
             request.close();
             return SchoolList;
         }
+    }
+
+    // 교육신청 마무리
+    public Integer insertSchoolUser(ModelSchoolUser user){
+        String weburl = "http://192.168.0.11/jwcuser/insert";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+            // ModelPerson을 json으로 변환
+            ModelSchoolUser obj = user ;
+
+            String data = new Gson().toJson(obj);
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                response = request.getStringResponse(); // 서버값이 리턴된다
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+        }
+
+        return Integer.valueOf(response);
     }
 }
