@@ -109,7 +109,7 @@ public class Http_User {
         }
     }
 
-    //
+    // 회원정보 가져오기
     public Model_User getLoginInfomation(Model_User model){
         String weburl = "http://192.168.0.11/jwcuser/getuserinfo";
 
@@ -140,6 +140,64 @@ public class Http_User {
         } finally {
             request.close();
             return user;
+        }
+    }
+
+    // 회원정보 업데이트
+    public Integer LoginInfoUpdate(Model_User model){
+        String weburl = "http://192.168.0.11/jwcuser/loginupdate";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+            String data = new Gson().toJson(model);
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                response = request.getStringResponse(); // 서버값이 리턴된다
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+            return Integer.valueOf(response);
+        }
+    }
+
+    // 회원정보 삭제
+    public Integer deleteuser(Model_User model){
+        String weburl = "http://192.168.0.11/jwcuser/deleteuser";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+            String data = new Gson().toJson(model);
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                response = request.getStringResponse(); // 서버값이 리턴된다
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+            return Integer.valueOf(response);
         }
     }
 }

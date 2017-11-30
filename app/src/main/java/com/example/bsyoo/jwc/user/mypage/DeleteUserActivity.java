@@ -11,64 +11,53 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.hppt.Http_SignUp;
 import com.example.bsyoo.jwc.hppt.Http_User;
 import com.example.bsyoo.jwc.model.Model_User;
-import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
-public class PwCheckActivity extends LoginInformation {
+public class DeleteUserActivity extends LoginInformation {
 
-    private TextView tv_id;
-    private EditText et_pw;
-    private Button btn_pwcheck;
     private Model_User user = new Model_User();
-    private String account = "";
+    private CheckBox ch_delete;
+    private Button btn_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pw_check);
+        setContentView(R.layout.activity_delete_user);
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.RED);
         }
-        setTitle("비밀번호 확인");
-
-        Intent intent = getIntent();
-        account = intent.getStringExtra("account");
+        setTitle("계정 탈퇴");
 
         byid();
-
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
         user.setNumber(pref.getInt("number_Set", -1));
 
-        new PwCheckActivity.getLoginInfomation().execute(user);
+        new DeleteUserActivity.getLoginInfomation().execute(user);
 
-        btn_pwcheck.setOnClickListener(new View.OnClickListener() {
+        btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.setPW(et_pw.getText().toString());
-                new PwCheckActivity.PwCheck().execute(user);
+                if(ch_delete.isChecked() == false){
+                    Toast.makeText(DeleteUserActivity.this, "계정탈퇴에 동의해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    new DeleteUserActivity.deleteuser().execute(user);
+                }
             }
         });
-    }
 
+    }
     private void byid(){
-        tv_id = (TextView) findViewById(R.id.tv_id);
-        et_pw = (EditText) findViewById(R.id.et_pw);
-        btn_pwcheck = (Button) findViewById(R.id.btn_pwcheck);
-    }
-
-    private void settext(){
-        tv_id.setText(user.getID().toString());
+        ch_delete = (CheckBox) findViewById(R.id.ch_delete);
+        btn_delete = (Button) findViewById(R.id.btn_delete);
     }
 
     // 회원정보 가져오기
@@ -82,7 +71,7 @@ public class PwCheckActivity extends LoginInformation {
 
             // ProgressDialog 보이기
             // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(PwCheckActivity.this);
+            waitDlg = new ProgressDialog(DeleteUserActivity.this);
             waitDlg.setMessage("회원정보를 가져오는중 입니다.");
             waitDlg.show();
         }
@@ -102,7 +91,6 @@ public class PwCheckActivity extends LoginInformation {
             super.onPostExecute(s);
 
             user = s;
-            settext();
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
                 waitDlg.dismiss();
@@ -111,8 +99,8 @@ public class PwCheckActivity extends LoginInformation {
         }
     }
 
-    // 비밀번호 확인
-    public class PwCheck extends AsyncTask<Model_User, Integer, Model_User> {
+    // 계정 탈퇴
+    public class deleteuser extends AsyncTask<Model_User, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -122,14 +110,14 @@ public class PwCheckActivity extends LoginInformation {
 
             // ProgressDialog 보이기
             // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(PwCheckActivity.this);
-            waitDlg.setMessage("비밀번호 확인중 입니다.");
+            waitDlg = new ProgressDialog(DeleteUserActivity.this);
+            waitDlg.setMessage("회원정보를 삭제중 입니다.");
             waitDlg.show();
         }
         @Override
-        protected Model_User doInBackground(Model_User... params) {
+        protected Integer doInBackground(Model_User... params) {
 
-            Model_User count = new Http_SignUp().Login(user);
+            Integer count = new Http_User().deleteuser(user);
 
             return count;
         }
@@ -138,48 +126,19 @@ public class PwCheckActivity extends LoginInformation {
             super.onProgressUpdate(values);
         }
         @Override
-        protected void onPostExecute(Model_User s) {
+        protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
+
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;
             }
-            if (s == null) {
-                Toast.makeText(PwCheckActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(PwCheckActivity.this, "비밀번호가 확인 되었습니다.", Toast.LENGTH_SHORT).show();
-                if(account.equals("수정")) {
-                    Intent intent = new Intent(PwCheckActivity.this, MypageModifiedActivity.class);
-                    startActivityForResult(intent, 777);
-                } else {
-                    Intent intent = new Intent(PwCheckActivity.this, DeleteUserActivity.class);
-                    startActivityForResult(intent, 888);
-                }
-            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 777 ) {
-            if (resultCode == RESULT_OK) {
-                finish();
-            }
-            //리턴값이 없을때
-            else {
-            }
-        }
-        if (requestCode == 888) {
-            if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(PwCheckActivity.this, MypageActivity.class);
+            if(s==1) {
+                Toast.makeText(DeleteUserActivity.this, "계정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DeleteUserActivity.this, PwCheckActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
-            }
-            //리턴값이 없을때
-            else {
             }
         }
     }

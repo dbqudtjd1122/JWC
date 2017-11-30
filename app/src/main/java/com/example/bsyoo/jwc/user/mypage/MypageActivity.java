@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.example.bsyoo.jwc.MainActivity;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.Http_SignUp;
 import com.example.bsyoo.jwc.hppt.Http_User;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class MypageActivity extends LoginInformation {
 
-    private Model_User user = new Model_User();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +71,6 @@ public class MypageActivity extends LoginInformation {
         // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        user.setNumber(pref.getInt("number_Set", -1));
-        new MypageActivity.getLoginInfomation().execute(user);
-
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -109,54 +106,17 @@ public class MypageActivity extends LoginInformation {
         });
     }
 
-    // 회원가입
-    public class getLoginInfomation extends AsyncTask<Model_User, Integer, Model_User> {
-
-        private ProgressDialog waitDlg = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            // ProgressDialog 보이기
-            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(MypageActivity.this);
-            waitDlg.setMessage("회원정보를 가져오는중 입니다.");
-            waitDlg.show();
-        }
-        @Override
-        protected Model_User doInBackground(Model_User... params) {
-
-            Model_User count = new Http_User().getLoginInfomation(user);
-
-            return count;
-        }
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-        @Override
-        protected void onPostExecute(Model_User s) {
-            super.onPostExecute(s);
-
-            user = s;
-
-            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
-            if (waitDlg != null) {
-                waitDlg.dismiss();
-                waitDlg = null;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666) {
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(MypageActivity.this, MainActivity.class);
+                setResult(RESULT_OK, intent);
+                finish();
             }
-            setValueFragment(user);
-        }
-    }
-
-    public void setValueFragment(Model_User model){
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        List<Fragment> fragments = fragmentManager.getFragments();
-        if(fragments != null){
-            for(Fragment fragment : fragments){
-                if(fragment != null && fragment.isVisible())
-                    ((MypageFragment)fragment).setOrderuser(model);
+            //리턴값이 없을때
+            else {
             }
         }
     }

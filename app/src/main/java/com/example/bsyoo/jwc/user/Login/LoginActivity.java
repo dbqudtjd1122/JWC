@@ -107,7 +107,7 @@ public class LoginActivity extends LoginInformation {
         }
     };
 
-    // 회원가입
+    // 로그인
     public class Login extends AsyncTask<Model_User, Integer, Model_User> {
 
         private ProgressDialog waitDlg = null;

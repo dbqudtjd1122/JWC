@@ -115,10 +115,10 @@
                             android:inputType="textPersonName"
                             android:maxLength="16"
                             android:singleLine="true"
+                            android:text="dbqudtjd1122"
                             android:textColor="#000"
                             android:textCursorDrawable="@null"
-                            android:textSize="16dp"
-                            android:text="dbqudtjd1122"/>
+                            android:textSize="16dp" />
 
 
                     </LinearLayout>
@@ -393,6 +393,7 @@
                             android:background="@color/colorblackk"
                             android:text="중복확인"
                             android:textColor="@color/colorblack"
+                            android:onClick="signClick"
                             android:textStyle="bold" />
 
 
@@ -494,7 +495,8 @@
                             android:background="@color/colorblackk"
                             android:text="주소 검색"
                             android:textColor="@color/colorblack"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:onClick="signClick"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -675,7 +677,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:text="주문 관련 정보, 주요 공지사항 및 이벤트 당첨 안내 등은 수신 동의 여부에 관계없이 자동 발송됩니다."
-                            android:textSize="13dp"></TextView>
+                            android:textSize="13dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -722,6 +724,7 @@
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="#000"
+                        android:maxLength="3"
                         android:textCursorDrawable="@null"
                         android:textSize="15dp" />
 
@@ -744,6 +747,7 @@
                         android:digits="0123456789"
                         android:ems="4"
                         android:inputType="number"
+                        android:maxLength="4"
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textCursorDrawable="@null"
@@ -768,6 +772,7 @@
                         android:digits="0123456789"
                         android:ems="4"
                         android:inputType="number"
+                        android:maxLength="4"
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textCursorDrawable="@null"
@@ -810,6 +815,7 @@
                         android:orientation="vertical">
 
                         <RadioGroup
+                            android:id="@+id/Rgroup"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -845,7 +851,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1121,7 +1127,8 @@
                     android:background="#ff0000"
                     android:text="정보수정 완료"
                     android:textColor="#ffffff"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="signClick"/>
 
             </LinearLayout>
         </LinearLayout>

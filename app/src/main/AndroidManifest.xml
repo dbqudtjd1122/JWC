@@ -119,7 +119,8 @@
 
         <activity android:name=".user.mypage.PwCheckActivity" />
         <activity android:name=".user.Login.IDPWSearch.IDPWSearchActivity" />
-        <activity android:name=".user.mypage.MypageModifiedActivity"></activity>
+        <activity android:name=".user.mypage.MypageModifiedActivity" />
+        <activity android:name=".user.mypage.DeleteUserActivity"></activity>
     </application>
 
 </manifest>

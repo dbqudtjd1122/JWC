@@ -65,6 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         setbyid();
 
+        // 밑줄치기
         SpannableString content = new SpannableString("회원가입 이용약관에 동의 합니다.");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tv_terms1.setText(content);
@@ -72,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         content2.setSpan(new UnderlineSpan(), 0, content2.length(), 0);
         tv_terms2.setText(content2);
 
+        // 비밀번호 일치한지 확인
         et_pw.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,7 +89,6 @@ public class SignUpActivity extends AppCompatActivity {
                     tv_pwcheck.setTextColor(Color.parseColor("#FF0000"));
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -120,8 +121,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                tv_addr1.setText(" " + data.getStringExtra("우편"));
-                tv_addr2.setText(" " + data.getStringExtra("주소"));
+                tv_addr1.setText(data.getStringExtra("우편"));
+                tv_addr2.setText(data.getStringExtra("주소"));
             }
             // 리턴값이 없을떄
             else {
@@ -174,18 +175,18 @@ public class SignUpActivity extends AppCompatActivity {
                 user.setPW(et_pw2.getText().toString());
                 user.setName(et_name.getText().toString());
                 user.setEmail(et_email.getText().toString()+"@"+et_email2.getText().toString());
-                user.setAddr(tv_addr1.getText().toString() + " " + tv_addr2.getText().toString() + " " + et_addr3.getText().toString());
+                user.setAddr(tv_addr1.getText().toString() + " " + tv_addr2.getText().toString() + " / " + et_addr3.getText().toString());
                 user.setPhone(et_phone1.getText().toString() + et_phone2.getText().toString() + et_phone3.getText().toString());
-                user.setPhone_home(et_hphone1.getText().toString() + et_hphone2.getText().toString() + et_hphone3.getText().toString());
+                user.setPhone_home(et_hphone1.getText().toString() +"-"+ et_hphone2.getText().toString() +"."+ et_hphone3.getText().toString());
                 if (ch_email.isChecked() == true) {
-                    user.setEmail_sms(2);
-                } else {
                     user.setEmail_sms(1);
+                } else {
+                    user.setEmail_sms(2);
                 }
                 if (ch_phone.isChecked() == true) {
-                    user.setPhone_sms(2);
-                } else {
                     user.setPhone_sms(1);
+                } else {
+                    user.setPhone_sms(2);
                 }
                 if (radioButton.isChecked() == true) {
                     user.setOK(1);
@@ -193,7 +194,7 @@ public class SignUpActivity extends AppCompatActivity {
                     user.setOK(2);
                     user.setMutual(et_Mutual.getText().toString());
                     user.setRepresentation(et_Representation.getText().toString());
-                    user.setBuisness_number(et_Buisness1.getText().toString() + "-" + et_Buisness2.getText().toString() + "-" + et_Buisness3.getText().toString());
+                    user.setBuisness_number(et_Buisness1.getText().toString() + et_Buisness2.getText().toString() + et_Buisness3.getText().toString());
                     user.setSectors(et_Sectors.getText().toString());
                 }
 
@@ -211,7 +212,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(this, "주소를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (user.getPhone().length() <= 10) {
-                    Toast.makeText(this, "핸드폰 번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "핸드폰 번호를 전부 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (idcheck == 0) {
                     Toast.makeText(this, "ID 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
@@ -355,7 +356,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
-
 
     // ID중복체크
     public class HttpIDCheck extends AsyncTask<Model_User, Integer, Integer> {

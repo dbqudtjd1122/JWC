@@ -231,7 +231,7 @@ public class MainActivity extends LoginInformation
             startActivityForResult(intent, 999);
         }else if (id == R.id.menu_mypage) {
             Intent intent = new Intent(MainActivity.this, MypageActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 555);
         }else if (id == R.id.menu_notice) {
             Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
             startActivity(intent);
@@ -301,10 +301,7 @@ public class MainActivity extends LoginInformation
         editor.remove("level_Set");
         editor.remove("number_Set");
         editor.remove("email_Set");
-        /*isid = pref.getString("id_Set", "").toString();
-        islevel = pref.getInt("level_Set", -1);
-        isnumber = pref.getInt("number_Set", -1);
-        isemail = pref.getString("email_Set", "" ).toString();*/
+
         editor.clear();
         editor.commit();
 
@@ -316,16 +313,26 @@ public class MainActivity extends LoginInformation
         menu.findItem(R.id.menu_setting).setVisible(false);
     }
 
-    // 로그인 액티비티에서오는 Result
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // 로그인 액티비티에서오는 Result
         if (requestCode == 999) {
             if (resultCode == RESULT_OK) {
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                 if (navigationView != null) {
                     Loginsave();
                 }
+            }
+        }
+        // 회원탈퇴 액티비티에서 오는 Result
+        if (requestCode == 555) {
+            if (resultCode == RESULT_OK) {
+                Logout();
+            }
+            //리턴값이 없을때
+            else {
             }
         }
     }
