@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.bsyoo.jwc.EventInfoActivity;
+import com.example.bsyoo.jwc.mainimage.notice.EventInfoActivity;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.ModelNotice;
 

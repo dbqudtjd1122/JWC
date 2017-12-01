@@ -65,9 +65,9 @@ public class AdapterSchool extends ArrayAdapter<ModelSchool> {
             }
 
             // 교육 시행날짜
-            SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd"); // E 요일 HH 시간 mm 분 ss 초
+            SimpleDateFormat data= new SimpleDateFormat("교육진행 일정 : yyyy-MM-dd 시간 : HH:mm"); // E 요일 HH 시간 mm 분 ss 초
             String datetime = data.format(getItem(position).getLecture_Time().getTime());  // 리뷰 수정 날짜, 시간
-            viewHolder.event_time.setText("교육시행 날짜 : "+datetime);
+            viewHolder.event_time.setText(datetime);
 
             // 이미지타이틀
             Glide.with(getContext()).load(getItem(position).getImg_title().toString()).override(800,1000).fitCenter().into(viewHolder.event_img);

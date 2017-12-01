@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.NoticeInfoActivity">
+    tools:context="com.example.bsyoo.jwc.mainimage.notice.NoticeInfoActivity">
 
     <ScrollView
         android:layout_width="match_parent"

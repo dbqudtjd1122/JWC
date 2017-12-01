@@ -20,6 +20,7 @@ import com.example.bsyoo.jwc.model.ModelSchoolUser;
 import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
 public class SchoolWriteActivity extends LoginInformation {
@@ -76,7 +77,7 @@ public class SchoolWriteActivity extends LoginInformation {
         tv_writetitle.setText(school.getSchool_Title().toString()+" 지원서");
         tv_applytime.setText(school.getApply_Time().toString());
 
-        SimpleDateFormat data= new SimpleDateFormat("yyyy-MM-dd HH:mm"); // E 요일 HH 시간 mm 분 ss 초
+        SimpleDateFormat data= new SimpleDateFormat("일정 : yyyy-MM-dd\n시간 : HH:mm"); // E 요일 HH 시간 mm 분 ss 초
         String datetime = data.format(school.getLecture_Time().getTime());  // 날짜, 시간
         tv_lecture.setText(datetime);
 
@@ -109,6 +110,7 @@ public class SchoolWriteActivity extends LoginInformation {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
         }
+
         @Override
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
@@ -119,7 +121,9 @@ public class SchoolWriteActivity extends LoginInformation {
                 waitDlg = null;
             }
             if(s==1){
-
+                Intent intent = new Intent(SchoolWriteActivity.this, SchoolInfoActivity.class);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }

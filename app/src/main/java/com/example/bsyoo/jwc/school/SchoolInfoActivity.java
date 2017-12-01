@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,11 +15,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.hppt.HttpSchool;
 import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.model.ModelSchool;
+import com.example.bsyoo.jwc.model.ModelSchoolUser;
 import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
-import com.example.bsyoo.jwc.user.mypage.MypageModifiedActivity;
+
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -30,7 +31,9 @@ public class SchoolInfoActivity extends LoginInformation {
     private ImageView school_info;
     private LinearLayout school_write;
     private ModelUser user = new ModelUser();
+    private ModelSchoolUser Suser = new ModelSchoolUser();
 
+    private int Scount = -1;  // 교육신청 내역 확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +70,16 @@ public class SchoolInfoActivity extends LoginInformation {
             new SchoolInfoActivity.getLoginInfomation().execute(user);
         }
 
+        // 교육신청페이지로..
         school_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(user.getUser_Number() == -1) {
                     Toast.makeText(SchoolInfoActivity.this, "로그인 해주세요.", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(Scount == -1 || Scount >= 1 ){
+                    Toast.makeText(SchoolInfoActivity.this, "이미 교육신청 하셨습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     Intent intent = new Intent(SchoolInfoActivity.this, SchoolWriteActivity.class);
                     intent.putExtra("school", school);
                     intent.putExtra("user", user);
@@ -119,11 +126,65 @@ public class SchoolInfoActivity extends LoginInformation {
                 waitDlg.dismiss();
                 waitDlg = null;
             }
+
+            Suser.setUser_Number(user.getUser_Number());
+            Suser.setSchool_Number(school.getSchool_Number());
+            new SchoolInfoActivity.getSchoolUser().execute(Suser);
         }
     }
+
+    // 교육신청 했는지 확인
+    public class getSchoolUser extends AsyncTask<ModelSchoolUser, Integer, Integer> {
+
+        private ProgressDialog waitDlg = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // ProgressDialog 보이기
+            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
+            waitDlg = new ProgressDialog(SchoolInfoActivity.this);
+            waitDlg.setMessage("신청내역을 확인중 입니다.");
+            waitDlg.show();
+        }
+        @Override
+        protected Integer doInBackground(ModelSchoolUser... params) {
+
+            Integer count = new HttpSchool().getSchoolUser(params[0]);
+
+            return count;
+        }
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Integer s) {
+            super.onPostExecute(s);
+
+            Scount = s;
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 789 ) {
+            if (resultCode == RESULT_OK) {
+                Scount = 1;
+                Toast.makeText(this, "교육 신청 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
     }
 }

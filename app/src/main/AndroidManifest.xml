@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NoticeActivity">
+        <activity android:name=".mainimage.notice.NoticeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -35,7 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".EventActivity">
+        <activity android:name=".mainimage.notice.EventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -48,15 +48,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".NoticeInfoActivity">
+        <activity android:name=".mainimage.notice.NoticeInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NoticeActivity" />
+                android:value=".mainimage.notice.NoticeActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".BannerActivity" />
         <activity
             android:name=".camera.CameraActivity"
             android:label="@string/app_name"
@@ -68,16 +67,16 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".EventInfoActivity">
+        <activity android:name=".mainimage.notice.EventInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".EventActivity" />
+                android:value=".mainimage.notice.EventActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".SeriesActivity" />
-        <activity android:name=".SeriesInfoActivity">
+        <activity android:name=".mainimage.series.SeriesActivity" />
+        <activity android:name=".mainimage.series.SeriesInfoActivity">
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
@@ -100,7 +99,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ModelSearchActivity">
+        <activity android:name=".mainimage.series.ModelSearchActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -123,7 +122,8 @@
         <activity android:name=".user.mypage.DeleteUserActivity" />
         <activity android:name=".school.SchoolActivity" />
         <activity android:name=".school.SchoolInfoActivity" />
-        <activity android:name=".school.SchoolWriteActivity"></activity>
+        <activity android:name=".school.SchoolWriteActivity" />
+        <activity android:name=".mainimage.AgencyActivity"></activity>
     </application>
 
 </manifest>

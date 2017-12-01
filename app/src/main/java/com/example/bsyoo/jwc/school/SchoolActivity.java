@@ -10,18 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.bsyoo.jwc.EventActivity;
-import com.example.bsyoo.jwc.EventInfoActivity;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterSchool;
-import com.example.bsyoo.jwc.hppt.HttpNotice;
 import com.example.bsyoo.jwc.hppt.HttpSchool;
-import com.example.bsyoo.jwc.model.ModelNotice;
 import com.example.bsyoo.jwc.model.ModelSchool;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

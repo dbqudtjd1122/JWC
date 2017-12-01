@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.SeriesActivity;
+import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.example.bsyoo.jwc.adapter.AdapterSeries;
 import com.example.bsyoo.jwc.hppt.HttpCamera;
 import com.example.bsyoo.jwc.model.ModelCamera;

@@ -128,6 +128,11 @@ public class MypageModifiedActivity extends LoginInformation {
     public void signClick(View view) {
         switch (view.getId()) {
             case R.id.btn_email_check:
+                if(user.getEmail().toString().equals(et_email.getText().toString()+"@"+et_email2.getText().toString())){
+                    Toast.makeText(this, "사용가능한 Email 입니다.", Toast.LENGTH_SHORT).show();
+                    emailcheck = 1;
+                    break;
+                }
                 user.setEmail(et_email.getText().toString()+"@"+et_email2.getText().toString());
                 if (et_email.getText().toString().length() <= 4 || et_email2.getText().toString().length() <= 5) {
                     Toast.makeText(this, "이메일을 정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
@@ -442,7 +447,7 @@ public class MypageModifiedActivity extends LoginInformation {
             }
             if (s == 1) {
                 if(user.getOK()==1){
-                    Toast.makeText(MypageModifiedActivity.this, "회원정보가 업데이트 되었습니다..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MypageModifiedActivity.this, "회원정보가 업데이트 되었습니다.", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(MypageModifiedActivity.this, "사업자 로그인 승인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }

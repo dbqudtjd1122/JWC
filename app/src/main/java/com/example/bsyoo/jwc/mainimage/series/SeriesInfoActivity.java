@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.mainimage.series;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.ModelCamera;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;

@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.mainimage.notice;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.ModelNotice;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -34,7 +35,7 @@ public class EventInfoActivity extends AppCompatActivity {
         ImageView event_info = (ImageView) findViewById(R.id.event_info);
 
         if (event.getImg_info() != null) {
-            Glide.with(this).load(event.getImg_info()).override(720, 4000).fitCenter().into(event_info);
+            Glide.with(this).load(event.getImg_info()).override(720, 10000).fitCenter().into(event_info);
         }
 
         // 이미지 줌인, 아웃 (build.gradle 추가)

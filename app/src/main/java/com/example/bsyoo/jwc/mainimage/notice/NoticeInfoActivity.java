@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.mainimage.notice;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.model.ModelNotice;
 
 import uk.co.senab.photoview.PhotoViewAttacher;

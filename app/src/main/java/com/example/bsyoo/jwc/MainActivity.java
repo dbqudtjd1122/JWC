@@ -25,6 +25,11 @@ import android.view.View.OnClickListener;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
+import com.example.bsyoo.jwc.mainimage.AgencyActivity;
+import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
+import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
+import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
+import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
 import com.example.bsyoo.jwc.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
@@ -177,6 +182,10 @@ public class MainActivity extends LoginInformation
             case R.id.img_supporter:
                 Intent intnet4 = new Intent(this, SchoolActivity.class);
                 startActivity(intnet4);
+                break;
+            case R.id.img_agency:
+                Intent intent5 = new Intent(this, AgencyActivity.class);
+                startActivity(intent5);
                 break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);

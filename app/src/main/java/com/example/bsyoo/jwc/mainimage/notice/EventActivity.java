@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc;
+package com.example.bsyoo.jwc.mainimage.notice;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterEvent;
 import com.example.bsyoo.jwc.hppt.HttpNotice;
 import com.example.bsyoo.jwc.model.ModelNotice;
