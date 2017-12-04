@@ -23,6 +23,12 @@ public class MypageTabFragment1 extends MypageFragment{
     }
 
     @Override
+    public void recall() {
+        super.recall();
+        user = getOrderuser();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_mypage_tab_fragment1, container, false);
@@ -41,6 +47,7 @@ public class MypageTabFragment1 extends MypageFragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PwCheckActivity.class);
                 intent.putExtra("account", "수정");
+                intent.putExtra("user", user);
                 getActivity().startActivity(intent);
             }
         });
@@ -49,6 +56,7 @@ public class MypageTabFragment1 extends MypageFragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PwCheckActivity.class);
                 intent.putExtra("account", "탈퇴");
+                intent.putExtra("user", user);
                 getActivity().startActivityForResult(intent, 666);
             }
         });

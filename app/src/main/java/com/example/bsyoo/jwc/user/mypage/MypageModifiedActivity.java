@@ -54,9 +54,9 @@ public class MypageModifiedActivity extends LoginInformation {
 
         byid();
 
-        SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        user.setUser_Number(pref.getInt("number_Set", -1));
-        new MypageModifiedActivity.getLoginInfomation().execute(user);
+        Intent intent = getIntent();
+        user = (ModelUser) intent.getSerializableExtra("user");
+        settext();
 
         // 라디오그룹 클릭리스너
         Rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -316,46 +316,6 @@ public class MypageModifiedActivity extends LoginInformation {
             ch_phone.setChecked(true);
         } else {
             ch_phone.setChecked(false);
-        }
-    }
-
-    // 회원정보 가져오기
-    public class getLoginInfomation extends AsyncTask<ModelUser, Integer, ModelUser> {
-
-        private ProgressDialog waitDlg = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            // ProgressDialog 보이기
-            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(MypageModifiedActivity.this);
-            waitDlg.setMessage("회원정보를 가져오는중 입니다.");
-            waitDlg.show();
-        }
-        @Override
-        protected ModelUser doInBackground(ModelUser... params) {
-
-            ModelUser count = new HttpUser().getLoginInfomation(user);
-
-            return count;
-        }
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-        @Override
-        protected void onPostExecute(ModelUser s) {
-            super.onPostExecute(s);
-
-            user = s;
-            settext();
-            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
-            if (waitDlg != null) {
-                waitDlg.dismiss();
-                waitDlg = null;
-            }
         }
     }
 

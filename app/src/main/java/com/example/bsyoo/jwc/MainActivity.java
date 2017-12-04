@@ -1,10 +1,12 @@
 package com.example.bsyoo.jwc;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,15 +27,18 @@ import android.view.View.OnClickListener;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
+import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.mainimage.AgencyActivity;
 import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
 import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
+import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
+import com.example.bsyoo.jwc.user.mypage.MypageModifiedActivity;
 import com.example.bsyoo.jwc.viewpager.ViewPagerAdapter;
 
 
@@ -86,6 +91,7 @@ public class MainActivity extends LoginInformation
         }else {
             Loginsave();
         }
+
 
         // ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -350,4 +356,4 @@ public class MainActivity extends LoginInformation
             }
         }
     }
-}
+    }
