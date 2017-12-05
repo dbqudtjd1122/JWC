@@ -1,7 +1,7 @@
 package com.example.bsyoo.jwc.model;
 
 
-public class ModelSchoolUser {
+public class ModelUserSchool {
 
     private Integer Number        ;
 	private Integer School_Number ;
@@ -13,7 +13,7 @@ public class ModelSchoolUser {
 
     @Override
     public String toString() {
-        return "ModelSchoolUser{" +
+        return "ModelUserSchool{" +
                 "Number=" + Number +
                 ", School_Number=" + School_Number +
                 ", User_Number=" + User_Number +
@@ -23,10 +23,10 @@ public class ModelSchoolUser {
                 '}';
     }
 
-    public ModelSchoolUser() {
+    public ModelUserSchool() {
     }
 
-    public ModelSchoolUser(Integer number, Integer school_Number, Integer user_Number, Integer user_Personnel, String user_Blog, String user_Motive) {
+    public ModelUserSchool(Integer number, Integer school_Number, Integer user_Number, Integer user_Personnel, String user_Blog, String user_Motive) {
         Number = number;
         School_Number = school_Number;
         User_Number = user_Number;

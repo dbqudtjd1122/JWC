@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.ListView;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterSerialCode;
 import com.example.bsyoo.jwc.hppt.HttpSerialCode;
-import com.example.bsyoo.jwc.model.ModelSerialCode;
+import com.example.bsyoo.jwc.model.ModelUserSerialCode;
 import com.example.bsyoo.jwc.model.ModelUser;
 
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class MypageTabFragment2 extends MypageFragment {
 
     private View view = null;
     private ModelUser user = new ModelUser();
-    private ModelSerialCode code = new ModelSerialCode();
+    private ModelUserSerialCode code = new ModelUserSerialCode();
     private ListView listView;
-    private List<ModelSerialCode> codelist;
+    private List<ModelUserSerialCode> codelist;
     private AdapterSerialCode adapter;
     private Button btn_serialcode_add;
 
@@ -70,11 +71,13 @@ public class MypageTabFragment2 extends MypageFragment {
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
-        btn_serialcode_add = (Button) view.findViewById(R.id.btn_serialcode_add);
+        btn_serialcode_add = (Button) view.findViewById(R.id.btn_serialcode_addgo);
         btn_serialcode_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SerialCodeAddActivity.class);
+                intent.putParcelableArrayListExtra("usercode", (ArrayList<? extends Parcelable>) codelist);
+                intent.putExtra("user", user);
                 startActivityForResult(intent, 156);
             }
         });
@@ -82,7 +85,7 @@ public class MypageTabFragment2 extends MypageFragment {
     }
 
     // Http List DB 가져오기
-    public class getCodeList extends AsyncTask<ModelSerialCode, Integer, List<ModelSerialCode>> {
+    public class getCodeList extends AsyncTask<ModelUserSerialCode, Integer, List<ModelUserSerialCode>> {
 
         private ProgressDialog waitDlg = null;
 
@@ -96,7 +99,7 @@ public class MypageTabFragment2 extends MypageFragment {
         }
 
         @Override
-        protected List<ModelSerialCode> doInBackground(ModelSerialCode... params) {
+        protected List<ModelUserSerialCode> doInBackground(ModelUserSerialCode... params) {
 
             try {
                 codelist = new HttpSerialCode().getSerialCodeList(params[0]);
@@ -113,7 +116,7 @@ public class MypageTabFragment2 extends MypageFragment {
         }
 
         @Override
-        protected void onPostExecute(List<ModelSerialCode> list) {
+        protected void onPostExecute(List<ModelUserSerialCode> list) {
             super.onPostExecute(list);
             // 1.
             codelist = list;

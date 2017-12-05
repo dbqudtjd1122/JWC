@@ -13,16 +13,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.model.ModelSerialCode;
+import com.example.bsyoo.jwc.model.ModelUserSerialCode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterSerialCode extends android.widget.ArrayAdapter<ModelSerialCode>{
+public class AdapterSerialCode extends android.widget.ArrayAdapter<ModelUserSerialCode>{
 
-    public ArrayList<ModelSerialCode> data = null;
+    public ArrayList<ModelUserSerialCode> data = null;
 
-    public AdapterSerialCode(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelSerialCode> objects) {
+    public AdapterSerialCode(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelUserSerialCode> objects) {
         super(context, resource, textViewResourceId, objects);
     }
 
@@ -39,7 +39,7 @@ public class AdapterSerialCode extends android.widget.ArrayAdapter<ModelSerialCo
         View itemLayout = super.getView(position, convertView, parent);
         ViewHolder viewHolder = (ViewHolder) itemLayout.getTag();
 
-        ModelSerialCode code = getItem(position);
+        ModelUserSerialCode code = getItem(position);
 
         if(viewHolder == null){
             viewHolder = new ViewHolder();

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.example.bsyoo.jwc.user.mypage.SerialCodeAddActivity"
-    android:gravity="center"
-    >
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         android:layout_margin="8dp">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/et_serialcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="11"
@@ -42,35 +42,110 @@
             android:hint="시리얼 넘버를 적어주세요."
             android:padding="8dp"
             android:textSize="18dp"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:maxLength="6"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_serialcode"
             android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
             android:background="#000"
             android:text="조회"
             android:textColor="#ffffff"
             android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="serialClick"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_serial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#ff0000"
-            android:text="등록"
-            android:textColor="#ffffff"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_dvr"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="7dp"
+                    app:srcCompat="@drawable/l1vd_100" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_seriesname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시리즈이름"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_dvrname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="제품이름"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_serialcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시리얼코드"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView58"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="위 제품이 맞으신경우 등록을 눌러주세요."
+                android:textColor="#000" />
+
+            <Button
+                android:id="@+id/btn_serialcode_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#ff0000"
+                android:onClick="serialClick"
+                android:text="등록"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

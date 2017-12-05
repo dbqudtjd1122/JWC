@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,20 +13,18 @@ import android.widget.TextView;
 
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.HttpSchool;
-import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.model.ModelSchool;
-import com.example.bsyoo.jwc.model.ModelSchoolUser;
+import com.example.bsyoo.jwc.model.ModelUserSchool;
 import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
 public class SchoolWriteActivity extends LoginInformation {
 
     private ModelSchool school = new ModelSchool();
     private ModelUser user = new ModelUser();
-    private ModelSchoolUser Suser = new ModelSchoolUser();
+    private ModelUserSchool Suser = new ModelUserSchool();
     private TextView tv_writetitle, tv_applytime, tv_lecture, tv_writename;
     private Button btn_finish;
     private EditText et_personnel, et_motive;
@@ -74,7 +71,7 @@ public class SchoolWriteActivity extends LoginInformation {
     }
 
     private void settext(){
-        tv_writetitle.setText(school.getSchool_Title().toString()+" 지원서");
+        tv_writetitle.setText(school.getSchool_Title().toString());
         tv_applytime.setText(school.getApply_Time().toString());
 
         SimpleDateFormat data= new SimpleDateFormat("일정 : yyyy-MM-dd\n시간 : HH:mm"); // E 요일 HH 시간 mm 분 ss 초
@@ -85,7 +82,7 @@ public class SchoolWriteActivity extends LoginInformation {
     }
 
     // 교육신청 마무리
-    public class insertSchoolUser extends AsyncTask<ModelSchoolUser, Integer, Integer> {
+    public class insertSchoolUser extends AsyncTask<ModelUserSchool, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -100,7 +97,7 @@ public class SchoolWriteActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Integer doInBackground(ModelSchoolUser... params) {
+        protected Integer doInBackground(ModelUserSchool... params) {
 
             Integer count = new HttpSchool().insertSchoolUser(params[0]);
 

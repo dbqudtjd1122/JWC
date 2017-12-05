@@ -18,7 +18,7 @@ import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.HttpSchool;
 import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.model.ModelSchool;
-import com.example.bsyoo.jwc.model.ModelSchoolUser;
+import com.example.bsyoo.jwc.model.ModelUserSchool;
 import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
@@ -31,7 +31,7 @@ public class SchoolInfoActivity extends LoginInformation {
     private ImageView school_info;
     private LinearLayout school_write;
     private ModelUser user = new ModelUser();
-    private ModelSchoolUser Suser = new ModelSchoolUser();
+    private ModelUserSchool Suser = new ModelUserSchool();
 
     private int Scount = -1;  // 교육신청 내역 확인
 
@@ -134,7 +134,7 @@ public class SchoolInfoActivity extends LoginInformation {
     }
 
     // 교육신청 했는지 확인
-    public class getSchoolUser extends AsyncTask<ModelSchoolUser, Integer, Integer> {
+    public class getSchoolUser extends AsyncTask<ModelUserSchool, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -149,7 +149,7 @@ public class SchoolInfoActivity extends LoginInformation {
             waitDlg.show();
         }
         @Override
-        protected Integer doInBackground(ModelSchoolUser... params) {
+        protected Integer doInBackground(ModelUserSchool... params) {
 
             Integer count = new HttpSchool().getSchoolUser(params[0]);
 

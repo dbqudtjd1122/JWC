@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_serialcode_add"
+            android:id="@+id/btn_serialcode_addgo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="정품등록하러 가기"

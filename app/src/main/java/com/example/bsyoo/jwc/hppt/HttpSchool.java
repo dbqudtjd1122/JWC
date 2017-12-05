@@ -1,13 +1,12 @@
 package com.example.bsyoo.jwc.hppt;
 
 import com.example.bsyoo.jwc.model.ModelSchool;
-import com.example.bsyoo.jwc.model.ModelSchoolUser;
+import com.example.bsyoo.jwc.model.ModelUserSchool;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -51,7 +50,7 @@ public class HttpSchool {
     }
 
     // 교육신청 마무리
-    public Integer insertSchoolUser(ModelSchoolUser user){
+    public Integer insertSchoolUser(ModelUserSchool user){
         String weburl = "http://192.168.0.11/school/insertschooluser";
 
         HttpRequest request = null;
@@ -60,7 +59,7 @@ public class HttpSchool {
         int httpCode = 0;
         try {
             // ModelPerson을 json으로 변환
-            ModelSchoolUser obj = user ;
+            ModelUserSchool obj = user ;
 
             String data = new Gson().toJson(obj);
 
@@ -84,7 +83,7 @@ public class HttpSchool {
     }
 
     // 교육신청정보 가져오기
-    public Integer getSchoolUser(ModelSchoolUser model){
+    public Integer getSchoolUser(ModelUserSchool model){
         String weburl = "http://192.168.0.11/school/getschooluser";
 
         HttpRequest request = null;

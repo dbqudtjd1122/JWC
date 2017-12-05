@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="마케팅팀"
+                android:text="영업팀"
                 android:textColor="#000"
                 android:textSize="17dp"
                 android:textStyle="bold"/>
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="담당자 복여울 사원 연락처 : 010-4403-2571\n(전화문의 마감시간 9:30~18:00)"
+                android:text="담당자 문대건 부장 연락처 : 1899-7602\n(전화문의 마감시간 9:30~18:00)"
                 android:textColor="#000"
                 android:textSize="15dp" />
 
