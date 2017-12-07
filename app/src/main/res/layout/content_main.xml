@@ -158,7 +158,7 @@
                     android:scaleType="fitXY"/>
 
                 <ImageView
-                    android:id="@+id/img_agency"
+                    android:id="@+id/imageView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -167,10 +167,11 @@
                     android:scaleType="fitXY"/>
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/img_agency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onclick"
                     app:srcCompat="@drawable/main_agency"
                     android:scaleType="fitXY"/>
             </LinearLayout>
@@ -181,10 +182,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView11"
+                    android:id="@+id/img_tech"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onclick"
                     app:srcCompat="@drawable/main_share"
                     android:scaleType="fitXY"/>
 

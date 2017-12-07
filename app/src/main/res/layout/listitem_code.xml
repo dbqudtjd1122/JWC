@@ -58,7 +58,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/code_delete"
+            android:id="@+id/btn_serialcode_delete"
             android:layout_width="60dp"
             android:layout_height="35dp"
             android:text="삭제"

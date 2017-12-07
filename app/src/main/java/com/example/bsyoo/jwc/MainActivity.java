@@ -29,6 +29,7 @@ import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
 import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.mainimage.AgencyActivity;
+import com.example.bsyoo.jwc.mainimage.TechnologyActivity;
 import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
@@ -190,8 +191,12 @@ public class MainActivity extends LoginInformation
                 startActivity(intnet4);
                 break;
             case R.id.img_agency:
-                Intent intent5 = new Intent(this, AgencyActivity.class);
-                startActivity(intent5);
+                Intent intent6 = new Intent(this, AgencyActivity.class);
+                startActivity(intent6);
+                break;
+            case R.id.img_tech:
+                Intent intent7 = new Intent(this, TechnologyActivity.class);
+                startActivity(intent7);
                 break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);

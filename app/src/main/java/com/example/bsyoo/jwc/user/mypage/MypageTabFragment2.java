@@ -26,22 +26,21 @@ public class MypageTabFragment2 extends MypageFragment {
 
     private View view = null;
     private ModelUser user = new ModelUser();
-    private ModelUserSerialCode code = new ModelUserSerialCode();
+    private ModelUserSerialCode usercode = new ModelUserSerialCode();
     private ListView listView;
     private List<ModelUserSerialCode> codelist;
     private AdapterSerialCode adapter;
     private Button btn_serialcode_add;
 
     public MypageTabFragment2(){
-
     }
 
     @Override
     public void recall() {
         super.recall();
         user = getOrderuser();
-        code.setUser_Number(user.getUser_Number());
-        new MypageTabFragment2.getCodeList().execute(code);
+        usercode.setUser_Number(user.getUser_Number());
+        new MypageTabFragment2.getCodeList().execute(usercode);
     }
 
     @Override
@@ -68,9 +67,6 @@ public class MypageTabFragment2 extends MypageFragment {
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
-        // 리스트뷰에 어댑터 설정
-        listView.setAdapter(adapter);
-
         btn_serialcode_add = (Button) view.findViewById(R.id.btn_serialcode_addgo);
         btn_serialcode_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,10 +74,9 @@ public class MypageTabFragment2 extends MypageFragment {
                 Intent intent = new Intent(getContext(), SerialCodeAddActivity.class);
                 intent.putParcelableArrayListExtra("usercode", (ArrayList<? extends Parcelable>) codelist);
                 intent.putExtra("user", user);
-                startActivityForResult(intent, 156);
+                getActivity().startActivityForResult(intent, 7437);
             }
         });
-
     }
 
     // Http List DB 가져오기
@@ -106,7 +101,6 @@ public class MypageTabFragment2 extends MypageFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return codelist;
         }
 
@@ -123,7 +117,6 @@ public class MypageTabFragment2 extends MypageFragment {
             adapter.clear();
             adapter.addAll(codelist);
             adapter.notifyDataSetChanged();
-
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;

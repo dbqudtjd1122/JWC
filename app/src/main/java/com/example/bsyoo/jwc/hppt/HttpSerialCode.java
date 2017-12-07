@@ -19,7 +19,7 @@ public class HttpSerialCode {
 
     // 개인이 등록이 시리얼코드 리스트 가져오기
     public List<ModelUserSerialCode> getSerialCodeList(ModelUserSerialCode model){
-        String weburl = "http://192.168.0.11/jwcserialcode/getserialsodelist";
+        String weburl = "http://192.168.0.11/jwcserialcode/getserialcodelist";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -42,7 +42,6 @@ public class HttpSerialCode {
                 }
             } else {
             }
-
 
             String jsonInString = response.toString();
             codelist = new Gson().fromJson(jsonInString, new TypeToken<List<ModelUserSerialCode>>() {
@@ -88,4 +87,71 @@ public class HttpSerialCode {
             return camera;
         }
     }
+
+    // 시리얼 등록
+    public Integer InsertSerial(ModelUserSerialCode user){
+        String weburl = "http://192.168.0.11/jwcserialcode/insertserial";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+            // ModelPerson을 json으로 변환
+            ModelUserSerialCode obj = user ;
+
+            String data = new Gson().toJson(obj);
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                response = request.getStringResponse(); // 서버값이 리턴된다
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+        }
+
+        return Integer.valueOf(response);
+    }
+
+    // 시리얼 삭제
+    public Integer DeleteSerial(ModelUserSerialCode user){
+        String weburl = "http://192.168.0.11/jwcserialcode/deleteserial";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+            // Model을 json으로 변환
+            ModelUserSerialCode obj = user ;
+
+            String data = new Gson().toJson(obj);
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                response = request.getStringResponse(); // 서버값이 리턴된다
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+        }
+
+        return Integer.valueOf(response);
+    }
+
 }

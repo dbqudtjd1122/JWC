@@ -13,7 +13,9 @@ public class MypageFragment extends Fragment{
     }
 
     public void setOrderuser(ModelUser orderuser) {
-        this.orderuser = orderuser;
+        if(orderuser.getUser_Number() != null){
+            this.orderuser = orderuser;
+        }
         recall();
     }
 

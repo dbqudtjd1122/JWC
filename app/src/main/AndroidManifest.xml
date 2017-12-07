@@ -124,7 +124,9 @@
         <activity android:name=".school.SchoolInfoActivity" />
         <activity android:name=".school.SchoolWriteActivity" />
         <activity android:name=".mainimage.AgencyActivity" />
-        <activity android:name=".user.mypage.SerialCodeAddActivity"></activity>
+        <activity android:name=".user.mypage.SerialCodeAddActivity" />
+        <activity android:name=".mainimage.TechnologyActivity" />
+        <activity android:name=".mainimage.TechnologyInfoActivity"></activity>
     </application>
 
 </manifest>

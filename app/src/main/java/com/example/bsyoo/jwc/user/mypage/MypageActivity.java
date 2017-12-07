@@ -104,17 +104,28 @@ public class MypageActivity extends LoginInformation {
                 viewPager.setCurrentItem(tab.getPosition());
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        // 회원 탈퇴에서 오는 Intent
         if (requestCode == 666) {
             if (resultCode == RESULT_OK) {
                 Intent intent = new Intent(MypageActivity.this, MainActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+
+        // 시리얼 등록에서 넘어오는 Intent
+        if (requestCode == 7437) {
+            if (resultCode == RESULT_OK) {
+                setValueFragment();
             }
             //리턴값이 없을때
             else {
@@ -158,11 +169,11 @@ public class MypageActivity extends LoginInformation {
                 waitDlg.dismiss();
                 waitDlg = null;
             }
-            setValueFragment(user);
+            setValueFragment();
         }
     }
 
-    public void setValueFragment(ModelUser user){
+    public void setValueFragment(){
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
         if(fragments != null){

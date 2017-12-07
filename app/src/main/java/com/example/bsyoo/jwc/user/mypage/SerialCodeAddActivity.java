@@ -38,8 +38,10 @@ public class SerialCodeAddActivity extends AppCompatActivity {
     private ModelUserSerialCode usercode = new ModelUserSerialCode();
     private ModelSerialCode code = new ModelSerialCode();
     private ModelUser user = new ModelUser();
+    private ModelCamera camera = new ModelCamera();
     private List<ModelUserSerialCode> codelist;
 
+    private int overlap = -1;
 
 
     @Override
@@ -94,26 +96,35 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                     if(codelist.get(i).getSerial_Code().toString().equals(code.getSerial_Code().toString())){
                         Toast.makeText(this, "이미 등록된 시리얼 입니다.", Toast.LENGTH_SHORT).show();
                         ll_serial.setVisibility(View.GONE);
+                        overlap = i;
                         break;
                     }
+                }
+
+                // 등록된 시리얼 체크
+                if(overlap != -1 ){
+                    overlap = -1;
+                    break;
                 }
 
                 if(code.getSerial_Code().toString().length() <= 5){
                     Toast.makeText(this, "6자리를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     ll_serial.setVisibility(View.GONE);
-                    break;
+                } else {
+                    new SerialCodeAddActivity.HttpSerialCheck().execute(code);
                 }
-
-                new SerialCodeAddActivity.HttpSerialCheck().execute(code);
 
                 break;
             case R.id.btn_serialcode_add:  // 확인
                 usercode.setUser_Number(user.getUser_Number());
                 usercode.setCameratype("녹화기");
-                usercode.setOnlineseries(code.getOnlineseries().toString());
+                usercode.setOnlineseries(camera.getOnlineseries().toString());
+                usercode.setOnlinename(camera.getOnlinename().toString());
 
                 usercode.setSerial_Code(code.getSerial_Code().toString());
+                usercode.setImg_title(camera.getOnline_Img_title().toString());
 
+                new SerialCodeAddActivity.InsertSerial().execute(usercode);
                 break;
         }
     }
@@ -153,15 +164,16 @@ public class SerialCodeAddActivity extends AppCompatActivity {
 
             if(s == null) {
                 ll_serial.setVisibility(View.GONE);
-                Toast.makeText(SerialCodeAddActivity.this, "조회돼지않는 시리얼 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SerialCodeAddActivity.this, "조회되지않는 시리얼 입니다.", Toast.LENGTH_SHORT).show();
             } else {
+                camera = s;
                 ll_serial.setVisibility(View.VISIBLE);
-                et_serialcode.setText("");
                 tv_seriesname.setText("시리즈이름 : " + s.getOnlineseries().toString());
                 tv_dvrname.setText(   "제품이름   : " + s.getOnlinename().toString());
                 tv_serialcode.setText("시리얼코드 : " + et_serialcode.getText().toString());
 
                 Glide.with(getApplicationContext()).load(s.getOnline_Img_title().toString()).override(100, 100).fitCenter().into(img_dvr);
+                et_serialcode.setText("");
             }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
@@ -190,9 +202,9 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(ModelUserSerialCode... params) {
 
-            //Integer count = new HttpSerialCode().selectSerialCode(params[0]);
+            Integer count = new HttpSerialCode().InsertSerial(params[0]);
 
-            return null;
+            return count;
         }
 
         @Override
@@ -204,11 +216,16 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
 
-
-            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
-            if (waitDlg != null) {
-                waitDlg.dismiss();
-                waitDlg = null;
+            if(s == 1){
+                // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+                if (waitDlg != null) {
+                    waitDlg.dismiss();
+                    waitDlg = null;
+                }
+                Intent intent = new Intent(SerialCodeAddActivity.this, MypageActivity.class);
+                setResult(RESULT_OK, intent);
+                finish();
+            } else {
             }
         }
     }

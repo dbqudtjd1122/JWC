@@ -37,13 +37,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="11"
-            android:inputType="textPersonName"
+            android:inputType="textCapCharacters"
             android:background="@drawable/text"
             android:hint="시리얼 넘버를 적어주세요."
             android:padding="8dp"
             android:textSize="18dp"
             android:textColor="#000"
-            android:maxLength="6"/>
+            android:maxLength="6"
+            android:textCursorDrawable="@null"
+            android:capitalize="characters"/>
 
         <Button
             android:id="@+id/btn_serialcode"
