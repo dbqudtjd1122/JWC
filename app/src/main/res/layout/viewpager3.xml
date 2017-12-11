@@ -8,5 +8,6 @@
         android:id="@+id/mainview3"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        app:srcCompat="@drawable/main_rental" />
+        app:srcCompat="@drawable/main_rental"
+        android:scaleType="fitXY"/>
 </LinearLayout>

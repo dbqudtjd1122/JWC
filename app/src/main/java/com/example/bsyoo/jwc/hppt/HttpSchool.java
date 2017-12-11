@@ -16,7 +16,7 @@ public class HttpSchool {
 
     // 교육 리스트 가져오기
     public List<ModelSchool> SchoolList(){
-        String weburl = "http://192.168.0.11/school/getSchool";
+        String weburl = "http://61.75.50.145:8187/school/getSchool";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -51,7 +51,7 @@ public class HttpSchool {
 
     // 교육신청 마무리
     public Integer insertSchoolUser(ModelUserSchool user){
-        String weburl = "http://192.168.0.11/school/insertschooluser";
+        String weburl = "http://61.75.50.145:8187/school/insertschooluser";
 
         HttpRequest request = null;
         String response = null;
@@ -84,7 +84,7 @@ public class HttpSchool {
 
     // 교육신청정보 가져오기
     public Integer getSchoolUser(ModelUserSchool model){
-        String weburl = "http://192.168.0.11/school/getschooluser";
+        String weburl = "http://61.75.50.145:8187/school/getschooluser";
 
         HttpRequest request = null;
         String response = null;

@@ -14,7 +14,7 @@ import java.util.List;
 public class HttpTechnology {
 
     public List<ModelTechnology> getTechnology(){
-        String weburl = "http://192.168.0.11/jwctechnology/gettechlist";
+        String weburl = "http://61.75.50.145:8187/jwctechnology/gettechlist";
 
         HttpRequest request = null;
         JSONArray response = null;

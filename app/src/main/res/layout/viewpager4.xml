@@ -8,5 +8,6 @@
         android:id="@+id/mainview4"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        app:srcCompat="@drawable/main_benefit" />
+        app:srcCompat="@drawable/main_benefit"
+        android:scaleType="fitXY"/>
 </LinearLayout>

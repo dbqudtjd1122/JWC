@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
+import com.example.bsyoo.jwc.cctvinstall.CctvInstallActivity;
 import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.mainimage.AgencyActivity;
 import com.example.bsyoo.jwc.mainimage.TechnologyActivity;
@@ -92,7 +93,6 @@ public class MainActivity extends LoginInformation
         }else {
             Loginsave();
         }
-
 
         // ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -198,11 +198,15 @@ public class MainActivity extends LoginInformation
                 Intent intent7 = new Intent(this, TechnologyActivity.class);
                 startActivity(intent7);
                 break;
+            case R.id.img_cctvinstall:
+                Intent intent8 = new Intent(this, CctvInstallActivity.class);
+                startActivity(intent8);
+                break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);
-                Intent intent9 = new Intent(this, ModelSearchActivity.class);
-                intent9.putExtra("model", et_modelsearch.getText().toString());
-                startActivity(intent9);
+                Intent intent10 = new Intent(this, ModelSearchActivity.class);
+                intent10.putExtra("model", et_modelsearch.getText().toString());
+                startActivity(intent10);
                 break;
         }
     }
@@ -306,8 +310,6 @@ public class MainActivity extends LoginInformation
         return super.onOptionsItemSelected(item);
     }
 
-
-
     // 로그인했을때, 로그인정보가 있을때
     public void Loginsave(){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -337,7 +339,6 @@ public class MainActivity extends LoginInformation
         menu.findItem(R.id.menu_logout).setVisible(false);
         menu.findItem(R.id.menu_setting).setVisible(false);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

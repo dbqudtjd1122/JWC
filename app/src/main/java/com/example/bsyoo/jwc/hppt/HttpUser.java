@@ -14,7 +14,7 @@ public class HttpUser {
 
     // 아이디찾기
     public ModelUser IDSearch1(ModelUser model){
-        String weburl = "http://192.168.0.11/jwcuser/idsearch";
+        String weburl = "http://61.75.50.145:8187/jwcuser/idsearch";
 
         HttpRequest request = null;
         JSONObject response = null;
@@ -48,7 +48,7 @@ public class HttpUser {
 
     // 비밀번호 찾기
     public ModelUser PWSearch1(ModelUser model){
-        String weburl = "http://192.168.0.11/jwcuser/pwsearch";
+        String weburl = "http://61.75.50.145:8187/jwcuser/pwsearch";
 
         HttpRequest request = null;
         JSONObject response = null;
@@ -82,7 +82,7 @@ public class HttpUser {
 
     // 비밀번호 업데이트
     public Integer PWSearch2(ModelUser model){
-        String weburl = "http://192.168.0.11/jwcuser/pwchange";
+        String weburl = "http://61.75.50.145:8187/jwcuser/pwchange";
 
         HttpRequest request = null;
         String response = null;
@@ -111,7 +111,7 @@ public class HttpUser {
 
     // 회원정보 가져오기
     public ModelUser getLoginInfomation(ModelUser model){
-        String weburl = "http://192.168.0.11/jwcuser/getuserinfo";
+        String weburl = "http://61.75.50.145:8187/jwcuser/getuserinfo";
 
         HttpRequest request = null;
         JSONObject response = null;
@@ -145,7 +145,7 @@ public class HttpUser {
 
     // 회원정보 업데이트
     public Integer LoginInfoUpdate(ModelUser model){
-        String weburl = "http://192.168.0.11/jwcuser/loginupdate";
+        String weburl = "http://61.75.50.145:8187/jwcuser/loginupdate";
 
         HttpRequest request = null;
         String response = null;
@@ -174,7 +174,7 @@ public class HttpUser {
 
     // 회원정보 삭제
     public Integer deleteuser(ModelUser model){
-        String weburl = "http://192.168.0.11/jwcuser/deleteuser";
+        String weburl = "http://61.75.50.145:8187/jwcuser/deleteuser";
 
         HttpRequest request = null;
         String response = null;

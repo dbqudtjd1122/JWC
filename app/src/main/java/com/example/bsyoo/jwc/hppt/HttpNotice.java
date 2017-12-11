@@ -15,7 +15,7 @@ import java.util.List;
 public class HttpNotice {
 
     public List<ModelNotice> NoticeList(String type){
-        String weburl = "http://192.168.0.11/notice/getnotice";
+        String weburl = "http://61.75.50.145:8187/notice/getnotice";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -50,7 +50,7 @@ public class HttpNotice {
     }
 
     public List<ModelNotice> EventList(String type){
-        String weburl = "http://192.168.0.11/notice/getevent";
+        String weburl = "http://61.75.50.145:8187/notice/getevent";
 
         HttpRequest request = null;
         JSONArray response = null;

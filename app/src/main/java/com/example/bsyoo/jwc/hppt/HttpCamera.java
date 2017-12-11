@@ -15,7 +15,7 @@ import java.util.List;
 public class HttpCamera {
 
     public List<ModelCamera> getCameraList(String type) {
-        String weburl = "http://192.168.0.11/jwccamera/cameralist";
+        String weburl = "http://61.75.50.145:8187/jwccamera/cameralist";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -51,7 +51,7 @@ public class HttpCamera {
     }
 
     public List<ModelCamera> getCameraInfoList(String series) {
-        String weburl = "http://192.168.0.11/jwccamera/getCameraInfoList";
+        String weburl = "http://61.75.50.145:8187/jwccamera/getCameraInfoList";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -87,7 +87,7 @@ public class HttpCamera {
     }
 
     public List<ModelCamera> getCameraSearchList(String search) {
-        String weburl = "http://192.168.0.11/jwccamera/getCameraSearchList";
+        String weburl = "http://61.75.50.145:8187/jwccamera/getCameraSearchList";
 
         HttpRequest request = null;
         JSONArray response = null;

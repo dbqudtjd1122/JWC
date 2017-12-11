@@ -19,7 +19,7 @@ public class HttpSerialCode {
 
     // 개인이 등록이 시리얼코드 리스트 가져오기
     public List<ModelUserSerialCode> getSerialCodeList(ModelUserSerialCode model){
-        String weburl = "http://192.168.0.11/jwcserialcode/getserialcodelist";
+        String weburl = "http://61.75.50.145:8187/jwcserialcode/getserialcodelist";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -57,7 +57,7 @@ public class HttpSerialCode {
 
     // 시리얼코드 확인 및 조회
     public ModelCamera selectSerialCode(ModelSerialCode model){
-        String weburl = "http://192.168.0.11/jwcserialcode/serialcodecheck";
+        String weburl = "http://61.75.50.145:8187/jwcserialcode/serialcodecheck";
 
         HttpRequest request = null;
         JSONObject response = null;
@@ -90,7 +90,7 @@ public class HttpSerialCode {
 
     // 시리얼 등록
     public Integer InsertSerial(ModelUserSerialCode user){
-        String weburl = "http://192.168.0.11/jwcserialcode/insertserial";
+        String weburl = "http://61.75.50.145:8187/jwcserialcode/insertserial";
 
         HttpRequest request = null;
         String response = null;
@@ -123,7 +123,7 @@ public class HttpSerialCode {
 
     // 시리얼 삭제
     public Integer DeleteSerial(ModelUserSerialCode user){
-        String weburl = "http://192.168.0.11/jwcserialcode/deleteserial";
+        String weburl = "http://61.75.50.145:8187/jwcserialcode/deleteserial";
 
         HttpRequest request = null;
         String response = null;
