@@ -13,9 +13,10 @@ import android.support.v4.app.NotificationCompat;
 
 import com.example.bsyoo.jwc.IntroActivity;
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.user.Login.LoginInformation;
 import com.google.firebase.messaging.RemoteMessage;
 
-public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
+public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMsgService";
 
@@ -44,8 +45,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setSound(defaultSoundUri).setLights(000000255,500,2000)
                 // 푸시 드래그 후에 표시될 내용
                 .setStyle(new NotificationCompat.BigTextStyle()
-                    .setBigContentTitle(title)
-                    .bigText(message))
+                        .setBigContentTitle(title)
+                        .bigText(message))
                 .setContentIntent(pendingIntent);
 
         // 푸시 드래그 후에 표시될 내용

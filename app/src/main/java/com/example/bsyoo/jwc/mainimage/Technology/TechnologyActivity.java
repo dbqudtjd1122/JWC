@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc.mainimage;
+package com.example.bsyoo.jwc.mainimage.Technology;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,11 +15,8 @@ import android.widget.Toast;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterTechnology;
 import com.example.bsyoo.jwc.hppt.HttpTechnology;
-import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
-import com.example.bsyoo.jwc.mainimage.notice.NoticeInfoActivity;
 import com.example.bsyoo.jwc.model.ModelTechnology;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +39,7 @@ public class TechnologyActivity extends AppCompatActivity  {
             getWindow().setStatusBarColor(Color.RED);
         }
 
-        getSupportActionBar().setTitle("기술공유");
+        getSupportActionBar().setTitle("기술자료");
 
         techlist = new ArrayList<>();
 
@@ -121,15 +118,19 @@ public class TechnologyActivity extends AppCompatActivity  {
         protected void onPostExecute(List<ModelTechnology> s) {
             super.onPostExecute(s);
 
-            techlist = s;
-            adater.clear();
-            adater.addAll(techlist);
-            adater.notifyDataSetChanged();
-
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;
+            }
+
+            if(s != null) {
+                techlist = s;
+                adater.clear();
+                adater.addAll(techlist);
+                adater.notifyDataSetChanged();
+            } else {
+                Toast.makeText(TechnologyActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

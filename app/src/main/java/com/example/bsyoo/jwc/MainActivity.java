@@ -1,12 +1,10 @@
 package com.example.bsyoo.jwc;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,19 +26,16 @@ import android.view.View.OnClickListener;
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
 import com.example.bsyoo.jwc.cctvinstall.CctvInstallActivity;
-import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.mainimage.AgencyActivity;
-import com.example.bsyoo.jwc.mainimage.TechnologyActivity;
+import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;
 import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
 import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
-import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
-import com.example.bsyoo.jwc.user.mypage.MypageModifiedActivity;
 import com.example.bsyoo.jwc.viewpager.ViewPagerAdapter;
 
 
@@ -201,6 +196,17 @@ public class MainActivity extends LoginInformation
             case R.id.img_cctvinstall:
                 Intent intent8 = new Intent(this, CctvInstallActivity.class);
                 startActivity(intent8);
+                break;
+            case R.id.img_downloads:
+                Intent intent9;
+                break;
+            case R.id.img_notice:
+                Intent intent11 = new Intent(MainActivity.this, NoticeActivity.class);
+                startActivity(intent11);
+                break;
+            case R.id.img_event:
+                Intent intent12 = new Intent(MainActivity.this, EventActivity.class);
+                startActivity(intent12);
                 break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);

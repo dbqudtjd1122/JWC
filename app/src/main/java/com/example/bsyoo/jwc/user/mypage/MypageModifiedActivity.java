@@ -415,6 +415,7 @@ public class MypageModifiedActivity extends LoginInformation {
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
+                Toast.makeText(MypageModifiedActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -73,7 +73,7 @@
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="314dp"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -113,7 +113,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="120dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -122,8 +122,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_new"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_new" />
 
                 <ImageView
                     android:id="@+id/image_camera"
@@ -131,8 +131,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_camera"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_camera" />
 
                 <ImageView
                     android:id="@+id/image_record"
@@ -140,14 +140,14 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_dvr"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_dvr" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="120dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -156,8 +156,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_school"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_school" />
 
                 <ImageView
                     android:id="@+id/imageView10"
@@ -165,8 +165,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_uses"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_uses" />
 
                 <ImageView
                     android:id="@+id/img_agency"
@@ -174,13 +174,13 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_agency"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_agency" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="120dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -189,8 +189,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_share"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_share" />
 
                 <ImageView
                     android:id="@+id/img_cctvinstall"
@@ -198,42 +198,68 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_install"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_install" />
 
                 <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/main_down"
-                    android:scaleType="fitXY"/>
+                    android:id="@+id/img_downloads"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onclick"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/main_down" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:onClick="onclick"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_notice" />
+
+                <ImageView
+                    android:id="@+id/img_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:onClick="onclick"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/main_event" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="7dp"
                     app:srcCompat="@drawable/jwc_logo_red" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="7dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView27"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:text="상호명 : (주)제이더블유씨네트웍스 \n 사업자번호 : 104-86-43227  l  대표 : 이동원 \n 주소 : 서울특별시 금천구 가산동 371-51 한국전자협동(주)공장B동 4층 \n TEL : 1899-4602 I FAX : 02-2277-7615"
+                        android:text="상호명 : (주)제이더블유씨네트웍스 \n 사업자번호 : 104-86-43227  l  대표 : 이동원 \n 주소 : 서울특별시 금천구 가산동 371-51\n 한국전자협동(주)공장B동 4층 \n TEL : 1899-4602 I FAX : 02-2277-7615"
+                        android:textColor="#000"
                         android:textSize="13dp" />
 
                 </LinearLayout>

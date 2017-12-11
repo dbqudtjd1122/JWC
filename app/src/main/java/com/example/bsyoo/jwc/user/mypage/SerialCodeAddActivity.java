@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.HttpSerialCode;
+import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;
 import com.example.bsyoo.jwc.model.ModelCamera;
 import com.example.bsyoo.jwc.model.ModelSerialCode;
 import com.example.bsyoo.jwc.model.ModelUser;
@@ -161,7 +162,10 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ModelCamera s) {
             super.onPostExecute(s);
-
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
             if(s == null) {
                 ll_serial.setVisibility(View.GONE);
                 Toast.makeText(SerialCodeAddActivity.this, "조회되지않는 시리얼 입니다.", Toast.LENGTH_SHORT).show();
@@ -176,10 +180,6 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                 et_serialcode.setText("");
             }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
-            if (waitDlg != null) {
-                waitDlg.dismiss();
-                waitDlg = null;
-            }
         }
     }
 
@@ -226,6 +226,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
+                Toast.makeText(SerialCodeAddActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

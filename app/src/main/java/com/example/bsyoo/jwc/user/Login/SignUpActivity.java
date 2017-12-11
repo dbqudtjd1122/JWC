@@ -1,8 +1,11 @@
 package com.example.bsyoo.jwc.user.Login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.hppt.HttpSignUp;
 import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.user.terms.TermsActivity;
 
@@ -137,6 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(this, "아이디를 6자리 이상 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
+
                     new SignUpActivity.HttpIDCheck().execute(user);
                 }
                 break;
@@ -240,7 +245,7 @@ public class SignUpActivity extends AppCompatActivity {
                     break;
                 }
 
-                new HttpSignUp().execute(user);
+                new SignUp().execute(user);
                 break;
         }
     }
@@ -297,7 +302,6 @@ public class SignUpActivity extends AppCompatActivity {
         buisness_layout = (LinearLayout) findViewById(R.id.buisness_layout);
     }
 
-
     // 액션바 우측 안보이는 이미지.. (가운데정렬)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -306,7 +310,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // 회원가입
-    public class HttpSignUp extends AsyncTask<ModelUser, Integer, Integer> {
+    public class SignUp extends AsyncTask<ModelUser, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -324,7 +328,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new com.example.bsyoo.jwc.hppt.HttpSignUp().signupinsert(user);
+            Integer count = new HttpSignUp().signupinsert(user);
 
             return count;
         }
@@ -352,8 +356,10 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 finish();
             } else {
+                Toast.makeText(SignUpActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     // ID중복체크
@@ -375,7 +381,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new com.example.bsyoo.jwc.hppt.HttpSignUp().IDCheck(user);
+            Integer count = new HttpSignUp().IDCheck(user);
 
             return count;
         }
@@ -423,7 +429,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(ModelUser... params) {
 
-            Integer count = new com.example.bsyoo.jwc.hppt.HttpSignUp().EmailCheck(user);
+            Integer count = new HttpSignUp().EmailCheck(user);
 
             return count;
         }

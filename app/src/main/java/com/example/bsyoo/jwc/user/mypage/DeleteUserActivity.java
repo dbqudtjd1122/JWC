@@ -96,6 +96,8 @@ public class DeleteUserActivity extends LoginInformation {
                 Intent intent = new Intent(DeleteUserActivity.this, PwCheckActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
+            }else {
+                Toast.makeText(DeleteUserActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterSerialCode;
@@ -112,14 +113,19 @@ public class MypageTabFragment2 extends MypageFragment {
         @Override
         protected void onPostExecute(List<ModelUserSerialCode> list) {
             super.onPostExecute(list);
-            // 1.
-            codelist = list;
-            adapter.clear();
-            adapter.addAll(codelist);
-            adapter.notifyDataSetChanged();
+
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;
+            }
+            // 1.
+            if(list != null) {
+                codelist = list;
+                adapter.clear();
+                adapter.addAll(codelist);
+                adapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(getContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

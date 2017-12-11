@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc.mainimage;
+package com.example.bsyoo.jwc.mainimage.Technology;
 
 import android.content.Intent;
 import android.graphics.Color;
