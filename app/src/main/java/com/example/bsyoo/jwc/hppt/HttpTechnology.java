@@ -13,7 +13,7 @@ import java.util.List;
 
 public class HttpTechnology {
 
-    public List<ModelTechnology> getTechnology(){
+    public List<ModelTechnology> getTechnology(String type){
         String weburl = "http://61.75.50.145:8187/jwctechnology/gettechlist";
 
         HttpRequest request = null;
@@ -23,6 +23,7 @@ public class HttpTechnology {
         int httpCode = 0;
         try {
             request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+            request.addParameter("CameraType", type);
             httpCode = request.post();
 
             if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200

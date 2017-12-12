@@ -25,19 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".mainimage.notice.NoticeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".user.Login.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".mainimage.notice.EventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,13 +43,11 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-
         <activity android:name=".CompanyActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".mainimage.notice.NoticeInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -61,7 +56,6 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-
         <activity
             android:name=".camera.CameraActivity"
             android:label="@string/app_name"
@@ -73,7 +67,6 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-
         <activity android:name=".mainimage.notice.EventInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -82,23 +75,18 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-
         <activity android:name=".mainimage.series.SeriesActivity" />
-
         <activity android:name=".mainimage.series.SeriesInfoActivity">
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-
         <activity android:name=".user.Login.SignUpActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".user.Login.LoginActivity" />
         </activity>
-
         <activity android:name=".user.Login.AddressActivity" />
-
         <activity
             android:name=".user.terms.TermsActivity"
             android:label="@string/app_name"
@@ -111,13 +99,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".mainimage.series.ModelSearchActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".user.mypage.PwCheckActivity" />
         <activity android:name=".user.Login.IDPWSearch.IDPWSearchActivity" />
         <activity android:name=".user.mypage.MypageModifiedActivity" />
@@ -127,13 +113,15 @@
         <activity android:name=".school.SchoolWriteActivity" />
         <activity android:name=".mainimage.AgencyActivity" />
         <activity android:name=".user.mypage.SerialCodeAddActivity" />
-        <activity android:name=".mainimage.Technology.TechnologyActivity" />
+        <activity
+            android:name=".mainimage.Technology.TechnologyActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mainimage.Technology.TechnologyInfoActivity" />
         <activity
             android:name=".cctvinstall.CctvInstallActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".fmcpush.FirebaseMessagingService">
             <intent-filter>
@@ -146,6 +134,8 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".mainimage.Cases.CasesActivity" />
+        <activity android:name=".mainimage.Cases.CasesInfoActivity"></activity>
     </application>
 
 </manifest>

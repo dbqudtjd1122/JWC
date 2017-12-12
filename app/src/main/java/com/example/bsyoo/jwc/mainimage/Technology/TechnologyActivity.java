@@ -1,38 +1,25 @@
 package com.example.bsyoo.jwc.mainimage.Technology;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.adapter.AdapterTechnology;
-import com.example.bsyoo.jwc.hppt.HttpTechnology;
-import com.example.bsyoo.jwc.model.ModelTechnology;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TechnologyActivity extends AppCompatActivity  {
 
-    private ListView listview;
-    private AdapterTechnology adater;
-    private List<ModelTechnology> techlist;
-    private ModelTechnology tech = new ModelTechnology();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_technology);
-
-        listview = (ListView) findViewById(R.id.list_Technology);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -41,97 +28,59 @@ public class TechnologyActivity extends AppCompatActivity  {
 
         getSupportActionBar().setTitle("기술자료");
 
-        techlist = new ArrayList<>();
 
-        // 어댑터를 생성하고 데이터 설정
-        adater = new AdapterTechnology(this, R.layout.listitem_notice, R.id.notice1, techlist);
+        // TabLayout 초기화
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+        tabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
 
-        listview.setOnItemClickListener( new TechnologyActivity.OnItemHandler());
-        listview.setOnItemLongClickListener(new TechnologyActivity.OnItemHandler());
-        listview.setOnItemSelectedListener(new TechnologyActivity.OnItemHandler());
+        tabLayout.addTab(tabLayout.newTab().setText("카메라 영상"));
+        tabLayout.addTab(tabLayout.newTab().setText("녹화기 영상"));
+        tabLayout.addTab(tabLayout.newTab().setText("기타 영상"));
 
-        // 리스트뷰에 어댑터 설정
-        listview.setAdapter(adater);
-        new TechnologyActivity.getTechList().execute();
-    }
+        // ViewPager 초기화
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 
-    class OnItemHandler implements ListView.OnItemClickListener, ListView.OnItemLongClickListener, ListView.OnItemSelectedListener{
+        // PagerAdater 생성
+        TechnologyTabPagerAdapter pagerAdapter= new TechnologyTabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(TechnologyActivity.this, TechnologyInfoActivity.class);
-            tech = techlist.get(position);
-            intent.putExtra("tech", tech);
-            startActivity(intent);
+        // PagerAdapter와 ViewPager 연결 : Fragment와 ViewPager 연결
+        viewPager.setAdapter(pagerAdapter);
 
-        }
+        // 탭 시작지점 정하는부분
+        viewPager.setCurrentItem(0);
 
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            // String msg = "onItemLongClick : "+position + ", "+id;
-            // Toast.makeText(TechnologyActivity.this, msg, Toast.LENGTH_SHORT).show();
-            return true;
-        }
 
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            // String msg = "onItemSelected : "+position + ", "+id;
-            // Toast.makeText(TechnologyActivity.this, msg, Toast.LENGTH_SHORT).show();
-        }
+        // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            //Toast.makeText(TechnologyActivity.this, "onNothingSelected", Toast.LENGTH_SHORT).show();
-        }
-    }
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
 
-    // 데이터가져오기
-    public class getTechList extends AsyncTask<String, Integer, List<ModelTechnology>> {
-
-        private ProgressDialog waitDlg = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            // ProgressDialog 보이기
-            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(TechnologyActivity.this);
-            waitDlg.setMessage("기술정보를 불러오는중 입니다.");
-            waitDlg.show();
-        }
-
-        @Override
-        protected List<ModelTechnology> doInBackground(String... params) {
-
-            List<ModelTechnology> list = new HttpTechnology().getTechnology();
-
-            return list;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(List<ModelTechnology> s) {
-            super.onPostExecute(s);
-
-            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
-            if (waitDlg != null) {
-                waitDlg.dismiss();
-                waitDlg = null;
+        // TabSelectedListener 설정 : 화면에서 tab을 클릭할때
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem( tab.getPosition());
             }
 
-            if(s != null) {
-                techlist = s;
-                adater.clear();
-                adater.addAll(techlist);
-                adater.notifyDataSetChanged();
-            } else {
-                Toast.makeText(TechnologyActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
             }
-        }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem( tab.getPosition());
+            }
+        });
     }
 }

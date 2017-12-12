@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
 import com.example.bsyoo.jwc.cctvinstall.CctvInstallActivity;
 import com.example.bsyoo.jwc.mainimage.AgencyActivity;
+import com.example.bsyoo.jwc.mainimage.Cases.CasesActivity;
 import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;
 import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
@@ -51,11 +55,13 @@ public class MainActivity extends LoginInformation
     private Thread thread = null;
     private Handler handler = null;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Status bar 색상 설정. (상태바)
@@ -80,6 +86,7 @@ public class MainActivity extends LoginInformation
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
@@ -198,7 +205,8 @@ public class MainActivity extends LoginInformation
                 startActivity(intent8);
                 break;
             case R.id.img_downloads:
-                Intent intent9;
+                Intent intent9 = new Intent(this, CasesActivity.class);
+                startActivity(intent9);
                 break;
             case R.id.img_notice:
                 Intent intent11 = new Intent(MainActivity.this, NoticeActivity.class);
@@ -293,6 +301,18 @@ public class MainActivity extends LoginInformation
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        // 액션바 왼쪽의 햄버거 아이콘 색상
+        int color = Color.parseColor("#ff0000");
+        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            final View v = toolbar.getChildAt(i);
+
+            if (v instanceof ImageButton) {
+                ((ImageButton) v).setColorFilter(colorFilter);
+            }
+        }
         return true;
     }
 
