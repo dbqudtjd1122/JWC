@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +20,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,12 +42,11 @@ import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
 import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
 import com.example.bsyoo.jwc.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
-import com.example.bsyoo.jwc.user.Login.LoginInformation;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
 import com.example.bsyoo.jwc.viewpager.ViewPagerAdapter;
 
 
-public class MainActivity extends LoginInformation
+public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
 
     private LinearLayout ModelSearch;
@@ -64,18 +67,33 @@ public class MainActivity extends LoginInformation
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
 
         // 액션바 타이틀 및 배경색
         getSupportActionBar().setTitle("");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
+        // getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));  // 액션바 컬러지정
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.jwc_logo_red);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);  // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setLogo(R.drawable.jwc_logo_red); // 액션바 이미지
 
+        // Status bar 색상 설정. (상태바)
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.RED);
+            getWindow().setStatusBarColor(0x00ff0000);
+            //getWindow().setBackgroundDrawable(d);
+        }*/
+
+        // 상태 표시 줄 높이와 일치하도록 상태바에 채우기를 설정합니다.
+        toolbar.setPadding (0, getStatusBarHeight (), 0, 0);
+
+        // 상태바 투명하게하여 액션바의 백그라운드 같이적용
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+        // 뒤로가기 2번클릭시 종료
         backCloseHandler = new BackCloseHandler(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -87,12 +105,11 @@ public class MainActivity extends LoginInformation
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         // 로그인정보가 있는경우
-        if(pref.getString("id_Set", "").toString().equals("") || pref.getString("id_Set", "").toString().equals(null)) {
-        }else {
+        if (pref.getString("id_Set", "").toString().equals("") || pref.getString("id_Set", "").toString().equals(null)) {
+        } else {
             Loginsave();
         }
 
@@ -116,7 +133,7 @@ public class MainActivity extends LoginInformation
                     img[2].setImageResource(R.drawable.page_not);
                     img[3].setImageResource(R.drawable.page_not);
                     img[0].setImageResource(R.drawable.page_select);
-                } else if(position == 1) {
+                } else if (position == 1) {
                     img[0].setImageResource(R.drawable.page_not);
                     img[2].setImageResource(R.drawable.page_not);
                     img[3].setImageResource(R.drawable.page_not);
@@ -126,16 +143,18 @@ public class MainActivity extends LoginInformation
                     img[1].setImageResource(R.drawable.page_not);
                     img[3].setImageResource(R.drawable.page_not);
                     img[2].setImageResource(R.drawable.page_select);
-                } else if(position == 3){
+                } else if (position == 3) {
                     img[0].setImageResource(R.drawable.page_not);
                     img[1].setImageResource(R.drawable.page_not);
                     img[2].setImageResource(R.drawable.page_not);
                     img[3].setImageResource(R.drawable.page_select);
                 }
             }
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -144,11 +163,11 @@ public class MainActivity extends LoginInformation
             public void handleMessage(android.os.Message msg) {
                 if (viewPager.getCurrentItem() == 0) {
                     viewPager.setCurrentItem(1);
-                } else if(viewPager.getCurrentItem() == 1) {
+                } else if (viewPager.getCurrentItem() == 1) {
                     viewPager.setCurrentItem(2);
                 } else if (viewPager.getCurrentItem() == 2) {
                     viewPager.setCurrentItem(3);
-                } else if(viewPager.getCurrentItem() == 3){
+                } else if (viewPager.getCurrentItem() == 3) {
                     viewPager.setCurrentItem(0);
                 }
             }
@@ -171,8 +190,8 @@ public class MainActivity extends LoginInformation
         thread.start();
     }
 
-    public void onclick(View view){
-        switch (view.getId()){
+    public void onclick(View view) {
+        switch (view.getId()) {
             case R.id.image_new:
                 Intent intent1 = new Intent(this, SeriesActivity.class);
                 intent1.putExtra("series", "JWC-AHD-720P");
@@ -265,31 +284,31 @@ public class MainActivity extends LoginInformation
             Intent intent = new Intent(MainActivity.this, CameraActivity.class);
             intent.putExtra("type", "카메라");
             startActivity(intent);
-        }else if (id == R.id.menu_record) {
+        } else if (id == R.id.menu_record) {
             Intent intent = new Intent(MainActivity.this, CameraActivity.class);
             intent.putExtra("type", "녹화기");
             startActivity(intent);
-        }else if (id == R.id.menu_login) {
+        } else if (id == R.id.menu_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(intent, 999);
-        }else if (id == R.id.menu_mypage) {
+        } else if (id == R.id.menu_mypage) {
             Intent intent = new Intent(MainActivity.this, MypageActivity.class);
             startActivityForResult(intent, 555);
-        }else if (id == R.id.menu_notice) {
+        } else if (id == R.id.menu_notice) {
             Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
             startActivity(intent);
-        }else if (id == R.id.menu_event) {
+        } else if (id == R.id.menu_event) {
             Intent intent = new Intent(MainActivity.this, EventActivity.class);
             startActivity(intent);
-        }else if (id == R.id.menu_company) {
+        } else if (id == R.id.menu_company) {
             Intent intent = new Intent(MainActivity.this, CompanyActivity.class);
             startActivity(intent);
-        }else if (id == R.id.menu_reference) {
+        } else if (id == R.id.menu_reference) {
             Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.menu_logout) {
+        } else if (id == R.id.menu_logout) {
             Logout();
             Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.menu_setting) {
+        } else if (id == R.id.menu_setting) {
             Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
         }
 
@@ -303,7 +322,7 @@ public class MainActivity extends LoginInformation
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         // 액션바 왼쪽의 햄버거 아이콘 색상
-        int color = Color.parseColor("#ff0000");
+        int color = Color.parseColor("#FFFFFFFF");
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 
         for (int i = 0; i < toolbar.getChildCount(); i++) {
@@ -337,7 +356,7 @@ public class MainActivity extends LoginInformation
     }
 
     // 로그인했을때, 로그인정보가 있을때
-    public void Loginsave(){
+    public void Loginsave() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.menu_login).setVisible(false);
@@ -345,8 +364,9 @@ public class MainActivity extends LoginInformation
         menu.findItem(R.id.menu_logout).setVisible(true);
         menu.findItem(R.id.menu_setting).setVisible(true);
     }
+
     // 로그아웃했을때
-    public void Logout(){
+    public void Logout() {
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
@@ -388,4 +408,16 @@ public class MainActivity extends LoginInformation
             }
         }
     }
+
+    // 상태 표시 줄의 높이를 찾는 메소드
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        result = (result / 10) * 6;
+        return result;
     }
+}
