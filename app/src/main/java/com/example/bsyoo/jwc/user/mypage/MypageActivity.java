@@ -109,7 +109,7 @@ public class MypageActivity extends LoginInformation {
             }
         });
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+        /*for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             if (tab != null) {
 
@@ -125,7 +125,7 @@ public class MypageActivity extends LoginInformation {
                     tabTextView.setTextSize(16);
                 }
             }
-        }
+        }*/
         // TabSelectedListener 설정 : 화면에서 tab을 클릭할때
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
