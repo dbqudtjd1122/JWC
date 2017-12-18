@@ -25,6 +25,7 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
     private String API_KEY = "";
     public static String VIDEO_ID = "J9dwKQ1yP98";
     private static final int RQS_ErrorDialog = 1;
+    private int level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         }
         Intent intent = getIntent();
         camera = (ModelCamera) intent.getSerializableExtra("camera");
+        level = intent.getIntExtra("level", -1);
         VIDEO_ID = camera.getYoutube().toString();
         API_KEY = camera.getYoutube().toString();
 
@@ -43,7 +45,11 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         youTubePlayerView.initialize(API_KEY, this);
 
         ImageView img_series_info = (ImageView) findViewById(R.id.series_info);
-        Glide.with(this).load(camera.getOnline_Img_info()).override(720,4000).fitCenter().into(img_series_info);
+        if(level == -1 || level == 1) {
+            Glide.with(this).load(camera.getOnline_Img_info().toString()).override(720, 4000).fitCenter().into(img_series_info);
+        } else {
+            Glide.with(this).load(camera.getOffline_Img_info().toString()).override(720, 4000).fitCenter().into(img_series_info);
+        }
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(img_series_info);

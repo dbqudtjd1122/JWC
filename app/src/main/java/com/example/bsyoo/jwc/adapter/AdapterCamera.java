@@ -55,18 +55,29 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             itemLayout.setTag(viewHolder);
         }
 
-        Glide.with(getContext()).load(getItem(position).getOnline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
-        viewHolder.text_cameraname.setText(getItem(position).getOnlinename().toString());
-
         // int i = new LoginInformation().levelreturn();
+        // viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString()); // 가격표시
+        viewHolder.text_cameraprice1.setVisibility(View.GONE);
+        if(getItem(position).getNewCamera().toString().equals("4")){
+            viewHolder.text_cameraprice1.setVisibility(View.VISIBLE);
+            viewHolder.text_cameraprice1.setText("단종");
+        }
+
 
         if(level == -1 || level ==1){
-            viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
+            Glide.with(getContext()).load(getItem(position).getOnline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
+            viewHolder.text_cameraname.setText(getItem(position).getOnlinename().toString());
+
+            // viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
         } else if (level >= 2) {
-            viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
+            Glide.with(getContext()).load(getItem(position).getOffline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
+            viewHolder.text_cameraname.setText(getItem(position).getOfflinename().toString());
+
+            // 대리점 단가표로 바꿈
+            /*viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
             viewHolder.text_cameraprice1.setPaintFlags(viewHolder.text_cameraprice1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG); // 텍스트 가운데 줄긋기
             viewHolder.text_cameraprice2.setVisibility(View.VISIBLE);
-            viewHolder.text_cameraprice2.setText(getItem(position).getLevel2price().toString());
+            viewHolder.text_cameraprice2.setText(getItem(position).getLevel2price().toString());*/
         }
         return itemLayout;
     }

@@ -65,6 +65,7 @@ public class ModelSearchActivity extends LoginInformation {
             Intent intent = new Intent(ModelSearchActivity.this, SeriesInfoActivity.class);
             camera = cameralist.get(position);
             intent.putExtra("camera", camera);
+            intent.putExtra("level", islevel);
             startActivity(intent);
         }
         @Override

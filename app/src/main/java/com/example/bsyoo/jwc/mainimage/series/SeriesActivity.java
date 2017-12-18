@@ -65,6 +65,7 @@ public class SeriesActivity extends LoginInformation {
             Intent intent = new Intent(SeriesActivity.this, SeriesInfoActivity.class);
             camera = cameralist.get(position);
             intent.putExtra("camera", camera);
+            intent.putExtra("level", islevel);
             startActivity(intent);
         }
         @Override

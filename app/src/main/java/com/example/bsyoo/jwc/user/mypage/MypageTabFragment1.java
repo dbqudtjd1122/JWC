@@ -15,7 +15,7 @@ import com.example.bsyoo.jwc.model.ModelUser;
 public class MypageTabFragment1 extends MypageFragment{
 
     private View view = null;
-    private LinearLayout ll_mypage1, ll_mypage2;
+    private LinearLayout ll_mypage1, ll_mypage2, ll_mypage3;
     private ModelUser user = new ModelUser();
 
     public MypageTabFragment1(){
@@ -26,6 +26,9 @@ public class MypageTabFragment1 extends MypageFragment{
     public void recall() {
         super.recall();
         user = getOrderuser();
+        if(user.getLevel() >= 4){
+            ll_mypage2.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -54,6 +57,15 @@ public class MypageTabFragment1 extends MypageFragment{
         ll_mypage2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent (getActivity(), AgencyTopicActivity.class);
+                intent.putExtra("user", user);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        ll_mypage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PwCheckActivity.class);
                 intent.putExtra("account", "탈퇴");
                 intent.putExtra("user", user);
@@ -65,5 +77,6 @@ public class MypageTabFragment1 extends MypageFragment{
     private void byid(){
         ll_mypage1 = (LinearLayout) view.findViewById(R.id.ll_mypage1);
         ll_mypage2 = (LinearLayout) view.findViewById(R.id.ll_mypage2);
+        ll_mypage3 = (LinearLayout) view.findViewById(R.id.ll_mypage3);
     }
 }

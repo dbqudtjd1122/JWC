@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity
         switch (view.getId()) {
             case R.id.image_new:
                 Intent intent1 = new Intent(this, SeriesActivity.class);
-                intent1.putExtra("series", "JWC-AHD-720P");
+                intent1.putExtra("series", "JWC-Q 400만화소");
                 startActivity(intent1);
                 break;
             case R.id.image_camera:

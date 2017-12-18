@@ -77,7 +77,6 @@ public class AdapterSerialCode extends ArrayAdapter<ModelUserSerialCode> {
             public void onClick(View v) {
                 usercode = getItem(position);
                 new AdapterSerialCode.deleteserial().execute(usercode);
-
             }
         });
         return itemLayout;

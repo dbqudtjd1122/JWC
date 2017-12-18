@@ -6,25 +6,60 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_mypage1"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_serialcode_add"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="정품등록하러 가기"
-            android:background="#84bdf5"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#84bdf5">
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="개인정보 변경"
+            android:textColor="#000"
+            android:textSize="25dp" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/series_code"
+    <LinearLayout
+        android:id="@+id/ll_mypage3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="#5eed71"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
+        <TextView
+            android:id="@+id/textView72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="대리점 공유란"
+            android:textColor="#000"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mypage2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#ff8f84">
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="계정 탈퇴"
+            android:textColor="#000"
+            android:textSize="25dp" />
+    </LinearLayout>
 </LinearLayout>
 

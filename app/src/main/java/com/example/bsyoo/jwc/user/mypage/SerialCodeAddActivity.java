@@ -101,20 +101,18 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
                 // 등록된 시리얼 체크
                 if(overlap != -1 ){
                     overlap = -1;
                     break;
                 }
 
-                if(code.getSerial_Code().toString().length() <= 5){
+                if(code.getSerial_Code().toString().length() <= 5 || code.getSerial_Code().toString().length() >= 7){
                     Toast.makeText(this, "6자리를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     ll_serial.setVisibility(View.GONE);
                 } else {
                     new SerialCodeAddActivity.HttpSerialCheck().execute(code);
                 }
-
                 break;
             case R.id.btn_serialcode_add:  // 확인
                 usercode.setUser_Number(user.getUser_Number());

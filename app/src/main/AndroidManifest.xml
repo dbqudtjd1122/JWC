@@ -25,19 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".mainimage.notice.NoticeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".user.Login.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".mainimage.notice.EventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,7 +43,6 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-
         <activity android:name=".CompanyActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -139,7 +135,9 @@
         </service>
 
         <activity android:name=".mainimage.Cases.CasesActivity" />
-        <activity android:name=".mainimage.Cases.CasesInfoActivity"></activity>
+        <activity android:name=".mainimage.Cases.CasesInfoActivity" />
+        <activity android:name=".user.mypage.AgencyTopicActivity" />
+        <activity android:name=".user.mypage.AgencTopicWriteActivity"></activity>
     </application>
 
 </manifest>

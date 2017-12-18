@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -20,18 +21,32 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private static final String TAG = "FirebaseMsgService";
 
+    public SharedPreferences pref = null;
+    public String islevel;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+        // 1. 공유 프레퍼런스 객체를 얻어온다. /data/data/패키지명/shared_prefs/Login.xml
+        pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        islevel = String.valueOf(pref.getInt("level_Set", -1));
+
+        // 레벨에 맞는 사람에게만 푸시 알람주기
+        if(remoteMessage.getData().get("level").equals(islevel)){
+            sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+        }
+        // 모든 사용자에게 푸시주기
+        else if(remoteMessage.getData().get("level").equals("1")){
+            sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+        }
+
     }
 
     private void sendPushNotification(String title, String message) {
         System.out.println("received message : " + message);
         Intent intent = new Intent(this, IntroActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //                                                                                          PendingIntent.FLAG_UPDATE_CURRENT
+        //    PendingIntent.FLAG_UPDATE_CURRENT
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

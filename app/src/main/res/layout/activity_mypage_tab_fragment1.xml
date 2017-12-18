@@ -33,6 +33,26 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:background="#5eed71"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="대리점 공유란"
+            android:textColor="#000"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mypage3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:background="#ff8f84">
 
         <TextView
