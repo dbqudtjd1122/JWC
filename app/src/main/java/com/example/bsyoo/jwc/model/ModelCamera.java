@@ -9,7 +9,7 @@ public class ModelCamera implements Serializable{
 	private String  Cameratype       ;
 	private Integer Level            ;
 	private String  Onlineseries     ;
-	private String  Offlineseries    ;
+	private String  Follow_Up        ;
 	private String  Onlinename       ;
 	private String  Offlinename      ;
     private String  Signaltype       ;
@@ -31,7 +31,7 @@ public class ModelCamera implements Serializable{
                 ", Cameratype='" + Cameratype + '\'' +
                 ", Level=" + Level +
                 ", Onlineseries='" + Onlineseries + '\'' +
-                ", Offlineseries='" + Offlineseries + '\'' +
+                ", Follow_Up='" + Follow_Up + '\'' +
                 ", Onlinename='" + Onlinename + '\'' +
                 ", Offlinename='" + Offlinename + '\'' +
                 ", Signaltype='" + Signaltype + '\'' +
@@ -48,12 +48,12 @@ public class ModelCamera implements Serializable{
                 '}';
     }
 
-    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String offlineseries, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera) {
+    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String follow_Up, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera) {
         Number = number;
         Cameratype = cameratype;
         Level = level;
         Onlineseries = onlineseries;
-        Offlineseries = offlineseries;
+        Follow_Up = follow_Up;
         Onlinename = onlinename;
         Offlinename = offlinename;
         Signaltype = signaltype;
@@ -70,6 +70,14 @@ public class ModelCamera implements Serializable{
     }
 
     public ModelCamera() {
+    }
+
+    public String getFollow_Up() {
+        return Follow_Up;
+    }
+
+    public void setFollow_Up(String follow_Up) {
+        Follow_Up = follow_Up;
     }
 
     public String getYoutube() {
@@ -120,13 +128,6 @@ public class ModelCamera implements Serializable{
         Onlineseries = onlineseries;
     }
 
-    public String getOfflineseries() {
-        return Offlineseries;
-    }
-
-    public void setOfflineseries(String offlineseries) {
-        Offlineseries = offlineseries;
-    }
 
     public String getOnlinename() {
         return Onlinename;

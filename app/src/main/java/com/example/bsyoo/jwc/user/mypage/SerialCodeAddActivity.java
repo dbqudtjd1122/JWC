@@ -33,8 +33,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
 
     private LinearLayout ll_serial;
     private EditText et_serialcode;
-    private TextView tv_seriesname, tv_dvrname, tv_serialcode;
-    private ImageView img_dvr;
+    private TextView tv_seriesname, tv_serialcode;
 
     private ModelUserSerialCode usercode = new ModelUserSerialCode();
     private ModelSerialCode code = new ModelSerialCode();
@@ -70,10 +69,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         et_serialcode.setFilters(new InputFilter[]{filter});
 
         tv_seriesname = (TextView) findViewById(R.id.tv_seriesname);
-        tv_dvrname = (TextView) findViewById(R.id.tv_dvrname);
         tv_serialcode = (TextView) findViewById(R.id.tv_serialcode);
-
-        img_dvr = (ImageView) findViewById(R.id.img_dvr);
 
     }
 
@@ -118,10 +114,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                 usercode.setUser_Number(user.getUser_Number());
                 usercode.setCameratype("녹화기");
                 usercode.setOnlineseries(camera.getOnlineseries().toString());
-                usercode.setOnlinename(camera.getOnlinename().toString());
-
-                usercode.setSerial_Code(code.getSerial_Code().toString());
-                usercode.setImg_title(camera.getOnline_Img_title().toString());
+                usercode.setSerial_Code(code.getSerial_Code().toString());;
 
                 new SerialCodeAddActivity.InsertSerial().execute(usercode);
                 break;
@@ -160,6 +153,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ModelCamera s) {
             super.onPostExecute(s);
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;
@@ -171,13 +165,10 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                 camera = s;
                 ll_serial.setVisibility(View.VISIBLE);
                 tv_seriesname.setText("시리즈이름 : " + s.getOnlineseries().toString());
-                tv_dvrname.setText(   "제품이름   : " + s.getOnlinename().toString());
                 tv_serialcode.setText("시리얼코드 : " + et_serialcode.getText().toString());
 
-                Glide.with(getApplicationContext()).load(s.getOnline_Img_title().toString()).override(100, 100).fitCenter().into(img_dvr);
                 et_serialcode.setText("");
             }
-            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
         }
     }
 

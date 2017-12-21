@@ -42,8 +42,7 @@ public class AdapterSerialCode extends ArrayAdapter<ModelUserSerialCode> {
     }
 
     class ViewHolder {
-        public ImageView img_dvr;
-        public TextView tv_seriesname, tv_dvrname, tv_serialcode;
+        public TextView tv_seriesname, tv_serialcode;
         public Button btn_serialcode_delete;
         public ListView listView;
     }
@@ -56,9 +55,7 @@ public class AdapterSerialCode extends ArrayAdapter<ModelUserSerialCode> {
 
         if(viewHolder == null){
             viewHolder = new ViewHolder();
-            viewHolder.img_dvr = (ImageView) itemLayout.findViewById(R.id.img_dvr);
             viewHolder.tv_seriesname = (TextView) itemLayout.findViewById(R.id.tv_seriesname);
-            viewHolder.tv_dvrname = (TextView) itemLayout.findViewById(R.id.tv_dvrname);
             viewHolder.tv_serialcode = (TextView) itemLayout.findViewById(R.id.tv_serialcode);
 
             viewHolder.btn_serialcode_delete = (Button) itemLayout.findViewById(R.id.btn_serialcode_delete);
@@ -67,9 +64,7 @@ public class AdapterSerialCode extends ArrayAdapter<ModelUserSerialCode> {
             itemLayout.setTag(viewHolder);
         }
 
-        Glide.with(getContext()).load(getItem(position).getImg_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_dvr);
         viewHolder.tv_seriesname.setText("시리즈 이름 : "+getItem(position).getOnlineseries().toString());
-        viewHolder.tv_dvrname.setText("녹화기 이름 : "+getItem(position).getOnlinename().toString());
         viewHolder.tv_serialcode.setText("시리얼 코드 : "+getItem(position).getSerial_Code().toString());
 
         viewHolder.btn_serialcode_delete.setOnClickListener(new View.OnClickListener() {

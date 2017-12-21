@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.bsyoo.jwc.R;
@@ -20,11 +21,11 @@ import com.example.bsyoo.jwc.model.ModelUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgencyTopicActivity extends AppCompatActivity {
+public class AgencyTopicActivity extends AppCompatActivity{
 
     private ModelUser user = new ModelUser();
     private ListView listview;
-    private AdapterAgencyTopic adater;
+    private AdapterAgencyTopic adapter;
     private List<ModelAgencyTopic> agencytopiclist;
     private ModelAgencyTopic agencytopic= new ModelAgencyTopic();
 
@@ -46,39 +47,46 @@ public class AgencyTopicActivity extends AppCompatActivity {
 
         agencytopiclist = new ArrayList<>();
 
-        adater = new AdapterAgencyTopic(this, R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user);
+        adapter = new AdapterAgencyTopic(this, R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user);
 
-        listview.setOnItemClickListener( new OnItemHandler());
-        listview.setOnItemLongClickListener(new OnItemHandler());
-        listview.setOnItemSelectedListener(new OnItemHandler());
+        listview.setAdapter(adapter);
 
-        listview.setAdapter(adater);
         new AgencyTopicActivity.getTopicList().execute();
+
+        Button btn_write = (Button) findViewById(R.id.btn_write);
+        btn_write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgencyTopicActivity.this, AgencyTopicWriteActivity.class);
+                intent.putExtra("user", user);
+                startActivityForResult(intent, 178);
+            }
+        });
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(AgencyTopicActivity.this, AgencyTopicReviewActivity.class);
+                agencytopic = agencytopiclist.get(position);
+                intent.putExtra("topic", agencytopic);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
 
     }
 
-    class OnItemHandler implements ListView.OnItemClickListener, ListView.OnItemLongClickListener, ListView.OnItemSelectedListener{
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        }
-
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            // String msg = "onItemLongClick : "+position + ", "+id;
-            // Toast.makeText(NoticeActivity.this, msg, Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            // String msg = "onItemSelected : "+position + ", "+id;
-            // Toast.makeText(NoticeActivity.this, msg, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // makeText(NoticeActivity.this, "onNothingSelected", Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 글 새로 작성시 & 수정시
+        if (requestCode == 178 ) {
+            if (resultCode == RESULT_OK) {
+                new AgencyTopicActivity.getTopicList().execute();
+            }
+            //리턴값이 없을때
+            else {
+            }
         }
     }
 
@@ -116,9 +124,9 @@ public class AgencyTopicActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             agencytopiclist = s;
-            adater.clear();
-            adater.addAll(agencytopiclist);
-            adater.notifyDataSetChanged();
+            adapter.clear();
+            adapter.addAll(agencytopiclist);
+            adapter.notifyDataSetChanged();
 
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {

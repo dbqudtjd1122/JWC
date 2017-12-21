@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- baselineAligned, descendantFocusability 버튼 있을경우도 클릭리스너 가능하게 해줌 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,8 +17,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="5dp">
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_id"
@@ -27,12 +30,21 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="제목"
+                android:textColor="#000"
+                android:textSize="16dp" />
+
+            <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="시간"
-                android:textColor="#000"
-                android:textSize="15dp" />
+                android:textSize="14dp" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +61,7 @@
                 android:background="#000"
                 android:text="수정"
                 android:textColor="#ffffff"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/btn_delete"
@@ -58,42 +70,47 @@
                 android:background="#000"
                 android:text="삭제"
                 android:textColor="#ffffff"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </LinearLayout>
 
     </LinearLayout>
 
     <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/img_topic1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:visibility="gone"
                 app:srcCompat="@drawable/l1vd_100" />
 
             <ImageView
                 android:id="@+id/img_topic2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/l1vd_100"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:visibility="gone"
+                app:srcCompat="@drawable/l1vd_100" />
 
             <ImageView
                 android:id="@+id/img_topic3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/l1vd_100"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:visibility="gone"
+                app:srcCompat="@drawable/l1vd_100" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -114,24 +131,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/tv_love"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="좋아요 12"
-            android:layout_marginRight="20dp"/>
 
-        <TextView
-            android:id="@+id/tv_countreview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="댓글 10" />
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="5dp"
+                app:srcCompat="@drawable/reviewcount" />
+
+            <TextView
+                android:id="@+id/tv_countreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="댓글 10" />
+
     </LinearLayout>
 </LinearLayout>

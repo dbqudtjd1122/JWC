@@ -137,7 +137,8 @@
         <activity android:name=".mainimage.Cases.CasesActivity" />
         <activity android:name=".mainimage.Cases.CasesInfoActivity" />
         <activity android:name=".user.mypage.AgencyTopicActivity" />
-        <activity android:name=".user.mypage.AgencTopicWriteActivity"></activity>
+        <activity android:name=".user.mypage.AgencyTopicWriteActivity" />
+        <activity android:name=".user.mypage.AgencyTopicReviewActivity"></activity>
     </application>
 
 </manifest>

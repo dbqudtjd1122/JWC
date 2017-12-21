@@ -60,7 +60,11 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
         viewHolder.text_cameraprice1.setVisibility(View.GONE);
         if(getItem(position).getNewCamera().toString().equals("4")){
             viewHolder.text_cameraprice1.setVisibility(View.VISIBLE);
-            viewHolder.text_cameraprice1.setText("단종");
+            if(level >=2){
+                viewHolder.text_cameraprice1.setText("단종\n대체모델 : "+getItem(position).getFollow_Up().toString());
+            }else {
+                viewHolder.text_cameraprice1.setText("단종");
+            }
         }
 
 
@@ -71,7 +75,8 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             // viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
         } else if (level >= 2) {
             Glide.with(getContext()).load(getItem(position).getOffline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
-            viewHolder.text_cameraname.setText(getItem(position).getOfflinename().toString());
+            viewHolder.text_cameraname.setText("온라인 품명 "+getItem(position).getOnlinename().toString()+"\n"+
+                                               "오프라인 품명 "+getItem(position).getOfflinename().toString());
 
             // 대리점 단가표로 바꿈
             /*viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
