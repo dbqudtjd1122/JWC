@@ -75,8 +75,8 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             // viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
         } else if (level >= 2) {
             Glide.with(getContext()).load(getItem(position).getOffline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
-            viewHolder.text_cameraname.setText("온라인 품명 "+getItem(position).getOnlinename().toString()+"\n"+
-                                               "오프라인 품명 "+getItem(position).getOfflinename().toString());
+            viewHolder.text_cameraname.setText("온라인\n"+getItem(position).getOnlinename().toString()+"\n"+
+                                               "오프라인\n"+getItem(position).getOfflinename().toString());
 
             // 대리점 단가표로 바꿈
             /*viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());

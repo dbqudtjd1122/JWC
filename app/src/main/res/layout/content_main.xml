@@ -180,7 +180,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/img_company"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"

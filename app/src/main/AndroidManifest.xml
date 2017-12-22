@@ -43,11 +43,15 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".CompanyActivity">
+
+        <activity android:name=".mainimage.Company.CompanyActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity android:name=".mainimage.notice.NoticeInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -138,7 +142,7 @@
         <activity android:name=".mainimage.Cases.CasesInfoActivity" />
         <activity android:name=".user.mypage.AgencyTopicActivity" />
         <activity android:name=".user.mypage.AgencyTopicWriteActivity" />
-        <activity android:name=".user.mypage.AgencyTopicReviewActivity"></activity>
+        <activity android:name=".user.mypage.AgencyTopicReviewActivity" />
     </application>
 
 </manifest>

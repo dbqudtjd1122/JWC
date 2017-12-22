@@ -32,6 +32,7 @@ import android.view.View.OnClickListener;
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.camera.CameraActivity;
 import com.example.bsyoo.jwc.cctvinstall.CctvInstallActivity;
+import com.example.bsyoo.jwc.mainimage.Company.CompanyActivity;
 import com.example.bsyoo.jwc.mainimage.agency.AgencyActivity;
 import com.example.bsyoo.jwc.mainimage.Cases.CasesActivity;
 import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;
@@ -209,6 +210,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.img_supporter:
                 Intent intnet4 = new Intent(this, SchoolActivity.class);
                 startActivity(intnet4);
+                break;
+            case R.id.img_company:
+                Intent intent5 = new Intent(this, CompanyActivity.class);
+                startActivity(intent5);
                 break;
             case R.id.img_agency:
                 Intent intent6 = new Intent(this, AgencyActivity.class);
