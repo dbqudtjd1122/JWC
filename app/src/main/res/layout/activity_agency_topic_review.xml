@@ -37,7 +37,8 @@
                 android:inputType="textWebEditText"
                 android:padding="5dp"
                 android:textColor="#000"
-                android:textCursorDrawable="@null" />
+                android:textCursorDrawable="@null"
+                android:theme="@style/MyEditTextStyle"/>
 
             <Button
                 android:id="@+id/btn_insert_review"

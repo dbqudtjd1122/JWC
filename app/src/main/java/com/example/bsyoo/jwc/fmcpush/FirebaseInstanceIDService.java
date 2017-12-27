@@ -1,5 +1,8 @@
 package com.example.bsyoo.jwc.fmcpush;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -8,8 +11,19 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
     private static final String TAG = "MyFirebaseIIDService";
 
+    public static Context mContext;
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mContext = this;
+    }
+
     @Override
     public void onTokenRefresh() {
+
         // 설치할때 여기서 토큰을 자동으로 만들어 준다
         String token = FirebaseInstanceId.getInstance().getToken();
 

@@ -11,10 +11,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.bsyoo.jwc.IntroActivity;
 import com.example.bsyoo.jwc.R;
-import com.example.bsyoo.jwc.user.Login.LoginInformation;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
@@ -23,6 +24,16 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     public SharedPreferences pref = null;
     public String islevel;
+
+    public static Context mContext;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mContext = this;
+    }
+
+
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -38,8 +49,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // 모든 사용자에게 푸시주기
         else if(remoteMessage.getData().get("level").equals("1")){
             sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+        } else {
+            sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
         }
-
     }
 
     private void sendPushNotification(String title, String message) {
@@ -75,5 +87,16 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         wakelock.acquire(5000);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    @Override
+    public void onMessageSent(String msgId) {
+        Log.e(TAG, "onMessageSent: " + msgId);
+    }
+
+    @Override
+    public void onSendError(String msgId, Exception e) {
+        Log.e(TAG, "onSendError: " + msgId);
+        Log.e(TAG, "Exception: " + e);
     }
 }

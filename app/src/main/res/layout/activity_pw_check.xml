@@ -75,7 +75,8 @@
             android:maxLength="16"
             android:padding="5dp"
             android:textColor="#000"
-            android:textCursorDrawable="@null"/>
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditTextStyle"/>
     </LinearLayout>
 
     <LinearLayout

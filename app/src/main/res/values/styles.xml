@@ -7,6 +7,7 @@
         <item name="colorPrimary">@color/colorblackk</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="Theme.MyTheme" parent="android:Theme.Holo">
@@ -19,6 +20,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Edittext handle 색상변경 -->
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">@color/colorred</item>
+        <item name="android:background">@color/colorTransparency</item>
+    </style>
+
 
     <!-- TextView 밑줄 생기기 -->
     <string name="your_string_here">This is an <u>underline</u>.</string>
@@ -28,7 +35,6 @@
         <item name="colorControlNormal">@color/colorblack</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

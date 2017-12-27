@@ -148,5 +148,4 @@ public class HttpRequest {
         writer.close();
         return this;
     }
-
 }

@@ -22,12 +22,13 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/edittext"
             android:ems="10"
-            android:padding="5dp"
             android:hint="아이디"
             android:inputType="textEmailAddress"
+            android:padding="5dp"
             android:singleLine="true"
             android:textColor="#000"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditTextStyle"/>
 
         <EditText
             android:id="@+id/et_login_pw"
@@ -37,11 +38,21 @@
             android:background="@drawable/edittext"
             android:ems="10"
             android:hint="비밀번호"
-            android:padding="5dp"
             android:inputType="textPassword"
-            android:singleLine="true"
+            android:padding="5dp"
             android:textColor="#000"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditTextStyle"/>
+
+        <EditText
+            android:id="@+id/et_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:padding="5dp"
+            android:theme="@style/MyEditTextStyle"/>
 
         <Button
             android:id="@+id/btn_login"

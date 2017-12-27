@@ -74,7 +74,8 @@
                 android:padding="7dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@null"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:theme="@style/MyEditTextStyle"/>
 
 
             <EditText
@@ -91,7 +92,8 @@
                 android:padding="7dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@null"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:theme="@style/MyEditTextStyle"/>
 
             <LinearLayout
                 android:id="@+id/ll_idsearch"
@@ -209,7 +211,8 @@
                 android:padding="7dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@null"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:theme="@style/MyEditTextStyle"/>
 
 
             <LinearLayout

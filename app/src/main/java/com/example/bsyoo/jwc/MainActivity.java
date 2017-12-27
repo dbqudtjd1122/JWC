@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < img.length; i++) {
             img[i].setOnClickListener(this);
         }
+
         // 보이는화면이 몇번째 View인지에 따라 설정하는 옵션값
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

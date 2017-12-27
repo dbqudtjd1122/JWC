@@ -63,7 +63,7 @@ public class CompanyTabFragment2 extends CompanyFragment {
         company = new ModelCompany();
         company.setTeam_name("온라인팀");
         company.setTeam_Title("'99%의 고객만족은 불충분하다.'");
-        company.setTv_Company("JWC 온라인팀은 웹마케팅, 디자인 전문가로 구성된 팀으로 웹을 통한 최적의 구매환경을 제공해 드릴 것을 약속 드리며, 고객만족 100%가 될때까지 최선을 다하겠습니다.");
+        company.setTv_Company("JWC 온라인팀은 웹마케팅, 디자인 전문가로 구성된 팀으로 웹을 통한 최적의 구매환경을 제공해 드릴 것을 약속 드리며, 100%의 고객만족이 될때까지 최선을 다하겠습니다.");
         company.setImg_Company(R.drawable.company_1);
         companylist.add(company);
 

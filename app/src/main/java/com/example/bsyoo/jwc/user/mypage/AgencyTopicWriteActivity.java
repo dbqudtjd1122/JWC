@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +18,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.fmcpush.FirebaseInstanceIDService;
+import com.example.bsyoo.jwc.fmcpush.FirebaseMessagingService;
 import com.example.bsyoo.jwc.hppt.HttpAgency;
 import com.example.bsyoo.jwc.model.ModelAgencyTopic;
 import com.example.bsyoo.jwc.model.ModelUser;
+import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
+import org.apache.harmony.awt.datatransfer.DataSnapshot;
+import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 public class AgencyTopicWriteActivity extends AppCompatActivity {
@@ -29,6 +42,9 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
     private TextView tv_id;
     private Button btn_finish;
     private EditText et_info, et_name;
+
+    private final String TAG = "JSA-FCM";
+    private Random random = new Random();
 
     private int i = -1;
 
@@ -97,6 +113,7 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         }
     };
 
+    // 작성
     public class InsertTopic extends AsyncTask<ModelAgencyTopic, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
@@ -134,6 +151,42 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if (s == 1) {
+                /*FirebaseMessaging fm = FirebaseMessaging.getInstance();
+                fm.send(new RemoteMessage.Builder("387675888283" + "@gcm.googleapis.com")
+                        .setMessageId(Integer.toString(msgId.incrementAndGet()))
+                        .addData("my_message", "Hello World")
+                        .addData("my_action","SAY_HELLO")
+                        .build());*/
+
+                /*
+                FirebaseMessaging fm = FirebaseMessaging.getInstance();
+                String to = "387675888283"+"@gcm.googleapis.com"; // the notification key
+                AtomicInteger msgId = new AtomicInteger();
+                fm.send(new RemoteMessage.Builder(to)
+                        .setMessageId(String.valueOf(msgId.incrementAndGet()))
+                        .addData("title", "titleworld")
+                        .addData("message", "world")
+                        .addData("level", "1")
+                        .build());
+                        */
+
+                FirebaseMessaging fm = FirebaseMessaging.getInstance();
+                RemoteMessage message = new RemoteMessage.Builder("387675888283"+"@gcm.googleapis.com")
+                        .setMessageId(Integer.toString(random.nextInt(9999)))
+                        .addData("title", "titleworld")
+                        .addData("message", "world")
+                        .addData("level", "1")
+                        .build();
+
+                if (!message.getData().isEmpty()) {
+                    Log.e(TAG, "UpstreamData: " + message.getData());
+                }
+
+                if (!message.getMessageId().isEmpty()) {
+                    Log.e(TAG, "UpstreamMessageId: " + message.getMessageId());
+                }
+                fm.send(message);
+
                 Intent intent = new Intent(AgencyTopicWriteActivity.this, AgencyTopicActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -143,6 +196,7 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         }
     }
 
+    // 수정
     public class UpdateTopic extends AsyncTask<ModelAgencyTopic, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
@@ -189,4 +243,5 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
             }
         }
     }
+
 }

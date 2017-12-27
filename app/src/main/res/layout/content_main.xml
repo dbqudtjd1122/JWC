@@ -47,7 +47,8 @@
                         android:padding="5dp"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textCursorDrawable="@null" />
+                        android:textCursorDrawable="@null"
+                        android:theme="@style/MyEditTextStyle"/>
 
                     <Button
                         android:id="@+id/btn_modelsearch"
