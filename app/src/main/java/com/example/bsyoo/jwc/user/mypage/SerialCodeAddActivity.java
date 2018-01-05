@@ -3,6 +3,7 @@ package com.example.bsyoo.jwc.user.mypage;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +34,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
 
     private LinearLayout ll_serial;
     private EditText et_serialcode;
-    private TextView tv_seriesname, tv_serialcode;
+    private TextView tv_seriesname, tv_serialcode, textView58;
 
     private ModelUserSerialCode usercode = new ModelUserSerialCode();
     private ModelSerialCode code = new ModelSerialCode();
@@ -49,10 +50,11 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_serial_code_add);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
         setTitle("시리얼 넘버 등록");
 
         byid();
@@ -61,6 +63,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
         codelist = intent.getParcelableArrayListExtra("usercode");
         user = (ModelUser) intent.getSerializableExtra("user");
 
+        textView58.setText("위 시리즈가 맞으신 경우 \"등록하기\"를 눌러주세요.");
     }
 
     private void byid(){
@@ -70,6 +73,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
 
         tv_seriesname = (TextView) findViewById(R.id.tv_seriesname);
         tv_serialcode = (TextView) findViewById(R.id.tv_serialcode);
+        textView58 = (TextView) findViewById(R.id.textView58);
 
     }
 

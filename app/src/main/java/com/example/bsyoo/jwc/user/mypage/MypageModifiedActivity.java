@@ -216,7 +216,6 @@ public class MypageModifiedActivity extends LoginInformation {
         }
     }
 
-
     private void byid(){
         et_pw = (EditText) findViewById(R.id.et_pw);
         et_pw2 = (EditText) findViewById(R.id.et_pw2);

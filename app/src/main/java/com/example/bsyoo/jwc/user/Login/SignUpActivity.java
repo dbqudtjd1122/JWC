@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -51,17 +52,13 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
-
-        // 액션바 타이틀 및 배경색
-        getSupportActionBar().setTitle("");
-        // getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
+        // 액션바에 백그라운드 이미지 넣기
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.jwc_logo_red);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
+        getSupportActionBar().setTitle("회원가입");
+
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -302,12 +299,6 @@ public class SignUpActivity extends AppCompatActivity {
         buisness_layout = (LinearLayout) findViewById(R.id.buisness_layout);
     }
 
-    // 액션바 우측 안보이는 이미지.. (가운데정렬)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sort_menu, menu);
-        return true;
-    }
 
     // 회원가입
     public class SignUp extends AsyncTask<ModelUser, Integer, Integer> {

@@ -3,6 +3,7 @@ package com.example.bsyoo.jwc.mainimage.notice;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -32,13 +33,15 @@ public class NoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
 
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
+        getSupportActionBar().setTitle("공지사항");
+
         listview = (ListView) findViewById(R.id.noticelistview);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
-        getSupportActionBar().setTitle("공지사항");
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

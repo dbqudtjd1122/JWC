@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +23,7 @@ import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.model.ModelSchool;
 import com.example.bsyoo.jwc.model.ModelUserSchool;
 import com.example.bsyoo.jwc.model.ModelUser;
+import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 
@@ -29,7 +33,8 @@ public class SchoolInfoActivity extends LoginInformation {
 
     private ModelSchool school = new ModelSchool();
     private ImageView school_info;
-    private LinearLayout school_write;
+    private ImageView school_write;
+    private LinearLayout schoolinfo_ll;
     private ModelUser user = new ModelUser();
     private ModelUserSchool Suser = new ModelUserSchool();
 
@@ -40,9 +45,11 @@ public class SchoolInfoActivity extends LoginInformation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_info);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
 
         Intent intent = getIntent();
         school = (ModelSchool) intent.getSerializableExtra("school");
@@ -50,9 +57,10 @@ public class SchoolInfoActivity extends LoginInformation {
         setTitle(school.getSchool_Title().toString());
 
         // 종료된 교육인경우
-        school_write = (LinearLayout) findViewById(R.id.school_write);
+        schoolinfo_ll = (LinearLayout) findViewById(R.id.schoolinfo_ll);
+        school_write = (ImageView) findViewById(R.id.school_write);
         if(school.getStart_End().toString().equals("종료")){
-            school_write.setVisibility(View.GONE);
+            schoolinfo_ll.setVisibility(View.GONE);
         }
 
         school_info = (ImageView) findViewById(R.id.school_info);
@@ -76,6 +84,9 @@ public class SchoolInfoActivity extends LoginInformation {
             public void onClick(View v) {
                 if(user.getUser_Number() == -1) {
                     Toast.makeText(SchoolInfoActivity.this, "로그인 해주세요.", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 } else if(Scount == -1 || Scount >= 1 ){
                     Toast.makeText(SchoolInfoActivity.this, "이미 교육신청 하셨습니다.", Toast.LENGTH_SHORT).show();
                 }

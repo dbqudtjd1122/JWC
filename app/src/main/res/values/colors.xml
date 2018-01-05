@@ -3,8 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorblack">#dddddd</color>
+    <color name="colorblack">#ffffff</color>
     <color name="colorblackk">#000000</color>
     <color name="colorred">#ff0000</color>
+    <color name="colorAction">#ff3c3c</color>
     <color name="colorTransparency">#00ffffff</color>
 </resources>

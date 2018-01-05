@@ -21,8 +21,8 @@
                 android:id="@+id/companyimg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/company_info" />
+                app:srcCompat="@drawable/company_info"
+                android:adjustViewBounds="true"/>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

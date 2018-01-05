@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
@@ -22,20 +23,22 @@ public class TechnologyInfoActivity extends YouTubeBaseActivity implements YouTu
     private String API_KEY = "";
     public static String VIDEO_ID = "url";
     private static final int RQS_ErrorDialog = 1;
+    private TextView tv_technology_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_technology_info);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
 
         Intent intent = getIntent();
         tech = (ModelTechnology) intent.getSerializableExtra("tech");
         VIDEO_ID = tech.getYouTubeUrl().toString();
         API_KEY = tech.getYouTubeUrl().toString();
+
+        tv_technology_title = (TextView) findViewById(R.id.tv_technology_title);
+        tv_technology_title.setText(tech.getYouTubeName().toString());
+
 
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.view_technology);
         youTubePlayerView.initialize(API_KEY, this);

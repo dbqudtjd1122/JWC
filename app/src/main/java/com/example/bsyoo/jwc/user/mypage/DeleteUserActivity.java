@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bsyoo.jwc.R;
@@ -23,16 +25,18 @@ public class DeleteUserActivity extends LoginInformation {
     private ModelUser user = new ModelUser();
     private CheckBox ch_delete;
     private Button btn_delete;
+    private TextView tv_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_user);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
         setTitle("계정 탈퇴");
 
         byid();
@@ -40,6 +44,16 @@ public class DeleteUserActivity extends LoginInformation {
         Intent intent = getIntent();
         user = (ModelUser) intent.getSerializableExtra("user");
 
+        tv_delete.setText("- JWC 회원탈퇴 시 JWC 서비스에 탈퇴되며,\n" +
+                " 다른 기본서비스(제품정보 등)는 이용이 가능합니다.\n\n" +
+                "- 탈퇴 후 재가입 시, 제한을 받을 수 있습니다.\n\n" +
+                "- 탈퇴한 계정의 JWC 이용 기록은 모두 삭제됩니다.\n" +
+                "  삭제된 데이터는 복구가 불가합니다.\n" +
+                "  (단, 작성된 리뷰와, 교육 내역은 5년까지 보관)\n\n" +
+                "  [삭제되는 이용 기록]\n" +
+                "  아이디, 비밀번호, 이름, 이메일, 휴대폰 번호,\n" +
+                "  주소, 사업자정보\n\n" +
+                "- 탈퇴시 복구가 불가능하니 신중하게 선택하세요.");
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +68,7 @@ public class DeleteUserActivity extends LoginInformation {
     private void byid(){
         ch_delete = (CheckBox) findViewById(R.id.ch_delete);
         btn_delete = (Button) findViewById(R.id.btn_delete);
+        tv_delete = (TextView) findViewById(R.id.tv_delete);
     }
 
     // 계정 탈퇴

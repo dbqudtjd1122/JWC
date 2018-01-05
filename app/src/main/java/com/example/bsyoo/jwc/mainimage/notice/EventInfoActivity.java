@@ -2,6 +2,7 @@ package com.example.bsyoo.jwc.mainimage.notice;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,10 +23,12 @@ public class EventInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
 
-        getSupportActionBar().setTitle("이벤트");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
+
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -33,6 +36,8 @@ public class EventInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         event = (ModelNotice) intent.getSerializableExtra("event");
         ImageView event_info = (ImageView) findViewById(R.id.event_info);
+
+        getSupportActionBar().setTitle(event.getNotice_title().toString());
 
         if (event.getImg_info() != null) {
             Glide.with(this).load(event.getImg_info()).override(720, 10000).fitCenter().into(event_info);

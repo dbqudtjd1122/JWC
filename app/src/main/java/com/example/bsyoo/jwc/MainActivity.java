@@ -37,14 +37,18 @@ import com.example.bsyoo.jwc.mainimage.Company.CompanyActivity;
 import com.example.bsyoo.jwc.mainimage.agency.AgencyActivity;
 import com.example.bsyoo.jwc.mainimage.Cases.CasesActivity;
 import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;
+import com.example.bsyoo.jwc.mainimage.notice.EventInfoActivity;
 import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
 import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
+import com.example.bsyoo.jwc.model.ModelNotice;
 import com.example.bsyoo.jwc.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
 import com.example.bsyoo.jwc.user.mypage.MypageActivity;
 import com.example.bsyoo.jwc.viewpager.ViewPagerAdapter;
+
+import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity
@@ -68,31 +72,31 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         // 액션바 타이틀 및 배경색
         getSupportActionBar().setTitle("");
         // getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));  // 액션바 컬러지정
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        Drawable d = getResources().getDrawable(R.drawable.main_actionbar);
         getSupportActionBar().setBackgroundDrawable(d);  // 액션바에 백그라운드 이미지 넣기
-        getSupportActionBar().setLogo(R.drawable.jwc_logo_red); // 액션바 이미지
+        // getSupportActionBar().setLogo(R.drawable.jwc_logo_red); // 액션바 이미지
+
 
         // Status bar 색상 설정. (상태바)
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-            getWindow().setStatusBarColor(0x00ff0000);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.BLACK);
+            //getWindow().setStatusBarColor(0x00ff0000);
             //getWindow().setBackgroundDrawable(d);
-        }*/
+        }
 
-        // 상태 표시 줄 높이와 일치하도록 상태바에 채우기를 설정합니다.
-        toolbar.setPadding (0, getStatusBarHeight (), 0, 0);
+        /*// 상태 표시 줄 높이와 일치하도록 상태바에 채우기를 설정합니다.
+         toolbar.setPadding (0, getStatusBarHeight(), 0, 0);
 
         // 상태바 투명하게하여 액션바의 백그라운드 같이적용
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+        }*/
 
         // 뒤로가기 2번클릭시 종료
         backCloseHandler = new BackCloseHandler(this);
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < img.length; i++) {
             img[i].setOnClickListener(this);
         }
+
 
         // 보이는화면이 몇번째 View인지에 따라 설정하는 옵션값
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -247,6 +252,14 @@ public class MainActivity extends AppCompatActivity
                 intent10.putExtra("model", et_modelsearch.getText().toString());
                 startActivity(intent10);
                 break;
+            case R.id.main_event2:
+                ModelNotice event = new ModelNotice();
+                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/event_1.jpg");
+                event.setNotice_title("2TB 무료 업그레이드!");
+                Intent intent = new Intent (MainActivity.this, EventInfoActivity.class);
+                intent.putExtra("event", event);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -265,6 +278,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.img_viewpager4:
                 viewPager.setCurrentItem(3);
                 break;
+
         }
     }
 
@@ -357,7 +371,6 @@ public class MainActivity extends AppCompatActivity
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -416,14 +429,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     // 상태 표시 줄의 높이를 찾는 메소드
-    public int getStatusBarHeight() {
+    /*public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-
             result = getResources().getDimensionPixelSize(resourceId);
         }
         result = (result / 10) * 6;
         return result;
-    }
+    }*/
 }

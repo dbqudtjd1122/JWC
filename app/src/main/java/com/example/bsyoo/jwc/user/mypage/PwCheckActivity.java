@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,8 +23,7 @@ import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 public class PwCheckActivity extends LoginInformation {
 
-    private TextView tv_id;
-    private EditText et_pw;
+    private EditText et_id,et_pw;
     private Button btn_pwcheck;
     private ModelUser user = new ModelUser();
     private String account = "";
@@ -33,10 +33,11 @@ public class PwCheckActivity extends LoginInformation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pw_check);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
         setTitle("비밀번호 확인");
 
         Intent intent = getIntent();
@@ -56,13 +57,13 @@ public class PwCheckActivity extends LoginInformation {
     }
 
     private void byid(){
-        tv_id = (TextView) findViewById(R.id.tv_id);
+        et_id = (EditText) findViewById(R.id.et_id);
         et_pw = (EditText) findViewById(R.id.et_pw);
         btn_pwcheck = (Button) findViewById(R.id.btn_pwcheck);
     }
 
     private void settext(){
-        tv_id.setText(user.getID().toString());
+        et_id.setText(user.getID().toString());
     }
 
     // 비밀번호 확인

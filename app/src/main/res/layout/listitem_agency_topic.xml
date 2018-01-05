@@ -58,18 +58,19 @@
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
-                android:background="#000"
+                android:background="@drawable/main_button"
                 android:text="수정"
-                android:textColor="#ffffff"
-                android:textStyle="bold"/>
+                android:textColor="#616161"
+                android:textStyle="bold"
+                />
 
             <Button
                 android:id="@+id/btn_delete"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
-                android:background="#000"
+                android:background="@drawable/main_button"
                 android:text="삭제"
-                android:textColor="#ffffff"
+                android:textColor="#616161"
                 android:textStyle="bold"/>
         </LinearLayout>
 
@@ -81,6 +82,7 @@
         android:layout_marginBottom="10dp">
 
         <LinearLayout
+            android:id="@+id/ll_topic"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

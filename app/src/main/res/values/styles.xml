@@ -4,18 +4,23 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="actionBarSize">65dp</item>
-        <item name="colorPrimary">@color/colorblackk</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorAction</item>
+        <item name="colorPrimaryDark">@color/colorblackk</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
-    <style name="Theme.MyTheme" parent="android:Theme.Holo">
-        <item name="android:homeAsUpIndicator">@drawable/jwc_logo_red</item>
+
+    <!-- Main 액션바 크게 (Manifest 설정) -->
+    <style name="BigAppTheme.NoActionBar" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="actionBarSize">75dp</item>
+        <item name="colorControlNormal">@color/colorblack</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!-- Intro Title 없애기 (Manifest 설정) -->
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme2" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
     </style>
@@ -26,10 +31,17 @@
         <item name="android:background">@color/colorTransparency</item>
     </style>
 
+    <!-- Edittext Main 모델검색-->
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/colorAction</item>
+        <item name="colorControlActivated">@color/colorred</item>
+        <item name="android:textCursorDrawable">@color/colorAction</item>
+        <item name="android:background">@color/colorTransparency</item>
+    </style>
+
 
     <!-- TextView 밑줄 생기기 -->
     <string name="your_string_here">This is an <u>underline</u>.</string>
-
 
     <style name="AppTheme.NoActionBar">
         <item name="colorControlNormal">@color/colorblack</item>

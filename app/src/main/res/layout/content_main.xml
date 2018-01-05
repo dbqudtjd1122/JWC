@@ -22,53 +22,64 @@
             <LinearLayout
                 android:id="@+id/ModelSearch"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/actionbar"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:visibility="gone">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/et_modelsearch"
-                        android:layout_width="250dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/edittext"
-                        android:ems="10"
+                        android:layout_width="260dp"
+                        android:layout_height="50dp"
+                        android:ems="5"
                         android:hint="제품 모델 입력"
                         android:inputType="textEmailAddress"
-                        android:padding="5dp"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textCursorDrawable="@null"
-                        android:theme="@style/MyEditTextStyle"/>
+                        android:theme="@style/EditTextStyle" />
 
                     <Button
                         android:id="@+id/btn_modelsearch"
-                        android:layout_width="50dp"
-                        android:layout_height="35dp"
+                        android:layout_width="65dp"
+                        android:layout_height="37dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@color/colorblackk"
+                        android:background="@drawable/main_button"
                         android:onClick="onclick"
                         android:text="검색"
-                        android:textColor="@android:color/background_light"
+                        android:textColor="#616161"
                         android:textStyle="bold" />
-
                 </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_event2"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/main_event2"
+                    android:onClick="onclick"/>
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -97,6 +108,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:gravity="bottom|center"
                         android:orientation="horizontal">
 
@@ -112,21 +126,21 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_margin="5dp"
-                            app:srcCompat="@drawable/page_not" />
+                            app:srcCompat="@drawable/page_not"/>
 
                         <ImageView
                             android:id="@+id/img_viewpager3"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_margin="5dp"
-                            app:srcCompat="@drawable/page_not" />
+                            app:srcCompat="@drawable/page_not"/>
 
                         <ImageView
                             android:id="@+id/img_viewpager4"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_margin="5dp"
-                            app:srcCompat="@drawable/page_not" />
+                            app:srcCompat="@drawable/page_not"/>
                     </LinearLayout>
                 </RelativeLayout>
             </FrameLayout>
@@ -134,34 +148,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/image_new"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
+                    android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_new"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@drawable/main_new" />
 
                 <ImageView
                     android:id="@+id/image_camera"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
+                    android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_camera"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@drawable/main_camera" />
 
                 <ImageView
                     android:id="@+id/image_record"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
+                    android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_dvr"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@drawable/main_dvr" />
 
             </LinearLayout>
 
@@ -171,32 +186,33 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/img_supporter"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:onClick="onclick"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/main_school"
-                    />
-
-                <ImageView
                     android:id="@+id/img_company"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:onClick="onclick"
                     android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/main_uses" />
+                    android:onClick="onclick"
+                    app:srcCompat="@drawable/main_company" />
 
                 <ImageView
                     android:id="@+id/img_agency"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:onClick="onclick"
                     android:adjustViewBounds="true"
+                    android:onClick="onclick"
                     app:srcCompat="@drawable/main_agency" />
+
+                <ImageView
+                    android:id="@+id/img_supporter"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:onClick="onclick"
+                    app:srcCompat="@drawable/main_school" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -209,8 +225,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:onClick="onclick"
                     android:adjustViewBounds="true"
+                    android:onClick="onclick"
                     app:srcCompat="@drawable/main_share" />
 
                 <ImageView
@@ -218,8 +234,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:onClick="onclick"
                     android:adjustViewBounds="true"
+                    android:onClick="onclick"
                     app:srcCompat="@drawable/main_install" />
 
                 <ImageView
@@ -229,7 +245,7 @@
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_down" />
+                    app:srcCompat="@drawable/main_cases" />
 
             </LinearLayout>
 
@@ -244,46 +260,30 @@
                     android:layout_height="fill_parent"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_notice" />
+                    app:srcCompat="@drawable/main_notice"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
                 <ImageView
                     android:id="@+id/img_event"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:onClick="onclick"
                     android:adjustViewBounds="true"
+                    android:onClick="onclick"
                     app:srcCompat="@drawable/main_event" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="7dp"
-                    app:srcCompat="@drawable/jwc_logo_red" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="7dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView27"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:text="상호명 : (주)제이더블유씨네트웍스 \n 사업자번호 : 104-86-43227  l  대표 : 이동원 \n 주소 : 서울특별시 금천구 가산동 371-51\n 한국전자협동(주)공장B동 4층 \n TEL : 1899-4602 I FAX : 02-2277-7615"
-                        android:textColor="#000"
-                        android:textSize="13dp" />
-
-                </LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/main_info"
+                    android:adjustViewBounds="true"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

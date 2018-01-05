@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:layout_gravity="bottom"
             android:background="#ffffff"
             android:orientation="horizontal"
@@ -29,25 +29,27 @@
             <EditText
                 android:id="@+id/et_insert_review"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/idpwsearchtext"
                 android:ems="10"
                 android:hint="댓글을 입력해 주세요."
                 android:inputType="textWebEditText"
+                android:lines="3"
                 android:padding="5dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@null"
-                android:theme="@style/MyEditTextStyle"/>
+                android:theme="@style/MyEditTextStyle" />
 
             <Button
                 android:id="@+id/btn_insert_review"
                 android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:background="#ff0004"
+                android:layout_height="match_parent"
+                android:background="#ff3c3c"
                 android:text="입력"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
+
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

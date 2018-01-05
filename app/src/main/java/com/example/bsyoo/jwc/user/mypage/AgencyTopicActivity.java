@@ -3,6 +3,7 @@ package com.example.bsyoo.jwc.user.mypage;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.bsyoo.jwc.R;
@@ -28,16 +30,18 @@ public class AgencyTopicActivity extends AppCompatActivity{
     private AdapterAgencyTopic adapter;
     private List<ModelAgencyTopic> agencytopiclist;
     private ModelAgencyTopic agencytopic= new ModelAgencyTopic();
+    private View footerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agency_topic);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
         setTitle("대리점 공유");
 
         Intent intent = getIntent();
@@ -45,16 +49,22 @@ public class AgencyTopicActivity extends AppCompatActivity{
 
         listview = (ListView) findViewById(R.id.topivlistview);
 
+        // 꼬리 아이템
+        footerView = getLayoutInflater().inflate(R.layout.listitem_review_footer, null);
+
         agencytopiclist = new ArrayList<>();
 
         adapter = new AdapterAgencyTopic(this, R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user);
+
+        // 꼬리아이템
+        listview.addFooterView(footerView, null, false);
 
         listview.setAdapter(adapter);
 
         new AgencyTopicActivity.getTopicList().execute();
 
-        Button btn_write = (Button) findViewById(R.id.btn_write);
-        btn_write.setOnClickListener(new View.OnClickListener() {
+        ImageView img_write = (ImageView) findViewById(R.id.img_write);
+        img_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AgencyTopicActivity.this, AgencyTopicWriteActivity.class);
@@ -73,7 +83,6 @@ public class AgencyTopicActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-
     }
 
     @Override

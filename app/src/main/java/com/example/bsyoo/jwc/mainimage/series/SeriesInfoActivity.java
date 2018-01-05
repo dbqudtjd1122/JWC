@@ -2,6 +2,7 @@ package com.example.bsyoo.jwc.mainimage.series;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -32,9 +33,6 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series_info);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
         Intent intent = getIntent();
         camera = (ModelCamera) intent.getSerializableExtra("camera");
         level = intent.getIntExtra("level", -1);

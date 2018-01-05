@@ -35,6 +35,7 @@ public class ViewPager2 extends Fragment{
             public void onClick(View view) {
                 ModelNotice event = new ModelNotice();
                 event.setImg_info("http://jwcnet.godohosting.com/JWCMALL/home/under/new_ss_v6.jpg");
+                event.setNotice_title("2TB 무료 업그레이드!");
                 Intent intent = new Intent (getContext(), EventInfoActivity.class);
                 intent.putExtra("event", event);
                 startActivity(intent);

@@ -3,6 +3,7 @@ package com.example.bsyoo.jwc.school;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -32,19 +33,22 @@ public class SchoolActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
+
         setTitle("교육목록");
 
         SchoolListview = (ListView) findViewById(R.id.schoollistview);
+        SchoolListview.setDivider(null);
 
         // 출력 데이터 생성
         schoollist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterSchool(this, R.layout.listitem_event, R.id.event_title, schoollist);
+        adapter = new AdapterSchool(this, R.layout.listitem_school, R.id.tv_school_title, schoollist);
 
         // 리스트뷰에 어댑터 설정
         SchoolListview.setAdapter(adapter);

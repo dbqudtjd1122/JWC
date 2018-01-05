@@ -1,8 +1,5 @@
 package com.example.bsyoo.jwc.fmcpush;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -10,16 +7,6 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
     private static final String TAG = "MyFirebaseIIDService";
-
-    public static Context mContext;
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        mContext = this;
-    }
 
     @Override
     public void onTokenRefresh() {

@@ -1,10 +1,19 @@
 package com.example.bsyoo.jwc.user.mypage;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.PowerManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -17,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bsyoo.jwc.IntroActivity;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.fmcpush.FirebaseInstanceIDService;
 import com.example.bsyoo.jwc.fmcpush.FirebaseMessagingService;
@@ -53,10 +63,11 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agency_topic_write);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
         setTitle("대리점 공유글 작성");
 
         byid();
@@ -154,8 +165,8 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                 /*FirebaseMessaging fm = FirebaseMessaging.getInstance();
                 fm.send(new RemoteMessage.Builder("387675888283" + "@gcm.googleapis.com")
                         .setMessageId(Integer.toString(msgId.incrementAndGet()))
-                        .addData("my_message", "Hello World")
-                        .addData("my_action","SAY_HELLO")
+                        .addData("title", "Hello World")
+                        .addData("message","SAY_HELLO")
                         .build());*/
 
                 /*
@@ -170,8 +181,8 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                         .build());
                         */
 
-                FirebaseMessaging fm = FirebaseMessaging.getInstance();
-                RemoteMessage message = new RemoteMessage.Builder("387675888283"+"@gcm.googleapis.com")
+                /*FirebaseMessaging fm = FirebaseMessaging.getInstance();
+                RemoteMessage message = new RemoteMessage.Builder("118371ec89e84dbe"+"@gcm.googleapis.com")
                         .setMessageId(Integer.toString(random.nextInt(9999)))
                         .addData("title", "titleworld")
                         .addData("message", "world")
@@ -185,7 +196,9 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                 if (!message.getMessageId().isEmpty()) {
                     Log.e(TAG, "UpstreamMessageId: " + message.getMessageId());
                 }
-                fm.send(message);
+                fm.send(message);*/
+
+                //sendPushNotification("타이틀 테스트", "메세지 테스트");
 
                 Intent intent = new Intent(AgencyTopicWriteActivity.this, AgencyTopicActivity.class);
                 setResult(RESULT_OK, intent);

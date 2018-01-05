@@ -18,7 +18,7 @@ public class IntroActivity extends AppCompatActivity {
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
+            getWindow().setStatusBarColor(Color.BLACK);
         }
 
         Handler handler = new Handler();

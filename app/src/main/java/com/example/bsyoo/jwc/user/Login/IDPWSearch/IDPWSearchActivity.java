@@ -2,6 +2,7 @@ package com.example.bsyoo.jwc.user.Login.IDPWSearch;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -34,10 +35,12 @@ public class IDPWSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idpwsearch);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
+        // 액션바에 백그라운드 이미지 넣기
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
+
         setTitle("아이디 & 비밀번호 찾기");
 
         byid();
@@ -84,6 +87,9 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 new IDPWSearchActivity.PWGMailSender().execute(temp.toString());
                 pwuser.setPW(temp.toString());  // 임시비밀번호 넣기
                 new IDPWSearchActivity.PWChange().execute(pwuser);
+                break;
+            case R.id.but_login:
+                finish();
                 break;
         }
     }
@@ -322,6 +328,5 @@ public class IDPWSearchActivity extends AppCompatActivity {
         tv_idsearch1 = (TextView) findViewById(R.id.tv_idsearch1);
         tv_idsearch2 = (TextView) findViewById(R.id.tv_idsearch2);
         tv_pwsearch = (TextView) findViewById(R.id.tv_pwsearch);
-
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -35,6 +36,8 @@ public class CompanyTabFragment1 extends CompanyFragment {
 
 
         companyimg = (ImageView) view.findViewById(R.id.companyimg);
+        Glide.with(this).load("http://jwcnet.godohosting.com/app/jwc_app/img/company_info.jpg").override(720,4000).fitCenter().into(companyimg);
+
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(companyimg);
         photoview.update();

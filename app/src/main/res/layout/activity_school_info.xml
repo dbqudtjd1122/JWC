@@ -7,41 +7,49 @@
     android:orientation="vertical"
     tools:context="com.example.bsyoo.jwc.school.SchoolInfoActivity">
 
-    <LinearLayout
-        android:id="@+id/school_write"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView55"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ff7171"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="교육 신청하러가기"
-            android:textColor="#000000"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/school_info"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/rental410" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
+            android:id="@+id/schoolinfo_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/school_info"
-                android:layout_width="fill_parent"
+                android:id="@+id/school_write"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/rental410" />
+                android:padding="10dp"
+                app:srcCompat="@drawable/school_info" />
         </LinearLayout>
-    </ScrollView>
-
+    </FrameLayout>
 </LinearLayout>

@@ -10,18 +10,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_margin="20dp">
 
         <Button
             android:id="@+id/btn_serialcode_addgo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="정품등록하러 가기"
-            android:background="#84bdf5"
+            android:layout_height="wrap_content"
+            android:text="정품 등록하러 가기"
+            android:background="#ff3c3c"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 

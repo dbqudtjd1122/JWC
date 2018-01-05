@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,15 +36,14 @@ public class LoginActivity extends LoginInformation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Status bar 색상 설정. (상태바)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.RED);
-        }
-        // 액션바 타이틀
-        getSupportActionBar().setTitle("");
+        // 액션바에 백그라운드 이미지 넣기
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.jwc_logo_red);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
+        getSupportActionBar().setBackgroundDrawable(d);
+
+        // 액션바 타이틀
+        getSupportActionBar().setTitle("로그인");
 
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -168,10 +168,10 @@ public class LoginActivity extends LoginInformation {
         }
     }
 
-    // 액션바 우측 안보이는 이미지.. (가운데정렬)
+    /*// 액션바 우측 안보이는 이미지.. (가운데정렬)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sort_menu, menu);
         return true;
-    }
+    }*/
 }

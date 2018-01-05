@@ -31,8 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center"
-            android:layout_margin="10dp"
-            app:srcCompat="@drawable/next" />
+            app:srcCompat="@drawable/camera_next"
+            android:padding="4dp"
+            android:adjustViewBounds="true"/>
     </LinearLayout>
 
 </LinearLayout>

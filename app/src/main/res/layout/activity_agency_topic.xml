@@ -7,18 +7,24 @@
     android:orientation="vertical"
     tools:context="com.example.bsyoo.jwc.user.mypage.AgencyTopicActivity">
 
-    <Button
-        android:id="@+id/btn_write"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="글 작성하러 가기"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:background="#36ff83"/>
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/topivlistview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ListView
+            android:id="@+id/topivlistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/img_write"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/write_info"
+            android:adjustViewBounds="true"
+            android:layout_gravity="bottom"
+            android:padding="10dp"/>
+
+    </FrameLayout>
+
 </LinearLayout>
