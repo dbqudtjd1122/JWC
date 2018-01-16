@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context="com.example.bsyoo.jwc.user.mypage.MypageModifiedActivity">
+    tools:context="com.example.bsyoo.jwc.mainmenu.mypage.MypageModifiedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -390,7 +390,7 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:layout_marginRight="5dp"
-                            android:background="@color/colorblackk"
+                            android:background="#ff3c3c"
                             android:text="중복확인"
                             android:textColor="@color/colorblack"
                             android:onClick="signClick"
@@ -492,7 +492,7 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:layout_marginRight="5dp"
-                            android:background="@color/colorblackk"
+                            android:background="#ff3c3c"
                             android:text="주소 검색"
                             android:textColor="@color/colorblack"
                             android:textStyle="bold"
@@ -1124,7 +1124,7 @@
                     android:id="@+id/btn_signupfinish"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:background="#ff0000"
+                    android:background="#ff3c3c"
                     android:text="정보수정 완료"
                     android:textColor="#ffffff"
                     android:textStyle="bold"

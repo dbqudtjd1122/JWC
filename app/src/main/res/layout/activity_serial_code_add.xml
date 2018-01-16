@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.user.mypage.SerialCodeAddActivity"
+    tools:context="com.example.bsyoo.jwc.mainmenu.mypage.SerialCodeAddActivity"
     android:gravity="center">
 
     <LinearLayout
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="-30dp"
         android:orientation="horizontal">
 
         <EditText
@@ -56,20 +57,20 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_seriesname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
                     android:text="시리즈이름"
                     android:textColor="#000"
-                    android:textSize="18dp"
-                    android:layout_marginBottom="7dp"/>
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/tv_serialcode"
@@ -78,6 +79,27 @@
                     android:text="시리얼코드"
                     android:textColor="#000"
                     android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/et_company_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:ems="11"
+                    android:hint="구매처를 입력해 주세요."
+                    android:inputType="textCapCharacters"
+                    android:maxLength="30"
+                    android:padding="15dp"
+                    android:textColor="#000"
+                    android:textSize="17dp"
+                    android:theme="@style/EditTextStyle" />
+
+                <TextView
+                    android:id="@+id/textView74"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="구매처 정보를 기재해 주시면 빠른 처리가 가능합니다." />
 
             </LinearLayout>
 

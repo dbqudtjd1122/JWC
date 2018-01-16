@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterCamera;
 import com.example.bsyoo.jwc.hppt.HttpCamera;
 import com.example.bsyoo.jwc.model.ModelCamera;
+import com.example.bsyoo.jwc.network.Network;
+import com.example.bsyoo.jwc.network.NetworkCheck;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class ModelSearchActivity extends LoginInformation {
     private List<ModelCamera> cameralist;
     private ModelCamera camera = new ModelCamera();
     private GridView gridView;
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,14 @@ public class ModelSearchActivity extends LoginInformation {
 
         // 리스트뷰에 어댑터 설정
         gridView.setAdapter(adapter);
-        new ModelSearchActivity.getCameraSearchList().execute(search);
+
+        netcheck = networkcheck();
+        if (netcheck == true) {
+            new ModelSearchActivity.getCameraSearchList().execute(search);
+        } else {
+            Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
+            startActivity(intent2);
+        }
 
         gridView.setOnItemClickListener( new ModelSearchActivity.OnItemHandler());
         gridView.setOnItemLongClickListener(new ModelSearchActivity.OnItemHandler());
@@ -84,6 +97,18 @@ public class ModelSearchActivity extends LoginInformation {
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
+        }
+    }
+
+    // 네트워크 체크
+    private boolean networkcheck() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if (wifi == true) {
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -1,10 +1,11 @@
 package com.example.bsyoo.jwc.user.Login.IDPWSearch;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,8 @@ import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.Gmail.GMail;
 import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.model.ModelUser;
+import com.example.bsyoo.jwc.network.Network;
+import com.example.bsyoo.jwc.network.NetworkCheck;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -29,6 +32,8 @@ public class IDPWSearchActivity extends AppCompatActivity {
     private ModelUser pwuser = new ModelUser();
     private LinearLayout ll_idsearch, ll_pwsearch;
     private TextView tv_idsearch1, tv_idsearch2, tv_pwsearch;
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +57,33 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 iduser = new ModelUser();
                 iduser.setName(et_id_searchname.getText().toString());
                 iduser.setEmail(et_id_searchemail.getText().toString());
-                new IDPWSearchActivity.IDSearch().execute(iduser);
+                netcheck = networkcheck();
+                if(netcheck == true) {
+                    new IDPWSearchActivity.IDSearch().execute(iduser);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent, 7777);
+                }
                 break;
             case R.id.btn_idview:
-                new IDGMailSender().execute();
+                netcheck = networkcheck();
+                if(netcheck == true) {
+                    new IDGMailSender().execute();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent, 7777);
+                }
                 break;
             case R.id.btn_pw_search1:
                 pwuser = new ModelUser();
                 pwuser.setID(et_pw_searchid.getText().toString());
-                new IDPWSearchActivity.PWSearch().execute(pwuser);
+                netcheck = networkcheck();
+                if(netcheck == true) {
+                    new IDPWSearchActivity.PWSearch().execute(pwuser);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent, 7777);
+                }
                 break;
             case R.id.btn_pwview:
                 // 임시비밀번호 만들기
@@ -83,10 +106,16 @@ public class IDPWSearchActivity extends AppCompatActivity {
                             break;
                     }
                 }
-                Toast.makeText(IDPWSearchActivity.this, tv_pwsearch.getText().toString() +"로 임시비밀번호를 발송하였습니다.", Toast.LENGTH_SHORT).show();
-                new IDPWSearchActivity.PWGMailSender().execute(temp.toString());
-                pwuser.setPW(temp.toString());  // 임시비밀번호 넣기
-                new IDPWSearchActivity.PWChange().execute(pwuser);
+                netcheck = networkcheck();
+                if(netcheck == true) {
+                    Toast.makeText(IDPWSearchActivity.this, tv_pwsearch.getText().toString() +"로 임시비밀번호를 발송하였습니다.", Toast.LENGTH_SHORT).show();
+                    new IDPWSearchActivity.PWGMailSender().execute(temp.toString()); // 임시비밀번호 메일 발송
+                    pwuser.setPW(temp.toString());  // 임시비밀번호 넣기
+                    new IDPWSearchActivity.PWChange().execute(pwuser); // 임시비밀번호로 데이터 변경
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent, 7777);
+                }
                 break;
             case R.id.but_login:
                 finish();
@@ -253,7 +282,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
         }
     }
 
-    // 비밀번호찾기 - 임시비밀번호로 변경
+    // 비밀번호찾기 - 임시비밀번호로 데이터 변경
     private class PWChange extends AsyncTask<ModelUser, Integer, Integer> {
 
         @Override
@@ -315,6 +344,31 @@ public class IDPWSearchActivity extends AppCompatActivity {
         tv_pwsearch.setText(emailtext+emailtext2+email3);
 
         et_pw_searchid.setText("");
+    }
+
+    // 네트워크 체크
+    private boolean networkcheck(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if(wifi == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777 ) {
+            if (resultCode == RESULT_OK) {
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
     }
 
     private void byid(){

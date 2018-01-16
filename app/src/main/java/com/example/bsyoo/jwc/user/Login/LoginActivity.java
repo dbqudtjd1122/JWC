@@ -3,16 +3,15 @@ package com.example.bsyoo.jwc.user.Login;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +20,8 @@ import android.widget.Toast;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.HttpSignUp;
 import com.example.bsyoo.jwc.model.ModelUser;
+import com.example.bsyoo.jwc.network.Network;
+import com.example.bsyoo.jwc.network.NetworkCheck;
 import com.example.bsyoo.jwc.user.Login.IDPWSearch.IDPWSearchActivity;
 
 import java.util.regex.Pattern;
@@ -30,6 +31,8 @@ public class LoginActivity extends LoginInformation {
     private TextView SignUp, IDPWSearch;
     private EditText et_login_id, et_login_pw;
     private ModelUser user = new ModelUser();
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class LoginActivity extends LoginInformation {
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
         setbyid();
 
@@ -79,7 +83,14 @@ public class LoginActivity extends LoginInformation {
             case R.id.btn_login:
                 user.setID(et_login_id.getText().toString());
                 user.setPW(et_login_pw.getText().toString());
-                new LoginActivity.Login().execute(user);
+                user.setToken(istoken.toString());
+                netcheck = networkcheck();
+                if(netcheck == true) {
+                    new LoginActivity.Login().execute(user);
+                } else {
+                    Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent2, 7777);
+                }
                 break;
         }
     }
@@ -161,12 +172,41 @@ public class LoginActivity extends LoginInformation {
                 setResult(RESULT_OK, intent);
                 Toast.makeText(LoginActivity.this, "로그인을 환영합니다.", Toast.LENGTH_SHORT).show();
                 finish();
+
             } else if (s.getOK() == 2) {
                 Toast.makeText(LoginActivity.this, "로그인 승인 대기를 기다려야합니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
     }
+    // 네트워크 체크
+    private boolean networkcheck(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if(wifi == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777 ) {
+            if (resultCode == RESULT_OK) {
+
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+    }
+
+
 
     /*// 액션바 우측 안보이는 이미지.. (가운데정렬)
     @Override

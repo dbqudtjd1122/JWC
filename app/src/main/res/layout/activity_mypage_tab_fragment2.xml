@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.user.mypage.MypageTabFragment2"
+    tools:context="com.example.bsyoo.jwc.mainmenu.mypage.MypageTabFragment2"
     tools:showIn="@layout/activity_mypage">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:id="@+id/btn_serialcode_addgo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="정품 등록하러 가기"
+            android:text="DVR 정품 등록"
             android:background="#ff3c3c"
             android:textSize="20dp"
             android:textStyle="bold"

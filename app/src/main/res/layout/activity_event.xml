@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bsyoo.jwc.mainimage.notice.EventActivity">
+    tools:context="com.example.bsyoo.jwc.mainmenu.notice.EventActivity">
 
     <ListView
         android:id="@+id/event_list"

@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 public class LoginInformation extends AppCompatActivity {
 
     public SharedPreferences pref = null;
-    public String isid, isemail;
-    public Integer isnumber, islevel;
+    public String isid, isemail, istoken;
+    public Integer isnumber, islevel, ispush;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class LoginInformation extends AppCompatActivity {
         islevel = pref.getInt("level_Set", -1);
         isnumber = pref.getInt("number_Set", -1);
         isemail = pref.getString("email_Set", "" ).toString();
-
+        istoken = pref.getString("token_Set", "").toString();
+        ispush = pref.getInt("pref_Set", 1);
     }
 }

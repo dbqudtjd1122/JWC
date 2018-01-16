@@ -80,13 +80,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/img_work"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:gravity="center"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/img_company" />
+            app:srcCompat="@drawable/img_work1" />
     </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bsyoo.jwc.cctvinstall.CctvInstallTabFragment1"
+    tools:context="com.example.bsyoo.jwc.mainimage.cctvinstall.CctvInstallTabFragment1"
     tools:showIn="@layout/activity_cctv_install">
 
     <ScrollView

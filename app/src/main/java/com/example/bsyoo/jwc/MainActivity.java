@@ -1,5 +1,6 @@
 package com.example.bsyoo.jwc;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,11 +8,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,8 +21,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,24 +30,26 @@ import android.support.v4.view.ViewPager;
 import android.view.View.OnClickListener;
 
 import com.example.bsyoo.jwc.adapter.BackCloseHandler;
-import com.example.bsyoo.jwc.camera.CameraActivity;
-import com.example.bsyoo.jwc.cctvinstall.CctvInstallActivity;
+import com.example.bsyoo.jwc.mainimage.camera.CameraActivity;
+import com.example.bsyoo.jwc.mainimage.cctvinstall.CctvInstallActivity;
+import com.example.bsyoo.jwc.hppt.HttpUser;
 import com.example.bsyoo.jwc.mainimage.Company.CompanyActivity;
 import com.example.bsyoo.jwc.mainimage.agency.AgencyActivity;
 import com.example.bsyoo.jwc.mainimage.Cases.CasesActivity;
 import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;
-import com.example.bsyoo.jwc.mainimage.notice.EventInfoActivity;
+import com.example.bsyoo.jwc.mainmenu.SetUp;
+import com.example.bsyoo.jwc.mainmenu.notice.EventInfoActivity;
 import com.example.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.example.bsyoo.jwc.mainimage.series.SeriesActivity;
-import com.example.bsyoo.jwc.mainimage.notice.EventActivity;
-import com.example.bsyoo.jwc.mainimage.notice.NoticeActivity;
+import com.example.bsyoo.jwc.mainmenu.notice.EventActivity;
+import com.example.bsyoo.jwc.mainmenu.notice.NoticeActivity;
 import com.example.bsyoo.jwc.model.ModelNotice;
-import com.example.bsyoo.jwc.school.SchoolActivity;
+import com.example.bsyoo.jwc.model.ModelUser;
+import com.example.bsyoo.jwc.mainimage.school.SchoolActivity;
 import com.example.bsyoo.jwc.user.Login.LoginActivity;
-import com.example.bsyoo.jwc.user.mypage.MypageActivity;
+import com.example.bsyoo.jwc.mainmenu.mypage.MypageActivity;
+import com.example.bsyoo.jwc.mainmenu.mypage.PwCheckActivity;
 import com.example.bsyoo.jwc.viewpager.ViewPagerAdapter;
-
-import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity
@@ -201,7 +202,7 @@ public class MainActivity extends AppCompatActivity
         switch (view.getId()) {
             case R.id.image_new:
                 Intent intent1 = new Intent(this, SeriesActivity.class);
-                intent1.putExtra("series", "JWC-Q 400만화소");
+                intent1.putExtra("new", "1");
                 startActivity(intent1);
                 break;
             case R.id.image_camera:
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.img_supporter:
                 Intent intnet4 = new Intent(this, SchoolActivity.class);
-                startActivity(intnet4);
+                startActivityForResult(intnet4, 489);
                 break;
             case R.id.img_company:
                 Intent intent5 = new Intent(this, CompanyActivity.class);
@@ -313,7 +314,7 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 999);
         } else if (id == R.id.menu_mypage) {
             Intent intent = new Intent(MainActivity.this, MypageActivity.class);
-            startActivityForResult(intent, 555);
+            startActivity(intent);
         } else if (id == R.id.menu_notice) {
             Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
             startActivity(intent);
@@ -323,13 +324,16 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.menu_company) {
             Intent intent = new Intent(MainActivity.this, CompanyActivity.class);
             startActivity(intent);
-        } else if (id == R.id.menu_reference) {
-            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.menu_logout) {
+        }  else if (id == R.id.menu_logout) {
             Logout();
             Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.menu_setting) {
-            Toast.makeText(this, "준비중 입니다.", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.menu_setup) {
+            Intent intent = new Intent(MainActivity.this, SetUp.class);
+            startActivity(intent);
+        } else if (id == R.id.menu_userdelete){
+            Intent intent = new Intent(MainActivity.this, PwCheckActivity.class);
+            intent.putExtra("account", "탈퇴");
+            startActivityForResult(intent, 555);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -381,7 +385,7 @@ public class MainActivity extends AppCompatActivity
         menu.findItem(R.id.menu_login).setVisible(false);
         menu.findItem(R.id.menu_mypage).setVisible(true);
         menu.findItem(R.id.menu_logout).setVisible(true);
-        menu.findItem(R.id.menu_setting).setVisible(true);
+        menu.findItem(R.id.menu_userdelete).setVisible(true);
     }
 
     // 로그아웃했을때
@@ -389,20 +393,28 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
+        String user_num = pref.getString("id_Set", "").toString();
+
+        ModelUser user = new ModelUser();
+        user.setID(user_num);
+        user.setToken("");
+
+        // 토큰 초기화
+        new MainActivity.TokenUpdate().execute(user);
+
         editor.remove("id_Set");
         editor.remove("level_Set");
         editor.remove("number_Set");
         editor.remove("email_Set");
 
-        editor.clear();
-        editor.commit();
+        editor.apply();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.menu_login).setVisible(true);
         menu.findItem(R.id.menu_mypage).setVisible(false);
         menu.findItem(R.id.menu_logout).setVisible(false);
-        menu.findItem(R.id.menu_setting).setVisible(false);
+        menu.findItem(R.id.menu_userdelete).setVisible(false);
     }
 
     @Override
@@ -425,6 +437,58 @@ public class MainActivity extends AppCompatActivity
             //리턴값이 없을때
             else {
             }
+        }
+        // 교육신청 액티비티에서 오는 Result
+        if (requestCode == 489) {
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivityForResult(intent, 999);
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+    }
+
+    // 로그아웃 토큰 초기화(업데이트)
+    public class TokenUpdate extends AsyncTask<ModelUser, Integer, Integer> {
+
+        private ProgressDialog waitDlg = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // ProgressDialog 보이기
+            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
+            waitDlg = new ProgressDialog(MainActivity.this);
+            waitDlg.setMessage("로그아웃 중 입니다.");
+            waitDlg.show();
+        }
+
+        @Override
+        protected Integer doInBackground(ModelUser... params) {
+
+            Integer count = new HttpUser().TokenUpdate(params[0]);
+
+            return count;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Integer s) {
+            super.onPostExecute(s);
+
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+
         }
     }
 

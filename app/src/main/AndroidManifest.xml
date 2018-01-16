@@ -4,7 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <user-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+
+    <user-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+
+    <!-- 와이파이, 데이터 연결 확인 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +22,6 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/BigAppTheme.NoActionBar" />
-
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme2">
@@ -27,8 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".mainimage.notice.NoticeActivity">
+        <activity android:name=".mainmenu.notice.NoticeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -38,33 +41,32 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".mainimage.notice.EventActivity">
+        <activity android:name=".mainmenu.notice.EventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-            <meta-data
-                android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
-                android:value="GlideModule" />
-        </activity>
-
-        <activity android:name=".mainimage.Company.CompanyActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-
-        <activity android:name=".mainimage.notice.NoticeInfoActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainimage.notice.NoticeActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
         <activity
-            android:name=".camera.CameraActivity"
+            android:name=".mainimage.Company.CompanyActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".mainmenu.notice.NoticeInfoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.notice.NoticeActivity" />
+            <meta-data
+                android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
+                android:value="GlideModule" />
+        </activity>
+        <activity
+            android:name=".mainimage.camera.CameraActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -74,10 +76,10 @@
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".mainimage.notice.EventInfoActivity">
+        <activity android:name=".mainmenu.notice.EventInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainimage.notice.EventActivity" />
+                android:value=".mainmenu.notice.EventActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
@@ -99,7 +101,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".user.mypage.MypageActivity"
+            android:name=".mainmenu.mypage.MypageActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -111,30 +113,58 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".user.mypage.PwCheckActivity" />
+        <activity android:name=".mainmenu.mypage.PwCheckActivity" />
         <activity android:name=".user.Login.IDPWSearch.IDPWSearchActivity" />
-        <activity android:name=".user.mypage.MypageModifiedActivity" />
-        <activity android:name=".user.mypage.DeleteUserActivity" />
-        <activity android:name=".school.SchoolActivity" />
-        <activity android:name=".school.SchoolInfoActivity" />
-        <activity android:name=".school.SchoolWriteActivity" />
-        <activity android:name=".mainimage.agency.AgencyActivity" />
-        <activity android:name=".user.mypage.SerialCodeAddActivity" />
+        <activity android:name=".mainmenu.mypage.MypageModifiedActivity" />
+        <activity android:name=".mainmenu.mypage.DeleteUserActivity" />
+        <activity android:name=".mainimage.school.SchoolActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".mainimage.school.SchoolInfoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainimage.school.SchoolActivity" />
+        </activity>
+        <activity android:name=".mainimage.school.SchoolWriteActivity" />
+        <activity android:name=".mainimage.agency.AgencyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".mainmenu.mypage.SerialCodeAddActivity" />
         <activity
             android:name=".mainimage.Technology.TechnologyActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".mainimage.Technology.TechnologyInfoActivity" />
         <activity
-            android:name=".cctvinstall.CctvInstallActivity"
+            android:name=".mainimage.cctvinstall.CctvInstallActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".mainimage.Cases.CasesActivity" />
-        <activity android:name=".user.mypage.AgencyTopicActivity" />
-        <activity android:name=".user.mypage.AgencyTopicWriteActivity" />
-        <activity android:name=".user.mypage.AgencyTopicReviewActivity" />
-
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".mainimage.Cases.CasesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".mainmenu.mypage.AgencyTopicActivity" />
+        <activity android:name=".mainmenu.mypage.AgencyTopicWriteActivity" />
+        <activity android:name=".mainmenu.mypage.AgencyTopicReviewActivity" />
+        <activity android:name=".network.NetworkCheck" />
+        <activity android:name=".mainmenu.SetUp">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
         <service android:name=".fmcpush.FirebaseMessagingService">
             <intent-filter>
@@ -146,6 +176,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
 
     </application>
 

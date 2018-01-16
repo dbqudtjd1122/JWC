@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.adapter.AdapterCamera;
 import com.example.bsyoo.jwc.hppt.HttpCamera;
 import com.example.bsyoo.jwc.model.ModelCamera;
+import com.example.bsyoo.jwc.network.Network;
+import com.example.bsyoo.jwc.network.NetworkCheck;
 import com.example.bsyoo.jwc.user.Login.LoginInformation;
 
 import java.util.ArrayList;
@@ -27,6 +31,10 @@ public class SeriesActivity extends LoginInformation {
     private List<ModelCamera> cameralist;
     private ModelCamera camera = new ModelCamera();
     private GridView listView;
+
+    private String series, newcamera;
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +50,8 @@ public class SeriesActivity extends LoginInformation {
         listView = (GridView) findViewById(R.id.series_list);
 
         Intent intent = getIntent();
-        String series = intent.getStringExtra("series");
-
-        setTitle(series);
+        series = intent.getStringExtra("series");
+        newcamera = intent.getStringExtra("new");
 
         // 출력 데이터 생성
         cameralist = new ArrayList<>();
@@ -54,9 +61,30 @@ public class SeriesActivity extends LoginInformation {
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
-        new SeriesActivity.getCameraInfoList().execute(series);
 
-        listView.setOnItemClickListener( new SeriesActivity.OnItemHandler());
+        if (newcamera != null) {
+            if (newcamera.equals("1")) {
+                setTitle("신제품 안내");
+                netcheck = networkcheck();
+                if (netcheck == true) {
+                    new SeriesActivity.getCameraInfoList().execute(newcamera);
+                } else {
+                    Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent2, 7777);
+                }
+            }
+        } else {
+            setTitle(series);
+            netcheck = networkcheck();
+            if (netcheck == true) {
+                new SeriesActivity.getCameraInfoList().execute(series);
+            } else {
+                Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
+                startActivityForResult(intent2, 7777);
+            }
+        }
+
+        listView.setOnItemClickListener(new SeriesActivity.OnItemHandler());
         listView.setOnItemLongClickListener(new SeriesActivity.OnItemHandler());
         listView.setOnItemSelectedListener(new SeriesActivity.OnItemHandler());
     }
@@ -70,6 +98,7 @@ public class SeriesActivity extends LoginInformation {
             intent.putExtra("level", islevel);
             startActivity(intent);
         }
+
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             return false;
@@ -83,6 +112,38 @@ public class SeriesActivity extends LoginInformation {
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
+        }
+    }
+
+    // 네트워크 체크
+    private boolean networkcheck() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if (wifi == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777) {
+            if (resultCode == RESULT_OK) {
+                if (newcamera != null) {
+                    if (newcamera.equals("1")) {
+                        new getCameraInfoList().execute(newcamera);
+                    }
+                } else {
+                    new getCameraInfoList().execute(series);
+                }
+            }
+        }
+        //리턴값이 없을때
+        else {
         }
     }
 
@@ -104,7 +165,13 @@ public class SeriesActivity extends LoginInformation {
         protected List<ModelCamera> doInBackground(String... params) {
 
             try {
-                cameralist = new HttpCamera().getCameraInfoList(params[0].toString());
+                if (newcamera != null) {
+                    if (newcamera.equals("1")) {
+                        cameralist = new HttpCamera().getCameraNewList(params[0].toString());
+                    }
+                } else {
+                    cameralist = new HttpCamera().getCameraInfoList(params[0].toString());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -119,7 +186,7 @@ public class SeriesActivity extends LoginInformation {
         @Override
         protected void onPostExecute(List<ModelCamera> list) {
             super.onPostExecute(list);
-            // 1.
+
             cameralist = list;
             adapter.clear();
             adapter.addAll(cameralist);

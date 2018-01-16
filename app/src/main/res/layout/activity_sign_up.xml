@@ -437,9 +437,9 @@
                             android:id="@+id/ch_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#ff0000"
+                            android:buttonTint="#9f9f9f"
                             android:checked="true"
-                            android:text="광고성 정보, 이벤트 메일 수신" />
+                            android:text="이벤트 정보 메일 수신" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -452,7 +452,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="주문 관련 정보, 주요 공지사항 및 이벤트 당첨 안내 등은 수신 동의 여부에 관계없이 자동 발송됩니다."
+                            android:text="주문 관련 정보, 주요 공지사항 및 이벤트 당첨 안내 등은 수신 동의 거부시에 발송이 제외될수 있습니다."
                             android:textSize="13dp" />
 
                     </LinearLayout>
@@ -693,9 +693,9 @@
                             android:id="@+id/ch_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#ff0000"
+                            android:buttonTint="#9f9f9f"
                             android:checked="true"
-                            android:text="광고성 정보, 이벤트 SMS 수신" />
+                            android:text="이벤트 SMS 수신" />
 
                     </LinearLayout>
 
@@ -709,8 +709,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="주문 관련 정보, 주요 공지사항 및 이벤트 당첨 안내 등은 수신 동의 여부에 관계없이 자동 발송됩니다."
-                            android:textSize="13dp"></TextView>
+                            android:text="주문 관련 정보, 주요 공지사항 및 이벤트 당첨 안내 등은 수신 동의 거부시에 발송이 제외될수 있습니다."
+                            android:textSize="13dp">
+
+                        </TextView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -1153,6 +1155,13 @@
                             android:textCursorDrawable="@null"
                             android:textSize="15dp"
                             android:theme="@style/MyEditTextStyle" />
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="CCTV관련 업태, 업종만 사업자 승인됩니다." />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

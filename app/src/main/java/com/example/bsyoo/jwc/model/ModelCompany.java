@@ -5,6 +5,7 @@ public class ModelCompany {
     private String Team_name;
     private String Team_Title;
     private Integer Img_Company;
+    private Integer Img_Work;
     private String Tv_Company;
 
 
@@ -14,18 +15,28 @@ public class ModelCompany {
                 "Team_name='" + Team_name + '\'' +
                 ", Team_Title='" + Team_Title + '\'' +
                 ", Img_Company=" + Img_Company +
+                ", Img_Work=" + Img_Work +
                 ", Tv_Company='" + Tv_Company + '\'' +
                 '}';
+    }
+
+    public ModelCompany(String team_name, String team_Title, Integer img_Company, Integer img_Work, String tv_Company) {
+        Team_name = team_name;
+        Team_Title = team_Title;
+        Img_Company = img_Company;
+        Img_Work = img_Work;
+        Tv_Company = tv_Company;
     }
 
     public ModelCompany() {
     }
 
-    public ModelCompany(String team_name, String team_Title, Integer img_Company, String tv_Company) {
-        Team_name = team_name;
-        Team_Title = team_Title;
-        Img_Company = img_Company;
-        Tv_Company = tv_Company;
+    public Integer getImg_Work() {
+        return Img_Work;
+    }
+
+    public void setImg_Work(Integer img_Work) {
+        Img_Work = img_Work;
     }
 
     public String getTeam_Title() {

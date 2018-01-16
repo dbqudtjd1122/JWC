@@ -23,28 +23,8 @@ public class ModelUser implements Serializable {
     private Integer Phone_sms;
     private Integer Push;
     private Integer OK;
+    private String Token;
 
-
-    public ModelUser(Integer user_Number, String ID, String email, Integer level, String PW, String name, String phone_home, String phone, String addr, String mutual, String representation, String buisness_number, String sectors, Date userTime, Integer email_sms, Integer phone_sms, Integer push, Integer OK) {
-        User_Number = user_Number;
-        this.ID = ID;
-        Email = email;
-        Level = level;
-        this.PW = PW;
-        Name = name;
-        Phone_home = phone_home;
-        Phone = phone;
-        Addr = addr;
-        Mutual = mutual;
-        Representation = representation;
-        Buisness_number = buisness_number;
-        Sectors = sectors;
-        UserTime = userTime;
-        Email_sms = email_sms;
-        Phone_sms = phone_sms;
-        Push = push;
-        this.OK = OK;
-    }
 
     @Override
     public String toString() {
@@ -67,13 +47,43 @@ public class ModelUser implements Serializable {
                 ", Phone_sms=" + Phone_sms +
                 ", Push=" + Push +
                 ", OK=" + OK +
+                ", Token='" + Token + '\'' +
                 '}';
+    }
+
+    public ModelUser(Integer user_Number, String ID, String email, Integer level, String PW, String name, String phone_home, String phone, String addr, String mutual, String representation, String buisness_number, String sectors, Date userTime, Integer email_sms, Integer phone_sms, Integer push, Integer OK, String token) {
+        User_Number = user_Number;
+        this.ID = ID;
+        Email = email;
+        Level = level;
+        this.PW = PW;
+        Name = name;
+        Phone_home = phone_home;
+        Phone = phone;
+        Addr = addr;
+        Mutual = mutual;
+        Representation = representation;
+        Buisness_number = buisness_number;
+        Sectors = sectors;
+        UserTime = userTime;
+        Email_sms = email_sms;
+        Phone_sms = phone_sms;
+        Push = push;
+        this.OK = OK;
+        Token = token;
     }
 
     public ModelUser() {
         super();
     }
 
+    public String getToken() {
+        return Token;
+    }
+
+    public void setToken(String token) {
+        Token = token;
+    }
 
     public Date getUserTime() {
         return UserTime;

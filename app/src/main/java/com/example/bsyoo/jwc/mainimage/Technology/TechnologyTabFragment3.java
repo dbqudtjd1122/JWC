@@ -33,6 +33,14 @@ public class TechnologyTabFragment3 extends TechnologyFragment {
     }
 
     @Override
+    public void recall() {
+        super.recall();
+        if(getNet()==true) {
+            new TechnologyTabFragment3.getCameraList().execute("ETC");
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_technology_tab_fragment3, container, false);

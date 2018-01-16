@@ -1,7 +1,11 @@
 package com.example.bsyoo.jwc.hppt;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.example.bsyoo.jwc.model.ModelSchool;
 import com.example.bsyoo.jwc.model.ModelUserSchool;
+import com.example.bsyoo.jwc.network.Network;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,7 +20,7 @@ public class HttpSchool {
 
     // 교육 리스트 가져오기
     public List<ModelSchool> SchoolList(){
-        String weburl = "http://61.75.50.145:8187/school/getSchool";
+        String weburl = "http://jwcctv1.cafe24.com/school/getSchool";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -51,7 +55,7 @@ public class HttpSchool {
 
     // 교육신청 마무리
     public Integer insertSchoolUser(ModelUserSchool user){
-        String weburl = "http://61.75.50.145:8187/school/insertschooluser";
+        String weburl = "http://jwcctv1.cafe24.com/school/insertschooluser";
 
         HttpRequest request = null;
         String response = null;
@@ -84,7 +88,7 @@ public class HttpSchool {
 
     // 교육신청정보 가져오기
     public Integer getSchoolUser(ModelUserSchool model){
-        String weburl = "http://61.75.50.145:8187/school/getschooluser";
+        String weburl = "http://jwcctv1.cafe24.com/school/getschooluser";
 
         HttpRequest request = null;
         String response = null;

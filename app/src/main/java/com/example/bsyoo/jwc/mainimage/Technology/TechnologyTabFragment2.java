@@ -33,6 +33,14 @@ public class TechnologyTabFragment2 extends TechnologyFragment {
     }
 
     @Override
+    public void recall() {
+        super.recall();
+        if(getNet()==true) {
+            new TechnologyTabFragment2.getCameraList().execute("DVR");
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_technology_tab_fragment2, container, false);

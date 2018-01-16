@@ -1,14 +1,12 @@
 package com.example.bsyoo.jwc.user.Login;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,7 +15,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
-import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -29,8 +26,12 @@ import android.widget.Toast;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.HttpSignUp;
 import com.example.bsyoo.jwc.model.ModelUser;
+import com.example.bsyoo.jwc.network.Network;
+import com.example.bsyoo.jwc.network.NetworkCheck;
 import com.example.bsyoo.jwc.user.terms.TermsActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -46,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
     // ID, Email 중복확인
     private int idcheck = 0;
     private int emailcheck = 0;
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +131,15 @@ public class SignUpActivity extends AppCompatActivity {
             else {
             }
         }
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777 ) {
+            if (resultCode == RESULT_OK) {
+
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
     }
 
     public void signClick(View view) {
@@ -138,8 +150,13 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(this, "아이디를 6자리 이상 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
-
-                    new SignUpActivity.HttpIDCheck().execute(user);
+                    netcheck = networkcheck();
+                    if(netcheck == true) {
+                        new SignUpActivity.HttpIDCheck().execute(user);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                        startActivityForResult(intent, 7777);
+                    }
                 }
                 break;
             case R.id.btn_email_check:
@@ -148,7 +165,13 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(this, "이메일을 정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
-                    new SignUpActivity.HttpEmailCheck().execute(user);
+                    netcheck = networkcheck();
+                    if(netcheck == true) {
+                        new SignUpActivity.HttpEmailCheck().execute(user);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                        startActivityForResult(intent, 7777);
+                    }
                 }
                 break;
             case R.id.btn_addr:
@@ -179,6 +202,9 @@ public class SignUpActivity extends AppCompatActivity {
                 user.setAddr(tv_addr1.getText().toString() + " " + tv_addr2.getText().toString() + " / " + et_addr3.getText().toString());
                 user.setPhone(et_phone1.getText().toString() + et_phone2.getText().toString() + et_phone3.getText().toString());
                 user.setPhone_home(et_hphone1.getText().toString() +"-"+ et_hphone2.getText().toString() +"."+ et_hphone3.getText().toString());
+
+                Date mDate = new Date();
+                user.setUserTime(mDate);
                 if (ch_email.isChecked() == true) {
                     user.setEmail_sms(1);
                 } else {
@@ -241,8 +267,13 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(this, "모든 이용약관에 동의해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 }
-
-                new SignUp().execute(user);
+                netcheck = networkcheck();
+                if(netcheck == true) {
+                    new SignUp().execute(user);
+                } else {
+                    Intent intent4 = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent4, 7777);
+                }
                 break;
         }
     }
@@ -446,6 +477,19 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(SignUpActivity.this, "사용가능한 Email 입니다.", Toast.LENGTH_SHORT).show();
                 emailcheck = 1;
             }
+        }
+    }
+
+
+    // 네트워크 체크
+    private boolean networkcheck(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if(wifi == true){
+            return true;
+        } else {
+            return false;
         }
     }
 }

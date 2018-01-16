@@ -14,6 +14,7 @@ public class ModelUserSerialCode implements Parcelable{
 	private String Onlinename     ; // 제품 이름
 	private String Serial_Code    ;
     private String Img_title      ;
+    private String Company_Info   ;  // 구입처
 
 
     protected ModelUserSerialCode(Parcel in) {
@@ -22,6 +23,7 @@ public class ModelUserSerialCode implements Parcelable{
         Onlinename = in.readString();
         Serial_Code = in.readString();
         Img_title = in.readString();
+        Company_Info = in.readString();
     }
 
     public static final Creator<ModelUserSerialCode> CREATOR = new Creator<ModelUserSerialCode>() {
@@ -46,10 +48,11 @@ public class ModelUserSerialCode implements Parcelable{
                 ", Onlinename='" + Onlinename + '\'' +
                 ", Serial_Code='" + Serial_Code + '\'' +
                 ", Img_title='" + Img_title + '\'' +
+                ", Company_Info='" + Company_Info + '\'' +
                 '}';
     }
 
-    public ModelUserSerialCode(Integer serial_Number, Integer user_Number, String cameratype, String onlineseries, String onlinename, String serial_Code, String img_title) {
+    public ModelUserSerialCode(Integer serial_Number, Integer user_Number, String cameratype, String onlineseries, String onlinename, String serial_Code, String img_title, String company_Info) {
         Serial_Number = serial_Number;
         User_Number = user_Number;
         Cameratype = cameratype;
@@ -57,11 +60,19 @@ public class ModelUserSerialCode implements Parcelable{
         Onlinename = onlinename;
         Serial_Code = serial_Code;
         Img_title = img_title;
+        Company_Info = company_Info;
     }
 
     public ModelUserSerialCode() {
     }
 
+    public String getCompany_Info() {
+        return Company_Info;
+    }
+
+    public void setCompany_Info(String company_Info) {
+        Company_Info = company_Info;
+    }
 
     public String getImg_title() {
         return Img_title;
@@ -119,6 +130,7 @@ public class ModelUserSerialCode implements Parcelable{
         Onlinename = onlinename;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -131,5 +143,6 @@ public class ModelUserSerialCode implements Parcelable{
         dest.writeString(Onlinename);
         dest.writeString(Serial_Code);
         dest.writeString(Img_title);
+        dest.writeString(Company_Info);
     }
 }

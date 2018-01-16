@@ -13,6 +13,10 @@ public class ModelSchool implements Serializable {
 	private Date Lecture_Time    ;
 	private String Img_title     ;
 	private String Img_info      ;
+    private String Team          ;
+    private String Manager       ;
+    private String ManagerPhone  ;
+
 
     @Override
     public String toString() {
@@ -24,13 +28,13 @@ public class ModelSchool implements Serializable {
                 ", Lecture_Time=" + Lecture_Time +
                 ", Img_title='" + Img_title + '\'' +
                 ", Img_info='" + Img_info + '\'' +
+                ", Team='" + Team + '\'' +
+                ", Manager='" + Manager + '\'' +
+                ", ManagerPhone='" + ManagerPhone + '\'' +
                 '}';
     }
 
-    public ModelSchool() {
-    }
-
-    public ModelSchool(Integer school_Number, String start_End, String school_Title, String apply_Time, Date lecture_Time, String img_title, String img_info) {
+    public ModelSchool(Integer school_Number, String start_End, String school_Title, String apply_Time, Date lecture_Time, String img_title, String img_info, String team, String manager, String managerPhone) {
         School_Number = school_Number;
         Start_End = start_End;
         School_Title = school_Title;
@@ -38,6 +42,37 @@ public class ModelSchool implements Serializable {
         Lecture_Time = lecture_Time;
         Img_title = img_title;
         Img_info = img_info;
+        Team = team;
+        Manager = manager;
+        ManagerPhone = managerPhone;
+    }
+
+    public ModelSchool() {
+    }
+
+
+    public String getTeam() {
+        return Team;
+    }
+
+    public void setTeam(String team) {
+        Team = team;
+    }
+
+    public String getManager() {
+        return Manager;
+    }
+
+    public void setManager(String manager) {
+        Manager = manager;
+    }
+
+    public String getManagerPhone() {
+        return ManagerPhone;
+    }
+
+    public void setManagerPhone(String managerPhone) {
+        ManagerPhone = managerPhone;
     }
 
     public Integer getSchool_Number() {

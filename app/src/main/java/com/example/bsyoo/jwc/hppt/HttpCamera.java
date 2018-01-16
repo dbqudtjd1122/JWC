@@ -15,7 +15,7 @@ import java.util.List;
 public class HttpCamera {
 
     public List<ModelCamera> getCameraList(String type) {
-        String weburl = "http://61.75.50.145:8187/jwccamera/cameralist";
+        String weburl = "http://jwcctv1.cafe24.com/jwccamera/cameralist";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -51,7 +51,7 @@ public class HttpCamera {
     }
 
     public List<ModelCamera> getCameraInfoList(String series) {
-        String weburl = "http://61.75.50.145:8187/jwccamera/getCameraInfoList";
+        String weburl = "http://jwcctv1.cafe24.com/jwccamera/getCameraInfoList";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -86,8 +86,44 @@ public class HttpCamera {
         }
     }
 
+    public List<ModelCamera> getCameraNewList(String newcamera) {
+        String weburl = "http://jwcctv1.cafe24.com/jwccamera/getCameraNewList";
+
+        HttpRequest request = null;
+        JSONArray response = null;
+        List<ModelCamera> cameraList = null;
+
+        int httpCode = 0;
+        try {
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+            request.addParameter("Newcamera", newcamera);
+
+            httpCode = request.post();
+
+            if (httpCode == HttpURLConnection.HTTP_OK) { // HttpURLConnection.HTTP_OK == 200
+                try {
+                    response = request.getJSONArrayResponse(); // 서버값이 리턴된다
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+            }
+
+            String jsonInString = response.toString();
+            cameraList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelCamera>>() {
+            }.getType());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+            return cameraList;
+        }
+    }
+
     public List<ModelCamera> getCameraSearchList(String search) {
-        String weburl = "http://61.75.50.145:8187/jwccamera/getCameraSearchList";
+        String weburl = "http://jwcctv1.cafe24.com/jwccamera/getCameraSearchList";
 
         HttpRequest request = null;
         JSONArray response = null;

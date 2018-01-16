@@ -1,19 +1,29 @@
 package com.example.bsyoo.jwc.mainimage.Technology;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.bsyoo.jwc.R;
+import com.example.bsyoo.jwc.mainimage.camera.CameraFragment;
+import com.example.bsyoo.jwc.network.Network;
+import com.example.bsyoo.jwc.network.NetworkCheck;
+
+import java.util.List;
 
 public class TechnologyActivity extends AppCompatActivity  {
 
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +39,18 @@ public class TechnologyActivity extends AppCompatActivity  {
         getSupportActionBar().setBackgroundDrawable(d);
         getSupportActionBar().setTitle("기술자료");
 
+        // 뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         // TabLayout 초기화
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
         tabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
 
-        tabLayout.addTab(tabLayout.newTab().setText("카메라 영상"));
-        tabLayout.addTab(tabLayout.newTab().setText("녹화기 영상"));
-        tabLayout.addTab(tabLayout.newTab().setText("기타 영상"));
+        tabLayout.addTab(tabLayout.newTab().setText("카메라"));
+        tabLayout.addTab(tabLayout.newTab().setText("녹화기"));
+        tabLayout.addTab(tabLayout.newTab().setText("기타"));
 
         // ViewPager 초기화
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -50,6 +63,13 @@ public class TechnologyActivity extends AppCompatActivity  {
 
         // 탭 시작지점 정하는부분
         viewPager.setCurrentItem(0);
+
+        netcheck = networkcheck();
+        if (netcheck == true) {
+        } else {
+            Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+            startActivityForResult(intent, 7777);
+        }
 
 
         // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
@@ -83,5 +103,42 @@ public class TechnologyActivity extends AppCompatActivity  {
                 viewPager.setCurrentItem( tab.getPosition());
             }
         });
+    }
+
+    // 네트워크 체크
+    private boolean networkcheck() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if (wifi == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777) {
+            if (resultCode == RESULT_OK) {
+                setValueFragment();
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+    }
+
+    public void setValueFragment(){
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if(fragments != null){
+            for(Fragment fragment : fragments){
+                if(fragment != null && fragment.isVisible())
+                    ((CameraFragment)fragment).setNet(true);
+            }
+        }
     }
 }

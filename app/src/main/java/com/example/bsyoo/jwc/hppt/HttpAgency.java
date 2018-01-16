@@ -18,7 +18,7 @@ public class HttpAgency {
 
     // 대리점 목록 및 내용
     public List<ModelAgency> getAgencyList(){
-        String weburl = "http://61.75.50.145:8187/agency/getagencylist";
+        String weburl = "http://jwcctv1.cafe24.com/agency/getagencylist";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -53,7 +53,7 @@ public class HttpAgency {
 
     // 대리점 게시판 리스트 가져오기
     public List<ModelAgencyTopic> getAgencyTopicList(){
-        String weburl = "http://61.75.50.145:8187/agency/getagencytopic";
+        String weburl = "http://jwcctv1.cafe24.com/agency/getagencytopic";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -88,7 +88,7 @@ public class HttpAgency {
 
     // 게시글 작성
     public Integer InsertTopic(ModelAgencyTopic topic){
-        String weburl = "http://61.75.50.145:8187/agency/inserttopic";
+        String weburl = "http://jwcctv1.cafe24.com/agency/inserttopic";
 
         HttpRequest request = null;
         String response = null;
@@ -118,7 +118,7 @@ public class HttpAgency {
 
     // 게시글 업데이트
     public Integer UpdateTopic(ModelAgencyTopic topic){
-        String weburl = "http://61.75.50.145:8187/agency/updatetopic";
+        String weburl = "http://jwcctv1.cafe24.com/agency/updatetopic";
 
         HttpRequest request = null;
         String response = null;
@@ -147,7 +147,7 @@ public class HttpAgency {
 
     // 게시글 삭제
     public Integer DeleteTopic(ModelAgencyTopic topic){
-        String weburl = "http://61.75.50.145:8187/agency/deletetopic";
+        String weburl = "http://jwcctv1.cafe24.com/agency/deletetopic";
 
         HttpRequest request = null;
         String response = null;
@@ -176,7 +176,7 @@ public class HttpAgency {
 
     // 대리점 리뷰 리스트 가져오기
     public List<ModelAgencyTopicReview> getAgencyReviewList(ModelAgencyTopic topic){
-        String weburl = "http://61.75.50.145:8187/agency/getreview";
+        String weburl = "http://jwcctv1.cafe24.com/agency/getreview";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -214,7 +214,7 @@ public class HttpAgency {
 
     // 리뷰 작성
     public Integer InsertReview(ModelAgencyTopicReview review){
-        String weburl = "http://61.75.50.145:8187/agency/insertreview";
+        String weburl = "http://jwcctv1.cafe24.com/agency/insertreview";
 
         HttpRequest request = null;
         String response = null;
@@ -244,7 +244,7 @@ public class HttpAgency {
 
     // 리뷰 삭제
     public Integer DeleteReview(ModelAgencyTopicReview review){
-        String weburl = "http://61.75.50.145:8187/agency/deletereview";
+        String weburl = "http://jwcctv1.cafe24.com/agency/deletereview";
 
         HttpRequest request = null;
         String response = null;

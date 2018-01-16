@@ -8,27 +8,18 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.bsyoo.jwc.R;
 import com.example.bsyoo.jwc.hppt.HttpSerialCode;
 import com.example.bsyoo.jwc.model.ModelUserSerialCode;
-import com.example.bsyoo.jwc.user.mypage.MypageActivity;
-import com.example.bsyoo.jwc.user.mypage.MypageFragment;
-import com.example.bsyoo.jwc.user.mypage.MypageTabFragment2;
 
-import junit.framework.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterSerialCode extends ArrayAdapter<ModelUserSerialCode> {

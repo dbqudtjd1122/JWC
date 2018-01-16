@@ -28,6 +28,7 @@ public class AdapterCompany extends ArrayAdapter<ModelCompany> {
 
     class ViewHolder{
         ImageView img_company;
+        ImageView img_work;
         TextView tv_company;
         TextView tv_teamname;
         TextView tv_title;
@@ -42,6 +43,7 @@ public class AdapterCompany extends ArrayAdapter<ModelCompany> {
         if(viewHolder == null){
             viewHolder = new ViewHolder();
             viewHolder.img_company = (ImageView) itemLayout.findViewById(R.id.img_company);
+            viewHolder.img_work = (ImageView) itemLayout.findViewById(R.id.img_work);
             viewHolder.tv_company = (TextView) itemLayout.findViewById(R.id.tv_company);
             viewHolder.tv_teamname = (TextView) itemLayout.findViewById(R.id.tv_teamname);
             viewHolder.tv_title = (TextView) itemLayout.findViewById(R.id.tv_title);
@@ -57,7 +59,9 @@ public class AdapterCompany extends ArrayAdapter<ModelCompany> {
         if (getItem(position).getImg_Company() != null){
             viewHolder.img_company.setImageResource(getItem(position).getImg_Company());
         }
-
+        if (getItem(position).getImg_Work() != null){
+            viewHolder.img_work.setImageResource(getItem(position).getImg_Work());
+        }
 
 
         return itemLayout;

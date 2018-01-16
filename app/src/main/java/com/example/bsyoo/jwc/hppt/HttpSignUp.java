@@ -14,7 +14,7 @@ public class HttpSignUp {
 
     // 회원가입
     public Integer signupinsert(ModelUser user){
-        String weburl = "http://61.75.50.145:8187/jwcuser/insert";
+        String weburl = "http://jwcctv1.cafe24.com/jwcuser/insert";
 
         HttpRequest request = null;
         String response = null;
@@ -47,7 +47,7 @@ public class HttpSignUp {
 
     // 아이디 중복확인
     public Integer IDCheck(ModelUser user){
-        String weburl = "http://61.75.50.145:8187/jwcuser/idcheck";
+        String weburl = "http://jwcctv1.cafe24.com/jwcuser/idcheck";
 
         HttpRequest request = null;
         String response = null;
@@ -80,7 +80,7 @@ public class HttpSignUp {
 
     // 이메일 중복확인
     public Integer EmailCheck(ModelUser user){
-        String weburl = "http://61.75.50.145:8187/jwcuser/emailcheck";
+        String weburl = "http://jwcctv1.cafe24.com/jwcuser/emailcheck";
 
         HttpRequest request = null;
         String response = null;
@@ -113,7 +113,7 @@ public class HttpSignUp {
 
     // 로그인
     public ModelUser Login(ModelUser model){
-        String weburl = "http://61.75.50.145:8187/jwcuser/login";
+        String weburl = "http://jwcctv1.cafe24.com/jwcuser/login";
 
         HttpRequest request = null;
         JSONObject response = null;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.school.SchoolWriteActivity">
+    tools:context="com.example.bsyoo.jwc.mainimage.school.SchoolWriteActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/textView60"
+                android:id="@+id/tv_teamname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -93,7 +93,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/textView67"
+                android:id="@+id/tv_teaminfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

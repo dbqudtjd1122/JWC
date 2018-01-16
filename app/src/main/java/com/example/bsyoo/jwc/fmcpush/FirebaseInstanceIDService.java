@@ -1,5 +1,8 @@
 package com.example.bsyoo.jwc.fmcpush;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -11,7 +14,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
     @Override
     public void onTokenRefresh() {
 
-        // 설치할때 여기서 토큰을 자동으로 만들어 준다
+        // 앱 설치할때 여기서 토큰을 자동으로 만들어 준다
         String token = FirebaseInstanceId.getInstance().getToken();
 
         sendRegistrationToServer(token);
@@ -19,6 +22,11 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
+
+        SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("token_Set", token);
+        editor.apply();
     }
 
     /*private void sendPost() throws Exception {

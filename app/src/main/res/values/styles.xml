@@ -4,10 +4,13 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="actionBarSize">65dp</item>
-        <item name="colorPrimary">@color/colorAction</item>
+        <!-- 액션바 백그라운드 색상-->
+        <item name="colorPrimary">@color/colorblack</item>
+        <!-- 액션바위 상태바 색상-->
         <item name="colorPrimaryDark">@color/colorblackk</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
 
 
     <!-- Main 액션바 크게 (Manifest 설정) -->
