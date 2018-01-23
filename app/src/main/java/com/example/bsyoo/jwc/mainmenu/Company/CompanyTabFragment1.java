@@ -1,7 +1,6 @@
-package com.example.bsyoo.jwc.mainimage.Company;
+package com.example.bsyoo.jwc.mainmenu.Company;
 
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +35,7 @@ public class CompanyTabFragment1 extends CompanyFragment {
 
 
         companyimg = (ImageView) view.findViewById(R.id.companyimg);
-        //Glide.with(this).load("http://jwcnet.godohosting.com/app/jwc_app/img/company_info.jpg").override(720,4000).fitCenter().into(companyimg);
+        Glide.with(this).load("http://jwcnet.godohosting.com/app/jwc_app/img/company/company_info.jpg").override(720,4000).fitCenter().into(companyimg);
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(companyimg);

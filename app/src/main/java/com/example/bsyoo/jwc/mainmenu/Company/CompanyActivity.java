@@ -1,23 +1,15 @@
-package com.example.bsyoo.jwc.mainimage.Company;
+package com.example.bsyoo.jwc.mainmenu.Company;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.example.bsyoo.jwc.R;
-
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 public class CompanyActivity extends AppCompatActivity {

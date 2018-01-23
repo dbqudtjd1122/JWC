@@ -25,6 +25,6 @@ public class LoginInformation extends AppCompatActivity {
         isnumber = pref.getInt("number_Set", -1);
         isemail = pref.getString("email_Set", "" ).toString();
         istoken = pref.getString("token_Set", "").toString();
-        ispush = pref.getInt("pref_Set", 1);
+        ispush = pref.getInt("push_Set", 1);
     }
 }

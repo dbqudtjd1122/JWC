@@ -73,6 +73,7 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
         viewHolder.tv_id.setText("작성자 : " + getItem(position).getID().toString());
         viewHolder.tv_name.setText("제목 : "+getItem(position).getTopic_Name().toString());
         viewHolder.tv_topicinfo.setText(getItem(position).getInformation().toString());
+
         viewHolder.tv_countreview.setText("리뷰 " + getItem(position).getReview().toString());
 
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd  HH:mm"); // E 요일 HH 시간 mm 분 ss 초

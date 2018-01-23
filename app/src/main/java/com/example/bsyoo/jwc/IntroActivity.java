@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class IntroActivity extends AppCompatActivity {
@@ -15,6 +16,9 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("notice");
+        FirebaseInstanceId.getInstance().getToken();
 
         // Status bar 색상 설정. (상태바)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -31,6 +35,5 @@ public class IntroActivity extends AppCompatActivity {
             }
         }, 2000);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("notice");
     }
 }

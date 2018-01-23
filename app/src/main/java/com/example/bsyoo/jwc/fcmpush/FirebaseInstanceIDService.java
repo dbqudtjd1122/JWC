@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc.fmcpush;
+package com.example.bsyoo.jwc.fcmpush;
 
 import android.content.Context;
 import android.content.SharedPreferences;

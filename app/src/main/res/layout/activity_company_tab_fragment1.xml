@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bsyoo.jwc.mainimage.Company.CompanyTabFragment1"
+    tools:context="com.example.bsyoo.jwc.mainmenu.Company.CompanyTabFragment1"
     tools:showIn="@layout/activity_company">
 
     <ScrollView
@@ -21,7 +21,6 @@
                 android:id="@+id/companyimg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/company_info"
                 android:adjustViewBounds="true"/>
         </LinearLayout>
     </ScrollView>

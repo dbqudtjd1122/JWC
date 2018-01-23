@@ -31,15 +31,21 @@ public class SetUp extends LoginInformation {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         sw_push = (Switch) findViewById(R.id.sw_push);
+        if(ispush == 1){
+            sw_push.setChecked(true);
+        }else {
+            sw_push.setChecked(false);
+        }
+
 
         sw_push.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor editor = pref.edit();
                 if(sw_push.isChecked()==true){
-                    editor.putInt("pref_Set", 1);
+                    editor.putInt("push_Set", 1);
                 }else {
-                    editor.putInt("pref_Set", 2);
+                    editor.putInt("push_Set", 2);
                 }
                 editor.apply();
             }

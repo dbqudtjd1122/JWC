@@ -33,7 +33,7 @@ import com.example.bsyoo.jwc.adapter.BackCloseHandler;
 import com.example.bsyoo.jwc.mainimage.camera.CameraActivity;
 import com.example.bsyoo.jwc.mainimage.cctvinstall.CctvInstallActivity;
 import com.example.bsyoo.jwc.hppt.HttpUser;
-import com.example.bsyoo.jwc.mainimage.Company.CompanyActivity;
+import com.example.bsyoo.jwc.mainmenu.Company.CompanyActivity;
 import com.example.bsyoo.jwc.mainimage.agency.AgencyActivity;
 import com.example.bsyoo.jwc.mainimage.Cases.CasesActivity;
 import com.example.bsyoo.jwc.mainimage.Technology.TechnologyActivity;

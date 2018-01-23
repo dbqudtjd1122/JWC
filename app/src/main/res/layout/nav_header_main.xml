@@ -20,5 +20,6 @@
         android:gravity="center"
         android:text="JWC 라인업"
         android:textSize="25dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#ffffff"/>
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +23,12 @@ import com.example.bsyoo.jwc.model.ModelAgencyTopic;
 import com.example.bsyoo.jwc.model.ModelUser;
 import com.example.bsyoo.jwc.network.Network;
 import com.example.bsyoo.jwc.network.NetworkCheck;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 public class AgencyTopicWriteActivity extends AppCompatActivity {
@@ -125,6 +129,18 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         }
     };
 
+    // 네트워크 체크
+    private boolean networkcheck() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if (wifi == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // 작성
     public class InsertTopic extends AsyncTask<ModelAgencyTopic, Integer, Integer> {
 
@@ -145,7 +161,9 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         protected Integer doInBackground(ModelAgencyTopic... params) {
 
             Integer count = new HttpAgency().InsertTopic(params[0]);
-
+            if(count == 1){
+                new HttpAgency().Tokenstart();
+            }
             return count;
         }
 
@@ -163,43 +181,6 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if (s == 1) {
-                /*FirebaseMessaging fm = FirebaseMessaging.getInstance();
-                fm.send(new RemoteMessage.Builder("387675888283" + "@gcm.googleapis.com")
-                        .setMessageId(Integer.toString(msgId.incrementAndGet()))
-                        .addData("title", "Hello World")
-                        .addData("message","SAY_HELLO")
-                        .build());*/
-
-                /*
-                FirebaseMessaging fm = FirebaseMessaging.getInstance();
-                String to = "387675888283"+"@gcm.googleapis.com"; // the notification key
-                AtomicInteger msgId = new AtomicInteger();
-                fm.send(new RemoteMessage.Builder(to)
-                        .setMessageId(String.valueOf(msgId.incrementAndGet()))
-                        .addData("title", "titleworld")
-                        .addData("message", "world")
-                        .addData("level", "1")
-                        .build());
-                        */
-
-                /*FirebaseMessaging fm = FirebaseMessaging.getInstance();
-                RemoteMessage message = new RemoteMessage.Builder("118371ec89e84dbe"+"@gcm.googleapis.com")
-                        .setMessageId(Integer.toString(random.nextInt(9999)))
-                        .addData("title", "titleworld")
-                        .addData("message", "world")
-                        .addData("level", "1")
-                        .build();
-
-                if (!message.getData().isEmpty()) {
-                    Log.e(TAG, "UpstreamData: " + message.getData());
-                }
-
-                if (!message.getMessageId().isEmpty()) {
-                    Log.e(TAG, "UpstreamMessageId: " + message.getMessageId());
-                }
-                fm.send(message);*/
-
-                //sendPushNotification("타이틀 테스트", "메세지 테스트");
 
                 Intent intent = new Intent(AgencyTopicWriteActivity.this, AgencyTopicActivity.class);
                 setResult(RESULT_OK, intent);
@@ -210,17 +191,6 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         }
     }
 
-    // 네트워크 체크
-    private boolean networkcheck() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        Boolean wifi = new Network().isNetWork(networkInfo);
-        if (wifi == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     // 수정
     public class UpdateTopic extends AsyncTask<ModelAgencyTopic, Integer, Integer> {

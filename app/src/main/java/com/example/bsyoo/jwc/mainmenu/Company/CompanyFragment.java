@@ -1,4 +1,4 @@
-package com.example.bsyoo.jwc.mainimage.Company;
+package com.example.bsyoo.jwc.mainmenu.Company;
 
 import android.support.v4.app.Fragment;
 

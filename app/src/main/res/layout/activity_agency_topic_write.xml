@@ -28,13 +28,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/idpwsearchtext"
-            android:textCursorDrawable="@null"
             android:hint="제목"
             android:maxLines="30"
             android:padding="5dp"
             android:textColor="#000"
+            android:textCursorDrawable="@null"
             android:textSize="18dp"
-            android:theme="@style/MyEditTextStyle"/>
+            android:theme="@style/MyEditTextStyle" />
 
         <EditText
             android:id="@+id/et_info"
@@ -51,16 +51,16 @@
             android:textColor="#000"
             android:textCursorDrawable="@null"
             android:textSize="13dp"
-            android:theme="@style/MyEditTextStyle"/>
+            android:theme="@style/MyEditTextStyle" />
 
         <Button
             android:id="@+id/btn_finish"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="#ff3c3c"
-            android:text="작성 완료"
+            android:text="작성 글 공유"
             android:textColor="#ffffff"
             android:textSize="17dp"
             android:textStyle="bold" />

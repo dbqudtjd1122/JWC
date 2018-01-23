@@ -271,4 +271,30 @@ public class HttpAgency {
         return Integer.valueOf(response);
     }
 
+    // 푸시 날리기
+    public Integer Tokenstart(){
+        String weburl = "http://jwcctv1.cafe24.com/send";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+
+            httpCode = request.post();
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                // 리턴값 없음
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+        }
+        return null;
+    }
 }
