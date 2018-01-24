@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.mainimage.Cases.CasesActivity">
+    tools:context="com.jwcnetworks.bsyoo.jwc.mainimage.Cases.CasesActivity">
 
     <ListView
         android:id="@+id/list_cases"

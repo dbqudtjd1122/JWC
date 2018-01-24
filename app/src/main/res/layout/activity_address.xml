@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context="com.example.bsyoo.jwc.user.Login.AddressActivity">
+    tools:context="com.jwcnetworks.bsyoo.jwc.user.Login.AddressActivity">
 
     <WebView
         android:id="@+id/addrView"

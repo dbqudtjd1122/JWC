@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bsyoo.jwc.user.Login.IDPWSearch.IDPWSearchActivity">
+    tools:context="com.jwcnetworks.bsyoo.jwc.user.Login.IDPWSearch.IDPWSearchActivity">
 
 
     <LinearLayout

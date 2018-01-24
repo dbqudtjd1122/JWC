@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bsyoo.jwc">
+    package="com.jwcnetworks.bsyoo.jwc">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -20,13 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/BigAppTheme.NoActionBar" />
 
         <!-- 푸시클릭시 중복실행 방지-->
         <activity
-            android:name=".IntroActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.IntroActivity"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:taskAffinity=""
@@ -38,147 +38,150 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".mainmenu.notice.NoticeActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.notice.NoticeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".user.Login.LoginActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.user.Login.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainmenu.notice.EventActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.notice.EventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
         <activity
-            android:name=".mainmenu.Company.CompanyActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.Company.CompanyActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainmenu.notice.NoticeInfoActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.notice.NoticeInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainmenu.notice.NoticeActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.mainmenu.notice.NoticeActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
         <activity
-            android:name=".mainimage.camera.CameraActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.mainimage.camera.CameraActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".mainmenu.notice.EventInfoActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.notice.EventInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainmenu.notice.EventActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.mainmenu.notice.EventActivity" />
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".mainimage.series.SeriesActivity" />
-        <activity android:name=".mainimage.series.SeriesInfoActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.series.SeriesActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.series.SeriesInfoActivity">
             <meta-data
                 android:name="kr.co.selphone.library.glide.SelphoneGlideModule"
                 android:value="GlideModule" />
         </activity>
-        <activity android:name=".user.Login.SignUpActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.user.Login.SignUpActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".user.Login.LoginActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.user.Login.LoginActivity" />
         </activity>
-        <activity android:name=".user.Login.AddressActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.user.Login.AddressActivity" />
         <activity
-            android:name=".user.terms.TermsActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.user.terms.TermsActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".mainmenu.mypage.MypageActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainimage.series.ModelSearchActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.series.ModelSearchActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainmenu.mypage.PwCheckActivity" />
-        <activity android:name=".user.Login.IDPWSearch.IDPWSearchActivity" />
-        <activity android:name=".mainmenu.mypage.MypageModifiedActivity" />
-        <activity android:name=".mainmenu.mypage.DeleteUserActivity" />
-        <activity android:name=".mainimage.school.SchoolActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.PwCheckActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.user.Login.IDPWSearch.IDPWSearchActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageModifiedActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.DeleteUserActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.school.SchoolActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainimage.school.SchoolInfoActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.school.SchoolInfoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainimage.school.SchoolActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.mainimage.school.SchoolActivity" />
         </activity>
-        <activity android:name=".mainimage.school.SchoolWriteActivity" />
-        <activity android:name=".mainimage.agency.AgencyActivity">
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.school.SchoolWriteActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.agency.AgencyActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainmenu.mypage.SerialCodeAddActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.SerialCodeAddActivity" />
         <activity
-            android:name=".mainimage.Technology.TechnologyActivity"
+            android:name="com.jwcnetworks.bsyoo.jwc.mainimage.Technology.TechnologyActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".mainimage.Technology.TechnologyInfoActivity" />
-        <activity
-            android:name=".mainimage.cctvinstall.CctvInstallActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".mainimage.Cases.CasesActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".mainmenu.mypage.AgencyTopicActivity" />
-        <activity android:name=".mainmenu.mypage.AgencyTopicWriteActivity" />
-        <activity android:name=".mainmenu.mypage.AgencyTopicReviewActivity" />
-        <activity android:name=".network.NetworkCheck" />
-        <activity android:name=".mainmenu.SetUp">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
 
-        <service android:name=".fcmpush.FirebaseMessagingService">
+        <activity
+            android:name="com.jwcnetworks.bsyoo.jwc.mainimage.Technology.TechnologyInfoActivity"/>
+
+        <activity
+            android:name="com.jwcnetworks.bsyoo.jwc.mainimage.cctvinstall.CctvInstallActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
+        </activity>
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainimage.Cases.CasesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
+        </activity>
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.AgencyTopicActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.AgencyTopicWriteActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.AgencyTopicReviewActivity" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.network.NetworkCheck" />
+        <activity android:name="com.jwcnetworks.bsyoo.jwc.mainmenu.SetUp">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
+        </activity>
+
+        <service android:name="com.jwcnetworks.bsyoo.jwc.fcmpush.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".fcmpush.FirebaseInstanceIDService">
+        <service android:name="com.jwcnetworks.bsyoo.jwc.fcmpush.FirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

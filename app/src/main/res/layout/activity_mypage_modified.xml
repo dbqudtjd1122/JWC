@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context="com.example.bsyoo.jwc.mainmenu.mypage.MypageModifiedActivity">
+    tools:context="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageModifiedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
