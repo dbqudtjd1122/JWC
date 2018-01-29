@@ -26,7 +26,7 @@ public class MypageTabFragment1 extends MypageFragment{
     public void recall() {
         super.recall();
         user = getOrderuser();
-        if(user.getLevel() >= 4){
+        if(user.getLevel() >= 10){
             ll_mypage2.setVisibility(View.VISIBLE);
         }
     }

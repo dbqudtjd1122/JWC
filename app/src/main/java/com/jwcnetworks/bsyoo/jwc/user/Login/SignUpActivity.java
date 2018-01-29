@@ -298,7 +298,9 @@ public class SignUpActivity extends AppCompatActivity {
         et_pw2.setFilters(new InputFilter[]{filter});
         et_name = (EditText) findViewById(R.id.et_name);
         et_email = (EditText) findViewById(R.id.et_email);
+        et_email.setFilters(new InputFilter[]{filter});
         et_email2 = (EditText) findViewById(R.id.et_email2);
+        et_email2.setFilters(new InputFilter[]{filter});
         et_addr3 = (EditText) findViewById(R.id.et_addr3);
         et_phone1 = (EditText) findViewById(R.id.et_phone1);
         et_phone2 = (EditText) findViewById(R.id.et_phone2);

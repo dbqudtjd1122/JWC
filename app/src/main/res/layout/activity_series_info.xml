@@ -28,7 +28,6 @@
                 android:id="@+id/series_info"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/l1vd_ss_410"
                 android:adjustViewBounds="true"/>
         </LinearLayout>
     </ScrollView>

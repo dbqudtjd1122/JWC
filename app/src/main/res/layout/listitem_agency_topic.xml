@@ -93,8 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:visibility="gone"
-                app:srcCompat="@drawable/l1vd_100" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/img_topic2"
@@ -102,8 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:clickable="true"
-                android:visibility="gone"
-                app:srcCompat="@drawable/l1vd_100" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/img_topic3"
@@ -111,8 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:clickable="true"
-                android:visibility="gone"
-                app:srcCompat="@drawable/l1vd_100" />
+                android:visibility="gone" />
         </LinearLayout>
     </HorizontalScrollView>
 

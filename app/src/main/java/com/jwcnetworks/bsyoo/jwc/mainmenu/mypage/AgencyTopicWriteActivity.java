@@ -81,25 +81,19 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                 Date date = new Date(now);
                 topic.setTopic_Time(date);
 
-                if (i == 1) {
-                    topic.setID(topic.getID().toString());
-                    netcheck = networkcheck();
-                    if (netcheck == true) {
+                netcheck = networkcheck();
+                if (netcheck == true) { // 네트워크 체크
+                    if (i == 1) {
+                        topic.setID(topic.getID().toString());
                         new AgencyTopicWriteActivity.UpdateTopic().execute(topic);
                     } else {
-                        Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
-                        startActivity(intent);
+                        topic.setID(user.getID().toString());
+                        new AgencyTopicWriteActivity.InsertTopic().execute(topic);
                     }
                 } else {
-                    topic.setID(user.getID().toString());
-                    netcheck = networkcheck();
-                    if (netcheck == true) {
-                        new AgencyTopicWriteActivity.InsertTopic().execute(topic);
-                    } else {
-                        Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
-                        startActivity(intent);
-            }
-        }
+                    Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -157,7 +151,7 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         protected Integer doInBackground(ModelAgencyTopic... params) {
 
             Integer count = new HttpAgency().InsertTopic(params[0]);
-            if(count == 1){
+            if (count == 1) {
                 new HttpAgency().Tokenstart();
             }
             return count;

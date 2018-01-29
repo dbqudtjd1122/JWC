@@ -1,5 +1,6 @@
 package com.jwcnetworks.bsyoo.jwc.mainimage.camera;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -109,7 +110,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     // 네트워크 체크
-    private boolean networkcheck() {
+    public boolean networkcheck() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         Boolean wifi = new Network().isNetWork(networkInfo);

@@ -58,7 +58,7 @@ public class AdapterCases extends ArrayAdapter<ModelCases> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getItem(position).getBlog_URL().toString()));
-                intent.setPackage("com.android.chrome");
+                // intent.setPackage("com.android.chrome"); // 크롬으로 열기
                 getContext().startActivity(intent);
             }
         });

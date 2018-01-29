@@ -12,13 +12,15 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
 
+    <!-- android:largeHeap="true" 메모리 관리-->
     <application
         android:allowBackup="true"
         android:icon="@drawable/jwc_small_logo_red"
         android:label="@string/app_name"
         android:roundIcon="@drawable/jwc_small_logo_red"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
         <activity
             android:name="com.jwcnetworks.bsyoo.jwc.MainActivity"
             android:label="@string/app_name"

@@ -16,6 +16,7 @@ import com.jwcnetworks.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.jwcnetworks.bsyoo.jwc.adapter.AdapterSeries;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpCamera;
 import com.jwcnetworks.bsyoo.jwc.model.ModelCamera;
+import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class CameraTabFragment2 extends CameraFragment {
     private List<ModelCamera> cameralist;
     private ModelCamera camera = new ModelCamera();
     private ListView listView;
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     public CameraTabFragment2(){
 
@@ -64,12 +67,16 @@ public class CameraTabFragment2 extends CameraFragment {
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
-        try {
-            new getCameraList().execute("녹화기");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+        netcheck = ((CameraActivity)getActivity()).networkcheck();
+        if (netcheck == true) {
+            try {
+                new getCameraList().execute("녹화기");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+        }
 
         // 아이템 클릭 이벤트 (camera 모델값을 넘겨준다.)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

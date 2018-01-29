@@ -43,4 +43,18 @@ public class NoticeInfoActivity extends AppCompatActivity {
         PhotoViewAttacher photoview = new PhotoViewAttacher(notice_info);
         photoview.update();
     }
+
+    // 메모리 부족할때 호출되는 메소드. 이후 GC가 수행됨  // 매니페스트에 android:largeHeap="true" 작성
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        Glide.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        Glide.get(this).trimMemory(level);
+    }
+
 }

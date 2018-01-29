@@ -29,6 +29,7 @@ import android.widget.Toast;
 import android.support.v4.view.ViewPager;
 import android.view.View.OnClickListener;
 
+import com.bumptech.glide.Glide;
 import com.jwcnetworks.bsyoo.jwc.adapter.BackCloseHandler;
 import com.jwcnetworks.bsyoo.jwc.mainimage.camera.CameraActivity;
 import com.jwcnetworks.bsyoo.jwc.mainimage.cctvinstall.CctvInstallActivity;
@@ -490,7 +491,21 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // 상태 표시 줄의 높이를 찾는 메소드
+
+    // 메모리 부족할때 호출되는 메소드. 이후 GC가 수행됨  // 매니페스트에 android:largeHeap="true" 작성
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        Glide.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        Glide.get(this).trimMemory(level);
+    }
+
+    // 상태 표시 줄의 높이를 찾는 메소드(액션바 백그라운드를 상태바에 적용시킬때)
     /*public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");

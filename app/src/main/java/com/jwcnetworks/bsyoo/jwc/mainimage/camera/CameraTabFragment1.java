@@ -28,15 +28,16 @@ public class CameraTabFragment1 extends CameraFragment {
     private ModelCamera camera = new ModelCamera();
     private ListView listView;
 
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
-    public CameraTabFragment1(){
+    public CameraTabFragment1() {
 
-    }
+}
 
     @Override
     public void recall() {
         super.recall();
-        if(getNet()==true) {
+        if (getNet() == true) {
             new CameraTabFragment1.getCameraList().execute("카메라");
         }
     }
@@ -65,13 +66,15 @@ public class CameraTabFragment1 extends CameraFragment {
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
-
-        try {
-            new getCameraList().execute("카메라");
-        } catch (Exception e) {
-            e.printStackTrace();
+        netcheck = ((CameraActivity)getActivity()).networkcheck();
+        if (netcheck == true) {
+            try {
+                new getCameraList().execute("카메라");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
         }
-
 
         // 아이템 클릭 이벤트 (camera 모델값을 넘겨준다.)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,7 +92,6 @@ public class CameraTabFragment1 extends CameraFragment {
     public class getCameraList extends AsyncTask<String, Integer, List<ModelCamera>> {
 
         private ProgressDialog waitDlg = null;
-
 
         @Override
         protected void onPreExecute() {

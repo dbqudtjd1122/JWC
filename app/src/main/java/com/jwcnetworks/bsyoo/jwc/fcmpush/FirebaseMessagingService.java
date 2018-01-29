@@ -25,7 +25,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     private static final String TAG = "FirebaseMsgService";
 
     public SharedPreferences pref = null;
-    public String islevel;
+    public Integer islevel;
     public Integer ispush;
 
 
@@ -37,7 +37,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         // 1. 공유 프레퍼런스 객체를 얻어온다. /data/data/패키지명/shared_prefs/Login.xml
         pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        islevel = String.valueOf(pref.getInt("level_Set", -1));
+        islevel = (pref.getInt("level_Set", -1));
         ispush = Integer.valueOf(pref.getInt("push_Set", 1));
 
         String tit = remoteMessage.getData().get("title").toString();
@@ -56,15 +56,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             }
         }
 
-        // 레벨에 맞는 사람에게만 푸시 알람주기
-        if(ispush == 1) {
-            if (remoteMessage.getData().get("level").equals(islevel)) {
-                //sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+        if(ispush == 1) { // 푸시 수신여부
+            // 레벨에 맞는 사람에게만 푸시 알람주기
+            // if (remoteMessage.getData().get("level").equals(islevel)) {
+            if (Integer.valueOf(remoteMessage.getData().get("level")) <= islevel) {
                 sendPushNotification(title, message);
             }
             // 모든 사용자에게 푸시주기
             else if (remoteMessage.getData().get("level").equals("1")) {
-                //sendPushNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
                 sendPushNotification(title, message);
             }
         }else {
