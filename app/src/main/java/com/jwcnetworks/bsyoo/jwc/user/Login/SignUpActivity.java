@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextWatcher;
@@ -145,8 +146,8 @@ public class SignUpActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btn_id_check:
                 user.setID(et_id.getText().toString());
-                if (user.getID().toString().length() <= 5) {
-                    Toast.makeText(this, "아이디를 6자리 이상 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                if (user.getID().toString().length() <= 5 || user.getID().toString().length() >= 16) {
+                    Toast.makeText(this, "아이디를 6자리 이상, 16자리 이하로 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
                     netcheck = networkcheck();
@@ -160,7 +161,7 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case R.id.btn_email_check:
                 user.setEmail(et_email.getText().toString()+"@"+et_email2.getText().toString());
-                if (user.getEmail().toString().length() <= 4) {
+                if (user.getEmail().toString().length() <= 4 || user.getEmail().toString().length() >= 40) {
                     Toast.makeText(this, "이메일을 정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
@@ -248,17 +249,17 @@ public class SignUpActivity extends AppCompatActivity {
                     break;
                 }
                 if (radioButton.isChecked() == false) {
-                    if (user.getMutual().length() <= 3) {
-                        Toast.makeText(this, "상호명을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    if (user.getMutual().length() <= 2 || user.getMutual().length() >= 20) {
+                        Toast.makeText(this, "상호명을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
-                    } else if (user.getRepresentation().length() <= 1) {
+                    } else if (user.getRepresentation().length() <= 1 || user.getRepresentation().length() >= 15) {
                         Toast.makeText(this, "대표자명을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
-                    } else if (user.getBuisness_number().length() <= 9) {
+                    } else if (user.getBuisness_number().length() <= 9 || user.getBuisness_number().length() >=15) {
                         Toast.makeText(this, "사업자번호를 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
-                    } else if (user.getSectors().length() <= 3) {
-                        Toast.makeText(this, "업태 / 업종을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    } else if (user.getSectors().length() <= 3 || user.getSectors().length() >= 30) {
+                        Toast.makeText(this, "업태 / 업종을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -292,27 +293,36 @@ public class SignUpActivity extends AppCompatActivity {
     private void setbyid() {
         et_id = (EditText) findViewById(R.id.et_id);
         et_id.setFilters(new InputFilter[]{filter});
+
         et_pw = (EditText) findViewById(R.id.et_pw);
         et_pw.setFilters(new InputFilter[]{filter});
+
         et_pw2 = (EditText) findViewById(R.id.et_pw2);
         et_pw2.setFilters(new InputFilter[]{filter});
+
         et_name = (EditText) findViewById(R.id.et_name);
         et_email = (EditText) findViewById(R.id.et_email);
-        et_email.setFilters(new InputFilter[]{filter});
+        et_email.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS); // 이메일타입
+
         et_email2 = (EditText) findViewById(R.id.et_email2);
-        et_email2.setFilters(new InputFilter[]{filter});
+        et_email2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         et_addr3 = (EditText) findViewById(R.id.et_addr3);
+
         et_phone1 = (EditText) findViewById(R.id.et_phone1);
         et_phone2 = (EditText) findViewById(R.id.et_phone2);
         et_phone3 = (EditText) findViewById(R.id.et_phone3);
         et_hphone1 = (EditText) findViewById(R.id.et_hphone1);
         et_hphone2 = (EditText) findViewById(R.id.et_hphone2);
         et_hphone3 = (EditText) findViewById(R.id.et_hphone3);
+
         et_Mutual = (EditText) findViewById(R.id.et_Mutual);
+
         et_Representation = (EditText) findViewById(R.id.et_Representation);
+
         et_Buisness1 = (EditText) findViewById(R.id.et_Buisness1);
         et_Buisness2 = (EditText) findViewById(R.id.et_Buisness2);
         et_Buisness3 = (EditText) findViewById(R.id.et_Buisness3);
+
         et_Sectors = (EditText) findViewById(R.id.et_Sectors);
 
         ch_email = (CheckBox) findViewById(R.id.ch_email);

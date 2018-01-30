@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 public class LoginInformation extends AppCompatActivity {
 
     public SharedPreferences pref = null;
+
     public String isid, isemail, istoken;
     public Integer isnumber, islevel, ispush;
 

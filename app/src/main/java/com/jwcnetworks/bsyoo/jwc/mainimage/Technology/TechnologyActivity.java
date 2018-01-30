@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.jwcnetworks.bsyoo.jwc.R;
-import com.jwcnetworks.bsyoo.jwc.mainimage.Technology.TechnologyFragment;
 import com.jwcnetworks.bsyoo.jwc.network.Network;
 import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 

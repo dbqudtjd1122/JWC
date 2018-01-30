@@ -309,7 +309,7 @@ public class MypageModifiedActivity extends LoginInformation {
         }
 
         // 일반소비자, 사업자 나눔
-        if(user.getMutual() == null){
+        if(user.getMutual() == null || user.getMutual().toString().equals("")){
             radioButton.setChecked(true);
             buisness_layout.setVisibility(View.GONE);
         } else {

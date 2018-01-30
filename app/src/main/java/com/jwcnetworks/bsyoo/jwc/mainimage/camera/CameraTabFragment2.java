@@ -16,7 +16,6 @@ import com.jwcnetworks.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.jwcnetworks.bsyoo.jwc.adapter.AdapterSeries;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpCamera;
 import com.jwcnetworks.bsyoo.jwc.model.ModelCamera;
-import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 
 import java.util.ArrayList;
 import java.util.List;

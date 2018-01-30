@@ -1,6 +1,5 @@
 package com.jwcnetworks.bsyoo.jwc.mainimage.camera;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;

@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,6 +49,8 @@ import com.jwcnetworks.bsyoo.jwc.mainmenu.notice.NoticeActivity;
 import com.jwcnetworks.bsyoo.jwc.model.ModelNotice;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.jwcnetworks.bsyoo.jwc.mainimage.school.SchoolActivity;
+import com.jwcnetworks.bsyoo.jwc.network.Network;
+import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 import com.jwcnetworks.bsyoo.jwc.user.Login.LoginActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.PwCheckActivity;
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity
     private Handler handler = null;
 
     private Toolbar toolbar;
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,7 +263,7 @@ public class MainActivity extends AppCompatActivity
                 ModelNotice event = new ModelNotice();
                 event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/event_1.jpg");
                 event.setNotice_title("2TB 무료 업그레이드!");
-                Intent intent = new Intent (MainActivity.this, EventInfoActivity.class);
+                Intent intent = new Intent(MainActivity.this, EventInfoActivity.class);
                 intent.putExtra("event", event);
                 startActivity(intent);
                 break;
@@ -324,13 +329,19 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.menu_company) {
             Intent intent = new Intent(MainActivity.this, CompanyActivity.class);
             startActivity(intent);
-        }  else if (id == R.id.menu_logout) {
-            Logout();
-            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.menu_logout) {
+            netcheck = networkcheck();
+            if (netcheck == true) {
+                Logout();
+                Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
+                startActivityForResult(intent2, 7777);
+            }
         } else if (id == R.id.menu_setup) {
             Intent intent = new Intent(MainActivity.this, SetUp.class);
             startActivity(intent);
-        } else if (id == R.id.menu_userdelete){
+        } else if (id == R.id.menu_userdelete) {
             Intent intent = new Intent(MainActivity.this, PwCheckActivity.class);
             intent.putExtra("account", "탈퇴");
             startActivityForResult(intent, 555);
@@ -448,6 +459,16 @@ public class MainActivity extends AppCompatActivity
             else {
             }
         }
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777) {
+            if (resultCode == RESULT_OK) {
+                Logout();
+                Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
     }
 
     // 로그아웃 토큰 초기화(업데이트)
@@ -503,6 +524,18 @@ public class MainActivity extends AppCompatActivity
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         Glide.get(this).trimMemory(level);
+    }
+
+    // 네트워크 체크
+    private boolean networkcheck() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if (wifi == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // 상태 표시 줄의 높이를 찾는 메소드(액션바 백그라운드를 상태바에 적용시킬때)

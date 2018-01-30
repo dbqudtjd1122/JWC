@@ -7,6 +7,9 @@
 
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
+    <!-- 앱 설치시 바로가기 생성-->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+
     <!-- 와이파이, 데이터 연결 확인 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />

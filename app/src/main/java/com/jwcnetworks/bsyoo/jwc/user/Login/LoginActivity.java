@@ -102,6 +102,7 @@ public class LoginActivity extends LoginInformation {
         et_login_id = (EditText) findViewById(R.id.et_login_id);
         et_login_id.setFilters(new InputFilter[]{filter});
         et_login_pw = (EditText) findViewById(R.id.et_login_pw);
+        et_login_pw.setFilters(new InputFilter[]{filter});
     }
 
     // EditText 영문&숫자만 적용
@@ -194,7 +195,6 @@ public class LoginActivity extends LoginInformation {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // 네트워크 불량에서 오는 Result
         if (requestCode == 7777 ) {
             if (resultCode == RESULT_OK) {
@@ -205,13 +205,4 @@ public class LoginActivity extends LoginInformation {
             }
         }
     }
-
-
-
-    /*// 액션바 우측 안보이는 이미지.. (가운데정렬)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sort_menu, menu);
-        return true;
-    }*/
 }

@@ -8,6 +8,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +27,7 @@ import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class IDPWSearchActivity extends AppCompatActivity {
 
@@ -371,10 +375,24 @@ public class IDPWSearchActivity extends AppCompatActivity {
         }
     }
 
+    // EditText 영문&숫자만 적용
+    protected InputFilter filter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
+            Pattern ps = Pattern.compile("^[a-zA-Z0-9]+$");
+            if (!ps.matcher(source).matches()) {
+                return "";
+            }
+            return null;
+        }
+    };
+
     private void byid(){
         et_id_searchname = (EditText) findViewById(R.id.et_id_searchname);
         et_id_searchemail = (EditText) findViewById(R.id.et_id_searchemail);
+        et_id_searchemail.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS); // 이메일타입
         et_pw_searchid = (EditText) findViewById(R.id.et_pw_searchid);
+        et_pw_searchid.setFilters(new InputFilter[]{filter});
 
         ll_idsearch = (LinearLayout) findViewById(R.id.ll_idsearch);
         ll_pwsearch = (LinearLayout) findViewById(R.id.ll_pwsearch);

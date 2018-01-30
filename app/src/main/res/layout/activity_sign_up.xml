@@ -380,8 +380,7 @@
                             android:layout_marginTop="7dp"
                             android:background="@drawable/signuptext"
                             android:ems="5"
-                            android:inputType="textPersonName"
-                            android:maxLength="20"
+                            android:inputType="textEmailAddress"
                             android:singleLine="true"
                             android:textColor="#000"
                             android:textCursorDrawable="@null"
@@ -408,7 +407,8 @@
                             android:layout_marginRight="5dp"
                             android:background="@drawable/signuptext"
                             android:ems="4"
-                            android:inputType="textPersonName"
+                            android:inputType="textEmailSubject"
+                            android:textSize="15dp"
                             android:textColor="#000"
                             android:textCursorDrawable="@null"
                             android:theme="@style/MyEditTextStyle" />
@@ -437,7 +437,7 @@
                             android:id="@+id/ch_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#9f9f9f"
+                            android:buttonTint="#ff0000"
                             android:checked="true"
                             android:text="이벤트 정보 메일 수신" />
                     </LinearLayout>
@@ -693,7 +693,7 @@
                             android:id="@+id/ch_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#9f9f9f"
+                            android:buttonTint="#ff0000"
                             android:checked="true"
                             android:text="이벤트 SMS 수신" />
 
@@ -936,6 +936,7 @@
                             android:layout_margin="7dp"
                             android:background="@drawable/signuptext"
                             android:ems="15"
+                            android:maxLines="20"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="#000"
@@ -987,6 +988,7 @@
                             android:layout_height="25dp"
                             android:layout_gravity="center|left"
                             android:layout_margin="7dp"
+                            android:maxLines="20"
                             android:background="@drawable/signuptext"
                             android:ems="15"
                             android:inputType="textPersonName"
@@ -1149,6 +1151,7 @@
                             android:layout_margin="7dp"
                             android:background="@drawable/signuptext"
                             android:ems="15"
+                            android:maxLines="30"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="#000"
