@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.jwcnetworks.bsyoo.jwc.R;
@@ -59,6 +62,15 @@ public class CasesActivity extends AppCompatActivity {
             Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivityForResult(intent2, 7777);
         }
+
+        CasesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(caseslist.get(position).getBlog_URL().toString()));
+                // intent.setPackage("com.android.chrome"); // 크롬으로 열기
+                startActivity(intent);
+            }
+        });
     }
 
     // 네트워크 체크

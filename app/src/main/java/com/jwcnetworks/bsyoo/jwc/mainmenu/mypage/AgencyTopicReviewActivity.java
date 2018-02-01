@@ -99,7 +99,7 @@ public class AgencyTopicReviewActivity extends AppCompatActivity {
 
         reviewlist = new ArrayList<>();
 
-        adapter = new AdapterAgencyTopicReview(this, R.layout.listitem_agency_topic_review, R.id.tv_id, reviewlist, user, topic);
+        adapter = new AdapterAgencyTopicReview(getApplicationContext(), R.layout.listitem_agency_topic_review, R.id.tv_id, reviewlist, user, topic);
 
         // 머리아이템
         listView.addHeaderView(headerView, null, true);
@@ -282,7 +282,7 @@ public class AgencyTopicReviewActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
                 et_insert_review.setText("");
             } else {
-                Toast.makeText(AgencyTopicReviewActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {

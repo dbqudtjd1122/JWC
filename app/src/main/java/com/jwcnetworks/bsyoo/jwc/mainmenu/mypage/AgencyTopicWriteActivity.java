@@ -35,9 +35,6 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
     private Button btn_finish;
     private EditText et_info, et_name;
 
-    private final String TAG = "JSA-FCM";
-    private Random random = new Random();
-
     private int i = -1;
 
     private Boolean netcheck = true;  // 네트워크 연결확인
@@ -172,15 +169,14 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
             }
             if (s == 1) {
 
-                Intent intent = new Intent(AgencyTopicWriteActivity.this, AgencyTopicActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AgencyTopicActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
-                Toast.makeText(AgencyTopicWriteActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 
     // 수정
     public class UpdateTopic extends AsyncTask<ModelAgencyTopic, Integer, Integer> {
@@ -221,11 +217,11 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if (s == 1) {
-                Intent intent = new Intent(AgencyTopicWriteActivity.this, AgencyTopicActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AgencyTopicActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
-                Toast.makeText(AgencyTopicWriteActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

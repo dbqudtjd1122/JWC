@@ -31,7 +31,6 @@ public class AdapterCases extends ArrayAdapter<ModelCases> {
     class ViewHolder {
         TextView tv_topic;
         TextView tv_titlename;
-        ImageView img_url;
     }
 
     @NonNull
@@ -44,7 +43,6 @@ public class AdapterCases extends ArrayAdapter<ModelCases> {
             viewHolder = new ViewHolder();
             viewHolder.tv_topic = (TextView) itemLayout.findViewById(R.id.tv_topic);
             viewHolder.tv_titlename = (TextView) itemLayout.findViewById(R.id.tv_titlename);
-            viewHolder.img_url = (ImageView) itemLayout.findViewById(R.id.img_url);
 
             itemLayout.setTag(viewHolder);
         }
@@ -54,15 +52,6 @@ public class AdapterCases extends ArrayAdapter<ModelCases> {
         } else {
             viewHolder.tv_titlename.setText(getItem(position).getTitle_Name().toString() + " 업체의 블로그");
         }
-        viewHolder.img_url.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getItem(position).getBlog_URL().toString()));
-                // intent.setPackage("com.android.chrome"); // 크롬으로 열기
-                getContext().startActivity(intent);
-            }
-        });
-
 
         return itemLayout;
     }

@@ -60,7 +60,7 @@ public class DeleteUserActivity extends LoginInformation {
             @Override
             public void onClick(View v) {
                 if(ch_delete.isChecked() == false){
-                    Toast.makeText(DeleteUserActivity.this, "계정탈퇴에 동의해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "계정탈퇴에 동의해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     netcheck = networkcheck();
                     if (netcheck == true) {
@@ -127,12 +127,12 @@ public class DeleteUserActivity extends LoginInformation {
                 waitDlg = null;
             }
             if(s==1) {
-                Toast.makeText(DeleteUserActivity.this, "계정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DeleteUserActivity.this, PwCheckActivity.class);
+                Toast.makeText(getApplicationContext(), "계정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), PwCheckActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
             }else {
-                Toast.makeText(DeleteUserActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -72,10 +72,9 @@
 
             <ImageView
                 android:id="@+id/img_agency_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/agency_ready" />
+                android:layout_margin="8dp" />
         </LinearLayout>
 
     </LinearLayout>

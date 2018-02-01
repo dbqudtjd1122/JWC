@@ -42,9 +42,9 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         ImageView img_series_info = (ImageView) findViewById(R.id.series_info);
         try {
             if(level == -1 || level == 1) {
-                Glide.with(this).load(camera.getOnline_Img_info().toString()).override(720, 4000).fitCenter().into(img_series_info);
+                Glide.with(getApplicationContext()).load(camera.getOnline_Img_info().toString()).override(720, 4000).fitCenter().into(img_series_info);
             } else {
-                Glide.with(this).load(camera.getOffline_Img_info().toString()).override(720, 4000).fitCenter().into(img_series_info);
+                Glide.with(getApplicationContext()).load(camera.getOffline_Img_info().toString()).override(720, 4000).fitCenter().into(img_series_info);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         if (result.isUserRecoverableError()) {
             result.getErrorDialog(this, RQS_ErrorDialog).show();
         } else {
-            Toast.makeText(this, "YouTubePlayer.onInitializationFailure(): " + result.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "YouTubePlayer.onInitializationFailure(): " + result.toString(), Toast.LENGTH_LONG).show();
         }
     }
     private YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {

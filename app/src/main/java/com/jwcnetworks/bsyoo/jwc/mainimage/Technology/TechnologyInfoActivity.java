@@ -58,7 +58,7 @@ public class TechnologyInfoActivity extends YouTubeBaseActivity implements YouTu
         if (result.isUserRecoverableError()) {
             result.getErrorDialog(this, RQS_ErrorDialog).show();
         } else {
-            Toast.makeText(this, "YouTubePlayer.onInitializationFailure(): " + result.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "YouTubePlayer.onInitializationFailure(): " + result.toString(), Toast.LENGTH_LONG).show();
         }
     }
 

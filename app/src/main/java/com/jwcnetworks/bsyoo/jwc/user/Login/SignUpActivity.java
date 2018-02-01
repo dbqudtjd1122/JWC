@@ -147,7 +147,7 @@ public class SignUpActivity extends AppCompatActivity {
             case R.id.btn_id_check:
                 user.setID(et_id.getText().toString());
                 if (user.getID().toString().length() <= 5 || user.getID().toString().length() >= 16) {
-                    Toast.makeText(this, "아이디를 6자리 이상, 16자리 이하로 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "아이디를 6자리 이상, 16자리 이하로 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
                     netcheck = networkcheck();
@@ -162,7 +162,7 @@ public class SignUpActivity extends AppCompatActivity {
             case R.id.btn_email_check:
                 user.setEmail(et_email.getText().toString()+"@"+et_email2.getText().toString());
                 if (user.getEmail().toString().length() <= 4 || user.getEmail().toString().length() >= 40) {
-                    Toast.makeText(this, "이메일을 정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "이메일을 정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
                     netcheck = networkcheck();
@@ -175,16 +175,16 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_addr:
-                Intent intent = new Intent(SignUpActivity.this, AddressActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddressActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.tv_terms1:
-                Intent intent2 = new Intent(SignUpActivity.this, TermsActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), TermsActivity.class);
                 intent2.putExtra("순서", 0);
                 startActivity(intent2);
                 break;
             case R.id.tv_terms2:
-                Intent intent3 = new Intent(SignUpActivity.this, TermsActivity.class);
+                Intent intent3 = new Intent(getApplicationContext(), TermsActivity.class);
                 intent3.putExtra("순서", 1);
                 startActivity(intent3);
                 break;
@@ -227,44 +227,44 @@ public class SignUpActivity extends AppCompatActivity {
 
                 // 회원가입정보를 입력하지 않은 경우
                 if (user.getPW().length() <= 7) {
-                    Toast.makeText(this, "패스워드를 8자리 이상 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "패스워드를 8자리 이상 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (!et_pw.getText().toString().equals(et_pw2.getText().toString())) {
-                    Toast.makeText(this, "비밀번호가 일치하지 않습니다..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다..", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (user.getName().length() <= 1) {
-                    Toast.makeText(this, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (tv_addr2.getText().toString().equals("")) {
-                    Toast.makeText(this, "주소를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "주소를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (user.getPhone().length() <= 10) {
-                    Toast.makeText(this, "핸드폰 번호를 전부 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "핸드폰 번호를 전부 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (idcheck == 0) {
-                    Toast.makeText(this, "ID 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "ID 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (emailcheck == 0) {
-                    Toast.makeText(this, "Email 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Email 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (radioButton.isChecked() == false) {
                     if (user.getMutual().length() <= 2 || user.getMutual().length() >= 20) {
-                        Toast.makeText(this, "상호명을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "상호명을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     } else if (user.getRepresentation().length() <= 1 || user.getRepresentation().length() >= 15) {
-                        Toast.makeText(this, "대표자명을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "대표자명을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     } else if (user.getBuisness_number().length() <= 9 || user.getBuisness_number().length() >=15) {
-                        Toast.makeText(this, "사업자번호를 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "사업자번호를 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     } else if (user.getSectors().length() <= 3 || user.getSectors().length() >= 30) {
-                        Toast.makeText(this, "업태 / 업종을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "업태 / 업종을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
                 if (ch_terms1.isChecked() == false || ch_terms2.isChecked() == false) {
-                    Toast.makeText(this, "모든 이용약관에 동의해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "모든 이용약관에 동의해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 netcheck = networkcheck();
@@ -383,13 +383,13 @@ public class SignUpActivity extends AppCompatActivity {
             }
             if (s == 1) {
                 if(user.getOK()==1){
-                    Toast.makeText(SignUpActivity.this, "회원가입을 환영합니다. 로그인 해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "회원가입을 환영합니다. 로그인 해주세요.", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(SignUpActivity.this, "사업자 로그인 승인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "사업자 로그인 승인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }
                 finish();
             } else {
-                Toast.makeText(SignUpActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -434,10 +434,10 @@ public class SignUpActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if (s == 1) {
-                Toast.makeText(SignUpActivity.this, "중복된 ID 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "중복된 ID 입니다.", Toast.LENGTH_SHORT).show();
                 idcheck = 0;
             } else {
-                Toast.makeText(SignUpActivity.this, "사용가능한 ID 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "사용가능한 ID 입니다.", Toast.LENGTH_SHORT).show();
                 idcheck = 1;
             }
         }
@@ -482,10 +482,10 @@ public class SignUpActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if (s == 1) {
-                Toast.makeText(SignUpActivity.this, "중복된 Email 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "중복된 Email 입니다.", Toast.LENGTH_SHORT).show();
                 emailcheck = 0;
             } else {
-                Toast.makeText(SignUpActivity.this, "사용가능한 Email 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "사용가능한 Email 입니다.", Toast.LENGTH_SHORT).show();
                 emailcheck = 1;
             }
         }

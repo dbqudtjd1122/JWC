@@ -36,7 +36,7 @@ public class NoticeInfoActivity extends AppCompatActivity {
         notice = (ModelNotice) intent.getSerializableExtra("notice");
 
         ImageView notice_info = (ImageView) findViewById(R.id.event_info);
-        Glide.with(this).load(notice.getImg_info()).override(720,4000).fitCenter().into(notice_info);
+        Glide.with(getApplicationContext()).load(notice.getImg_info()).override(720,4000).fitCenter().into(notice_info);
 
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
@@ -48,13 +48,13 @@ public class NoticeInfoActivity extends AppCompatActivity {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        Glide.get(this).clearMemory();
+        Glide.get(getApplicationContext()).clearMemory();
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        Glide.get(this).trimMemory(level);
+        Glide.get(getApplicationContext()).trimMemory(level);
     }
 
 }

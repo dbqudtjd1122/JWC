@@ -135,7 +135,7 @@ public class SchoolWriteActivity extends LoginInformation {
                 waitDlg = null;
             }
             if(s==1){
-                Intent intent = new Intent(SchoolWriteActivity.this, SchoolInfoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SchoolInfoActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -145,7 +145,7 @@ public class SchoolWriteActivity extends LoginInformation {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(SchoolWriteActivity.this, SchoolInfoActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SchoolInfoActivity.class);
         intent.putExtra("school", school);
         setResult(RESULT_OK, intent);
         finish();

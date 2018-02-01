@@ -112,7 +112,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 }
                 netcheck = networkcheck();
                 if(netcheck == true) {
-                    Toast.makeText(IDPWSearchActivity.this, tv_pwsearch.getText().toString() +"로 임시비밀번호를 발송하였습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), tv_pwsearch.getText().toString() +"로 임시비밀번호를 발송하였습니다.", Toast.LENGTH_SHORT).show();
                     new IDPWSearchActivity.PWGMailSender().execute(temp.toString()); // 임시비밀번호 메일 발송
                     pwuser.setPW(temp.toString());  // 임시비밀번호 넣기
                     new IDPWSearchActivity.PWChange().execute(pwuser); // 임시비밀번호로 데이터 변경
@@ -163,7 +163,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if(s == null){
-                Toast.makeText(IDPWSearchActivity.this, "입력한 정보의 ID가 없습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "입력한 정보의 ID가 없습니다.", Toast.LENGTH_SHORT).show();
                 ll_idsearch.setVisibility(View.GONE);
             } else {
                 iduser = s;
@@ -203,7 +203,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
-            Toast.makeText(IDPWSearchActivity.this, iduser.getEmail().toString() +"로 아이디를 발송하였습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), iduser.getEmail().toString() +"로 아이디를 발송하였습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -243,7 +243,7 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 waitDlg = null;
             }
             if(s == null){
-                Toast.makeText(IDPWSearchActivity.this, "조회되지않는 ID입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "조회되지않는 ID입니다.", Toast.LENGTH_SHORT).show();
                 ll_pwsearch.setVisibility(View.GONE);
             } else {
                 pwuser = s;

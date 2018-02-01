@@ -54,7 +54,7 @@ public class EventActivity extends AppCompatActivity {
         noticeslist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterEvent(this, R.layout.listitem_event, R.id.event_title, noticeslist);
+        adapter = new AdapterEvent(getApplicationContext(), R.layout.listitem_event, R.id.event_title, noticeslist);
 
         // 리스트뷰에 어댑터 설정
         EventListView.setAdapter(adapter);
@@ -75,7 +75,7 @@ public class EventActivity extends AppCompatActivity {
     public class OnItemHandler implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemLongClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(EventActivity.this, EventInfoActivity.class);
+            Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
             event = noticeslist.get(position);
             intent.putExtra("event", event);
             startActivity(intent);

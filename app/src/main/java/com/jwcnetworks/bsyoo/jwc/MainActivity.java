@@ -482,7 +482,7 @@ public class MainActivity extends AppCompatActivity
 
             // ProgressDialog 보이기
             // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(getApplicationContext());
+            waitDlg = new ProgressDialog(MainActivity.this);
             waitDlg.setMessage("로그아웃 중 입니다.");
             waitDlg.show();
         }

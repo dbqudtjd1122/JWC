@@ -95,7 +95,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                 code.setSerial_Code(et_serialcode.getText().toString());
                 for(int i = 0; i<=codelist.size()-1 ; i++){
                     if(codelist.get(i).getSerial_Code().toString().equals(code.getSerial_Code().toString())){
-                        Toast.makeText(this, "이미 등록된 시리얼 입니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "이미 등록된 시리얼 입니다.", Toast.LENGTH_SHORT).show();
                         ll_serial.setVisibility(View.GONE);
                         overlap = i;
                         break;
@@ -108,7 +108,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                 }
 
                 if(code.getSerial_Code().toString().length() <= 5 || code.getSerial_Code().toString().length() >= 7){
-                    Toast.makeText(this, "6자리를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "6자리를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     ll_serial.setVisibility(View.GONE);
                 } else {
                     netcheck = networkcheck();
@@ -203,7 +203,7 @@ public class SerialCodeAddActivity extends AppCompatActivity {
             }
             if(s == null) {
                 ll_serial.setVisibility(View.GONE);
-                Toast.makeText(SerialCodeAddActivity.this, "조회되지않는 시리얼 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "조회되지않는 시리얼 입니다.", Toast.LENGTH_SHORT).show();
             } else {
                 camera = s;
                 ll_serial.setVisibility(View.VISIBLE);
@@ -255,11 +255,11 @@ public class SerialCodeAddActivity extends AppCompatActivity {
                     waitDlg.dismiss();
                     waitDlg = null;
                 }
-                Intent intent = new Intent(SerialCodeAddActivity.this, MypageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
-                Toast.makeText(SerialCodeAddActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
     }

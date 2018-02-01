@@ -38,7 +38,7 @@ public class EventInfoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(event.getNotice_title().toString());
 
         if (event.getImg_info() != null) {
-            Glide.with(this).load(event.getImg_info()).override(720, 10000).fitCenter().into(event_info);
+            Glide.with(getApplicationContext()).load(event.getImg_info()).override(720, 10000).fitCenter().into(event_info);
         }
 
         // 이미지 줌인, 아웃 (build.gradle 추가)

@@ -51,7 +51,7 @@ public class AdapterEvent extends ArrayAdapter<ModelNotice> {
             }
             viewHolder.school_time.setVisibility(View.GONE);
             if(getItem(position).getNotice_end().toString().equals("진행 중인 이벤트")){
-                viewHolder.event_title.setText("[이벤트] "+getItem(position).getNotice_title().toString());
+                viewHolder.event_title.setText("[진행 중인 이벤트] "+getItem(position).getNotice_title().toString());
             } else {
                 viewHolder.event_title.setText("[종료된 이벤트] "+getItem(position).getNotice_title().toString());
             }

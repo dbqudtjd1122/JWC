@@ -120,15 +120,15 @@ public class PwCheckActivity extends LoginInformation {
                 waitDlg = null;
             }
             if (s == null) {
-                Toast.makeText(PwCheckActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(PwCheckActivity.this, "비밀번호가 확인 되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "비밀번호가 확인 되었습니다.", Toast.LENGTH_SHORT).show();
                 if(account.equals("수정")) {
-                    Intent intent = new Intent(PwCheckActivity.this, MypageModifiedActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MypageModifiedActivity.class);
                     intent.putExtra("user", user);
                     startActivityForResult(intent, 777);
                 } else {
-                    Intent intent = new Intent(PwCheckActivity.this, DeleteUserActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), DeleteUserActivity.class);
                     intent.putExtra("user", user);
                     startActivityForResult(intent, 888);
                 }
@@ -194,7 +194,7 @@ public class PwCheckActivity extends LoginInformation {
         // 회원탈퇴
         if (requestCode == 888) {
             if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(PwCheckActivity.this, MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 setResult(RESULT_OK, intent);
                 finish();
             }

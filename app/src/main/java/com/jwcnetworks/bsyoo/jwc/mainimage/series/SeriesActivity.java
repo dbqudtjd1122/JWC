@@ -55,7 +55,7 @@ public class SeriesActivity extends LoginInformation {
         cameralist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterCamera(this, R.layout.listitem_camera, R.id.text_cameraname, cameralist, islevel);
+        adapter = new AdapterCamera(getApplicationContext(), R.layout.listitem_camera, R.id.text_cameraname, cameralist, islevel);
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
@@ -90,7 +90,7 @@ public class SeriesActivity extends LoginInformation {
     class OnItemHandler implements ListView.OnItemClickListener, ListView.OnItemLongClickListener, ListView.OnItemSelectedListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(SeriesActivity.this, SeriesInfoActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SeriesInfoActivity.class);
             camera = cameralist.get(position);
             intent.putExtra("camera", camera);
             intent.putExtra("level", islevel);

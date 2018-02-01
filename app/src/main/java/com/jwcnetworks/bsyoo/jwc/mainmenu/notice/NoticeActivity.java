@@ -52,7 +52,7 @@ public class NoticeActivity extends AppCompatActivity {
         noticelist = new ArrayList<>();
 
         // 어댑터를 생성하고 데이터 설정
-        adater = new AdapterNotice(this, R.layout.listitem_notice, R.id.notice1, noticelist);
+        adater = new AdapterNotice(getApplicationContext(), R.layout.listitem_notice, R.id.notice1, noticelist);
 
         listview.setOnItemClickListener( new OnItemHandler());
         listview.setOnItemLongClickListener(new OnItemHandler());
@@ -75,7 +75,7 @@ public class NoticeActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(NoticeActivity.this, NoticeInfoActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NoticeInfoActivity.class);
             notice = noticelist.get(position);
             intent.putExtra("notice", notice);
             startActivity(intent);

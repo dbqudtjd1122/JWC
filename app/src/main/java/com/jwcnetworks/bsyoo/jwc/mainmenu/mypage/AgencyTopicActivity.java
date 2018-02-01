@@ -57,7 +57,7 @@ public class AgencyTopicActivity extends AppCompatActivity{
 
         agencytopiclist = new ArrayList<>();
 
-        adapter = new AdapterAgencyTopic(this, R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user);
+        adapter = new AdapterAgencyTopic(getApplicationContext(), R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user);
 
         // 꼬리아이템
         listview.addFooterView(footerView, null, false);
@@ -75,7 +75,7 @@ public class AgencyTopicActivity extends AppCompatActivity{
         img_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AgencyTopicActivity.this, AgencyTopicWriteActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AgencyTopicWriteActivity.class);
                 intent.putExtra("user", user);
                 startActivityForResult(intent, 178);
             }
@@ -84,7 +84,7 @@ public class AgencyTopicActivity extends AppCompatActivity{
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(AgencyTopicActivity.this, AgencyTopicReviewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AgencyTopicReviewActivity.class);
                 agencytopic = agencytopiclist.get(position);
                 intent.putExtra("topic", agencytopic);
                 intent.putExtra("user", user);

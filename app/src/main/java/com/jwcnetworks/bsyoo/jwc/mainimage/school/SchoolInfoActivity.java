@@ -64,7 +64,7 @@ public class SchoolInfoActivity extends LoginInformation {
         }
 
         school_info = (ImageView) findViewById(R.id.school_info);
-        Glide.with(this).load(school.getImg_info()).override(720, 4000).fitCenter().into(school_info);
+        Glide.with(getApplicationContext()).load(school.getImg_info()).override(720, 4000).fitCenter().into(school_info);
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(school_info);
@@ -89,15 +89,15 @@ public class SchoolInfoActivity extends LoginInformation {
             @Override
             public void onClick(View v) {
                 if(user.getUser_Number() == -1) {
-                    Toast.makeText(SchoolInfoActivity.this, "로그인 해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "로그인 해주세요.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     setResult(RESULT_OK, intent);
                     finish();
                 } else if(Scount == -1 || Scount >= 1 ){
-                    Toast.makeText(SchoolInfoActivity.this, "이미 교육신청 하셨습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "이미 교육신청 하셨습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent intent = new Intent(SchoolInfoActivity.this, SchoolWriteActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SchoolWriteActivity.class);
                     intent.putExtra("school", school);
                     intent.putExtra("user", user);
                     startActivityForResult(intent, 789);
@@ -197,7 +197,7 @@ public class SchoolInfoActivity extends LoginInformation {
         if (requestCode == 789 ) {
             if (resultCode == RESULT_OK) {
                 Scount = 1;
-                Toast.makeText(this, "교육 신청 되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "교육 신청 되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = getIntent();
                 school = (ModelSchool) intent.getSerializableExtra("school");
             }

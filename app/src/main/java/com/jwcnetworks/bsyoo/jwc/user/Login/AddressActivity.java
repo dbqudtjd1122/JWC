@@ -63,7 +63,7 @@ public class AddressActivity extends AppCompatActivity {
                     // result.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
                     // WebView를 초기화 하지않으면 재사용할 수 없음
                     init_webView();
-                    Intent intent = new Intent(AddressActivity.this, SignUpActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                     intent.putExtra("우편", "("+arg1+")");
                     intent.putExtra("주소", arg2+" "+arg3);
                     setResult(RESULT_OK, intent);

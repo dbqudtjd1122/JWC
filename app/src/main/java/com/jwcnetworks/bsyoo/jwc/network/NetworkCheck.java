@@ -43,7 +43,7 @@ public class NetworkCheck extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    Toast.makeText(NetworkCheck.this, "네트워크 연결이 확인되지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "네트워크 연결이 확인되지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

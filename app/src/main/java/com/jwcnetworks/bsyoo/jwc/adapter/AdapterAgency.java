@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jwcnetworks.bsyoo.jwc.R;
 import com.jwcnetworks.bsyoo.jwc.model.ModelAgency;
 
@@ -65,42 +66,10 @@ public class AdapterAgency extends ArrayAdapter<ModelAgency>{
         }
 
         // 이미지 설정
-        if(getItem(position).getAgency_Name().toString().equals("동래전자")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_donglae);
-        } else if(getItem(position).getAgency_Name().toString().equals("씨씨티비서치")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_search);
-        } else if(getItem(position).getAgency_Name().toString().equals("JYCCTV")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_jycctv);
-        } else if(getItem(position).getAgency_Name().toString().equals("BK네트웍스")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_bknetworks);
-        } else if(getItem(position).getAgency_Name().toString().equals("CCTV24")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_cctv24);
-        } else if(getItem(position).getAgency_Name().toString().equals("JWC 대전지사")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_daejeon);
-        } else if(getItem(position).getAgency_Name().toString().equals("디에스")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_ds);
-        } else if(getItem(position).getAgency_Name().toString().equals("비앤에스컴퍼니")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_bns);
-        } else if(getItem(position).getAgency_Name().toString().equals("㈜서신정보통신")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_seosin);
-        } else if(getItem(position).getAgency_Name().toString().equals("애린테크")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_erin);
-        } else if(getItem(position).getAgency_Name().toString().equals("영인정보기술")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_yeongin);
-        } else if(getItem(position).getAgency_Name().toString().equals("유비네트워크")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_yubi);
-        } else if(getItem(position).getAgency_Name().toString().equals("진원컴텍")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_jinwoncomtech);
-        } else if(getItem(position).getAgency_Name().toString().equals("진원전자(테크노)")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_jinwonjeonja);
-        } else if(getItem(position).getAgency_Name().toString().equals("하이텍 아이디티")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_hightech);
-        } else if(getItem(position).getAgency_Name().toString().equals("현대하이테크")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.agency_hyeondae);
-        } else if(getItem(position).getAgency_Name().toString().equals("본사")){
-            viewHolder.img_agency_title.setImageResource(R.drawable.jwc_logo_red);
-        } else {
-            viewHolder.img_agency_title.setImageResource(R.drawable.jwc_logo_red);
+        if(getItem(position).getImg_Title() == null || getItem(position).getImg_Title().toString().equals("")){
+            Glide.with(getContext()).load("http://jwcnet.godohosting.com/app/jwc_app/img/agency/jwc_biglogo_red.png").override(400, 300).fitCenter().into(viewHolder.img_agency_title);
+        }else {
+            Glide.with(getContext()).load(getItem(position).getImg_Title().toString()).override(400, 300).fitCenter().into(viewHolder.img_agency_title);
         }
 
         return itemLayout;

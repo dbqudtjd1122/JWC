@@ -48,7 +48,7 @@ public class AgencyActivity extends AppCompatActivity {
         agencylist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterAgency(this, R.layout.listitem_agency, R.id.tv_agency_name, agencylist);
+        adapter = new AdapterAgency(getApplicationContext(), R.layout.listitem_agency, R.id.tv_agency_name, agencylist);
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);

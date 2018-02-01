@@ -50,7 +50,7 @@ public class SchoolActivity extends AppCompatActivity {
         schoollist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterSchool(this, R.layout.listitem_school, R.id.tv_school_title, schoollist);
+        adapter = new AdapterSchool(getApplicationContext(), R.layout.listitem_school, R.id.tv_school_title, schoollist);
 
         // 리스트뷰에 어댑터 설정
         SchoolListview.setAdapter(adapter);
@@ -75,7 +75,7 @@ public class SchoolActivity extends AppCompatActivity {
     public class OnItemHandler implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemLongClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(SchoolActivity.this, SchoolInfoActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SchoolInfoActivity.class);
             school = schoollist.get(position);
             intent.putExtra("school", school);
             startActivityForResult(intent, 478);
