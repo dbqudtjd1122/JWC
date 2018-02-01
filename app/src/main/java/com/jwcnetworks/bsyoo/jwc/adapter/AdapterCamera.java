@@ -66,7 +66,6 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             }
         }
 
-
         if(level == -1 || level ==1){
             Glide.with(getContext()).load(getItem(position).getOnline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);
             viewHolder.text_cameraname.setText(getItem(position).getOnlinename().toString());

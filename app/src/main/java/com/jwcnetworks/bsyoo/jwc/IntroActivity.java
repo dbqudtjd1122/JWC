@@ -27,10 +27,10 @@ public class IntroActivity extends AppCompatActivity {
         isInstalled = shortcutSharedPref.getBoolean("isInstalled", false);
 
         if (!isInstalled) {
-            addAppIconToHomeScreen(this);
+            addAppIconToHomeScreen(getApplicationContext());
         }
 
-        FirebaseMessaging.getInstance().subscribeToTopic("notice");
+        FirebaseMessaging.getInstance().subscribeToTopic("notice"); // 푸시 주제
         FirebaseInstanceId.getInstance().getToken();
 
         // Status bar 색상 설정. (상태바)
@@ -42,7 +42,7 @@ public class IntroActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -207,63 +207,63 @@ public class MainActivity extends AppCompatActivity
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.image_new:
-                Intent intent1 = new Intent(this, SeriesActivity.class);
+                Intent intent1 = new Intent(getApplicationContext(), SeriesActivity.class);
                 intent1.putExtra("new", "1");
                 startActivity(intent1);
                 break;
             case R.id.image_camera:
-                Intent intent2 = new Intent(this, CameraActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), CameraActivity.class);
                 intent2.putExtra("type", "카메라");
                 startActivity(intent2);
                 break;
             case R.id.image_record:
-                Intent intent3 = new Intent(this, CameraActivity.class);
+                Intent intent3 = new Intent(getApplicationContext(), CameraActivity.class);
                 intent3.putExtra("type", "녹화기");
                 startActivity(intent3);
                 break;
             case R.id.img_supporter:
-                Intent intnet4 = new Intent(this, SchoolActivity.class);
+                Intent intnet4 = new Intent(getApplicationContext(), SchoolActivity.class);
                 startActivityForResult(intnet4, 489);
                 break;
             case R.id.img_company:
-                Intent intent5 = new Intent(this, CompanyActivity.class);
+                Intent intent5 = new Intent(getApplicationContext(), CompanyActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.img_agency:
-                Intent intent6 = new Intent(this, AgencyActivity.class);
+                Intent intent6 = new Intent(getApplicationContext(), AgencyActivity.class);
                 startActivity(intent6);
                 break;
             case R.id.img_tech:
-                Intent intent7 = new Intent(this, TechnologyActivity.class);
+                Intent intent7 = new Intent(getApplicationContext(), TechnologyActivity.class);
                 startActivity(intent7);
                 break;
             case R.id.img_cctvinstall:
-                Intent intent8 = new Intent(this, CctvInstallActivity.class);
+                Intent intent8 = new Intent(getApplicationContext(), CctvInstallActivity.class);
                 startActivity(intent8);
                 break;
             case R.id.img_downloads:
-                Intent intent9 = new Intent(this, CasesActivity.class);
+                Intent intent9 = new Intent(getApplicationContext(), CasesActivity.class);
                 startActivity(intent9);
                 break;
             case R.id.img_notice:
-                Intent intent11 = new Intent(MainActivity.this, NoticeActivity.class);
+                Intent intent11 = new Intent(getApplicationContext(), NoticeActivity.class);
                 startActivity(intent11);
                 break;
             case R.id.img_event:
-                Intent intent12 = new Intent(MainActivity.this, EventActivity.class);
+                Intent intent12 = new Intent(getApplicationContext(), EventActivity.class);
                 startActivity(intent12);
                 break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);
-                Intent intent10 = new Intent(this, ModelSearchActivity.class);
+                Intent intent10 = new Intent(getApplicationContext(), ModelSearchActivity.class);
                 intent10.putExtra("model", et_modelsearch.getText().toString());
                 startActivity(intent10);
                 break;
             case R.id.main_event2:
                 ModelNotice event = new ModelNotice();
-                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/event_1.jpg");
-                event.setNotice_title("2TB 무료 업그레이드!");
-                Intent intent = new Intent(MainActivity.this, EventInfoActivity.class);
+                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/main_event1_info.jpg");
+                event.setNotice_title("K패키지 구매왕!");
+                Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
                 intent.putExtra("event", event);
                 startActivity(intent);
                 break;
@@ -307,42 +307,42 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.menu_camera) {
-            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
             intent.putExtra("type", "카메라");
             startActivity(intent);
         } else if (id == R.id.menu_record) {
-            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
             intent.putExtra("type", "녹화기");
             startActivity(intent);
         } else if (id == R.id.menu_login) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivityForResult(intent, 999);
         } else if (id == R.id.menu_mypage) {
-            Intent intent = new Intent(MainActivity.this, MypageActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_notice) {
-            Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_event) {
-            Intent intent = new Intent(MainActivity.this, EventActivity.class);
+            Intent intent = new Intent(getApplicationContext(), EventActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_company) {
-            Intent intent = new Intent(MainActivity.this, CompanyActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CompanyActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_logout) {
             netcheck = networkcheck();
             if (netcheck == true) {
                 Logout();
-                Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
                 startActivityForResult(intent2, 7777);
             }
         } else if (id == R.id.menu_setup) {
-            Intent intent = new Intent(MainActivity.this, SetUp.class);
+            Intent intent = new Intent(getApplicationContext(), SetUp.class);
             startActivity(intent);
         } else if (id == R.id.menu_userdelete) {
-            Intent intent = new Intent(MainActivity.this, PwCheckActivity.class);
+            Intent intent = new Intent(getApplicationContext(), PwCheckActivity.class);
             intent.putExtra("account", "탈퇴");
             startActivityForResult(intent, 555);
         }
@@ -382,7 +382,7 @@ public class MainActivity extends AppCompatActivity
                 ModelSearch.setVisibility(View.GONE);
             } else {
                 ModelSearch.setVisibility(View.VISIBLE);
-                Toast.makeText(this, "제품을 검색해 주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "제품을 검색해 주세요.", Toast.LENGTH_SHORT).show();
             }
             return true;
         }
@@ -452,7 +452,7 @@ public class MainActivity extends AppCompatActivity
         // 교육신청 액티비티에서 오는 Result
         if (requestCode == 489) {
             if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(intent, 999);
             }
             //리턴값이 없을때
@@ -463,7 +463,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 7777) {
             if (resultCode == RESULT_OK) {
                 Logout();
-                Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
             }
             //리턴값이 없을때
             else {
@@ -482,7 +482,7 @@ public class MainActivity extends AppCompatActivity
 
             // ProgressDialog 보이기
             // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
-            waitDlg = new ProgressDialog(MainActivity.this);
+            waitDlg = new ProgressDialog(getApplicationContext());
             waitDlg.setMessage("로그아웃 중 입니다.");
             waitDlg.show();
         }
@@ -517,13 +517,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        Glide.get(this).clearMemory();
+        Glide.get(getApplicationContext()).clearMemory();
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        Glide.get(this).trimMemory(level);
+        Glide.get(getApplicationContext()).trimMemory(level);
     }
 
     // 네트워크 체크
