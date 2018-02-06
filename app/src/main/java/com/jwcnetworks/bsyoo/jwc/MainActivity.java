@@ -1,9 +1,12 @@
 package com.jwcnetworks.bsyoo.jwc;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -56,6 +59,13 @@ import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.PwCheckActivity;
 import com.jwcnetworks.bsyoo.jwc.viewpager.ViewPagerAdapter;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
@@ -71,6 +81,10 @@ public class MainActivity extends AppCompatActivity
 
     private Toolbar toolbar;
     private Boolean netcheck = true;  // 네트워크 연결확인
+
+    // 버전체크
+    public String rtn, verSion;
+    public AlertDialog.Builder alt_bld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +138,10 @@ public class MainActivity extends AppCompatActivity
         } else {
             Loginsave();
         }
+
+        // 최신버전 체크후 업데이트 권장
+        alt_bld = new AlertDialog.Builder(this);
+        new Version().execute();
 
         // ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -518,6 +536,56 @@ public class MainActivity extends AppCompatActivity
                 waitDlg.dismiss();
                 waitDlg = null;
             }
+        }
+    }
+
+    // 앱 현재 버전, 최신버전 체크
+    private class Version extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            // Confirmation of market information in the Google Play Store
+            try {
+                Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id=com.jwcnetworks.bsyoo.jwc").get();
+                Elements Version = doc.select(".content");
+                for (Element v : Version) {
+                    if (v.attr("itemprop").equals("softwareVersion")) {
+                        rtn = v.text();
+                    }
+                }
+                return rtn;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            // Version check the execution application.
+            PackageInfo pi = null;
+            try {
+                pi = getPackageManager().getPackageInfo(getPackageName(), 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            verSion = pi.versionName;
+            rtn = result;
+
+            if (!verSion.equals(rtn)) { // 최신버전이 아닐경우
+                Toast.makeText(getApplicationContext(), "최신버전으로 업데이트 해주세요.", Toast.LENGTH_SHORT).show();
+                //데이터 담아서 팝업(액티비티) 호출
+                Intent intent_ = new Intent(getApplicationContext(), PopupActivity.class);
+                intent_.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
+                getApplicationContext().startActivity(intent_);
+            }
+            super.onPostExecute(result);
         }
     }
 
