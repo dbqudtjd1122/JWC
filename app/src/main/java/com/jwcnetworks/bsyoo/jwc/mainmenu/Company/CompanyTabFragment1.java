@@ -33,13 +33,15 @@ public class CompanyTabFragment1 extends CompanyFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
         companyimg = (ImageView) view.findViewById(R.id.companyimg);
         Glide.with(this).load("http://jwcnet.godohosting.com/app/jwc_app/img/company/company_info.jpg").override(720,4000).fitCenter().into(companyimg);
 
-        // 이미지 줌인, 아웃 (build.gradle 추가)
-        PhotoViewAttacher photoview = new PhotoViewAttacher(companyimg);
-        photoview.update();
-
+        try {
+            // 이미지 줌인, 아웃 (build.gradle 추가)
+            PhotoViewAttacher photoview = new PhotoViewAttacher(companyimg);
+            photoview.setScaleType(ImageView.ScaleType.FIT_XY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

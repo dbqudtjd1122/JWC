@@ -43,7 +43,7 @@ public class EventInfoActivity extends AppCompatActivity {
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(event_info);
-        photoview.update();
+        photoview.setScaleType(ImageView.ScaleType.FIT_XY);
 
     }
 }

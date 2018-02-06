@@ -17,6 +17,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.jwcnetworks.bsyoo.jwc.MainActivity;
 import com.jwcnetworks.bsyoo.jwc.R;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpUser;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
@@ -190,6 +191,22 @@ public class MypageActivity extends LoginInformation {
             else {
             }
         }
+
+        // 개인정보 수정에서 넘어오는 Intent
+        if (requestCode == 5612) {
+            if (resultCode == RESULT_OK) {
+                int OK = data.getIntExtra("OK", -1);
+                if(OK==2){
+                    Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                    setResult(RESULT_OK, intent2);
+                    finish();
+                }
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+
         // 네트워크 불량에서 오는 Result
         if (requestCode == 7777) {
             if (resultCode == RESULT_OK) {

@@ -261,8 +261,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.main_event2:
                 ModelNotice event = new ModelNotice();
-                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/main_event1_info.jpg");
-                event.setNotice_title("K패키지 구매왕!");
+                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/notice/Security2_info.jpg");
+                event.setNotice_title("시큐리티 월드");
                 Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
                 intent.putExtra("event", event);
                 startActivity(intent);
@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 999);
         } else if (id == R.id.menu_mypage) {
             Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 7823);
         } else if (id == R.id.menu_notice) {
             Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
             startActivity(intent);
@@ -438,6 +438,15 @@ public class MainActivity extends AppCompatActivity
                 if (navigationView != null) {
                     Loginsave();
                 }
+            }
+        }
+        // 개인정보 수정 액티비티에서 오는 Result
+        if (requestCode == 7823) {
+            if (resultCode == RESULT_OK) {
+                Logout();
+            }
+            //리턴값이 없을때
+            else {
             }
         }
         // 회원탈퇴 액티비티에서 오는 Result

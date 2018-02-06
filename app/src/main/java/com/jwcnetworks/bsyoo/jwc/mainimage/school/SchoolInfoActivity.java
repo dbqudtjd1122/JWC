@@ -68,7 +68,7 @@ public class SchoolInfoActivity extends LoginInformation {
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(school_info);
-        photoview.update();
+        photoview.setScaleType(ImageView.ScaleType.FIT_XY);
 
         // 회원정보 가져오기
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);

@@ -44,7 +44,7 @@ public class CctvInstallTabFragment2 extends CctvInstallFragment {
 
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(appinstall_info);
-        photoview.update();
+        photoview.setScaleType(ImageView.ScaleType.FIT_XY);
 
         img_install.setOnClickListener(new View.OnClickListener() {
             @Override

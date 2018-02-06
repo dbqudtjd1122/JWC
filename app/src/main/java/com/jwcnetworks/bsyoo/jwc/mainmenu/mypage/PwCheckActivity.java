@@ -21,7 +21,17 @@ import com.jwcnetworks.bsyoo.jwc.hppt.HttpUser;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.jwcnetworks.bsyoo.jwc.network.Network;
 import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
+import com.jwcnetworks.bsyoo.jwc.user.Encrypt.SecretCode;
 import com.jwcnetworks.bsyoo.jwc.user.Login.LoginInformation;
+
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class PwCheckActivity extends LoginInformation {
 
@@ -122,6 +132,7 @@ public class PwCheckActivity extends LoginInformation {
             if (s == null) {
                 Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
             } else {
+                user = s;
                 Toast.makeText(getApplicationContext(), "비밀번호가 확인 되었습니다.", Toast.LENGTH_SHORT).show();
                 if(account.equals("수정")) {
                     Intent intent = new Intent(getApplicationContext(), MypageModifiedActivity.class);
@@ -170,6 +181,26 @@ public class PwCheckActivity extends LoginInformation {
             super.onPostExecute(s);
 
             user = s;
+            String pw = "";
+            try {
+                pw = SecretCode.AES_Decode(user.getPW().toString());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (NoSuchPaddingException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            } catch (InvalidAlgorithmParameterException e) {
+                e.printStackTrace();
+            } catch (IllegalBlockSizeException e) {
+                e.printStackTrace();
+            } catch (BadPaddingException e) {
+                e.printStackTrace();
+            }
+            user.setPW(pw);
+
             settext();
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
@@ -182,9 +213,13 @@ public class PwCheckActivity extends LoginInformation {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 시리얼 등록
+        // 개인정보 변경에서 오는 Result
         if (requestCode == 777 ) {
             if (resultCode == RESULT_OK) {
+                int OK = data.getIntExtra("OK", -1);
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                intent.putExtra("OK", OK);
+                setResult(RESULT_OK, intent);
                 finish();
             }
             //리턴값이 없을때

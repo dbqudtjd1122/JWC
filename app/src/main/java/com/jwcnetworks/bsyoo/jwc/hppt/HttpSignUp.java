@@ -3,21 +3,51 @@ package com.jwcnetworks.bsyoo.jwc.hppt;
 
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.google.gson.Gson;
+import com.jwcnetworks.bsyoo.jwc.user.Encrypt.SecretCode;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class HttpSignUp {
 
+    public static String pw = "";
+
     // 회원가입
-    public Integer signupinsert(ModelUser user){
+    public Integer signupinsert(ModelUser user) {
         String weburl = "http://jwcctv1.cafe24.com/jwcuser/insert";
 
         HttpRequest request = null;
         String response = null;
+
+        try {
+            pw = SecretCode.AES_Encode(user.getPW().toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        user.setPW(pw);
 
         int httpCode = 0;
         try {
@@ -118,6 +148,26 @@ public class HttpSignUp {
         HttpRequest request = null;
         JSONObject response = null;
         ModelUser user = null ;
+
+        try {
+            pw = SecretCode.AES_Encode(model.getPW().toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        model.setPW(pw);
+
         int httpCode = 0;
         try {
             String data = new Gson().toJson(model);
@@ -127,13 +177,31 @@ public class HttpSignUp {
                     .addHeader("Accept", "application/json");
             httpCode = request.post(data);
 
-            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+            if(httpCode == HttpURLConnection.HTTP_OK){      // HttpURLConnection.HTTP_OK == 200
                 response = request.getJSONObjectResponse(); // 서버값이 리턴된다
             } else {
             }
 
             String jsonInString = response.toString();
             user = new Gson().fromJson(jsonInString, ModelUser.class);
+            try {
+                String pw2 = SecretCode.AES_Decode(user.getPW().toString());
+                user.setPW(pw2);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (NoSuchPaddingException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            } catch (InvalidAlgorithmParameterException e) {
+                e.printStackTrace();
+            } catch (IllegalBlockSizeException e) {
+                e.printStackTrace();
+            } catch (BadPaddingException e) {
+                e.printStackTrace();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

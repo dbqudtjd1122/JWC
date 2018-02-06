@@ -70,7 +70,7 @@
                     android:layout_height="fill_parent"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_event1" />
+                    app:srcCompat="@drawable/security2" />
             </LinearLayout>
 
             <FrameLayout

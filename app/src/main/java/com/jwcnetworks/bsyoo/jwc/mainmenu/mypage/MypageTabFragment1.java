@@ -50,7 +50,7 @@ public class MypageTabFragment1 extends MypageFragment{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PwCheckActivity.class);
                 intent.putExtra("account", "수정");
-                getActivity().startActivity(intent);
+                getActivity().startActivityForResult(intent, 5612);
             }
         });
         ll_mypage2.setOnClickListener(new View.OnClickListener() {

@@ -26,8 +26,18 @@ import com.jwcnetworks.bsyoo.jwc.hppt.HttpUser;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.jwcnetworks.bsyoo.jwc.network.Network;
 import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
+import com.jwcnetworks.bsyoo.jwc.user.Encrypt.SecretCode;
 import com.jwcnetworks.bsyoo.jwc.user.Login.AddressActivity;
 import com.jwcnetworks.bsyoo.jwc.user.Login.LoginInformation;
+
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class MypageModifiedActivity extends LoginInformation {
 
@@ -40,8 +50,8 @@ public class MypageModifiedActivity extends LoginInformation {
     private LinearLayout buisness_layout;
     public Integer REQUEST_CODE = 8577;
 
-    // 이메일 중복확인
-    private int emailcheck = 0;
+    private int emailcheck = 0;  // 이메일 중복확인
+    private int OK = 0;  // 사업자 여부 확인
 
     private Boolean netcheck = true;  // 네트워크 연결확인
 
@@ -62,6 +72,11 @@ public class MypageModifiedActivity extends LoginInformation {
         Intent intent = getIntent();
         user = (ModelUser) intent.getSerializableExtra("user");
         settext();
+        if(user.getMutual().toString() == null || user.getMutual().toString().equals("")){
+            OK = 2;  // 사업자
+        } else {
+            OK = 1; // 일반소비자
+        }
 
         // 라디오그룹 클릭리스너
         Rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -109,7 +124,6 @@ public class MypageModifiedActivity extends LoginInformation {
                     tv_pwcheck.setTextColor(Color.parseColor("#FF0000"));
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -132,7 +146,7 @@ public class MypageModifiedActivity extends LoginInformation {
     }
     public void signClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_email_check:
+            case R.id.btn_email_check: // 이메일 중복확인
                 if(user.getEmail().toString().equals(et_email.getText().toString()+"@"+et_email2.getText().toString())){
                     Toast.makeText(getApplicationContext(), "사용가능한 Email 입니다.", Toast.LENGTH_SHORT).show();
                     emailcheck = 1;
@@ -152,12 +166,31 @@ public class MypageModifiedActivity extends LoginInformation {
                     }
                 }
                 break;
-            case R.id.btn_addr:
+            case R.id.btn_addr: // 주소 적용
                 Intent intent = new Intent(getApplicationContext(), AddressActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
-            case R.id.btn_signupfinish:
-                user.setPW(et_pw2.getText().toString());
+            case R.id.btn_signupfinish: // 회원정보 업데이트
+                String pw = "";
+                try {
+                    pw = SecretCode.AES_Encode(et_pw2.getText().toString()); // 비밀번호 암호화
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (NoSuchPaddingException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (InvalidAlgorithmParameterException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                }
+                user.setPW(pw);
+
                 user.setName(et_name.getText().toString());
                 user.setAddr(tv_addr1.getText().toString() + " " + tv_addr2.getText().toString() + " / " + et_addr3.getText().toString());
                 user.setPhone(et_phone1.getText().toString() + et_phone2.getText().toString() + et_phone3.getText().toString());
@@ -172,10 +205,14 @@ public class MypageModifiedActivity extends LoginInformation {
                 } else {
                     user.setPhone_sms(2);
                 }
-                if (radioButton.isChecked() == true) {
+                if (radioButton.isChecked() == true) { // 일반소비자 checked
                     user.setOK(1);
                 } else {
-                    user.setOK(2);
+                    if(OK == 1){
+                        user.setOK(1);
+                    }else {
+                        user.setOK(2);
+                    }
                     user.setMutual(et_Mutual.getText().toString());
                     user.setRepresentation(et_Representation.getText().toString());
                     user.setBuisness_number(et_Buisness1.getText().toString() + et_Buisness2.getText().toString() + et_Buisness3.getText().toString());
@@ -230,7 +267,6 @@ public class MypageModifiedActivity extends LoginInformation {
                     Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
                     startActivityForResult(intent2, 7777);
                 }
-
         }
     }
 
@@ -441,6 +477,7 @@ public class MypageModifiedActivity extends LoginInformation {
                     Toast.makeText(getApplicationContext(), "사업자 로그인 승인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(getApplicationContext(), PwCheckActivity.class);
+                intent.putExtra("OK", user.getOK());
                 setResult(RESULT_OK, intent);
                 finish();
             } else {

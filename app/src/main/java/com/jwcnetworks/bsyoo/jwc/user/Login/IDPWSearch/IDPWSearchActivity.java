@@ -24,10 +24,19 @@ import com.jwcnetworks.bsyoo.jwc.hppt.HttpUser;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.jwcnetworks.bsyoo.jwc.network.Network;
 import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
+import com.jwcnetworks.bsyoo.jwc.user.Encrypt.SecretCode;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.regex.Pattern;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class IDPWSearchActivity extends AppCompatActivity {
 
@@ -114,7 +123,27 @@ public class IDPWSearchActivity extends AppCompatActivity {
                 if(netcheck == true) {
                     Toast.makeText(getApplicationContext(), tv_pwsearch.getText().toString() +"로 임시비밀번호를 발송하였습니다.", Toast.LENGTH_SHORT).show();
                     new IDPWSearchActivity.PWGMailSender().execute(temp.toString()); // 임시비밀번호 메일 발송
-                    pwuser.setPW(temp.toString());  // 임시비밀번호 넣기
+
+                    // 임시비밀번호 암호화
+                    String pw = "";
+                    try {
+                        pw = SecretCode.AES_Encode(temp.toString());
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchPaddingException e) {
+                        e.printStackTrace();
+                    } catch (InvalidKeyException e) {
+                        e.printStackTrace();
+                    } catch (InvalidAlgorithmParameterException e) {
+                        e.printStackTrace();
+                    } catch (IllegalBlockSizeException e) {
+                        e.printStackTrace();
+                    } catch (BadPaddingException e) {
+                        e.printStackTrace();
+                    }
+                    pwuser.setPW(pw);  // 암호화된 임시비밀번호 넣기
                     new IDPWSearchActivity.PWChange().execute(pwuser); // 임시비밀번호로 데이터 변경
                 } else {
                     Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
