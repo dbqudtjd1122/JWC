@@ -122,7 +122,7 @@ public class HttpCamera {
         }
     }
 
-    public List<ModelCamera> getCameraSearchList(String search) {
+    public List<ModelCamera> getCameraSearchList(String name, String type) {
         String weburl = "http://jwcctv1.cafe24.com/jwccamera/getCameraSearchList";
 
         HttpRequest request = null;
@@ -133,7 +133,8 @@ public class HttpCamera {
         try {
 
             request = new HttpRequest(weburl).addHeader("charset", "utf-8");
-            request.addParameter("Onlinename", search);
+            request.addParameter("name", name);
+            request.addParameter("type", type);
 
             httpCode = request.post();
 

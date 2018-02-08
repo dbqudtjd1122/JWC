@@ -52,7 +52,6 @@ public class LoginActivity extends LoginInformation {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-
         setbyid();
 
         // TextView 밑줄 적용

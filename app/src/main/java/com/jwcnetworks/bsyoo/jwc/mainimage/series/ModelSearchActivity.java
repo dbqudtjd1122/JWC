@@ -63,7 +63,11 @@ public class ModelSearchActivity extends LoginInformation {
 
         netcheck = networkcheck();
         if (netcheck == true) {
-            new ModelSearchActivity.getCameraSearchList().execute(search);
+            if(islevel >= 2) {
+                new ModelSearchActivity.getCameraSearchList().execute(search, "Offline");
+            }else {
+                new ModelSearchActivity.getCameraSearchList().execute(search, "Online");
+            }
         } else {
             Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivity(intent2);
@@ -128,7 +132,7 @@ public class ModelSearchActivity extends LoginInformation {
         protected List<ModelCamera> doInBackground(String... params) {
 
             try {
-                cameralist = new HttpCamera().getCameraSearchList(params[0].toString());
+                cameralist = new HttpCamera().getCameraSearchList(params[0].toString(), params[1].toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -143,12 +147,13 @@ public class ModelSearchActivity extends LoginInformation {
         @Override
         protected void onPostExecute(List<ModelCamera> list) {
             super.onPostExecute(list);
-            // 1.
-            cameralist = list;
-            adapter.clear();
-            adapter.addAll(cameralist);
-            adapter.notifyDataSetChanged();
 
+            if(list!=null) {
+                cameralist = list;
+                adapter.clear();
+                adapter.addAll(cameralist);
+                adapter.notifyDataSetChanged();
+            }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
                 waitDlg.dismiss();
