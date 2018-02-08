@@ -98,9 +98,9 @@ public class MainActivity extends AppCompatActivity
         // getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));  // 액션바 컬러지정
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        Drawable d = getResources().getDrawable(R.drawable.main_actionbar);
+        Drawable d = getResources().getDrawable(R.drawable.actionbar);
         getSupportActionBar().setBackgroundDrawable(d);  // 액션바에 백그라운드 이미지 넣기
-        // getSupportActionBar().setLogo(R.drawable.jwc_logo_red); // 액션바 이미지
+        getSupportActionBar().setLogo(R.drawable.actionbar_logo); // 액션바 이미지
 
 
         // Status bar 색상 설정. (상태바)
@@ -580,7 +580,6 @@ public class MainActivity extends AppCompatActivity
 
             if (!verSion.equals(rtn)) { // 최신버전이 아닐경우
                 Toast.makeText(getApplicationContext(), "최신버전으로 업데이트 해주세요.", Toast.LENGTH_SHORT).show();
-                //데이터 담아서 팝업(액티비티) 호출
                 Intent intent_ = new Intent(getApplicationContext(), PopupActivity.class);
                 intent_.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
                 getApplicationContext().startActivity(intent_);
@@ -588,7 +587,6 @@ public class MainActivity extends AppCompatActivity
             super.onPostExecute(result);
         }
     }
-
 
     // 메모리 부족할때 호출되는 메소드. 이후 GC가 수행됨  // 매니페스트에 android:largeHeap="true" 작성
     @Override

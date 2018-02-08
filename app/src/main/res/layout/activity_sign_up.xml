@@ -182,9 +182,10 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@drawable/text">
 
                     <EditText
                         android:id="@+id/et_pw"
@@ -248,7 +249,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@drawable/text">
 
                     <EditText
                         android:id="@+id/et_pw2"
@@ -310,7 +312,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@drawable/text">
 
                     <EditText
                         android:id="@+id/et_name"

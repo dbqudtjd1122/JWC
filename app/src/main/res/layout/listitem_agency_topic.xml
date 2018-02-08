@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="시간"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:textColor="#636363"/>
 
 
         </LinearLayout>
@@ -144,13 +145,14 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginRight="5dp"
-                app:srcCompat="@drawable/reviewcount" />
+                android:src="@drawable/reviewcount" />
 
             <TextView
                 android:id="@+id/tv_countreview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="댓글 10" />
+                android:text="댓글 10"
+                android:textColor="#636363"/>
 
     </LinearLayout>
 </LinearLayout>

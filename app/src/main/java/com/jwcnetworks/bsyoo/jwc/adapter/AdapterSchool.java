@@ -70,7 +70,7 @@ public class AdapterSchool extends ArrayAdapter<ModelSchool> {
         viewHolder.tv_school_time2.setText(datetime);
 
         // 이미지타이틀
-        Glide.with(getContext()).load(getItem(position).getImg_title().toString()).override(800,1000).fitCenter().into(viewHolder.img_school_title);
+        Glide.with(getContext()).load(getItem(position).getImg_title().toString()).override(500,300).fitCenter().into(viewHolder.img_school_title);
 
         return itemLayout;
     }

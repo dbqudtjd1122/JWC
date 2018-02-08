@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="7dp"
             android:text="2017-10-26"
-            android:textSize="13dp" />
+            android:textSize="13dp"
+            android:textColor="#636363"/>
     </LinearLayout>
 
 </LinearLayout>

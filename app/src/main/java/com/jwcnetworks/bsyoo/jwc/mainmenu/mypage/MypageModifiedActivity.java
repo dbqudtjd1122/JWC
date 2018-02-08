@@ -72,7 +72,7 @@ public class MypageModifiedActivity extends LoginInformation {
         Intent intent = getIntent();
         user = (ModelUser) intent.getSerializableExtra("user");
         settext();
-        if(user.getMutual().toString() == null || user.getMutual().toString().equals("")){
+        if(user.getMutual() == null || user.getMutual().toString().equals("")){
             OK = 2;  // 사업자
         } else {
             OK = 1; // 일반소비자

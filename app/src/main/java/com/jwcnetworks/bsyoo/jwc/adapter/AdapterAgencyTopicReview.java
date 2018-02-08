@@ -39,7 +39,7 @@ public class AdapterAgencyTopicReview extends ArrayAdapter<ModelAgencyTopicRevie
     }
 
     class ViewHolder {
-        TextView tv_id, tv_time, tv_info, tv_countreview;
+        TextView tv_id, tv_time, tv_info;
         ImageView img_review_delete;
     }
 

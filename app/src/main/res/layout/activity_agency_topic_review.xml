@@ -28,13 +28,13 @@
 
             <EditText
                 android:id="@+id/et_insert_review"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/idpwsearchtext"
                 android:ems="10"
                 android:hint="댓글을 입력해 주세요."
-                android:inputType="textWebEditText"
+                android:inputType="none"
                 android:lines="3"
                 android:padding="5dp"
                 android:textColor="#000"

@@ -13,11 +13,10 @@
         android:layout_marginTop="5dp"
         android:adjustViewBounds="true"
         android:background="@drawable/schoolback"
-        android:orientation="horizontal"
-        android:weightSum="8">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_weight="2"
             android:layout_gravity="center"
@@ -25,16 +24,16 @@
 
             <ImageView
                 android:id="@+id/img_school_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:padding="10dp"
                 android:adjustViewBounds="true"/>
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="6">
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,7 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textColor="#636363"/>
 
                 <TextView
                     android:id="@+id/tv_school_time2"
@@ -66,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="TextView"
-                    android:textSize="13dp" />
+                    android:textSize="13dp"
+                    android:textColor="#636363"/>
             </LinearLayout>
 
             <LinearLayout
@@ -80,7 +81,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/schoolplus" />
+                    android:src="@drawable/schoolplus"/>
 
             </LinearLayout>
         </RelativeLayout>

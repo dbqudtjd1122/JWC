@@ -491,7 +491,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-
     // 네트워크 체크
     private boolean networkcheck(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);

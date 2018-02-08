@@ -28,8 +28,7 @@ public class SecretCode {
         byte[] textBytes = str.getBytes("UTF-8");
         AlgorithmParameterSpec ivSpec = new IvParameterSpec(ivBytes);
         SecretKeySpec newKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "AES");
-        Cipher cipher = null;
-        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
 
         return Base64.encodeToString(cipher.doFinal(textBytes), 0);
