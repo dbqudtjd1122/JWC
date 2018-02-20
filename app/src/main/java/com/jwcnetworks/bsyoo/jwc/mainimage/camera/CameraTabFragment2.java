@@ -124,11 +124,13 @@ public class CameraTabFragment2 extends CameraFragment {
         @Override
         protected void onPostExecute(List<ModelCamera> list) {
             super.onPostExecute(list);
-            // 1.
-            cameralist = list;
-            adapter.clear();
-            adapter.addAll(cameralist);
-            adapter.notifyDataSetChanged();
+
+            if(list != null) {
+                cameralist = list;
+                adapter.clear();
+                adapter.addAll(cameralist);
+                adapter.notifyDataSetChanged();
+            }
 
             if (waitDlg != null) {
                 waitDlg.dismiss();

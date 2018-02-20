@@ -34,7 +34,7 @@ import com.jwcnetworks.bsyoo.jwc.user.terms.TermsActivity;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends LoginInformation {
 
     private TextView tv_addr1, tv_addr2, tv_terms1, tv_terms2, tv_pwcheck;
     private EditText et_id, et_pw, et_pw2, et_name, et_email, et_email2, et_addr3, et_phone1, et_phone2, et_phone3, et_hphone1, et_hphone2, et_hphone3, et_Mutual, et_Representation, et_Buisness1, et_Buisness2, et_Buisness3, et_Sectors;
@@ -202,6 +202,7 @@ public class SignUpActivity extends AppCompatActivity {
                 user.setAddr(tv_addr1.getText().toString() + " " + tv_addr2.getText().toString() + " / " + et_addr3.getText().toString());
                 user.setPhone(et_phone1.getText().toString() + et_phone2.getText().toString() + et_phone3.getText().toString());
                 user.setPhone_home(et_hphone1.getText().toString() +"-"+ et_hphone2.getText().toString() +"."+ et_hphone3.getText().toString());
+                user.setToken(istoken.toString());
 
                 Date mDate = new Date();
                 user.setUserTime(mDate);
@@ -226,19 +227,19 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 // 회원가입정보를 입력하지 않은 경우
-                if (user.getPW().length() <= 7) {
-                    Toast.makeText(getApplicationContext(), "패스워드를 8자리 이상 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                if (user.getPW().toString().length() <= 7 || user.getPW().toString().length() >= 17) {
+                    Toast.makeText(getApplicationContext(), "패스워드를 8자리 이상, 16자리 이하로 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (!et_pw.getText().toString().equals(et_pw2.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다..", Toast.LENGTH_SHORT).show();
                     break;
-                } else if (user.getName().length() <= 1) {
+                } else if (user.getName().toString().length() <= 1) {
                     Toast.makeText(getApplicationContext(), "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (tv_addr2.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "주소를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
-                } else if (user.getPhone().length() <= 10) {
+                } else if (user.getPhone().toString().length() <= 10) {
                     Toast.makeText(getApplicationContext(), "핸드폰 번호를 전부 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     break;
                 } else if (idcheck == 0) {
@@ -249,17 +250,17 @@ public class SignUpActivity extends AppCompatActivity {
                     break;
                 }
                 if (radioButton.isChecked() == false) {
-                    if (user.getMutual().length() <= 2 || user.getMutual().length() >= 20) {
+                    if (user.getMutual().toString().length() <= 2 || user.getMutual().toString().length() >= 20) {
                         Toast.makeText(getApplicationContext(), "상호명을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
-                    } else if (user.getRepresentation().length() <= 1 || user.getRepresentation().length() >= 15) {
+                    } else if (user.getRepresentation().toString().length() <= 1 || user.getRepresentation().toString().length() >= 15) {
                         Toast.makeText(getApplicationContext(), "대표자명을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
-                    } else if (user.getBuisness_number().length() <= 9 || user.getBuisness_number().length() >=15) {
+                    } else if (user.getBuisness_number().toString().length() <= 9 || user.getBuisness_number().toString().length() >=15) {
                         Toast.makeText(getApplicationContext(), "사업자번호를 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
-                    } else if (user.getSectors().length() <= 3 || user.getSectors().length() >= 30) {
-                        Toast.makeText(getApplicationContext(), "업태 / 업종을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    } else if (user.getSectors().toString().length() <= 3 || user.getSectors().toString().length() >= 30) {
+                        Toast.makeText(getApplicationContext(), "업태 / 종목을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -269,7 +270,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 netcheck = networkcheck();
                 if(netcheck == true) {
-                    new SignUp().execute(user);
+                    new SignUpActivity.SignUp().execute(user);
                 } else {
                     Intent intent4 = new Intent(getApplicationContext(), NetworkCheck.class);
                     startActivityForResult(intent4, 7777);
@@ -357,7 +358,6 @@ public class SignUpActivity extends AppCompatActivity {
             waitDlg.setMessage("회원가입중 입니다.");
             waitDlg.show();
         }
-
         @Override
         protected Integer doInBackground(ModelUser... params) {
 
@@ -365,13 +365,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             return count;
         }
-
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
         }
-
-
         @Override
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
@@ -392,7 +389,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     // ID중복체크
@@ -410,7 +406,6 @@ public class SignUpActivity extends AppCompatActivity {
             waitDlg.setMessage("ID 확인중 입니다.");
             waitDlg.show();
         }
-
         @Override
         protected Integer doInBackground(ModelUser... params) {
 
@@ -418,12 +413,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             return count;
         }
-
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
         }
-
         @Override
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
@@ -436,6 +429,8 @@ public class SignUpActivity extends AppCompatActivity {
             if (s == 1) {
                 Toast.makeText(getApplicationContext(), "중복된 ID 입니다.", Toast.LENGTH_SHORT).show();
                 idcheck = 0;
+            } else if(s == -1){
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "사용가능한 ID 입니다.", Toast.LENGTH_SHORT).show();
                 idcheck = 1;
@@ -484,6 +479,8 @@ public class SignUpActivity extends AppCompatActivity {
             if (s == 1) {
                 Toast.makeText(getApplicationContext(), "중복된 Email 입니다.", Toast.LENGTH_SHORT).show();
                 emailcheck = 0;
+            } else if(s == -1){
+                Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "사용가능한 Email 입니다.", Toast.LENGTH_SHORT).show();
                 emailcheck = 1;

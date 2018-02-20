@@ -155,7 +155,6 @@ public class MainActivity extends AppCompatActivity
             img[i].setOnClickListener(this);
         }
 
-
         // 보이는화면이 몇번째 View인지에 따라 설정하는 옵션값
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

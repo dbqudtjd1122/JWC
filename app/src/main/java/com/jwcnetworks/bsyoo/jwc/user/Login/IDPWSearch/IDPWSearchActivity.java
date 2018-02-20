@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -292,6 +293,12 @@ public class IDPWSearchActivity extends AppCompatActivity {
         protected Integer doInBackground(String... params) {
 
             GMail sender = new GMail("jwccctv@gmail.com", "orohzqtygypwpkat"); // SUBSTITUTE HERE
+            if (android.os.Build.VERSION.SDK_INT > 9)
+            {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                        .permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+            }
             try {
                 sender.sendMail(
                         "[JWC] 비밀번호 찾기 안내 메일입니다.",   // 메일제목

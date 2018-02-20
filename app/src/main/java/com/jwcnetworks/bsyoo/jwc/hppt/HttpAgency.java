@@ -112,7 +112,6 @@ public class HttpAgency {
         } finally {
             request.close();
         }
-
         return Integer.valueOf(response);
     }
 

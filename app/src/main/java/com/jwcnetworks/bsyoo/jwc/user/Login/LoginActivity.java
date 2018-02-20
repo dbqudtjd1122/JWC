@@ -175,7 +175,9 @@ public class LoginActivity extends LoginInformation {
 
             } else if (s.getOK() == 2) {
                 Toast.makeText(LoginActivity.this, "로그인 승인 대기를 기다려야합니다.", Toast.LENGTH_SHORT).show();
-                finish();
+                Intent intent = new Intent(getApplicationContext(), BusinessPopupActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
+                getApplicationContext().startActivity(intent);
             }
         }
     }

@@ -540,7 +540,7 @@
                         <TextView
                             android:id="@+id/tv_addr2"
                             android:layout_width="wrap_content"
-                            android:layout_height="25dp"
+                            android:layout_height="50dp"
                             android:layout_marginLeft="7dp"
                             android:background="@drawable/signuptext"
                             android:ems="13"
@@ -883,7 +883,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="사업자 회원가입 경우 로그인 승인대기를\n기다리셔야 합니다." />
+                            android:text="사업자 회원가입 경우 로그인 승인대기를\n기다리셔야 합니다."/>
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -1134,7 +1135,7 @@
                             android:id="@+id/textView29"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text="업태 / 업종"
+                            android:text="업태 / 종목"
                             android:textColor="@color/colorblackk"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -1167,7 +1168,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:text="CCTV관련 업태, 업종만 사업자 승인됩니다." />
+                            android:text="CCTV관련 업태, 종목만 사업자 승인됩니다." />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

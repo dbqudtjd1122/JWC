@@ -1,6 +1,5 @@
 package com.jwcnetworks.bsyoo.jwc.hppt;
 
-
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.google.gson.Gson;
 import com.jwcnetworks.bsyoo.jwc.user.Encrypt.SecretCode;
@@ -21,7 +20,7 @@ import javax.crypto.NoSuchPaddingException;
 
 public class HttpSignUp {
 
-    public static String pw = "";
+    public String pw = "";
 
     // 회원가입
     public Integer signupinsert(ModelUser user) {
@@ -51,7 +50,7 @@ public class HttpSignUp {
 
         int httpCode = 0;
         try {
-            // ModelPerson을 json으로 변환
+            // ModelUser을 json으로 변환
             ModelUser obj = user ;
 
             String data = new Gson().toJson(obj);
@@ -64,15 +63,18 @@ public class HttpSignUp {
             if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
                 response = request.getStringResponse(); // 서버값이 리턴된다
             } else {
-            }
 
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             request.close();
+            if(response != null) {
+                return Integer.valueOf(response);
+            }else {
+                return -1;
+            }
         }
-
-        return Integer.valueOf(response);
     }
 
     // 아이디 중복확인
@@ -98,14 +100,16 @@ public class HttpSignUp {
                 response = request.getStringResponse(); // 서버값이 리턴된다
             } else {
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             request.close();
+            if(response != null) {
+                return Integer.valueOf(response);
+            }else {
+                return -1;
+            }
         }
-
-        return Integer.valueOf(response);
     }
 
     // 이메일 중복확인
@@ -136,9 +140,12 @@ public class HttpSignUp {
             e.printStackTrace();
         } finally {
             request.close();
+            if(response != null) {
+                return Integer.valueOf(response);
+            }else {
+                return -1;
+            }
         }
-
-        return Integer.valueOf(response);
     }
 
     // 로그인

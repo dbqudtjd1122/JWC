@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class PopupActivity extends Activity {
 
-    Button btn_popup1, btn_popup2;
+    private Button btn_popup1, btn_popup2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
