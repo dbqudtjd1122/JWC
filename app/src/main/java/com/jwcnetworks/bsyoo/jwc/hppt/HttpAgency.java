@@ -279,7 +279,6 @@ public class HttpAgency {
 
         int httpCode = 0;
         try {
-
             request = new HttpRequest(weburl).addHeader("charset", "utf-8");
 
             httpCode = request.post();
@@ -288,7 +287,6 @@ public class HttpAgency {
                 // 리턴값 없음
             } else {
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

@@ -81,8 +81,21 @@ public class MypageActivity extends LoginInformation {
         // PagerAdapter와 ViewPager 연결 : Fragment와 ViewPager 연결
         viewPager.setAdapter(pagerAdapter);
 
-        // 탭 시작지점 정하는부분
-        viewPager.setCurrentItem(0);
+        // 푸시 클릭후 오는 데이터
+        Intent fcmintent = getIntent();
+        String page = fcmintent.getStringExtra("page");
+        if (page != null || page != "") {
+            if(page.equals("dvr")){     // DVR 시리얼 등록
+                viewPager.setCurrentItem(1);    // 탭 시작지점 정하는부분
+            }else if(page.equals("agency")){    // 대리점 네트워크
+                Intent intent = new Intent (getApplicationContext(), AgencyTopicActivity.class);
+                intent.putExtra("user", user);
+                getApplicationContext().startActivity(intent);
+            }
+        } else {
+            viewPager.setCurrentItem(0);     // 탭 시작지점 정하는부분
+        }
+
 
         // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -269,7 +282,9 @@ public class MypageActivity extends LoginInformation {
                 waitDlg.dismiss();
                 waitDlg = null;
             }
-            setValueFragment();
+            if(s != null) {
+                setValueFragment();
+            }
         }
     }
 

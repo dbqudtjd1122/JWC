@@ -49,6 +49,7 @@ import com.jwcnetworks.bsyoo.jwc.mainimage.series.ModelSearchActivity;
 import com.jwcnetworks.bsyoo.jwc.mainimage.series.SeriesActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.notice.EventActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.notice.NoticeActivity;
+import com.jwcnetworks.bsyoo.jwc.mainmenu.notice.NoticeInfoActivity;
 import com.jwcnetworks.bsyoo.jwc.model.ModelNotice;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.jwcnetworks.bsyoo.jwc.mainimage.school.SchoolActivity;
@@ -57,6 +58,7 @@ import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 import com.jwcnetworks.bsyoo.jwc.user.Login.LoginActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageActivity;
 import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.PwCheckActivity;
+import com.jwcnetworks.bsyoo.jwc.user.Login.LoginInformation;
 import com.jwcnetworks.bsyoo.jwc.viewpager.ViewPagerAdapter;
 
 import org.jsoup.Jsoup;
@@ -67,7 +69,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends LoginInformation
         implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
 
     private LinearLayout ModelSearch;
@@ -142,6 +144,42 @@ public class MainActivity extends AppCompatActivity
         // 최신버전 체크후 업데이트 권장
         alt_bld = new AlertDialog.Builder(this);
         new Version().execute();
+
+        // 푸시클릭 후..
+        Intent fcmintent = getIntent();
+        String page = fcmintent.getStringExtra("page");
+        String title = fcmintent.getStringExtra("title");
+        String message = fcmintent.getStringExtra("message");
+        if(page != null || page != ""){
+            if(page.equals("dvr") && islevel >= 1){ // DVR 시리얼 등록
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                intent.putExtra("page", "dvr");
+                startActivityForResult(intent, 7823);
+            } else if(page.equals("agency") && islevel >= 10){  // 대리점 네트웍스
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                intent.putExtra("page", "agency");
+                startActivityForResult(intent, 7823);
+            } else if(page.equals("wed")){      // 수요쿠폰
+                Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
+                ModelNotice event = new ModelNotice();
+                event.setNotice_title("매주 수요일 할인쿠폰!");
+                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/Wednesday_S.jpg");
+                intent.putExtra("event", event);
+                startActivity(intent);
+            } else if(page.equals("redfriday")){     // 레드프라이데이
+                Intent intent = new Intent(getApplicationContext(), NoticeInfoActivity.class);
+                ModelNotice notice = new ModelNotice();
+                notice.setNotice_title("매주 금요일 레드프라이데이!");
+                notice.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/redfriday_S.jpg");
+                intent.putExtra("notice", notice);
+                startActivity(intent);
+            } else if(page.equals("normal")){
+                Intent intent = new Intent(getApplicationContext(), FCMPopupActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("message", message);
+                startActivity(intent);
+            }
+        }
 
         // ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -336,6 +374,7 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 999);
         } else if (id == R.id.menu_mypage) {
             Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+            intent.putExtra("page", "");
             startActivityForResult(intent, 7823);
         } else if (id == R.id.menu_notice) {
             Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);

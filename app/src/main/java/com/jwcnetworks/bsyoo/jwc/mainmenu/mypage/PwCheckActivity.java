@@ -9,6 +9,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -85,9 +88,26 @@ public class PwCheckActivity extends LoginInformation {
         });
     }
 
+    // EditText 이모티콘일경우 리턴 ""
+    protected InputFilter specialCharacterFilter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; i++) {
+                // 이모티콘 패턴
+                Pattern unicodeOutliers = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+                // '-' 입력 받고 싶을 경우 : unicodeOutliers.matcher(source).matches() && !source.toString().matches(".*-.*")
+                if(unicodeOutliers.matcher(source).matches()) {
+                    return "";
+                }
+            }
+            return null;
+        }
+    };
+
     private void byid(){
         et_id = (EditText) findViewById(R.id.et_id);
         et_pw = (EditText) findViewById(R.id.et_pw);
+        et_pw.setFilters(new InputFilter[]{specialCharacterFilter});
+
         btn_pwcheck = (Button) findViewById(R.id.btn_pwcheck);
     }
 

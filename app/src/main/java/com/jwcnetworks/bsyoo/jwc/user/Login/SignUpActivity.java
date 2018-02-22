@@ -291,15 +291,30 @@ public class SignUpActivity extends LoginInformation {
         }
     };
 
+    // EditText 이모티콘일경우 리턴 ""
+    protected InputFilter specialCharacterFilter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; i++) {
+                // 이모티콘 패턴
+                Pattern unicodeOutliers = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+                // '-' 입력 받고 싶을 경우 : unicodeOutliers.matcher(source).matches() && !source.toString().matches(".*-.*")
+                if(unicodeOutliers.matcher(source).matches()) {
+                    return "";
+                }
+            }
+            return null;
+        }
+    };
+
     private void setbyid() {
         et_id = (EditText) findViewById(R.id.et_id);
         et_id.setFilters(new InputFilter[]{filter});
 
         et_pw = (EditText) findViewById(R.id.et_pw);
-        et_pw.setFilters(new InputFilter[]{filter});
+        et_pw.setFilters(new InputFilter[]{specialCharacterFilter});
 
         et_pw2 = (EditText) findViewById(R.id.et_pw2);
-        et_pw2.setFilters(new InputFilter[]{filter});
+        et_pw2.setFilters(new InputFilter[]{specialCharacterFilter});
 
         et_name = (EditText) findViewById(R.id.et_name);
         et_email = (EditText) findViewById(R.id.et_email);

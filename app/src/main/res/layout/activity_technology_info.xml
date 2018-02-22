@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jwcnetworks.bsyoo.jwc.mainimage.Technology.TechnologyInfoActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.jwcnetworks.bsyoo.jwc.mainimage.Technology.TechnologyInfoActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imageView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/technologyback"
-            android:orientation="vertical"
-            android:layout_marginTop="65dp">
+            android:src="@drawable/actionbar"
+            android:adjustViewBounds="true"/>
 
-            <view
-                android:id="@+id/view_technology"
-                class="com.google.android.youtube.player.YouTubePlayerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_technology_title"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@drawable/actionbar"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_technology_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="기술자료"
-                android:textColor="#ffffff"
-                android:textSize="20dp"
-                android:layout_margin="15dp"/>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="기술자료"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/technologyback"
+        android:orientation="vertical">
+
+        <view
+            android:id="@+id/view_technology"
+            class="com.google.android.youtube.player.YouTubePlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 </LinearLayout>

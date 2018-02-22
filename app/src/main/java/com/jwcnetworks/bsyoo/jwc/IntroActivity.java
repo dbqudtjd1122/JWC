@@ -42,9 +42,25 @@ public class IntroActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                Intent fcmintent = getIntent();
+                String page = fcmintent.getStringExtra("page");
+                String title = fcmintent.getStringExtra("title");
+                String message = fcmintent.getStringExtra("message");
+                if(page != null) {
+                    if (page.equals("normal")) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("title", title);
+                        intent.putExtra("message", message);
+                        intent.putExtra("page", "normal");
+                        startActivity(intent);
+                        finish();
+                    }
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("page", "");
+                    startActivity(intent);
+                    finish();
+                }
             }
         }, 2000);
     }
@@ -60,7 +76,7 @@ public class IntroActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getResources().getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(context, R.mipmap.ic_launcher));
+                Intent.ShortcutIconResource.fromContext(context, R.drawable.myjwc_icon));
 
         intent.putExtra("duplicate", false);
         intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");

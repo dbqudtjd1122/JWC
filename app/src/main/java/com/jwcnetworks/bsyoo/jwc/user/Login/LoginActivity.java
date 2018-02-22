@@ -101,7 +101,7 @@ public class LoginActivity extends LoginInformation {
         et_login_id = (EditText) findViewById(R.id.et_login_id);
         et_login_id.setFilters(new InputFilter[]{filter});
         et_login_pw = (EditText) findViewById(R.id.et_login_pw);
-        et_login_pw.setFilters(new InputFilter[]{filter});
+        et_login_pw.setFilters(new InputFilter[]{specialCharacterFilter});
     }
 
     // EditText 영문&숫자만 적용
@@ -111,6 +111,21 @@ public class LoginActivity extends LoginInformation {
             Pattern ps = Pattern.compile("^[a-zA-Z0-9]+$");
             if (!ps.matcher(source).matches()) {
                 return "";
+            }
+            return null;
+        }
+    };
+
+    // EditText 이모티콘일경우 리턴 ""
+    protected InputFilter specialCharacterFilter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; i++) {
+                // 이모티콘 패턴
+                Pattern unicodeOutliers = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+                // '-' 입력 받고 싶을 경우 : unicodeOutliers.matcher(source).matches() && !source.toString().matches(".*-.*")
+                if(unicodeOutliers.matcher(source).matches()) {
+                    return "";
+                }
             }
             return null;
         }
