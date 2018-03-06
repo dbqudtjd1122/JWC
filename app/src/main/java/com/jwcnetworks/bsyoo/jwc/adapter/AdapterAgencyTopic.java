@@ -27,13 +27,13 @@ import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.AgencyTopicWriteActivity;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
+public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic> {
 
     public ModelUser user = new ModelUser();
     public ModelAgencyTopic topic = new ModelAgencyTopic();
     public List<ModelAgencyTopic> data = null;
 
-    public AdapterAgencyTopic(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelAgencyTopic> objects,@NonNull ModelUser user) {
+    public AdapterAgencyTopic(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelAgencyTopic> objects, @NonNull ModelUser user) {
         super(context, resource, textViewResourceId, objects);
         this.user = user;
         this.data = objects;
@@ -70,8 +70,9 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
             itemLayout.setTag(viewHolder);
         }
 
+
         viewHolder.tv_id.setText("작성자 : " + getItem(position).getID().toString());
-        viewHolder.tv_name.setText("제목 : "+getItem(position).getTopic_Name().toString());
+        viewHolder.tv_name.setText("제목 : " + getItem(position).getTopic_Name().toString());
         viewHolder.tv_topicinfo.setText(getItem(position).getInformation().toString());
 
         viewHolder.tv_countreview.setText("리뷰 " + getItem(position).getReview().toString());
@@ -87,10 +88,12 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
         if (getItem(position).getImg1() != null) {
             viewHolder.img_topic1.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(getItem(position).getImg1().toString()).override(250, 250).fitCenter().into(viewHolder.img_topic1);
-        }if (getItem(position).getImg2() != null) {
+        }
+        if (getItem(position).getImg2() != null) {
             viewHolder.img_topic2.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(getItem(position).getImg2().toString()).override(250, 250).fitCenter().into(viewHolder.img_topic2);
-        }if (getItem(position).getImg3() != null) {
+        }
+        if (getItem(position).getImg3() != null) {
             viewHolder.img_topic3.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(getItem(position).getImg3().toString()).override(250, 250).fitCenter().into(viewHolder.img_topic3);
         }
@@ -118,14 +121,15 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
             @Override
             public void onClick(View v) {
                 topic = getItem(position);
-                new AdapterAgencyTopic.deletetopic().execute(topic);
+                new AdapterAgencyTopic.deletetopic2().execute(topic);
             }
         });
+
         return itemLayout;
     }
 
-    // 삭제
-    public class deletetopic extends AsyncTask<ModelAgencyTopic, Integer, Integer> {
+    // 삭제(Delete Update -> 2)
+    public class deletetopic2 extends AsyncTask<ModelAgencyTopic, Integer, Integer> {
 
         private ProgressDialog waitDlg = null;
 
@@ -134,6 +138,7 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
             super.onPreExecute();
 
         }
+
         @Override
         protected Integer doInBackground(ModelAgencyTopic... params) {
 
@@ -141,10 +146,12 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
 
             return count;
         }
+
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
         }
+
         @Override
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
@@ -154,11 +161,11 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic>{
                 waitDlg.dismiss();
                 waitDlg = null;
             }
-            if(s==1) {
+            if (s == 1) {
                 data.remove(topic);
                 AdapterAgencyTopic.this.notifyDataSetChanged();
                 Toast.makeText(getContext(), "게시글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
             }
         }
     }

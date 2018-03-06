@@ -4,7 +4,6 @@ package com.jwcnetworks.bsyoo.jwc.fcmpush;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,13 +20,12 @@ import com.jwcnetworks.bsyoo.jwc.MainActivity;
 import com.jwcnetworks.bsyoo.jwc.R;
 import com.google.firebase.messaging.RemoteMessage;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpUser;
-import com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.MypageActivity;
-import com.jwcnetworks.bsyoo.jwc.mainmenu.notice.EventInfoActivity;
-import com.jwcnetworks.bsyoo.jwc.model.ModelNotice;
+import com.jwcnetworks.bsyoo.jwc.model.ModelPushToken;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Date;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
@@ -37,10 +35,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     public Integer islevel;
     public Integer ispush;
     public Integer isnumber;
+    public String isid;
 
     public String title, message, page, same;
+    public Integer level;   // 푸시에서 오는 레벨
 
     public ModelUser user = new ModelUser();
+    public ModelPushToken pushToken = new ModelPushToken();
 
     public FirebaseMessagingService() {
     }
@@ -54,9 +55,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         islevel = pref.getInt("level_Set", -1);
         ispush = pref.getInt("push_Set", 1);
         isnumber = pref.getInt("number_Set", -1);
+        isid = pref.getString("id_Set", "").toString();
+
 
         String tit = remoteMessage.getData().get("title").toString();
         String mes = remoteMessage.getData().get("message").toString();
+        level = Integer.valueOf(remoteMessage.getData().get("level").toString());
         String type = remoteMessage.getData().get("type").toString();
         String page2 = remoteMessage.getData().get("page").toString();
         String same2 = remoteMessage.getData().get("same").toString();
@@ -81,24 +85,47 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 user.setUser_Number(isnumber);
                 new FirebaseMessagingService.getLoginInfomation().execute(user);
             } else { // 로그인 안한경우
-                PushCheck(remoteMessage.getData().get("level"));
+                PushCheck(level);
+            }
+        } else {    // 푸시 수신 거부
+            if(isnumber != -1) {   // 로그인 한 경우만
+                setPushToken();
+                pushToken.setInoutpush("수신거부");
+                new FirebaseMessagingService.insertpushLog().execute(pushToken);
             }
         }
     }
 
-    public void PushCheck(String level) {
-        if (level.equals("1")) {        // 모든 사용자에게 푸시주기
+    // 푸시 로그 입력
+    public void setPushToken(){
+        pushToken.setPushtitle(title);
+        pushToken.setPushmessage(message);
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        pushToken.setPushtime(date);
+
+        pushToken.setUserid(isid);
+        pushToken.setUserlevel(islevel);
+        if(ispush == 1) {
+            pushToken.setReception("수신");
+        } else {
+            pushToken.setReception("수신거부");
+        }
+    }
+
+    public void PushCheck(Integer level) {
+        if (level == 1) {        // 모든 사용자에게 푸시주기
             sendPushNotification(title, message);
         }
 
         else if (same.equals("1")){   // 레벨에 맞는 사람 & 11레벨 이상등급 푸시 알람주기
-            if (Integer.valueOf(level) == islevel || islevel >= 11) {
+            if (level == islevel || islevel >= 11) {
                 sendPushNotification(title, message);
             }
         }
 
         else if (same.equals("2")){  //  레벨이상의 모든 등급 푸시 알람 주기
-            if (Integer.valueOf(level) <= islevel){
+            if (level <= islevel){
                 sendPushNotification(title, message);
             }
         }
@@ -133,7 +160,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         //    PendingIntent.FLAG_UPDATE_CURRENT
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
         // PendingIntent pendingIntent = PendingIntent.getService(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
-
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -187,12 +213,42 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         @Override
         protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
-
             if (s != null) {
                 user = s;
                 islevel = user.getLevel();
-                PushCheck(String.valueOf(islevel));
+                PushCheck(level);
+
+                // 푸시 로그 입력
+                setPushToken();
+                pushToken.setInoutpush("푸시완료");
+                new FirebaseMessagingService.insertpushLog().execute(pushToken);
             }
+        }
+    }
+
+    // 푸시 로그 기록하기
+    public class insertpushLog extends AsyncTask<ModelPushToken, Integer, Integer> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(ModelPushToken... params) {
+
+            Integer count = new HttpUser().InsertpushLog(params[0]);
+
+            return count;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Integer s) {
+            super.onPostExecute(s);
         }
     }
 

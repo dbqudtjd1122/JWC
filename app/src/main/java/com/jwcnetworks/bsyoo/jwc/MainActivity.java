@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,6 +37,9 @@ import android.view.View.OnClickListener;
 
 import com.bumptech.glide.Glide;
 import com.jwcnetworks.bsyoo.jwc.adapter.BackCloseHandler;
+import com.jwcnetworks.bsyoo.jwc.hppt.HttpNotice;
+import com.jwcnetworks.bsyoo.jwc.mainimage.News.NewsActivity;
+import com.jwcnetworks.bsyoo.jwc.mainimage.banner.MobileLiveActivity;
 import com.jwcnetworks.bsyoo.jwc.mainimage.camera.CameraActivity;
 import com.jwcnetworks.bsyoo.jwc.mainimage.cctvinstall.CctvInstallActivity;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpUser;
@@ -67,6 +71,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.List;
 
 
 public class MainActivity extends LoginInformation
@@ -87,6 +94,10 @@ public class MainActivity extends LoginInformation
     // 버전체크
     public String rtn, verSion;
     public AlertDialog.Builder alt_bld;
+
+    // 메인 이미지
+    public ModelNotice imgNotice = new ModelNotice();
+    private ImageView main_event2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,44 +152,62 @@ public class MainActivity extends LoginInformation
             Loginsave();
         }
 
-        // 최신버전 체크후 업데이트 권장
-        alt_bld = new AlertDialog.Builder(this);
-        new Version().execute();
+        netcheck = networkcheck();
+        if (netcheck == true) {
+            // 메인 이미지 가져오기
+            main_event2 = (ImageView) findViewById(R.id.main_event2);
+            new MainActivity.getMainImage().execute("메인");
+
+            // 최신버전 체크후 업데이트 권장
+            alt_bld = new AlertDialog.Builder(this);
+            new Version().execute();
+        } else {
+            Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
+            startActivityForResult(intent2, 4523);
+        }
 
         // 푸시클릭 후..
         Intent fcmintent = getIntent();
         String page = fcmintent.getStringExtra("page");
         String title = fcmintent.getStringExtra("title");
         String message = fcmintent.getStringExtra("message");
-        if(page != null || page != ""){
-            if(page.equals("dvr") && islevel >= 1){ // DVR 시리얼 등록
-                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
-                intent.putExtra("page", "dvr");
-                startActivityForResult(intent, 7823);
-            } else if(page.equals("agency") && islevel >= 10){  // 대리점 네트웍스
-                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
-                intent.putExtra("page", "agency");
-                startActivityForResult(intent, 7823);
-            } else if(page.equals("wed")){      // 수요쿠폰
-                Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
-                ModelNotice event = new ModelNotice();
-                event.setNotice_title("매주 수요일 할인쿠폰!");
-                event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/Wednesday_S.jpg");
-                intent.putExtra("event", event);
-                startActivity(intent);
-            } else if(page.equals("redfriday")){     // 레드프라이데이
-                Intent intent = new Intent(getApplicationContext(), NoticeInfoActivity.class);
-                ModelNotice notice = new ModelNotice();
-                notice.setNotice_title("매주 금요일 레드프라이데이!");
-                notice.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/redfriday_S.jpg");
-                intent.putExtra("notice", notice);
-                startActivity(intent);
-            } else if(page.equals("normal")){
-                Intent intent = new Intent(getApplicationContext(), FCMPopupActivity.class);
-                intent.putExtra("title", title);
-                intent.putExtra("message", message);
-                startActivity(intent);
+        try {
+            if(page != null){
+                if(page.equals("dvr") && islevel >= 1){ // DVR 시리얼 등록
+                    Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                    intent.putExtra("page", "dvr");
+                    startActivityForResult(intent, 7823);
+                } else if(page.equals("agency") && islevel >= 10){  // 대리점 네트웍스
+                    Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                    intent.putExtra("page", "agency");
+                    startActivityForResult(intent, 7823);
+                } else if(page.equals("wed")){      // 수요쿠폰
+                    Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
+                    ModelNotice event = new ModelNotice();
+                    event.setNotice_title("매주 수요일 할인쿠폰!");
+                    event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/Wednesday_S.jpg");
+                    intent.putExtra("event", event);
+                    startActivity(intent);
+                } else if(page.equals("redfriday")){     // 레드프라이데이
+                    Intent intent = new Intent(getApplicationContext(), NoticeInfoActivity.class);
+                    ModelNotice notice = new ModelNotice();
+                    notice.setNotice_title("매주 금요일 레드프라이데이!");
+                    notice.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/event/redfriday_S.jpg");
+                    intent.putExtra("notice", notice);
+                    startActivity(intent);
+                } else if(page.equals("normal")){
+                    Intent intent = new Intent(getApplicationContext(), FCMPopupActivity.class);
+                    intent.putExtra("title", title);
+                    intent.putExtra("message", message);
+                    startActivity(intent);
+                }
             }
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsStrting = sw.toString();
+            Log.e("push error", exceptionAsStrting);
+            e.printStackTrace();
         }
 
         // ViewPager
@@ -308,6 +337,14 @@ public class MainActivity extends LoginInformation
                 Intent intent12 = new Intent(getApplicationContext(), EventActivity.class);
                 startActivity(intent12);
                 break;
+            case R.id.img_live:
+                Intent intent13 = new Intent(getApplicationContext(), MobileLiveActivity.class);
+                startActivity(intent13);
+                break;
+            case R.id.img_news:
+                Intent intent14 = new Intent(getApplicationContext(), NewsActivity.class);
+                startActivity(intent14);
+                break;
             case R.id.btn_modelsearch:
                 EditText et_modelsearch = (EditText) findViewById(R.id.et_modelsearch);
                 Intent intent10 = new Intent(getApplicationContext(), ModelSearchActivity.class);
@@ -315,11 +352,12 @@ public class MainActivity extends LoginInformation
                 startActivity(intent10);
                 break;
             case R.id.main_event2:
-                ModelNotice event = new ModelNotice();
+
+                /*ModelNotice event = new ModelNotice();
                 event.setImg_info("http://jwcnet.godohosting.com/app/jwc_app/img/notice/Security2_info.jpg");
-                event.setNotice_title("시큐리티 월드");
+                event.setNotice_title("시큐리티 월드");*/
                 Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
-                intent.putExtra("event", event);
+                intent.putExtra("event", imgNotice);
                 startActivity(intent);
                 break;
         }
@@ -524,11 +562,23 @@ public class MainActivity extends LoginInformation
             else {
             }
         }
-        // 네트워크 불량에서 오는 Result
+        // 로그아웃 네트워크 불량에서 오는 Result
         if (requestCode == 7777) {
             if (resultCode == RESULT_OK) {
                 Logout();
                 Toast.makeText(getApplicationContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+
+        // 이미지 불러오기 네트워크 불량에서 오는 Result 2
+        if (requestCode == 4523) {
+            if (resultCode == RESULT_OK) {
+                // 메인 이미지 가져오기
+                main_event2 = (ImageView) findViewById(R.id.main_event2);
+                new MainActivity.getMainImage().execute("메인");
             }
             //리턴값이 없을때
             else {
@@ -569,6 +619,51 @@ public class MainActivity extends LoginInformation
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
 
+            // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
+            if (waitDlg != null) {
+                waitDlg.dismiss();
+                waitDlg = null;
+            }
+        }
+    }
+
+    // 메인 이미지 가져오기(Notice)
+    public class getMainImage extends AsyncTask<String, Integer, List<ModelNotice>> {
+
+        private ProgressDialog waitDlg = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // ProgressDialog 보이기
+            // 서버 요청 완료후 Mating dialog를 보여주도록 한다.
+            waitDlg = new ProgressDialog(MainActivity.this);
+            waitDlg.setMessage("인터넷 연결을 확인 중 입니다.");
+            waitDlg.show();
+        }
+
+        @Override
+        protected List<ModelNotice> doInBackground(String... params) {
+
+            List<ModelNotice> notice = new HttpNotice().NoticeList(params[0]);
+
+            return notice;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(List<ModelNotice> s) {
+            super.onPostExecute(s);
+
+            if(s != null) {
+                imgNotice = s.get(0);
+                Glide.with(getApplicationContext()).load(s.get(0).getImg_title().toString()).override(720, 1000).fitCenter().into(main_event2);
+            }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
                 waitDlg.dismiss();

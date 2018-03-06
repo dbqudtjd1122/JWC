@@ -47,7 +47,7 @@ public class IntroActivity extends AppCompatActivity {
                 String title = fcmintent.getStringExtra("title");
                 String message = fcmintent.getStringExtra("message");
                 if(page != null) {
-                    if (page.equals("normal")) {
+                    if (page.equals("normal")) {  // 일반적인 푸시 클릭후 접속
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("title", title);
                         intent.putExtra("message", message);
@@ -55,7 +55,7 @@ public class IntroActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                } else {
+                } else {  // 그냥 아이콘 클릭 접속
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("page", "");
                     startActivity(intent);

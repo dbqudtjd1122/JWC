@@ -187,13 +187,25 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" />
-
         <activity
             android:name=".FCMPopupActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent"/>
+            android:theme="@android:style/Theme.Translucent" />
+        <activity android:name=".mainimage.banner.MobileLiveActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
+        </activity>
 
+        <activity android:name=".mainmenu.mypage.InstallShareActivity"></activity>
+
+        <activity android:name=".mainimage.News.NewsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
+        </activity>
+        <activity android:name=".mainimage.News.NewsInfoActivity"></activity>
 
 
         <service android:name=".fcmpush.FirebaseMessagingService">

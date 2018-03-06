@@ -1,11 +1,11 @@
 package com.jwcnetworks.bsyoo.jwc.hppt;
 
-
 import com.jwcnetworks.bsyoo.jwc.model.ModelAgency;
 import com.jwcnetworks.bsyoo.jwc.model.ModelAgencyTopic;
 import com.jwcnetworks.bsyoo.jwc.model.ModelAgencyTopicReview;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -146,7 +146,7 @@ public class HttpAgency {
 
     // 게시글 삭제
     public Integer DeleteTopic(ModelAgencyTopic topic){
-        String weburl = "http://jwcctv1.cafe24.com/agency/deletetopic";
+        String weburl = "http://jwcctv1.cafe24.com/agency/deletetopic2";
 
         HttpRequest request = null;
         String response = null;
@@ -271,17 +271,19 @@ public class HttpAgency {
     }
 
     // 푸시 날리기
-    public Integer Tokenstart(){
-        String weburl = "http://jwcctv1.cafe24.com/send";
+    public Integer Tokenstart(ModelUser user){
+        String weburl = "http://jwcctv1.cafe24.com/agencytopic/send";
 
         HttpRequest request = null;
-        String response = null;
 
         int httpCode = 0;
         try {
-            request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+            String data = new Gson().toJson(user);
 
-            httpCode = request.post();
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
 
             if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
                 // 리턴값 없음

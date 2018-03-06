@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -85,6 +86,7 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
                         new AgencyTopicWriteActivity.UpdateTopic().execute(topic);
                     } else {
                         topic.setID(user.getID().toString());
+                        Log.i("대리점 글 작성", "WriteActivity 89번째줄");
                         new AgencyTopicWriteActivity.InsertTopic().execute(topic);
                     }
                 } else {
@@ -149,7 +151,7 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
 
             Integer count = new HttpAgency().InsertTopic(params[0]);
             if (count == 1) {
-                new HttpAgency().Tokenstart();
+                new HttpAgency().Tokenstart(user);
             }
             return count;
         }

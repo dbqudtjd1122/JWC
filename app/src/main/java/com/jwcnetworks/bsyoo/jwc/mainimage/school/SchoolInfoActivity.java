@@ -59,7 +59,7 @@ public class SchoolInfoActivity extends LoginInformation {
         // 종료된 교육인경우
         schoolinfo_ll = (LinearLayout) findViewById(R.id.schoolinfo_ll);
         school_write = (ImageView) findViewById(R.id.school_write);
-        if(school.getStart_End().toString().equals("종료")){
+        if (school.getStart_End().toString().equals("종료")) {
             schoolinfo_ll.setVisibility(View.GONE);
         }
 
@@ -73,10 +73,10 @@ public class SchoolInfoActivity extends LoginInformation {
         // 회원정보 가져오기
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
         user.setUser_Number(pref.getInt("number_Set", -1));
-        if(user.getUser_Number() == -1 ) {
+        if (user.getUser_Number() == -1) {
         } else {
             netcheck = networkcheck();
-            if(netcheck == true) {
+            if (netcheck == true) {
                 new SchoolInfoActivity.getLoginInfomation().execute(user);
             } else {
                 Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
@@ -88,19 +88,24 @@ public class SchoolInfoActivity extends LoginInformation {
         school_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(user.getUser_Number() == -1) {
+                if (user.getUser_Number() == -1) {
                     Toast.makeText(getApplicationContext(), "로그인 해주세요.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     setResult(RESULT_OK, intent);
                     finish();
-                } else if(Scount == -1 || Scount >= 1 ){
+                } else if (Scount == -1 || Scount >= 1) {
                     Toast.makeText(getApplicationContext(), "이미 교육신청 하셨습니다.", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Intent intent = new Intent(getApplicationContext(), SchoolWriteActivity.class);
-                    intent.putExtra("school", school);
-                    intent.putExtra("user", user);
-                    startActivityForResult(intent, 789);
+                } else if (school.getLevel() > islevel) {
+                    Toast.makeText(getApplicationContext(), "해당 교육신청 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                } else if (school.getLevel() <= islevel) {
+                    if (school.getSame() == 1) { // 해당 레벨만 신청가능
+                        Toast.makeText(getApplicationContext(), "해당 교육신청 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                    } else if (school.getSame() == 2) { // 해당 레벨이상으로 신청가능
+                        Intent intent = new Intent(getApplicationContext(), SchoolWriteActivity.class);
+                        intent.putExtra("school", school);
+                        intent.putExtra("user", user);
+                        startActivityForResult(intent, 789);
+                    }
                 }
             }
         });
@@ -121,6 +126,7 @@ public class SchoolInfoActivity extends LoginInformation {
             waitDlg.setMessage("회원정보를 가져오는중 입니다.");
             waitDlg.show();
         }
+
         @Override
         protected ModelUser doInBackground(ModelUser... params) {
 
@@ -128,10 +134,12 @@ public class SchoolInfoActivity extends LoginInformation {
 
             return count;
         }
+
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
         }
+
         @Override
         protected void onPostExecute(ModelUser s) {
             super.onPostExecute(s);
@@ -165,6 +173,7 @@ public class SchoolInfoActivity extends LoginInformation {
             waitDlg.setMessage("신청내역을 확인중 입니다.");
             waitDlg.show();
         }
+
         @Override
         protected Integer doInBackground(ModelUserSchool... params) {
 
@@ -172,6 +181,7 @@ public class SchoolInfoActivity extends LoginInformation {
 
             return count;
         }
+
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -190,11 +200,10 @@ public class SchoolInfoActivity extends LoginInformation {
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 789 ) {
+        if (requestCode == 789) {
             if (resultCode == RESULT_OK) {
                 Scount = 1;
                 Toast.makeText(getApplicationContext(), "교육 신청 되었습니다.", Toast.LENGTH_SHORT).show();
@@ -206,7 +215,7 @@ public class SchoolInfoActivity extends LoginInformation {
             }
         }
         // 네트워크 불량에서 오는 Result
-        if (requestCode == 7777 ) {
+        if (requestCode == 7777) {
             if (resultCode == RESULT_OK) {
                 new SchoolInfoActivity.getLoginInfomation().execute(user);
             }
@@ -217,11 +226,11 @@ public class SchoolInfoActivity extends LoginInformation {
     }
 
     // 네트워크 체크
-    private boolean networkcheck(){
+    private boolean networkcheck() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         Boolean wifi = new Network().isNetWork(networkInfo);
-        if(wifi == true){
+        if (wifi == true) {
             return true;
         } else {
             return false;

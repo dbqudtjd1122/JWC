@@ -69,7 +69,7 @@ public class SignUpActivity extends LoginInformation {
         setbyid();
 
         // 밑줄치기
-        SpannableString content = new SpannableString("회원가입 이용약관에 동의 합니다.");
+        SpannableString content = new SpannableString("회원가입 이용약관에 동의합니다.");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tv_terms1.setText(content);
         SpannableString content2 = new SpannableString("개인정보취급방침에 동의합니다.");
@@ -206,6 +206,13 @@ public class SignUpActivity extends LoginInformation {
 
                 Date mDate = new Date();
                 user.setUserTime(mDate);
+
+                // 사업자 내용
+                user.setMutual(et_Mutual.getText().toString());
+                user.setRepresentation(et_Representation.getText().toString());
+                user.setBuisness_number(et_Buisness1.getText().toString() + et_Buisness2.getText().toString() + et_Buisness3.getText().toString());
+                user.setSectors(et_Sectors.getText().toString());
+
                 if (ch_email.isChecked() == true) {
                     user.setEmail_sms(1);
                 } else {
@@ -220,10 +227,6 @@ public class SignUpActivity extends LoginInformation {
                     user.setOK(1);
                 } else {
                     user.setOK(2);
-                    user.setMutual(et_Mutual.getText().toString());
-                    user.setRepresentation(et_Representation.getText().toString());
-                    user.setBuisness_number(et_Buisness1.getText().toString() + et_Buisness2.getText().toString() + et_Buisness3.getText().toString());
-                    user.setSectors(et_Sectors.getText().toString());
                 }
 
                 // 회원가입정보를 입력하지 않은 경우
@@ -356,7 +359,6 @@ public class SignUpActivity extends LoginInformation {
 
         buisness_layout = (LinearLayout) findViewById(R.id.buisness_layout);
     }
-
 
     // 회원가입
     public class SignUp extends AsyncTask<ModelUser, Integer, Integer> {

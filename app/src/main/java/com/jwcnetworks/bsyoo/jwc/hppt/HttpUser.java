@@ -1,6 +1,7 @@
 package com.jwcnetworks.bsyoo.jwc.hppt;
 
 
+import com.jwcnetworks.bsyoo.jwc.model.ModelPushToken;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
 import com.google.gson.Gson;
 
@@ -228,6 +229,39 @@ public class HttpUser {
         } finally {
             request.close();
             return Integer.valueOf(response);
+        }
+    }
+
+    // 푸시 로그 기록
+    public Integer InsertpushLog (ModelPushToken model){
+        String weburl = "http://jwcctv1.cafe24.com/jwcpush/insertpushlog";
+
+        HttpRequest request = null;
+        String response = null;
+
+        int httpCode = 0;
+        try {
+            String data = new Gson().toJson(model);
+
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json");
+            httpCode = request.post(data);
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                response = request.getStringResponse(); // 서버값이 리턴된다
+            } else {
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+            if(response != null) {
+                return Integer.valueOf(response);
+            }else {
+                return -1;
+            }
         }
     }
 }

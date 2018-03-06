@@ -66,6 +66,9 @@ public class MypageTabFragment1 extends MypageFragment{
             @Override
             public void onClick(View v) {
                 // 어플 개선사항
+                Intent intent = new Intent (getActivity(), InstallShareActivity.class);
+                intent.putExtra("user", user);
+                getActivity().startActivity(intent);
             }
         });
     }

@@ -16,6 +16,8 @@ public class ModelSchool implements Serializable {
     private String Team          ;
     private String Manager       ;
     private String ManagerPhone  ;
+    private Integer Level        ;
+    private Integer Same         ;
 
 
     @Override
@@ -31,10 +33,12 @@ public class ModelSchool implements Serializable {
                 ", Team='" + Team + '\'' +
                 ", Manager='" + Manager + '\'' +
                 ", ManagerPhone='" + ManagerPhone + '\'' +
+                ", Level=" + Level +
+                ", Same=" + Same +
                 '}';
     }
 
-    public ModelSchool(Integer school_Number, String start_End, String school_Title, String apply_Time, Date lecture_Time, String img_title, String img_info, String team, String manager, String managerPhone) {
+    public ModelSchool(Integer school_Number, String start_End, String school_Title, String apply_Time, Date lecture_Time, String img_title, String img_info, String team, String manager, String managerPhone, Integer level, Integer same) {
         School_Number = school_Number;
         Start_End = start_End;
         School_Title = school_Title;
@@ -45,11 +49,28 @@ public class ModelSchool implements Serializable {
         Team = team;
         Manager = manager;
         ManagerPhone = managerPhone;
+        Level = level;
+        Same = same;
     }
 
     public ModelSchool() {
     }
 
+    public Integer getLevel() {
+        return Level;
+    }
+
+    public void setLevel(Integer level) {
+        Level = level;
+    }
+
+    public Integer getSame() {
+        return Same;
+    }
+
+    public void setSame(Integer same) {
+        Same = same;
+    }
 
     public String getTeam() {
         return Team;

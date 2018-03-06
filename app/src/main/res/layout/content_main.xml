@@ -67,10 +67,10 @@
                 <ImageView
                     android:id="@+id/main_event2"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/security2" />
+                    />
             </LinearLayout>
 
             <FrameLayout
@@ -269,7 +269,26 @@
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
                     app:srcCompat="@drawable/main_event"
-                    android:layout_marginBottom="5dp"/>
+                    />
+
+                <ImageView
+                    android:id="@+id/img_live"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="5dp"
+                    android:adjustViewBounds="true"
+                    android:onClick="onclick"
+                    app:srcCompat="@drawable/main_live"/>
+
+                <ImageView
+                    android:id="@+id/img_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:adjustViewBounds="true"
+                    android:onClick="onclick"
+                    app:srcCompat="@drawable/main_live"/>
             </LinearLayout>
 
             <LinearLayout

@@ -10,7 +10,7 @@ public class ModelAgencyTopic implements Serializable {
 	private String Topic_Name     ;
 	private String Information    ;
 	private Date Topic_Time       ;
-	private Integer Love          ;
+	private Integer UpDelete;
     private Integer review        ;
 	private String ID             ;
 	private String Img1           ;
@@ -25,7 +25,7 @@ public class ModelAgencyTopic implements Serializable {
                 ", Topic_Name='" + Topic_Name + '\'' +
                 ", Information='" + Information + '\'' +
                 ", Topic_Time=" + Topic_Time +
-                ", Love=" + Love +
+                ", UpDelete=" + UpDelete +
                 ", review=" + review +
                 ", ID='" + ID + '\'' +
                 ", Img1='" + Img1 + '\'' +
@@ -34,12 +34,12 @@ public class ModelAgencyTopic implements Serializable {
                 '}';
     }
 
-    public ModelAgencyTopic(Integer topic_Number, String topic_Name, String information, Date topic_Time, Integer love, Integer review, String ID, String img1, String img2, String img3) {
+    public ModelAgencyTopic(Integer topic_Number, String topic_Name, String information, Date topic_Time, Integer UpDelete, Integer review, String ID, String img1, String img2, String img3) {
         Topic_Number = topic_Number;
         Topic_Name = topic_Name;
         Information = information;
         Topic_Time = topic_Time;
-        Love = love;
+        this.UpDelete = UpDelete;
         this.review = review;
         this.ID = ID;
         Img1 = img1;
@@ -90,12 +90,12 @@ public class ModelAgencyTopic implements Serializable {
         Topic_Time = topic_Time;
     }
 
-    public Integer getLove() {
-        return Love;
+    public Integer getUpDelete() {
+        return UpDelete;
     }
 
-    public void setLove(Integer love) {
-        Love = love;
+    public void setUpDelete(Integer upDelete) {
+        this.UpDelete = upDelete;
     }
 
     public String getID() {

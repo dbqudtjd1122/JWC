@@ -29,7 +29,6 @@ public class SchoolActivity extends AppCompatActivity {
     private List<ModelSchool> schoollist;
     private AdapterSchool adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +57,8 @@ public class SchoolActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         Boolean wifi = new Network().isNetWork(networkInfo);
-        if(wifi == true){
-
-        new SchoolActivity.getSchoolList().execute();
-
+        if (wifi == true) {
+            new SchoolActivity.getSchoolList().execute();
         } else {
             Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivityForResult(intent, 7777);
@@ -96,7 +93,6 @@ public class SchoolActivity extends AppCompatActivity {
             return false;
         }
     }
-
 
     public class getSchoolList extends AsyncTask<Integer, Integer, List<ModelSchool>> {
 
@@ -146,7 +142,7 @@ public class SchoolActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 로그인창으로 가는 Result
-        if (requestCode == 478 ) {
+        if (requestCode == 478) {
             if (resultCode == RESULT_OK) {
                 Intent intent = getIntent();
                 setResult(RESULT_OK, intent);
@@ -157,7 +153,7 @@ public class SchoolActivity extends AppCompatActivity {
             }
         }
         // 네트워크 불량에서 오는 Result
-        if (requestCode == 7777 ) {
+        if (requestCode == 7777) {
             if (resultCode == RESULT_OK) {
                 new SchoolActivity.getSchoolList().execute();
             }
