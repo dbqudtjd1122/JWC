@@ -32,7 +32,7 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
     class ViewHolder {
         TextView text_cameraname;
         TextView text_cameraprice1;
-        TextView text_cameraprice2;
+        TextView text_cameraStock;
         ImageView img_camera;
     }
 
@@ -49,7 +49,7 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             viewHolder.text_cameraprice1 = (TextView) itemLayout.findViewById(R.id.text_cameraprice1);
             viewHolder.img_camera = (ImageView) itemLayout.findViewById(R.id.img_camera);
 
-            viewHolder.text_cameraprice2 = (TextView) itemLayout.findViewById(R.id.text_cameraprice2);
+            viewHolder.text_cameraStock = (TextView) itemLayout.findViewById(R.id.text_cameraStock);
 
             itemLayout.setTag(viewHolder);
         }
@@ -63,6 +63,13 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
                 viewHolder.text_cameraprice1.setText("단종\n대체모델 : "+getItem(position).getFollow_Up().toString());
             }else {
                 viewHolder.text_cameraprice1.setText("단종");
+            }
+        } else {
+            viewHolder.text_cameraStock.setVisibility(View.VISIBLE);
+            if(getItem(position).getStock() == 0) {
+                viewHolder.text_cameraStock.setText("품절");
+            } else {
+                viewHolder.text_cameraStock.setText("재고 : " + getItem(position).getStock() + "개");
             }
         }
 
@@ -78,8 +85,8 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             // 대리점 단가표로 바꿈
             /*viewHolder.text_cameraprice1.setText(getItem(position).getLevel1price().toString());
             viewHolder.text_cameraprice1.setPaintFlags(viewHolder.text_cameraprice1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG); // 텍스트 가운데 줄긋기
-            viewHolder.text_cameraprice2.setVisibility(View.VISIBLE);
-            viewHolder.text_cameraprice2.setText(getItem(position).getLevel2price().toString());*/
+            viewHolder.text_cameraStock.setVisibility(View.VISIBLE);
+            viewHolder.text_cameraStock.setText(getItem(position).getLevel2price().toString());*/
         }
         return itemLayout;
     }

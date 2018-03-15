@@ -51,7 +51,7 @@
         android:layout_margin="20dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/imageView13"

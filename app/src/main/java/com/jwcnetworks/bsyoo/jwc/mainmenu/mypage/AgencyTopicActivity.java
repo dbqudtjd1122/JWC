@@ -57,7 +57,7 @@ public class AgencyTopicActivity extends AppCompatActivity{
 
         agencytopiclist = new ArrayList<>();
 
-        adapter = new AdapterAgencyTopic(getApplicationContext(), R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user);
+        adapter = new AdapterAgencyTopic(getApplicationContext(), R.layout.listitem_agency_topic, R.id.tv_id, agencytopiclist, user, AgencyTopicActivity.this);
 
         // 꼬리아이템
         listview.addFooterView(footerView, null, false);

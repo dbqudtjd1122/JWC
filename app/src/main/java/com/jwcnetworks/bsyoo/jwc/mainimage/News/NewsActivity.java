@@ -67,7 +67,6 @@ public class NewsActivity extends AppCompatActivity {
             Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivityForResult(intent2, 7777);
         }
-
     }
 
     class OnItemHandler implements ListView.OnItemClickListener, ListView.OnItemLongClickListener, ListView.OnItemSelectedListener{

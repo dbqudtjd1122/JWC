@@ -23,6 +23,8 @@ public class ModelCamera implements Serializable{
 	private String  Offline_Img_info ;
     private String  Youtube          ;
     private String  NewCamera        ;
+    private Integer Stock            ;
+
 
     @Override
     public String toString() {
@@ -45,10 +47,11 @@ public class ModelCamera implements Serializable{
                 ", Offline_Img_info='" + Offline_Img_info + '\'' +
                 ", Youtube='" + Youtube + '\'' +
                 ", NewCamera='" + NewCamera + '\'' +
+                ", Stock=" + Stock +
                 '}';
     }
 
-    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String follow_Up, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera) {
+    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String follow_Up, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera, Integer stock) {
         Number = number;
         Cameratype = cameratype;
         Level = level;
@@ -67,9 +70,18 @@ public class ModelCamera implements Serializable{
         Offline_Img_info = offline_Img_info;
         Youtube = youtube;
         NewCamera = newCamera;
+        Stock = stock;
     }
 
     public ModelCamera() {
+    }
+
+    public Integer getStock() {
+        return Stock;
+    }
+
+    public void setStock(Integer stock) {
+        Stock = stock;
     }
 
     public String getFollow_Up() {

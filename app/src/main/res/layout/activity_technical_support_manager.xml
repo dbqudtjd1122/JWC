@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jwcnetworks.bsyoo.jwc.mainmenu.mypage.TechnicalSupportManagerActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="이름 : "
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="홍길동"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView49"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="질문유형 : "
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tv_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="A/S 문의"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="이메일 : "
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="jwcmall@naver.com"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+
+                <CheckBox
+                    android:id="@+id/check_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#ff0000"
+                    android:clickable="false"
+                    android:text="수신여부" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="연락처 : "
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tv_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="010-8888-5555"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+
+                <CheckBox
+                    android:id="@+id/check_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#ff0000"
+                    android:clickable="false"
+                    android:text="수신여부" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="제목 : "
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="제목 타이틀"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="내용 : "
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다."
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="답변"
+                    android:textColor="#000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_managerinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/idpwsearchtext"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="300"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="16dp"
+                    android:theme="@style/MyEditTextStyle" />
+
+                <Button
+                    android:id="@+id/btn_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="#ff3c3c"
+                    android:text="완료"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

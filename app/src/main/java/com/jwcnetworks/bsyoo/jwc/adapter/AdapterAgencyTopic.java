@@ -32,11 +32,13 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic> {
     public ModelUser user = new ModelUser();
     public ModelAgencyTopic topic = new ModelAgencyTopic();
     public List<ModelAgencyTopic> data = null;
+    public Activity mActivity;
 
-    public AdapterAgencyTopic(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelAgencyTopic> objects, @NonNull ModelUser user) {
+    public AdapterAgencyTopic(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<ModelAgencyTopic> objects, @NonNull ModelUser user, @NonNull Activity mActivity) {
         super(context, resource, textViewResourceId, objects);
         this.user = user;
         this.data = objects;
+        this.mActivity = mActivity;
     }
 
     class ViewHolder {
@@ -114,7 +116,7 @@ public class AdapterAgencyTopic extends ArrayAdapter<ModelAgencyTopic> {
                 topic = getItem(position);
                 intent.putExtra("topic", topic);
                 intent.putExtra("1", 1);
-                ((Activity) getContext()).startActivityForResult(intent, 178);
+                mActivity.startActivityForResult(intent, 178);
             }
         });
         viewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {

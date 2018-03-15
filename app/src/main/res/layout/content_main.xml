@@ -268,20 +268,19 @@
                     android:layout_height="fill_parent"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_event"
-                    />
+                    app:srcCompat="@drawable/main_event" />
 
                 <ImageView
-                    android:id="@+id/img_live"
+                    android:id="@+id/img_news"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginTop="5dp"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_live"/>
+                    app:srcCompat="@drawable/main_news"/>
 
                 <ImageView
-                    android:id="@+id/img_news"
+                    android:id="@+id/img_live"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="5dp"

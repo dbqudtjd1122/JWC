@@ -197,16 +197,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-
-        <activity android:name=".mainmenu.mypage.InstallShareActivity"></activity>
-
+        <activity android:name=".mainmenu.mypage.TechnicalSupportWriteActivity" />
         <activity android:name=".mainimage.News.NewsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jwcnetworks.bsyoo.jwc.MainActivity" />
         </activity>
-        <activity android:name=".mainimage.News.NewsInfoActivity"></activity>
-
+        <activity android:name=".mainimage.News.NewsInfoActivity" />
+        <activity android:name=".mainmenu.mypage.TechnicalSupportActivity" />
 
         <service android:name=".fcmpush.FirebaseMessagingService">
             <intent-filter>
@@ -219,7 +217,7 @@
             </intent-filter>
         </service>
 
-
+        <activity android:name=".mainmenu.mypage.TechnicalSupportManagerActivity"></activity>
     </application>
 
 </manifest>

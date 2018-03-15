@@ -44,8 +44,8 @@
             android:layout_gravity="right|center"
             android:layout_margin="10dp"
             android:background="@drawable/main_button"
-            android:text="삭제"
             android:textColor="#616161"
+            android:text="삭제"
             android:textSize="16dp"
             android:textStyle="bold" />
 
