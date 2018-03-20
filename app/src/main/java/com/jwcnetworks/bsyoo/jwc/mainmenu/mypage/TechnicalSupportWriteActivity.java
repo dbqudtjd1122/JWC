@@ -271,4 +271,17 @@ public class TechnicalSupportWriteActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777) {
+            if (resultCode == RESULT_OK) {
+            }
+            //리턴값이 없을때
+            else {
+            }
+        }
+    }
 }

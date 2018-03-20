@@ -25,7 +25,7 @@
                 android:text="제목"
                 android:textColor="#000"
                 android:textSize="17dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tv_userid"
@@ -33,14 +33,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="작성자"
-                android:textColor="#000" />
+                android:textColor="#000"/>
 
             <TextView
                 android:id="@+id/tv_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="질문유형"
-                android:textColor="#000" />
+                android:textColor="#000"/>
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +64,7 @@
                     android:background="@drawable/main_button"
                     android:text="수정"
                     android:textColor="#616161"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <Button
                     android:id="@+id/btn_delete"
@@ -74,7 +74,7 @@
                     android:background="@drawable/main_button"
                     android:text="삭제"
                     android:textColor="#616161"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_marginRight="10dp"
                 android:gravity="right"
                 android:text="시간"
-                android:textColor="#000" />
+                android:textColor="#000"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -92,9 +92,10 @@
         android:id="@+id/ll_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#e1e1e1"
+        android:background="#ffb1b1"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,7 +109,7 @@
                 android:layout_height="match_parent"
                 android:gravity="bottom"
                 android:text="질문 내용"
-                android:textColor="#616161"
+                android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:textSize="15dp"
                />
@@ -130,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="내용"
-                    android:textColor="#000"
+                    android:textColor="#ffffff"
                     android:gravity="left"
                     android:layout_gravity="left" />
             </LinearLayout>
@@ -159,7 +160,7 @@
         android:id="@+id/ll_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ededed"
+        android:background="#ff6161"
         android:orientation="vertical"
         android:visibility="gone"
         android:layout_marginTop="8dp">
@@ -183,9 +184,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="관리자 답변"
-                    android:textColor="#616161"
-                    android:textStyle="bold"
-                    android:textSize="15dp" />
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_managerid"
@@ -193,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:text="아이디"
-                    android:textColor="#616161" />
+                    android:textColor="#ffffff" />
             </LinearLayout>
 
             <LinearLayout
@@ -210,7 +211,7 @@
                     android:layout_marginRight="10dp"
                     android:gravity="right"
                     android:text="시간"
-                    android:textColor="#000" />
+                    android:textColor="#ffffff" />
             </LinearLayout>
         </LinearLayout>
 
@@ -225,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="내용"
-                android:textColor="#000" />
+                android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

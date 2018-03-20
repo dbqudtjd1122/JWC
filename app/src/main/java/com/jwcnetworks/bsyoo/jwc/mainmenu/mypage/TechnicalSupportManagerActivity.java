@@ -3,6 +3,8 @@ package com.jwcnetworks.bsyoo.jwc.mainmenu.mypage;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import com.jwcnetworks.bsyoo.jwc.R;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpTechnicalSupport;
 import com.jwcnetworks.bsyoo.jwc.model.ModelTechnicalSupport;
 import com.jwcnetworks.bsyoo.jwc.model.ModelUser;
+import com.jwcnetworks.bsyoo.jwc.network.Network;
+import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 import com.jwcnetworks.bsyoo.jwc.user.Login.LoginInformation;
 
 import java.util.Date;
@@ -29,6 +33,8 @@ public class TechnicalSupportManagerActivity extends LoginInformation {
     private EditText edt_managerinfo;
     private CheckBox check_email, check_sms;
     private Button btn_finish;
+
+    private Boolean netcheck = true;  // 네트워크 연결확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,13 @@ public class TechnicalSupportManagerActivity extends LoginInformation {
                 technical.setManagerinfo(edt_managerinfo.getText().toString());
                 Date mdate = new Date();
                 technical.setManagertime(mdate);
-
-                new TechnicalSupportManagerActivity.updateManagerTechnical().execute(technical);
+                netcheck = networkcheck();
+                if (netcheck == true) {
+                    new TechnicalSupportManagerActivity.updateManagerTechnical().execute(technical);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), NetworkCheck.class);
+                    startActivityForResult(intent, 7777);
+                }
             }
         });
     }
@@ -132,6 +143,32 @@ public class TechnicalSupportManagerActivity extends LoginInformation {
                 finish();
             } else {
                 Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // 네트워크 체크
+    private boolean networkcheck(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean wifi = new Network().isNetWork(networkInfo);
+        if(wifi == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 네트워크 불량에서 오는 Result
+        if (requestCode == 7777) {
+            if (resultCode == RESULT_OK) {
+                new TechnicalSupportManagerActivity.updateManagerTechnical().execute(technical);
+            }
+            //리턴값이 없을때
+            else {
             }
         }
     }

@@ -660,9 +660,14 @@ public class MainActivity extends LoginInformation
         protected void onPostExecute(List<ModelNotice> s) {
             super.onPostExecute(s);
 
-            if(s != null) {
-                imgNotice = s.get(0);
-                Glide.with(getApplicationContext()).load(s.get(0).getImg_title().toString()).override(720, 1000).fitCenter().into(main_event2);
+
+            try {
+                if(s != null) {
+                    imgNotice = s.get(0);
+                    Glide.with(getApplicationContext()).load(s.get(0).getImg_title().toString()).override(720, 1000).fitCenter().into(main_event2);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
             if (waitDlg != null) {
@@ -689,6 +694,7 @@ public class MainActivity extends LoginInformation
                 for (Element v : Version) {
                     if (v.attr("itemprop").equals("softwareVersion")) {
                         rtn = v.text();
+                        //return v.text().trim();
                     }
                 }
                 return rtn;

@@ -62,7 +62,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:textColor="#000"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -72,24 +71,25 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/tv_source"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#000"/>
+                    android:textSize="17dp"
+                    android:textColor="#000"
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:id="@+id/img_link"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/blog"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@drawable/news_info"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"/>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

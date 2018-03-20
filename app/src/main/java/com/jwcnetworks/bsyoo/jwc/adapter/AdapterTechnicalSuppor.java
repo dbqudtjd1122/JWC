@@ -98,7 +98,6 @@ public class AdapterTechnicalSuppor extends ArrayAdapter<ModelTechnicalSupport> 
             viewHolder.btn_manager.setVisibility(View.VISIBLE);
         }
 
-
         viewHolder.btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

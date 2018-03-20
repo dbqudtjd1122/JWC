@@ -222,10 +222,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                             .bigPicture(bigPicture)
                             .setBigContentTitle(title)
                             .setSummaryText(message))
-
                     .setContentIntent(pendingIntent);
         }
-
         // 푸시 드래그 후에 표시될 내용 (위쪽에 적용되어있음)
         //NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle(notificationBuilder);
         //style.bigText(message).setBigContentTitle(title);
