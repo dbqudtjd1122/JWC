@@ -33,6 +33,7 @@ public class TechnicalSupportManagerActivity extends LoginInformation {
     private EditText edt_managerinfo;
     private CheckBox check_email, check_sms;
     private Button btn_finish;
+    private String managerinfo;
 
     private Boolean netcheck = true;  // 네트워크 연결확인
 
@@ -51,6 +52,7 @@ public class TechnicalSupportManagerActivity extends LoginInformation {
         Intent intent = getIntent();
         technical = (ModelTechnicalSupport) intent.getSerializableExtra("technical");
         user = (ModelUser) intent.getSerializableExtra("user");
+        managerinfo = intent.getStringExtra("managerinfo");
 
         setText();
 
@@ -90,6 +92,7 @@ public class TechnicalSupportManagerActivity extends LoginInformation {
         tv_sms.setText(user.getPhone().toString());
         tv_title.setText(technical.getTitle().toString());
         tv_info.setText(technical.getInfo().toString());
+        edt_managerinfo.setText(managerinfo);
         if(technical.getEmailcheck() == 1){
             check_email.setChecked(true);
         }

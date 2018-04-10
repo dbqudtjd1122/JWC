@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.jwcnetworks.bsyoo.jwc.network.Network;
 import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class TechnicalSupportWriteActivity extends AppCompatActivity {
 
@@ -152,6 +155,7 @@ public class TechnicalSupportWriteActivity extends AppCompatActivity {
         tv_email = (TextView) findViewById(R.id.tv_email);
         edt_phone = (EditText) findViewById(R.id.edt_phone);
         edt_info = (EditText) findViewById(R.id.edt_info);
+        edt_info.setFilters(new InputFilter[]{specialCharacterFilter});
         edt_title = (EditText) findViewById(R.id.edt_title);
         btn_finish = (Button) findViewById(R.id.btn_finish);
         btn_question = (Button) findViewById(R.id.btn_question);
@@ -164,6 +168,21 @@ public class TechnicalSupportWriteActivity extends AppCompatActivity {
         tv_email.setText(user.getEmail().toString());
         edt_phone.setText(user.getPhone().toString());
     }
+
+    /** 이모티콘이 있을경우 "" 리턴, 그렇지 않을 경우 null 리턴 **/
+    protected InputFilter specialCharacterFilter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; i++) {
+                // 이모티콘 패턴
+                Pattern unicodeOutliers = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+                // '-' 입력 받고 싶을 경우 : unicodeOutliers.matcher(source).matches() && !source.toString().matches(".*-.*")
+                if(unicodeOutliers.matcher(source).matches()) {
+                    return "";
+                }
+            }
+            return null;
+        }
+    };
 
     // 1:1 문의신청
     public class insertTechnicalSupport extends AsyncTask<ModelTechnicalSupport, Integer, Integer> {

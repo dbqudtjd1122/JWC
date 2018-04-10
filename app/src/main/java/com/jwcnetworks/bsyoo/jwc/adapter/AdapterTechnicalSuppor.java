@@ -93,6 +93,11 @@ public class AdapterTechnicalSuppor extends ArrayAdapter<ModelTechnicalSupport> 
         datetime = data.format(getItem(position).getManagertime().getTime());  // 리뷰 수정 날짜, 시간
         viewHolder.tv_managertime.setText(datetime);
 
+        viewHolder.btn_update.setVisibility(View.GONE);
+        if(user.getUser_Number().equals(getItem(position).getUserNumber())){
+            viewHolder.btn_update.setVisibility(View.VISIBLE);
+        }
+
         viewHolder.btn_manager.setVisibility(View.GONE);
         if (user.getLevel() >= 11) {
             viewHolder.btn_manager.setVisibility(View.VISIBLE);
@@ -126,8 +131,8 @@ public class AdapterTechnicalSuppor extends ArrayAdapter<ModelTechnicalSupport> 
                 technical = getItem(position);
                 intent.putExtra("technical", technical);
                 intent.putExtra("user", user);
+                intent.putExtra("managerinfo", technical.getManagerinfo().toString());
                 mActivity.startActivityForResult(intent, 6422);
-
             }
         });
 
@@ -140,9 +145,9 @@ public class AdapterTechnicalSuppor extends ArrayAdapter<ModelTechnicalSupport> 
                     finalViewHolder.ll_manager.setVisibility(View.GONE);
                 } else {
                     finalViewHolder.ll_answer.setVisibility(View.VISIBLE);
-                    if (getItem(position).getManagerinfo().toString().equals("")) {
+                    if (getItem(position).getManagerinfo().toString().equals("")) { // 관리자 내용이 없을때
                         finalViewHolder.ll_manager.setVisibility(View.GONE);
-                    } else {
+                    } else {     // 관리자 내용이 있을때
                         finalViewHolder.ll_manager.setVisibility(View.VISIBLE);
                     }
                 }

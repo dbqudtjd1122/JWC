@@ -169,6 +169,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } else if (page.equals("redfriday")) { // 레드프라이데이
             intent = new Intent(this, MainActivity.class);
             intent.putExtra("page", "redfriday");
+        } else if(page.equals("technical")){
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra("page", "technical");
         } else {
             intent = new Intent(this, IntroActivity.class);
             intent.putExtra("title", title);
@@ -236,6 +239,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
 
+        // 푸시 로그 입력
+        setPushToken();
+        pushToken.setInoutpush("푸시완료");
+        new FirebaseMessagingService.insertpushLog().execute(pushToken);
     }
 
     // 회원정보 가져오기
@@ -265,11 +272,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 user = s;
                 islevel = user.getLevel();
                 PushCheck(level);
-
-                // 푸시 로그 입력
-                setPushToken();
-                pushToken.setInoutpush("푸시완료");
-                new FirebaseMessagingService.insertpushLog().execute(pushToken);
             }
         }
     }

@@ -159,8 +159,8 @@ public class MainActivity extends LoginInformation
             new MainActivity.getMainImage().execute("메인");
 
             // 최신버전 체크후 업데이트 권장
-            alt_bld = new AlertDialog.Builder(this);
-            new Version().execute();
+            /*alt_bld = new AlertDialog.Builder(this);
+            new Version().execute();*/
         } else {
             Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivityForResult(intent2, 4523);
@@ -177,7 +177,7 @@ public class MainActivity extends LoginInformation
                     Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                     intent.putExtra("page", "dvr");
                     startActivityForResult(intent, 7823);
-                } else if(page.equals("agency") && islevel >= 10){  // 대리점 네트웍스
+                } else if(page.equals("agency") && islevel >= 9){  // 대리점 네트웍스
                     Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                     intent.putExtra("page", "agency");
                     startActivityForResult(intent, 7823);
@@ -200,6 +200,10 @@ public class MainActivity extends LoginInformation
                     intent.putExtra("title", title);
                     intent.putExtra("message", message);
                     startActivity(intent);
+                } else if(page.equals("technical") && islevel >= 1){    // 1:1문의
+                    Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                    intent.putExtra("page", "technical");
+                    startActivityForResult(intent, 7823);
                 }
             }
         } catch (Exception e) {

@@ -9,7 +9,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -101,9 +103,9 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
         tv_id = (TextView) findViewById(R.id.tv_id);
         btn_finish = (Button) findViewById(R.id.btn_finish);
         et_info = (EditText) findViewById(R.id.et_info);
-        et_info.setFilters(new InputFilter[]{filter});
+        et_info.setFilters(new InputFilter[]{specialCharacterFilter});
         et_name = (EditText) findViewById(R.id.et_name);
-        et_info.setFilters(new InputFilter[]{filter});
+        et_name.setFilters(new InputFilter[]{filter});
     }
 
     // EditText 특수문자 및 이모티콘 제외
@@ -113,6 +115,21 @@ public class AgencyTopicWriteActivity extends AppCompatActivity {
             Pattern ps = Pattern.compile("^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\x20]*$");
             if (!ps.matcher(source).matches()) {
                 return "";
+            }
+            return null;
+        }
+    };
+
+    /** 이모티콘이 있을경우 "" 리턴, 그렇지 않을 경우 null 리턴 **/
+    protected InputFilter specialCharacterFilter = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start; i < end; i++) {
+                // 이모티콘 패턴
+                Pattern unicodeOutliers = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+                // '-' 입력 받고 싶을 경우 : unicodeOutliers.matcher(source).matches() && !source.toString().matches(".*-.*")
+                if(unicodeOutliers.matcher(source).matches()) {
+                    return "";
+                }
             }
             return null;
         }

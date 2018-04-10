@@ -55,6 +55,7 @@ public class MypageActivity extends LoginInformation {
 
         SharedPreferences pref = getSharedPreferences("Login", Context.MODE_PRIVATE);
         user.setUser_Number(pref.getInt("number_Set", -1));
+        user.setID(pref.getString("id_Set", "").toString());
 
         netcheck = networkcheck();
         if (netcheck == true) {
@@ -89,6 +90,10 @@ public class MypageActivity extends LoginInformation {
                 viewPager.setCurrentItem(1);    // 탭 시작지점 정하는부분
             }else if(page.equals("agency")){    // 대리점 네트워크
                 Intent intent = new Intent (getApplicationContext(), AgencyTopicActivity.class);
+                intent.putExtra("user", user);
+                getApplicationContext().startActivity(intent);
+            } else if(page.equals("technical")){
+                Intent intent = new Intent (getApplicationContext(), TechnicalSupportActivity.class);
                 intent.putExtra("user", user);
                 getApplicationContext().startActivity(intent);
             }

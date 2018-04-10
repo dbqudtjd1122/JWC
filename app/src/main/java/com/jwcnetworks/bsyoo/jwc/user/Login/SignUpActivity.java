@@ -55,12 +55,14 @@ public class SignUpActivity extends LoginInformation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
         // 액션바에 백그라운드 이미지 넣기
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         Drawable d = getResources().getDrawable(R.drawable.actionbar);
         getSupportActionBar().setBackgroundDrawable(d);
         getSupportActionBar().setTitle("회원가입");
+
 
         // 뒤로가기 버튼
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

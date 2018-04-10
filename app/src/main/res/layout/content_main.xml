@@ -277,7 +277,8 @@
                     android:layout_marginTop="5dp"
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
-                    app:srcCompat="@drawable/main_news"/>
+                    app:srcCompat="@drawable/main_news"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/img_live"

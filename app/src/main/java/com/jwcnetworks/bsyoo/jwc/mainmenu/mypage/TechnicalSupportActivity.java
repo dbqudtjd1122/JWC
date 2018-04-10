@@ -52,6 +52,7 @@ public class TechnicalSupportActivity extends LoginInformation {
 
         Intent intent = getIntent();
         user = (ModelUser) intent.getSerializableExtra("user");
+        user.setLevel(islevel);
 
         listview_technical = (ListView) findViewById(R.id.listview_technical);
 

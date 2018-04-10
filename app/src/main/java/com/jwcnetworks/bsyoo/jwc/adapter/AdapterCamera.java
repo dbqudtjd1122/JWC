@@ -64,14 +64,14 @@ public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
             }else {
                 viewHolder.text_cameraprice1.setText("단종");
             }
-        } else {
+        } /*else {  // 재고 등록
             viewHolder.text_cameraStock.setVisibility(View.VISIBLE);
             if(getItem(position).getStock() == 0) {
                 viewHolder.text_cameraStock.setText("품절");
             } else {
                 viewHolder.text_cameraStock.setText("재고 : " + getItem(position).getStock() + "개");
             }
-        }
+        }*/
 
         if(level == -1 || level ==1){
             Glide.with(getContext()).load(getItem(position).getOnline_Img_title().toString()).override(100, 100).fitCenter().into(viewHolder.img_camera);

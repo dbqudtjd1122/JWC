@@ -43,14 +43,13 @@
             android:layout_margin="10dp"
             android:background="@drawable/idpwsearchtext"
             android:hint="300자 내외로 작성 해주세요."
-            android:inputType="textMultiLine"
             android:lines="8"
             android:maxLines="300"
             android:padding="5dp"
             android:scrollbars="vertical"
             android:textColor="#000"
             android:textCursorDrawable="@null"
-            android:textSize="13dp"
+            android:textSize="14dp"
             android:theme="@style/MyEditTextStyle" />
 
         <Button

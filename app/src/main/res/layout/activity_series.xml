@@ -14,7 +14,8 @@
         android:textColor="#000"
         android:gravity="center"
         android:textSize="17dp"
-        android:layout_margin="7dp"/>
+        android:layout_margin="7dp"
+        android:visibility="gone"/>
 
     <GridView
         android:id="@+id/series_list"
