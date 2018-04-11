@@ -35,6 +35,8 @@ public class MypageActivity extends LoginInformation {
 
     private Boolean netcheck = true;  // 네트워크 연결확인
 
+    private String page = ""; // 푸시클릭 후 오는 페이지
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,25 +84,16 @@ public class MypageActivity extends LoginInformation {
         // PagerAdapter와 ViewPager 연결 : Fragment와 ViewPager 연결
         viewPager.setAdapter(pagerAdapter);
 
-        // 푸시 클릭후 오는 데이터
+        // 푸시 클릭후 오는 데이터, 회원정보 확인 후 페이지 넘어감
         Intent fcmintent = getIntent();
-        String page = fcmintent.getStringExtra("page");
-        if (page != null || page != "") {
+        page = fcmintent.getStringExtra("page");
+        if (page != null || !page.equals("")) {
             if(page.equals("dvr")){     // DVR 시리얼 등록
                 viewPager.setCurrentItem(1);    // 탭 시작지점 정하는부분
-            }else if(page.equals("agency")){    // 대리점 네트워크
-                Intent intent = new Intent (getApplicationContext(), AgencyTopicActivity.class);
-                intent.putExtra("user", user);
-                getApplicationContext().startActivity(intent);
-            } else if(page.equals("technical")){
-                Intent intent = new Intent (getApplicationContext(), TechnicalSupportActivity.class);
-                intent.putExtra("user", user);
-                getApplicationContext().startActivity(intent);
             }
         } else {
             viewPager.setCurrentItem(0);     // 탭 시작지점 정하는부분
         }
-
 
         // ViewPager의 OnPageChangeListener 리스너 설정 : TabLayout과 ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -110,7 +103,6 @@ public class MypageActivity extends LoginInformation {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
-
             @Override
             public void onPageSelected(int position) {
                 // 텍스트 컬러값 지정
@@ -289,6 +281,18 @@ public class MypageActivity extends LoginInformation {
             }
             if(s != null) {
                 setValueFragment();
+            }
+            if (page != null || !page.equals("")) {
+                if(page.equals("dvr")){     // DVR 시리얼 등록
+                }else if(page.equals("agency")){    // 대리점 네트워크
+                    Intent intent = new Intent (getApplicationContext(), AgencyTopicActivity.class);
+                    intent.putExtra("user", user);
+                    getApplicationContext().startActivity(intent);
+                } else if(page.equals("technical")){
+                    Intent intent = new Intent (getApplicationContext(), TechnicalSupportActivity.class);
+                    intent.putExtra("user", user);
+                    getApplicationContext().startActivity(intent);
+                }
             }
         }
     }
