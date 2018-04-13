@@ -217,7 +217,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".mainmenu.mypage.TechnicalSupportManagerActivity"></activity>
+        <activity android:name=".mainmenu.mypage.TechnicalSupportManagerActivity" />
+        <activity android:name=".mainimage.agency.AgencyInfoActivity"></activity>
     </application>
 
 </manifest>

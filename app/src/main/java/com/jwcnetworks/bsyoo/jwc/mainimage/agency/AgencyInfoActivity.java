@@ -8,13 +8,10 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.jwcnetworks.bsyoo.jwc.R;
-import com.jwcnetworks.bsyoo.jwc.adapter.AdapterAgency;
-
+import com.jwcnetworks.bsyoo.jwc.adapter.AdapterAgencyInfo;
 import com.jwcnetworks.bsyoo.jwc.hppt.HttpAgency;
 import com.jwcnetworks.bsyoo.jwc.model.ModelAgency;
 import com.jwcnetworks.bsyoo.jwc.network.Network;
@@ -23,9 +20,9 @@ import com.jwcnetworks.bsyoo.jwc.network.NetworkCheck;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgencyActivity extends AppCompatActivity {
+public class AgencyInfoActivity extends AppCompatActivity {
 
-    private AdapterAgency adapter;
+    private AdapterAgencyInfo adapter;
     private List<ModelAgency> agencylist;
     private ModelAgency agency = new ModelAgency();
     private ListView listView;
@@ -35,7 +32,7 @@ public class AgencyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agency);
+        setContentView(R.layout.activity_agency_info);
 
         // 액션바에 백그라운드 이미지 넣기
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -44,6 +41,8 @@ public class AgencyActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(d);
         setTitle("대리점 안내");
 
+        Intent intent = getIntent();
+        agency = (ModelAgency) intent.getSerializableExtra("agency");
 
         listView = (ListView) findViewById(R.id.list_agency);
 
@@ -51,28 +50,18 @@ public class AgencyActivity extends AppCompatActivity {
         agencylist = new ArrayList<>();
 
         // Adapter 생성
-        adapter = new AdapterAgency(getApplicationContext(), R.layout.listitem_agency, R.id.area_name, agencylist);
+        adapter = new AdapterAgencyInfo(getApplicationContext(), R.layout.listitem_agencyinfo, R.id.tv_agency_name, agencylist);
 
         // 리스트뷰에 어댑터 설정
         listView.setAdapter(adapter);
 
         netcheck = networkcheck();
         if (netcheck == true) {
-            new AgencyActivity.AgencyList().execute();
+            new AgencyInfoActivity.AgencyList().execute(agency.getArea().toString());
         } else {
             Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivityForResult(intent2, 7777);
         }
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), AgencyInfoActivity.class);
-                agency = agencylist.get(position);
-                intent.putExtra("agency", agency);
-                startActivity(intent);
-            }
-        });
     }
 
     // 네트워크 체크
@@ -93,7 +82,7 @@ public class AgencyActivity extends AppCompatActivity {
         // 네트워크 불량에서 오는 Result
         if (requestCode == 7777) {
             if (resultCode == RESULT_OK) {
-                new AgencyActivity.AgencyList().execute();
+                new AgencyInfoActivity.AgencyList().execute(agency.getArea().toString());
             }
             //리턴값이 없을때
             else {
@@ -110,7 +99,7 @@ public class AgencyActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            waitDlg = new ProgressDialog(AgencyActivity.this);
+            waitDlg = new ProgressDialog(AgencyInfoActivity.this);
             waitDlg.setMessage("대리점 정보를 가져오고 있습니다.");
             waitDlg.show();
         }
@@ -119,7 +108,7 @@ public class AgencyActivity extends AppCompatActivity {
         protected List<ModelAgency> doInBackground(String... params) {
 
             try {
-                agencylist = new HttpAgency().getAreaList();
+                agencylist = new HttpAgency().getAgencyList(params[0]);
             } catch (Exception e) {
                 e.printStackTrace();
             }

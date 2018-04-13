@@ -120,7 +120,6 @@ public class MypageActivity extends LoginInformation {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override

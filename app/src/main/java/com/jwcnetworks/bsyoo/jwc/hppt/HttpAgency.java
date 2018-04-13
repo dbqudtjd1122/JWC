@@ -16,9 +16,9 @@ import java.util.List;
 
 public class HttpAgency {
 
-    // 대리점 목록 및 내용
-    public List<ModelAgency> getAgencyList(){
-        String weburl = "http://jwcctv1.cafe24.com/agency/getagencylist";
+    // 대리점 지역 리스트 가져오기
+    public List<ModelAgency> getAreaList(){
+        String weburl = "http://jwcctv1.cafe24.com/agency/getAreaList";
 
         HttpRequest request = null;
         JSONArray response = null;
@@ -27,6 +27,42 @@ public class HttpAgency {
         int httpCode = 0;
         try {
             request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+
+            httpCode = request.post();
+
+            if(httpCode == HttpURLConnection.HTTP_OK){ // HttpURLConnection.HTTP_OK == 200
+                try {
+                    response = request.getJSONArrayResponse(); // 서버값이 리턴된다
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+            }
+
+            String jsonInString = response.toString();
+            AgencyList = new Gson().fromJson(jsonInString, new TypeToken<List<ModelAgency>>() {
+            }.getType());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            request.close();
+            return AgencyList;
+        }
+    }
+
+    // 대리점 목록 및 내용
+    public List<ModelAgency> getAgencyList(String area){
+        String weburl = "http://jwcctv1.cafe24.com/agency/getagencylist2";
+
+        HttpRequest request = null;
+        JSONArray response = null;
+        List<ModelAgency> AgencyList = null;
+
+        int httpCode = 0;
+        try {
+            request = new HttpRequest(weburl).addHeader("charset", "utf-8");
+            request.addParameter("area", area);
 
             httpCode = request.post();
 

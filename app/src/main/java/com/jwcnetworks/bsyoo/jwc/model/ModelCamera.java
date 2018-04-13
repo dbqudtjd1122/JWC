@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class ModelCamera implements Serializable{
 
-
 	private Integer Number           ;
 	private String  Cameratype       ;
 	private Integer Level            ;
@@ -24,6 +23,7 @@ public class ModelCamera implements Serializable{
     private String  Youtube          ;
     private String  NewCamera        ;
     private Integer Stock            ;
+    private String  MobileLink       ;
 
 
     @Override
@@ -48,10 +48,11 @@ public class ModelCamera implements Serializable{
                 ", Youtube='" + Youtube + '\'' +
                 ", NewCamera='" + NewCamera + '\'' +
                 ", Stock=" + Stock +
+                ", MobileLink='" + MobileLink + '\'' +
                 '}';
     }
 
-    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String follow_Up, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera, Integer stock) {
+    public ModelCamera(Integer number, String cameratype, Integer level, String onlineseries, String follow_Up, String onlinename, String offlinename, String signaltype, String level1price, String level2price, String level3price, String level4price, String online_Img_title, String offline_Img_title, String online_Img_info, String offline_Img_info, String youtube, String newCamera, Integer stock, String mobileLink) {
         Number = number;
         Cameratype = cameratype;
         Level = level;
@@ -71,9 +72,18 @@ public class ModelCamera implements Serializable{
         Youtube = youtube;
         NewCamera = newCamera;
         Stock = stock;
+        MobileLink = mobileLink;
     }
 
     public ModelCamera() {
+    }
+
+    public String getMobileLink() {
+        return MobileLink;
+    }
+
+    public void setMobileLink(String mobileLink) {
+        MobileLink = mobileLink;
     }
 
     public Integer getStock() {

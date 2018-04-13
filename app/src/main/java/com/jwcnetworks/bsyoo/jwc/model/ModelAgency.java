@@ -1,7 +1,9 @@
 package com.jwcnetworks.bsyoo.jwc.model;
 
 
-public class ModelAgency {
+import java.io.Serializable;
+
+public class ModelAgency implements Serializable {
 
 
 	private Integer Agency_Number ;

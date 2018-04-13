@@ -91,6 +91,8 @@ public class MainActivity extends LoginInformation
     private Toolbar toolbar;
     private Boolean netcheck = true;  // 네트워크 연결확인
 
+    private ProgressDialog waitDlg = null;
+
     // 버전체크
     public String rtn, verSion;
     public AlertDialog.Builder alt_bld;
@@ -634,7 +636,7 @@ public class MainActivity extends LoginInformation
     // 메인 이미지 가져오기(Notice)
     public class getMainImage extends AsyncTask<String, Integer, List<ModelNotice>> {
 
-        private ProgressDialog waitDlg = null;
+
 
         @Override
         protected void onPreExecute() {
@@ -663,8 +665,6 @@ public class MainActivity extends LoginInformation
         @Override
         protected void onPostExecute(List<ModelNotice> s) {
             super.onPostExecute(s);
-
-
             try {
                 if(s != null) {
                     imgNotice = s.get(0);
@@ -674,7 +674,7 @@ public class MainActivity extends LoginInformation
                 e.printStackTrace();
             }
             // Progressbar 감추기 : 서버 요청 완료수 Maiting dialog를 제거한다.
-            if (waitDlg != null) {
+            if (waitDlg != null && waitDlg.isShowing()) {
                 waitDlg.dismiss();
                 waitDlg = null;
             }

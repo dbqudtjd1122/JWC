@@ -11,8 +11,8 @@ public class ModelNotice implements Serializable {
     private Date time;
 	private String img_title;
 	private String img_info;
+	private String text_info;
     private String notice_end;
-
 
     @Override
     public String toString() {
@@ -22,26 +22,30 @@ public class ModelNotice implements Serializable {
                 ", time=" + time +
                 ", img_title='" + img_title + '\'' +
                 ", img_info='" + img_info + '\'' +
+                ", text_info='" + text_info + '\'' +
                 ", notice_end='" + notice_end + '\'' +
                 '}';
     }
 
-    public ModelNotice(String notice_type, String notice_title, Date time, String img_title, String img_info, String notice_end) {
+    public ModelNotice(String notice_type, String notice_title, Date time, String img_title, String img_info, String text_info, String notice_end) {
         this.notice_type = notice_type;
         this.notice_title = notice_title;
         this.time = time;
         this.img_title = img_title;
         this.img_info = img_info;
+        this.text_info = text_info;
         this.notice_end = notice_end;
     }
 
-    public ModelNotice(String notice_title, Date time, String img_title) {
-        this.notice_title = notice_title;
-        this.time = time;
-        this.img_title = img_title;
+    public ModelNotice() {
     }
 
-    public ModelNotice() {
+    public String getText_info() {
+        return text_info;
+    }
+
+    public void setText_info(String text_info) {
+        this.text_info = text_info;
     }
 
     public String getNotice_end() {

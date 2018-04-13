@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import com.jwcnetworks.bsyoo.jwc.user.Login.LoginInformation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterCamera extends android.widget.ArrayAdapter<ModelCamera> {
+public class AdapterCamera extends ArrayAdapter<ModelCamera> {
 
     public ArrayList<ModelCamera> data = null;
     public LoginInformation login;

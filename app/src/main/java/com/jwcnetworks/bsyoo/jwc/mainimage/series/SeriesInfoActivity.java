@@ -1,7 +1,9 @@
 package com.jwcnetworks.bsyoo.jwc.mainimage.series;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
     public static String VIDEO_ID = "J9dwKQ1yP98";
     private static final int RQS_ErrorDialog = 1;
     private int level;
+    private ImageView img_mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,20 @@ public class SeriesInfoActivity extends YouTubeBaseActivity implements YouTubePl
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(img_series_info);
         photoview.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        img_mobile = (ImageView) findViewById(R.id.img_mobile);
+        img_mobile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(camera.getMobileLink() != null && !camera.getMobileLink().toString().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(camera.getMobileLink().toString()));
+                    // intent.setPackage("com.android.chrome"); // 크롬으로 열기
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "연결된 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
