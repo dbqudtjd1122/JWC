@@ -2,6 +2,8 @@ package com.jwcnetworks.bsyoo.jwc.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -33,11 +36,12 @@ public class AdapterAgencyInfo extends ArrayAdapter<ModelAgency>{
         TextView tv_agency_info;
         TextView tv_agency_addr;
         ImageView img_agency_title;
+        ImageView img_call;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View itemLayout = super.getView(position, convertView, parent);
         ViewHolder viewHolder = (ViewHolder) itemLayout.getTag();
 
@@ -49,6 +53,7 @@ public class AdapterAgencyInfo extends ArrayAdapter<ModelAgency>{
             viewHolder.tv_agency_info = (TextView) itemLayout.findViewById(R.id.tv_agency_info);
             viewHolder.tv_agency_addr = (TextView) itemLayout.findViewById(R.id.tv_agency_addr);
             viewHolder.img_agency_title = (ImageView) itemLayout.findViewById(R.id.img_agency_title);
+            viewHolder.img_call = (ImageView) itemLayout.findViewById(R.id.img_call);
 
             itemLayout.setTag(viewHolder);
         }
@@ -58,11 +63,14 @@ public class AdapterAgencyInfo extends ArrayAdapter<ModelAgency>{
         viewHolder.tv_agency_info.setText(getItem(position).getInformation().toString());
         viewHolder.tv_agency_addr.setText("주소 : " + getItem(position).getAddr().toString());
 
+        viewHolder.tv_agency_phone.setVisibility(View.GONE);
+        viewHolder.img_call.setVisibility(View.GONE);
         // 전화번호 설정
         if(getItem(position).getPhone().toString().equals("")) {
-            viewHolder.tv_agency_phone.setText("");
         } else {
             viewHolder.tv_agency_phone.setText("TEL : " + getItem(position).getPhone().toString());
+            viewHolder.tv_agency_phone.setVisibility(View.VISIBLE);
+            viewHolder.img_call.setVisibility(View.VISIBLE);
         }
 
         // 이미지 설정
@@ -71,6 +79,17 @@ public class AdapterAgencyInfo extends ArrayAdapter<ModelAgency>{
         }else {
             Glide.with(getContext()).load(getItem(position).getImg_Title().toString()).override(400, 300).fitCenter().into(viewHolder.img_agency_title);
         }
+
+        viewHolder.img_call.setOnClickListener(new View.OnClickListener() { // 전화통화 버튼
+            @Override
+            public void onClick(View v) {
+                String phone = getItem(position).getPhone().toString();
+                phone = phone.replace("-", "");
+                String tel = "tel:"+phone;
+
+                getContext().startActivity(new Intent("android.intent.action.DIAL", Uri.parse(tel)));
+            }
+        });
 
         return itemLayout;
     }

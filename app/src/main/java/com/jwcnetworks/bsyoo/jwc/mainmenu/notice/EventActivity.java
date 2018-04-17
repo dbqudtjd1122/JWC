@@ -78,6 +78,8 @@ public class EventActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), EventInfoActivity.class);
             event = noticeslist.get(position);
             intent.putExtra("event", event);
+            intent.putExtra("", event.getImg_info().toString());
+            intent.putExtra("",event.getTime());
             startActivity(intent);
         }
 

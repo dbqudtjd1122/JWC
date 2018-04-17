@@ -47,7 +47,6 @@ public class NoticeInfoActivity extends AppCompatActivity {
             tv_text_info.setVisibility(View.GONE);
         }
 
-
         // 이미지 줌인, 아웃 (build.gradle 추가)
         PhotoViewAttacher photoview = new PhotoViewAttacher(notice_info);
         photoview.setScaleType(ImageView.ScaleType.FIT_XY);

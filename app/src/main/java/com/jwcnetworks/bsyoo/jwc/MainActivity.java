@@ -206,6 +206,10 @@ public class MainActivity extends LoginInformation
                     Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                     intent.putExtra("page", "technical");
                     startActivityForResult(intent, 7823);
+                } else if(page.equals("newcamera")){    // 신제품
+                    Intent intent1 = new Intent(getApplicationContext(), SeriesActivity.class);
+                    intent1.putExtra("new", "1");
+                    startActivity(intent1);
                 }
             }
         } catch (Exception e) {
@@ -635,8 +639,6 @@ public class MainActivity extends LoginInformation
 
     // 메인 이미지 가져오기(Notice)
     public class getMainImage extends AsyncTask<String, Integer, List<ModelNotice>> {
-
-
 
         @Override
         protected void onPreExecute() {

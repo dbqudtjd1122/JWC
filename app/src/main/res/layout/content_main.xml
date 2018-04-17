@@ -175,7 +175,6 @@
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
                     app:srcCompat="@drawable/main_dvr" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -209,8 +208,6 @@
                     android:adjustViewBounds="true"
                     android:onClick="onclick"
                     app:srcCompat="@drawable/main_school" />
-
-
             </LinearLayout>
 
             <LinearLayout

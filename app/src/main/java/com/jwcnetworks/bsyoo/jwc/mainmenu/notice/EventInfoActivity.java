@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jwcnetworks.bsyoo.jwc.R;
@@ -45,5 +47,11 @@ public class EventInfoActivity extends AppCompatActivity {
         PhotoViewAttacher photoview = new PhotoViewAttacher(event_info);
         photoview.setScaleType(ImageView.ScaleType.FIT_XY);
 
+        TextView tv_text_info = (TextView) findViewById(R.id.tv_text_info);
+        if(event.getText_info() != null && !event.getText_info().toString().equals("")) {
+            tv_text_info.setText(event.getText_info().toString());
+        } else {
+            tv_text_info.setVisibility(View.GONE);
+        }
     }
 }

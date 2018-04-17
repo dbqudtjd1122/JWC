@@ -42,7 +42,6 @@
         <item name="android:background">@color/colorTransparency</item>
     </style>
 
-
     <!-- TextView 밑줄 생기기 -->
     <string name="your_string_here">This is an <u>underline</u>.</string>
 
@@ -55,5 +54,4 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 </resources>

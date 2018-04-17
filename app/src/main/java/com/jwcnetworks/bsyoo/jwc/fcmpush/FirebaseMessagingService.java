@@ -172,6 +172,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } else if(page.equals("technical")){
             intent = new Intent(this, MainActivity.class);
             intent.putExtra("page", "technical");
+        } else if(page.equals("newcamera")){
+            intent = new Intent (this, MainActivity.class);
+            intent.putExtra("page", "newcamera");
         } else {
             intent = new Intent(this, IntroActivity.class);
             intent.putExtra("title", title);
