@@ -175,6 +175,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } else if(page.equals("newcamera")){
             intent = new Intent (this, MainActivity.class);
             intent.putExtra("page", "newcamera");
+        } else if(page.equals("school")){
+            intent = new Intent (this, MainActivity.class);
+            intent.putExtra("page", "school");
         } else {
             intent = new Intent(this, IntroActivity.class);
             intent.putExtra("title", title);
@@ -197,7 +200,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 

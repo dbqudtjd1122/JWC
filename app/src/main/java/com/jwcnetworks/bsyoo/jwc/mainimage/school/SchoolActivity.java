@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.jwcnetworks.bsyoo.jwc.R;
 import com.jwcnetworks.bsyoo.jwc.adapter.AdapterSchool;
@@ -126,11 +127,12 @@ public class SchoolActivity extends AppCompatActivity {
         protected void onPostExecute(List<ModelSchool> list) {
             super.onPostExecute(list);
 
-            schoollist = list;
-            adapter.clear();
-            adapter.addAll(schoollist);
-            adapter.notifyDataSetChanged();
-
+            if(list != null) {
+                schoollist = list;
+                adapter.clear();
+                adapter.addAll(schoollist);
+                adapter.notifyDataSetChanged();
+            }
             if (waitDlg != null) {
                 waitDlg.dismiss();
                 waitDlg = null;

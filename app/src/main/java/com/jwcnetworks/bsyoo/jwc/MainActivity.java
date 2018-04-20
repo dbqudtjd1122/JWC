@@ -210,6 +210,9 @@ public class MainActivity extends LoginInformation
                     Intent intent1 = new Intent(getApplicationContext(), SeriesActivity.class);
                     intent1.putExtra("new", "1");
                     startActivity(intent1);
+                } else if(page.equals("school")){
+                    Intent intnet4 = new Intent(getApplicationContext(), SchoolActivity.class);
+                    startActivityForResult(intnet4, 489);
                 }
             }
         } catch (Exception e) {
@@ -236,26 +239,12 @@ public class MainActivity extends LoginInformation
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
-                    img[1].setImageResource(R.drawable.page_not);
-                    img[2].setImageResource(R.drawable.page_not);
-                    img[3].setImageResource(R.drawable.page_not);
-                    img[0].setImageResource(R.drawable.page_select);
-                } else if (position == 1) {
-                    img[0].setImageResource(R.drawable.page_not);
-                    img[2].setImageResource(R.drawable.page_not);
-                    img[3].setImageResource(R.drawable.page_not);
-                    img[1].setImageResource(R.drawable.page_select);
-                } else if (position == 2) {
-                    img[0].setImageResource(R.drawable.page_not);
-                    img[1].setImageResource(R.drawable.page_not);
-                    img[3].setImageResource(R.drawable.page_not);
-                    img[2].setImageResource(R.drawable.page_select);
-                } else if (position == 3) {
-                    img[0].setImageResource(R.drawable.page_not);
-                    img[1].setImageResource(R.drawable.page_not);
-                    img[2].setImageResource(R.drawable.page_not);
-                    img[3].setImageResource(R.drawable.page_select);
+                for(int i = 0; i <= 3; i++){
+                    if(i == position){
+                        img[i].setImageResource(R.drawable.page_select);
+                    }else {
+                        img[i].setImageResource(R.drawable.page_not);
+                    }
                 }
             }
 

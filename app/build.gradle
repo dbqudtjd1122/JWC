@@ -13,8 +13,8 @@ android {
         applicationId "com.jwcnetworks.bsyoo.jwc"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 36
-        versionName "1.5.3"
+        versionCode 37
+        versionName "1.5.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
