@@ -99,7 +99,14 @@ public class SchoolInfoActivity extends LoginInformation {
                     Toast.makeText(getApplicationContext(), "해당 교육신청 권한이 없습니다.", Toast.LENGTH_SHORT).show();
                 } else if (school.getLevel() <= islevel) {
                     if (school.getSame() == 1) { // 해당 레벨만 신청가능
-                        Toast.makeText(getApplicationContext(), "해당 교육신청 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                        if(Integer.valueOf(school.getLevel()) == islevel){
+                            Intent intent = new Intent(getApplicationContext(), SchoolWriteActivity.class);
+                            intent.putExtra("school", school);
+                            intent.putExtra("user", user);
+                            startActivityForResult(intent, 789);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "해당 교육신청 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     } else if (school.getSame() == 2) { // 해당 레벨이상으로 신청가능
                         Intent intent = new Intent(getApplicationContext(), SchoolWriteActivity.class);
                         intent.putExtra("school", school);

@@ -68,26 +68,13 @@ public class SerialCodeAddActivity extends AppCompatActivity {
     private void byid(){
         ll_serial = (LinearLayout) findViewById(R.id.ll_serial);
         et_serialcode = (EditText) findViewById(R.id.et_serialcode);
-        et_serialcode.setFilters(new InputFilter[]{filter});
+        et_serialcode.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(6)}); // 자동 대문자 변경 & 최대 6글자제한
         et_company_info = (EditText) findViewById(R.id.et_company_info);
 
         tv_seriesname = (TextView) findViewById(R.id.tv_seriesname);
         tv_serialcode = (TextView) findViewById(R.id.tv_serialcode);
         textView58 = (TextView) findViewById(R.id.textView58);
-
     }
-
-    // EditText 영문&숫자만 적용
-    protected InputFilter filter = new InputFilter() {
-        public CharSequence filter(CharSequence source, int start, int end,
-                                   Spanned dest, int dstart, int dend) {
-            Pattern ps = Pattern.compile("^[a-zA-Z0-9]+$");
-            if (!ps.matcher(source).matches()) {
-                return "";
-            }
-            return null;
-        }
-    };
 
     public void serialClick(View view){
         switch (view.getId()){

@@ -276,6 +276,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             if (s != null) {
                 user = s;
                 islevel = user.getLevel();
+                SharedPreferences.Editor prefEditor = pref.edit();
+                prefEditor.putInt("level_Set", user.getLevel());
                 PushCheck(level);
             }
         }
