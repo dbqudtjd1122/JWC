@@ -67,13 +67,13 @@ import com.jwcnetworks.bsyoo.jwc.viewpager.ViewPagerAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class MainActivity extends LoginInformation
@@ -161,8 +161,8 @@ public class MainActivity extends LoginInformation
             new MainActivity.getMainImage().execute("메인");
 
             // 최신버전 체크후 업데이트 권장
-            /*alt_bld = new AlertDialog.Builder(this);
-            new Version().execute();*/
+            alt_bld = new AlertDialog.Builder(this);
+            new Version().execute();
         } else {
             Intent intent2 = new Intent(getApplicationContext(), NetworkCheck.class);
             startActivityForResult(intent2, 4523);
@@ -685,11 +685,13 @@ public class MainActivity extends LoginInformation
             // Confirmation of market information in the Google Play Store
             try {
                 Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id=com.jwcnetworks.bsyoo.jwc").get();
-                Elements Version = doc.select(".content");
-                for (Element v : Version) {
-                    if (v.attr("itemprop").equals("softwareVersion")) {
-                        rtn = v.text();
-                        //return v.text().trim();
+
+                Elements Version = doc.select(".htlgb ");
+
+                for (int i = 0; i < 5; i++) {
+                    rtn = Version.get(i).text();
+                    if (Pattern.matches("^[0-9]{1}.[0-9]{1}.[0-9]{1}$", rtn)) {
+                        break;
                     }
                 }
                 return rtn;
@@ -701,7 +703,6 @@ public class MainActivity extends LoginInformation
 
         @Override
         protected void onPostExecute(String result) {
-
             // Version check the execution application.
             PackageInfo pi = null;
             try {
